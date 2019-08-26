@@ -1,3 +1,4 @@
+const dbServer = require('./db/database')
 const express = require('express');
 const userRouter = require('./routers/user');
 const groupRouter = require('./routers/group');
