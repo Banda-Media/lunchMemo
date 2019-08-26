@@ -32,14 +32,16 @@ const findAll = async function() {
 }
 
 const findFromId = async function(uid) {
+    console.log('findFromId')
     const user = await new User(axios.get(`${BASE_URL}/${uid}`))
-    return JSON.stringify(users)
+    console.log(`Obtained user from DB: ${user}`)
+    return JSON.stringify(user)
 }
 
 const findFromEmail = async function(string) {
     const users = await axios.get(`${BASE_URL}`)
 
-    for (i=0 ; i<users.length ; i++) {
+    for (i = 0; i < users.length; i++) {
         if (users.data[i].email === string) {
             return new User(users.data[i])
         }
@@ -57,11 +59,11 @@ const save = async function(user) {
 }
 
 const setActive = async function(uid) {
-    return await axios.patch(`${BASE_URL}/${uid}`, {active: true})
+    return await axios.patch(`${BASE_URL}/${uid}`, { active: true })
 }
 
 const setInactive = async function(uid) {
-    return await axios.patch(`${BASE_URL}/${uid}`, {active: true})
+    return await axios.patch(`${BASE_URL}/${uid}`, { active: true })
 }
 
 
