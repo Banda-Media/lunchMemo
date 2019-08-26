@@ -10,6 +10,8 @@ app.use(express.json());
 app.use('/', indexRouter);
 app.use('/', groupRouter);
 app.use('/', userRouter);
-app.use(express.static(__dirname + '../public'));
+
+var path = require('path');
+app.use(express.static(path.join(__dirname, '../public')));
 
 module.exports = app;
