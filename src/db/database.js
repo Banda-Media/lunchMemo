@@ -1,22 +1,13 @@
-const mongoose = require('mongoose');
+const jsonServer = require('json-server');
+const dbServer = jsonServer.create();
+const dbRouter = jsonServer.router('./db.json');
+const middleware = jsonServer.defaults();
+const port = process.env.DB_PORT || 3001;
 
-console.log('Attempting to connect to server...', process.env.LUNCHMEMO_MONGODB_URL);
-mongoose.connect(process.env.LUNCHMEMO_MONGODB_URL, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false
-})
-
-var connection = mongoose.connection;
-
-connection.on('connected', () => console.log('connected to db'));
-connection.on('disconnected', () => console.log('disconnected from db'));
-
-connection.on('SIGINT', () => {
-    connection.close(() => {
-        console.log('Lost connection to db due to process termination');
-        process.exit();
-    });
+dbServer.use(middleware);
+dbServer.use(dbRouter);
+dbServer.listen(port, () => {
+    console.log('JSON Server is running')
 });
 
-module.exports = connection;
+module.exports = dbServer
