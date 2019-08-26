@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "author": "Bob Wang & Andres Weber",
   "license": "ISC",
