@@ -1,6 +1,6 @@
 const Model = require('./generic')
 const axios = require('axios')
-const BASE_URL = "http://localhost:8000/users"
+const BASE_URL = "http://localhost:3001/users"
 
 class User extends Model {
     constructor(userData) {
@@ -12,8 +12,6 @@ class User extends Model {
         this.startRange = userData.startRange
         this.endRange = userData.endRange
     }
-
-
 
     json() {
         return {
@@ -28,36 +26,51 @@ class User extends Model {
     }
 }
 
-
-//User.find()
 const findAll = async function() {
-    let x = await axios.get(`${BASE_URL}`)
-    console.log(x)
-}
-findAll()
-
-const findFromId = function(uid) {
-    const user = new User(axios.get(`${BASE_URL}/${uid}`))
-    return JSON.stringify(user)
-
+    const users = await axios.get(`${BASE_URL}`)
+    return users.data
 }
 
-const range = function() {
-    console.log('range')
+const findFromId = async function(uid) {
+    const user = await new User(axios.get(`${BASE_URL}/${uid}`))
+    return JSON.stringify(users)
 }
 
-const setActive = function(user) {
-    user.active = true
-    save(user)
+const findFromEmail = async function(string) {
+    const users = await axios.get(`${BASE_URL}`)
+
+    for (i=0 ; i<users.length ; i++) {
+        if (users.data[i].email === string) {
+            return new User(users.data[i])
+        }
+    }
+    throw "Email not found."
 }
-const save = function(user) {
-    //TODO: Database saving.
+
+const remove = async function(uid) {
+    return await axios.delete(`${BASE_URL}/${uid}`)
 }
+
+const save = async function(user) {
+    findFromId(user.id)
+    return await axios.patch(`${BASE_URL}`, new User(users.data))
+}
+
+const setActive = async function(uid) {
+    return await axios.patch(`${BASE_URL}/${uid}`, {active: true})
+}
+
+const setInactive = async function(uid) {
+    return await axios.patch(`${BASE_URL}/${uid}`, {active: true})
+}
+
 
 module.exports = {
     findAll,
-    range,
-    setActive,
+    findFromId,
+    findFromEmail,
+    remove,
     save,
-    User
+    setActive,
+    setInactive
 }
