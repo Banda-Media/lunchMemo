@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 app.use('/', indexRouter);
-app.use('/', userRouter);
 app.use('/', groupRouter);
+app.use('/', userRouter);
 
 module.exports = app;

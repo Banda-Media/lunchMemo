@@ -32,18 +32,15 @@ const findAll = async function() {
 }
 
 const findFromId = async function(uid) {
-    console.log('findFromId')
-    const user = await new User(axios.get(`${BASE_URL}/${uid}`))
-    console.log(`Obtained user from DB: ${user}`)
-    return JSON.stringify(user)
+    const user = await axios.get(`${BASE_URL}/${uid}`)
+    return user.data
 }
 
-const findFromEmail = async function(string) {
-    const users = await axios.get(`${BASE_URL}`)
-
-    for (i = 0; i < users.length; i++) {
-        if (users.data[i].email === string) {
-            return new User(users.data[i])
+const findFromEmail = async function(email) {
+    const users = await findAll()
+    for (i = 0; i < users.length - 1; i++) {
+        if (users[i].email === email) {
+            return users[i]
         }
     }
     throw "Email not found."
@@ -53,9 +50,8 @@ const remove = async function(uid) {
     return await axios.delete(`${BASE_URL}/${uid}`)
 }
 
-const save = async function(user) {
-    findFromId(user.id)
-    return await axios.patch(`${BASE_URL}`, new User(users.data))
+const save = async function(userData) {
+    return await axios.post(`${BASE_URL}`, userData)
 }
 
 const setActive = async function(uid) {
@@ -63,7 +59,7 @@ const setActive = async function(uid) {
 }
 
 const setInactive = async function(uid) {
-    return await axios.patch(`${BASE_URL}/${uid}`, { active: true })
+    return await axios.patch(`${BASE_URL}/${uid}`, { active: false })
 }
 
 
