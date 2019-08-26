@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-console.log('Attempting to connect to server...');
-mongoose.connect(process.env.MONGODB_URL, {
+console.log('Attempting to connect to server...', process.env.LUNCHMEMO_MONGODB_URL);
+mongoose.connect(process.env.LUNCHMEMO_MONGODB_URL, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false
