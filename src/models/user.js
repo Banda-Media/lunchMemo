@@ -1,57 +1,49 @@
-const Model = require('./generic')
 const axios = require('axios')
 const BASE_URL = "http://localhost:3001/users"
-
-class User extends Model {
-    constructor(userData) {
-        this.name = userData.name
-        this.email = userData.email
-        this.password = userData.password
-        this.groupSize = userData.groupSize
-        this.active = userData.active
-        this.startRange = userData.startRange
-        this.endRange = userData.endRange
-    }
-
-    json() {
-        return {
-            name: this.name,
-            email: this.email,
-            password: this.password,
-            groupSize: this.groupSize,
-            active: this.active,
-            startrange: this.startRange,
-            endrange: this.endRange
-        }
-    }
-}
 
 const findAll = async function() {
     const users = await axios.get(`${BASE_URL}`)
     return users.data
 }
 
-const findFromId = function(uid) {
-    const user = new User(axios.get(`${BASE_URL}/${uid}`))
-    return JSON.stringify(user)
+const findFromId = async function(uid) {
+    const user = await axios.get(`${BASE_URL}/${uid}`)
+    return user.data
 }
 
-const range = function() {
-    console.log('range')
+const findFromEmail = async function(email) {
+    const users = await findAll()
+    for (i = 0; i < users.length - 1; i++) {
+        if (users[i].email === email) {
+            return users[i]
+        }
+    }
+    throw "Email not found."
 }
 
-const setActive = function(user) {
-    user.active = true
-    save(user)
+const remove = async function(uid) {
+    return await axios.delete(`${BASE_URL}/${uid}`)
 }
-const save = function(user) {
-    //TODO: Database saving.
+
+const save = async function(userData) {
+    return await axios.post(`${BASE_URL}`, userData)
 }
+
+const setActive = async function(uid) {
+    return await axios.patch(`${BASE_URL}/${uid}`, { active: true })
+}
+
+const setInactive = async function(uid) {
+    return await axios.patch(`${BASE_URL}/${uid}`, { active: false })
+}
+
 
 module.exports = {
     findAll,
-    range,
-    setActive,
+    findFromId,
+    findFromEmail,
+    remove,
     save,
-    User
+    setActive,
+    setInactive
 }
