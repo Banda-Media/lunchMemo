@@ -1,14 +1,6 @@
 const express = require('express')
-const { User, findAll } = require('../models/user')
+const Restaurant = require('../models/restaurant')
 const router = new express.Router()
-
-router.get('/users', async(req, res) => {
-    try {
-        res.status(201).send(findAll())
-    } catch (e) {
-        res.status(400).send(e)
-    }
-})
 
 router.post('/users', async(req, res) => {
     const user = new User(req.body)
@@ -30,7 +22,7 @@ router.post('/users/login', async(req, res) => {
     }
 })
 
-router.post('/users/logout', async(req, res) => {
+router.post('/users/logout', auth, async(req, res) => {
     try {
         await req.user.setInactive()
         res.send()
@@ -39,7 +31,7 @@ router.post('/users/logout', async(req, res) => {
     }
 })
 
-router.delete('/users/me', async(req, res) => {
+router.delete('/users/me', auth, async(req, res) => {
     try {
         await req.user.remove()
         res.send(req.user)
