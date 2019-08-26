@@ -9,13 +9,15 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "sass:compile": "node-sass --include-path sass ./public/css/scss/main.scss ./public/css/main.css"
   },
-  "author": "Bob Wang & Andres Weber",
+  "author": "Bobby Wang & Andres Weber",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.0",
     "json-server": "^0.15.0",
+    "npm-sass": "^2.3.0",
     "yelp-fusion": "^3.0.0"
   },
   "devDependencies": {
