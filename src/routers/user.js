@@ -1,9 +1,9 @@
 const express = require('express')
 const { findFromId, findAll, findFromEmail, save, remove, setInactive, setActive } = require('../models/user')
-
 const router = new express.Router()
+const BASE_URL = '/users'
 
-router.get('/users', async(req, res) => {
+router.get(BASE_URL, async(req, res) => {
     console.log(`GET /users: ${req.body}`)
     try {
         const users = await findAll()
@@ -13,7 +13,7 @@ router.get('/users', async(req, res) => {
     }
 })
 
-router.get('/users/:id', async(req, res) => {
+router.get(`${BASE_URL}/:id`, async(req, res) => {
     console.log(`GET /users/${req.params.id}: ${req.body}`)
     const _id = req.params.id
     try {
@@ -24,7 +24,7 @@ router.get('/users/:id', async(req, res) => {
     }
 })
 
-router.delete('/users/:id', async(req, res) => {
+router.delete(`${BASE_URL}/:id`, async(req, res) => {
     console.log(`DELETE /users/${req.params.id}: ${req.body}`)
     const _id = req.params.id
     try {
@@ -37,7 +37,7 @@ router.delete('/users/:id', async(req, res) => {
     }
 })
 
-router.post('/users', async(req, res) => {
+router.post(BASE_URL, async(req, res) => {
     console.log(`POST /users: ${JSON.stringify(req.body)}`)
     try {
         await save(req.body)
@@ -48,7 +48,7 @@ router.post('/users', async(req, res) => {
     }
 })
 
-router.post('/users/login', async(req, res) => {
+router.post(`${BASE_URL}/login`, async(req, res) => {
     console.log(`POST /users/login: ${JSON.stringify(req.body)}`)
     try {
         let user = await findFromEmail(req.body.email)
@@ -62,7 +62,7 @@ router.post('/users/login', async(req, res) => {
     }
 })
 
-router.post('/users/logout/:id', async(req, res) => {
+router.post(`${BASE_URL}/logout/:id`, async(req, res) => {
     console.log(`POST /users/logout/${req.params.id}`)
     const _id = req.params.id
     try {

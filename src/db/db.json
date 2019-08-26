@@ -30,6 +30,12 @@
       ],
       "categories": [],
       "active": "true"
+    },
+    {
+      "users": [
+        1
+      ],
+      "id": 2
     }
   ],
   "restaurants": [
