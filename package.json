@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "json": "json-server --watch src/db/db.json --port 8000",
+    "json": "json-server --watch src/db/db.json --port 8000"
   },
   "author": "Bob Wang & Andres Weber",
   "license": "ISC",
