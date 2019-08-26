@@ -20,6 +20,17 @@ router.get('/users/:uid', async(req, res) => {
     }
 })
 
+router.delete('/users/:uid', async(req, res) => {
+    try {
+        const user = findFromId(req.params.uid)
+        await remove(req.params.uid)
+        console.log(`Deleted user at id ${req.params.uid}`)
+        res.status(200).send({ user })
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
 router.post('/users', async(req, res) => {
     const user = new User(req.body)
     try {
@@ -41,21 +52,11 @@ router.post('/users/login', async(req, res) => {
     }
 })
 
-router.post('/users/logout', async(req, res) => {
+router.post('/users/logout/:uid', async(req, res) => {
     try {
-        await setInactive(req.params.uid)
+        let result = await setInactive(req.params.uid)
         console.log(`User ${req.params.uid} logged out.`)
-        res.status(200).send()
-    } catch (e) {
-        res.status(500).send()
-    }
-})
-
-router.delete('/users/me', async(req, res) => {
-    try {
-        await remove(req.params.uid)
-        console.log(`Deleted user at id ${req.params.uid}`)
-        res.status(200).send()
+        res.status(200).send(result)
     } catch (e) {
         res.status(500).send()
     }

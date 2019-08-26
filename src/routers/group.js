@@ -1,5 +1,5 @@
 const express = require('express')
-const { Group, findAll, save } = require('../models/group')
+const { Group, findAll, save, remove } = require('../models/group')
 const router = new express.Router()
 
 router.get('/groups', async(req, res) => {
@@ -33,6 +33,17 @@ router.post('/groups', async(req, res) => {
     const group = new Group(req.body)
     try {
         await save(group)
+        res.status(201).send({ group })
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+router.delete('/groups/:uid', async(req, res) => {
+    try {
+        const group = findFromId(req.params.uid)
+        await remove(req.params.uid)
+        console.log(`Deleted group at id ${req.params.uid}`)
         res.status(201).send({ group })
     } catch (e) {
         res.status(400).send(e)
