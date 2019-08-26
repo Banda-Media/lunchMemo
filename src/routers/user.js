@@ -1,8 +1,10 @@
 const express = require('express')
-const { User, findFromId, findAll, findFromEmail } = require('../models/user')
+const { findFromId, findAll, findFromEmail, save, remove, setInactive, setActive } = require('../models/user')
+
 const router = new express.Router()
 
 router.get('/users', async(req, res) => {
+    console.log(`GET /users: ${req.body}`)
     try {
         const users = await findAll()
         res.status(200).send(users)
@@ -11,53 +13,64 @@ router.get('/users', async(req, res) => {
     }
 })
 
-router.get('/users/:uid', async(req, res) => {
+router.get('/users/:id', async(req, res) => {
+    console.log(`GET /users/${req.params.id}: ${req.body}`)
+    const _id = req.params.id
     try {
-        const user = await findFromId(req.params.uid)
-        res.status(200).send(user)
+        const user = await findFromId(_id)
+        res.status(200).send({ user })
     } catch (e) {
         res.status(400).send(e)
     }
 })
 
-router.delete('/users/:uid', async(req, res) => {
+router.delete('/users/:id', async(req, res) => {
+    console.log(`DELETE /users/${req.params.id}: ${req.body}`)
+    const _id = req.params.id
     try {
-        const user = findFromId(req.params.uid)
-        await remove(req.params.uid)
-        console.log(`Deleted user at id ${req.params.uid}`)
+        const user = await findFromId(_id)
+        await remove(_id)
         res.status(200).send({ user })
     } catch (e) {
+        console.log(e)
         res.status(500).send()
     }
 })
 
 router.post('/users', async(req, res) => {
-    const user = new User(req.body)
+    console.log(`POST /users: ${JSON.stringify(req.body)}`)
     try {
-        await save(user)
-        res.status(201).send({ user })
+        await save(req.body)
+        res.status(201).send({ user: req.body })
     } catch (e) {
+        console.log(e)
         res.status(400).send(e)
     }
 })
 
 router.post('/users/login', async(req, res) => {
+    console.log(`POST /users/login: ${JSON.stringify(req.body)}`)
     try {
-        const user = await findFromEmail(req.body.email)
+        let user = await findFromEmail(req.body.email)
         if (user.password !== req.body.password) throw 'Could not login'
-        console.log(`User ${req.params.uid} logged in.`)
-        res.status(200).send({ user })
+        await setActive(user.id)
+        console.log(`User ${user.id} logged in.`)
+        res.status(200).send({ user: await findFromId(user.id) })
     } catch (e) {
-        res.status(400).send()
+        console.log(e)
+        res.status(400).send(e)
     }
 })
 
-router.post('/users/logout/:uid', async(req, res) => {
+router.post('/users/logout/:id', async(req, res) => {
+    console.log(`POST /users/logout/${req.params.id}`)
+    const _id = req.params.id
     try {
-        let result = await setInactive(req.params.uid)
-        console.log(`User ${req.params.uid} logged out.`)
-        res.status(200).send(result)
+        await setInactive(_id)
+        console.log(`User ${_id} logged out.`)
+        res.status(200).send()
     } catch (e) {
+        console.log(e)
         res.status(500).send()
     }
 })
