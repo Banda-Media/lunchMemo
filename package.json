@@ -1,0 +1,28 @@
+{
+    "name": "LunchMemo",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "directories": {
+        "test": "tests",
+        "src": "src"
+    },
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js",
+        "dev-c": "env-cmd ./config/dev.env nodemon src/index.js",
+        "test-c": "env-cmd -f ./config/test.env jest --watch --runInBand"
+    },
+    "author": "Bob Wang & Andres Weber",
+    "license": "ISC",
+    "dependencies": {
+        "bad-words": "^3.0.2",
+        "express": "^4.17.1",
+        "faker": "^4.1.0",
+        "shortid": "^2.2.14",
+        "socket.io": "^2.2.0"
+    },
+    "devDependencies": {
+        "nodemon": "^1.19.1"
+    }
+}
