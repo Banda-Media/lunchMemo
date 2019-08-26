@@ -1,0 +1,40 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "name": "Andres",
+        "email": "hello@andresweber.com",
+        "password": "password",
+        "groupSize": "sm",
+        "active": true,
+        "startRange": "August 26, 2019 12:00:00",
+        "endRange": "August 26, 2019 12:30:00"
+      },
+      {
+        "id": 2,
+        "name": "Bobby",
+        "email": "hello@bobbywang.net",
+        "password": "password",
+        "groupSize": "md",
+        "active": true,
+        "startRange": "August 26, 2019 12:00:00",
+        "endRange": "August 26, 2019 12:30:00"
+      }
+    ],
+    "groups": [
+        {
+            "id": 1,
+            "users": [1,2],
+            "categories": [],
+            "active": true
+        }
+    ],
+    "restaurants": [
+        {
+            "id": 1,
+            "name": "Coyo Taco",
+            "category": "Mexican",
+            "openTime": "11:00"
+        }
+    ]
+  }
