@@ -1,24 +1,12 @@
-const mongoose = require('mongoose')
-
-const groupSchema = new mongoose.Schema({
+const Group = {
     description: {
         type: String,
-        required: true,
-        trim: true
+        required: true
     },
     members: {
-        type: [{ type: ObjectId, ref: 'User' }],
-        default: false
-    },
-    owner: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'User'
+        type: Array,
+        default: []
     }
-}, {
-    timestamps: true
-})
-
-const Group = mongoose.model('Task', groupSchema)
+}
 
 module.exports = Group

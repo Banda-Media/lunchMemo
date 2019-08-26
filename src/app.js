@@ -1,5 +1,5 @@
 const express = require('express');
-require('./db/mongoose');
+const database = require('./db/database')
 const userRouter = require('./routers/user');
 const groupRouter = require('./routers/group');
 const indexRouter = require('./routers/index');
