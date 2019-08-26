@@ -1,22 +1,24 @@
 {
-    "name": "LunchMemo",
-    "version": "0.0.1",
-    "description": "",
-    "main": "index.js",
-    "directories": {
-        "test": "tests",
-        "src": "src"
-    },
-    "scripts": {
-        "start": "node src/index.js",
-        "dev": "nodemon src/index.js"
-    },
-    "author": "Bob Wang & Andres Weber",
-    "license": "ISC",
-    "dependencies": {
-        "yelp-fusion": "^3.0.0"
-    },
-    "devDependencies": {
-        "nodemon": "^1.19.1"
-    }
+  "name": "LunchMemo",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests",
+    "src": "src"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "json": "json-server --watch src/db/db.json --port 8000"
+  },
+  "author": "Bob Wang & Andres Weber",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.15.0",
+    "yelp-fusion": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
 }
