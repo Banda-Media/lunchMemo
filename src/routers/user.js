@@ -4,7 +4,8 @@ const router = new express.Router()
 
 router.get('/users', async(req, res) => {
     try {
-        res.status(200).send(findAll())
+        const users = await findAll()
+        res.status(200).send(users)
     } catch (e) {
         res.status(400).send(e)
     }

@@ -1,6 +1,6 @@
 const Model = require('./generic')
 const axios = require('axios')
-const BASE_URL = "http://localhost:8000/users"
+const BASE_URL = "http://localhost:3001/users"
 
 class User extends Model {
     constructor(userData) {
@@ -12,8 +12,6 @@ class User extends Model {
         this.startRange = userData.startRange
         this.endRange = userData.endRange
     }
-
-
 
     json() {
         return {
@@ -28,18 +26,14 @@ class User extends Model {
     }
 }
 
-
-//User.find()
 const findAll = async function() {
-    let x = await axios.get(`${BASE_URL}`)
-    console.log(x)
+    const users = await axios.get(`${BASE_URL}`)
+    return users.data
 }
-findAll()
 
 const findFromId = function(uid) {
     const user = new User(axios.get(`${BASE_URL}/${uid}`))
     return JSON.stringify(user)
-
 }
 
 const range = function() {
