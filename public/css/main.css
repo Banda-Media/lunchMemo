@@ -233,6 +233,7 @@ label {
   color: #777; }
 
 input {
+  width: 100%;
   margin-bottom: 7px;
   border: 1px solid #eee;
   padding: 12px;
@@ -240,12 +241,11 @@ input {
 
 button {
   cursor: pointer;
-  padding: 12px 12px 9px 12px;
+  padding: 12px 2rem;
   background: #7C5CBF;
   border: none;
-  color: white;
-  font-size: 16px;
-  transition: background .3s ease; }
+  color: #fff;
+  font-size: 16px; }
   button:hover {
     background: #6b47b8; }
   button:disabled {
@@ -253,11 +253,9 @@ button {
     background: #7c5cbf94; }
 
 .btn-red {
-  background-color: #d60000;
-  border-bottom: 3px solid #d60000; }
+  background-color: #d60000; }
   .btn-red:hover {
-    background-color: #ca1818;
-    border-bottom-color: #481e1e; }
+    background-color: #ca1818; }
 
 ul {
   margin-left: 20px; }
