@@ -34,7 +34,7 @@
 </head>
 
 <body>
-    <!--[if lt IE 7]>
+
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
@@ -90,21 +90,64 @@
                         </div>
                     </form>
                 </div>
-                <!-- right side registration-->
-                <div class="right log">
-                    <h3><span>Hungry?</span>Log in below to get started</h3>
-                    <form id="fp-login">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" required minlength=3 />
+            </nav>
+        </header>
 
-                        <label for="password">Password</label>
-                        <input type="password" id="password" required />
-
-                        <div class="form-footer">
-                            <button type="submit" class="btn-red">Log in</button>
-                            <span><a href="#" class="go-register">Register</a></span>
-                        </div>
-                    </form>
+        <section class="memoshadow animated fadeInDown faster">
+            <div id="app-widget" class="app hide">
+              <div class="app-header">
+                  <input id="timepicker-start" class="timepickerStart timeSelect" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime"
+                      max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
+                  <input id="timepicker-end" class="timepickerEnd timeSelect" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime"
+                      max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
+                  <select id="group-size-select">
+                      <option label="Small (1-2)" value="sm"></option>
+                      <option label="Medium (3-5)" value="md"></option>
+                      <option label="Large (5-8)" value="lg"></option>
+                  </select>
+                  <button id="profile-btn" type="button" class="timePickerButton btn-red">Set Profile</button>
+              </div>
+            </div>
+            <div class="container">
+                <div class="register">
+                    <div class="left">
+                        <h1 class="logo"><span class="lunch">LUNCH</span><span class="memo">memo</span></h1>
+                        <p>Lunch Memo makes it easy to organize lunch with your colleagues and other professionals in your area. Spend less time finding lunch spots and scheduling with everyone and simply your lunch life with LunchMemo.</p>
+                    </div>
+                    <div class="right widget-register hide">
+                        <h3><span>Hungry?</span>Create an account below to get started</h3>
+                        <form id="fp-registration">
+                            <label for="name">Name</label>
+                            <input type="text" id="register-name" required minlength=3 />
+    
+                            <label for="email">Email</label>
+                            <input type="email" id="register-email" required minlength=3 />
+    
+                            <label for="password">Password</label>
+                            <input type="password" id="register-password" required />
+    
+                            <div class="form-footer">
+                                <button type="submit" class="btn-red">Register</button>
+                                <span><a href="#" class="go-login">Log in</a></span>
+                            </div>
+                        </form>
+                    </div> <!-- right side registration-->
+                    <div class="right widget-login">
+                        <h3><span>Hungry?</span>Log in below to get started</h3>
+                        <form id="fp-login">
+                            <label for="email">Email</label>
+                            <input type="email" id="login-email" required minlength=3 />
+    
+                            <label for="password">Password</label>
+                            <input type="password" id="login-password" required />
+    
+                            <div class="form-footer">
+                                <button type="submit" class="btn-red">Log in</button>
+                                <span><a href="#" class="go-register">Register</a></span>
+                                <div class="error"></div>
+                            </div>
+                        </form>
+                    </div> <!-- right side registration-->
                 </div>
                 <!-- right side registration-->
             </div>
@@ -121,5 +164,4 @@
     <script src="js/index.js" async defer></script>
     <script src="js/app.js" async defer></script>
 </body>
-
 </html>
