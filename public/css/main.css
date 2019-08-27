@@ -135,7 +135,8 @@ template {
   .form-footer a:hover, .form-footer a:active {
     color: #481e1e; }
 
-.container {
+.container,
+.app-body {
   position: relative;
   margin: 0 auto;
   width: 850px;
@@ -146,7 +147,11 @@ template {
 .app {
   height: 50vh;
   position: relative;
-  top: 25vh; }
+  top: 25vh;
+  display: flex;
+  justify-content: center; }
+  .app select {
+    height: 2.9rem; }
 
 .register {
   height: 50vh;

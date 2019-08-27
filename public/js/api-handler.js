@@ -1,25 +1,32 @@
 class APIHandler {
     constructor(baseUrl) {
-        this.BASE_URL = baseUrl;
+      this.API_BASE_URL = baseUrl;
     }
 
     createOneRegister(userData) {
-        return axios.post(`${this.BASE_URL}/users/`, userData)
-            .then(res => {
-                axios.post(`${this.BASE_URL}/login/`, { user: userData })
-                return userData
-            })
-            .catch(err => {
-                console.log(err)
-                return err
-            })
+        return axios.post(`${this.API_BASE_URL}/users/`, userData)
+        .then(res => {
+            console.log(userData)
+            axios.post(`${this.API_BASE_URL}/login/`, {password: userData.password, email: userData.email})
+            window.me = res.data.user.id
+            lmRunApp()
+            return res
+        })
     }
 
+    userLogin(userData) {
+        return axios.post(`${this.API_BASE_URL}/login/`, {password: userData.password, email: userData.email})
+        .then(res => {
+            window.me = res.data.user.id
+            lmRunApp()
+            return res
+        })
+        .catch(err => {
+            return err
+        })
+    }  
     updateOneRegister(userData) {
-        console.log(`updateOneRegister PATCH: ${this.BASE_URL}/users`)
-        console.log({ user: userData })
-
-        return axios.patch(`${this.BASE_URL}/users`, { user: userData })
+        return axios.patch(`${this.API_BASE_URL}/users`, { user: userData })
             .then(res => {
                 console.log('Updated user: ', userData)
                 return userData
