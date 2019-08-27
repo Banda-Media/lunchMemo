@@ -1,17 +1,23 @@
-const lunchmemoAPI = new APIHandler(`http://localhost:${proccess.env(PORT) || 3000}`)
+const lunchmemoAPI = new APIHandler(`http://localhost:3000`)
 
 $(document).ready(() => {
 
-    document.getElementById('fp-registration').onsubmit = function (e) {
+    document.getElementById("fp-registration").onsubmit = async function(e) {
         e.preventDefault()
 
         let userData = {
-            name: documentQuerySelector("#fp-registration #name").value,
-            email: documentQuerySelector("#fp-registration #email").value,
-            password: documentQuerySelector("#fp-registration #password").value
+            name: $("#name").val(),
+            email: $("#email").val(),
+            password: $("#password").val()
         }
 
         lunchmemoAPI.createOneRegister(userData)
+            .then( res => {
+                $(".register").addClass("animated fadeOut faster")
+            })
+        
+
+
     }
 
 })

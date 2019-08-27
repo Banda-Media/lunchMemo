@@ -185,6 +185,11 @@ button {
     cursor: default;
     background: #7c5cbf94; }
 
+.btn-red {
+  background-color: #d42032; }
+  .btn-red:hover {
+    background-color: #d42032; }
+
 ul {
   margin-left: 20px; }
 
@@ -242,13 +247,14 @@ header {
     letter-spacing: 1px; }
 
 .container {
-  margin: 0 auto; }
+  position: relative;
+  margin: 0 auto;
+  width: 850px;
+  top: 25vh; }
 
 .register {
-  position: relative;
-  width: 850px;
   height: 50vh;
-  top: 25vh;
+  position: relative;
   background-color: #fff;
   box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.4); }
   .register p {

@@ -3,13 +3,16 @@ class APIHandler {
       this.BASE_URL = baseUrl;
     }
 
-    createOneRegister(userData) {
-        Axios.get(`$(this.BASE_URL)/users`)
+    async createOneRegister(userData) {
+        return axios.post(`${this.BASE_URL}/users/`, userData)
         .then(res => {
             console.log(userData)
+            axios.post(`${this.BASE_URL}/login/`, userData)
+            return userData
         })
         .catch(err => {
             console.log(err)
+            return err
         })
     }
 }
