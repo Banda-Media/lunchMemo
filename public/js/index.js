@@ -17,4 +17,16 @@ $(document).ready(() => {
             })
     }
 
+    $( ".go-register" ).click(function() {
+        $(".widget-login").addClass("hide")
+        $(".widget-register").removeClass("hide")
+        $(".widget-register").addClass("animated fadeIn faster")
+      });
+
+    $( ".go-login" ).click(function() {
+        $(".widget-register").addClass("hide")
+        $(".widget-login").removeClass("hide")
+        $(".widget-login").addClass("animated fadeIn faster")
+    });
+
 })
