@@ -135,26 +135,19 @@ template {
   .form-footer a:hover, .form-footer a:active {
     color: #481e1e; }
 
-.container,
-.app-body {
+.container {
   position: relative;
   margin: 0 auto;
-  width: 850px;
-  top: 25vh;
   background-color: #fff;
   box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.4); }
-
-.app {
-  height: 50vh;
-  position: relative;
-  top: 25vh;
-  display: flex;
-  justify-content: center; }
-  .app select {
-    height: 2.9rem; }
+  .container.register-login {
+    width: 850px;
+    top: 25vh; }
+  .container.app-host-lunch {
+    background-color: unset; }
 
 .register {
-  height: 50vh;
+  height: 42vh;
   position: relative; }
   .register p {
     margin-top: 2rem;
@@ -181,7 +174,7 @@ template {
   left: 0;
   width: 50%;
   height: 100%;
-  padding: 5rem 3.2rem; }
+  padding: 4rem 3.2rem; }
 
 .right {
   width: 50%;
@@ -193,8 +186,7 @@ template {
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  transform: .4 all; }
+  box-sizing: border-box; }
 
 body,
 html {
@@ -267,6 +259,7 @@ ul {
 header {
   z-index: 2;
   position: fixed;
+  top: 0;
   display: flex;
   justify-content: space-between;
   width: 100%;
