@@ -2,63 +2,81 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Lunch Memo</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
 
-        
-        <link href="https://fonts.googleapis.com/css?family=Coustard|Work+Sans&display=swap" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" redl="stylesheet">
-        <link rel="stylesheet" href="/css/main.css">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Lunch Memo</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/icon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#f5d808">
+    <meta name="apple-mobile-web-app-title" content="LUNCHmemo">
+    <meta name="application-name" content="LUNCHmemo">
+    <meta name="msapplication-TileColor" content="#ff0000">
+    <meta name="theme-color" content="#ffffff">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js" async defer></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,400,700|Rubik:300,300i,400,500,700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <header>
-            <h1>Lunch Memo</h1>
-            <nav>
-                Hello, Username
-                <div class="nav">
-                    <a href="#">Logout</a>
-                </div>
-            </nav>
-        </header>
-
-        <section>
-            <div class="register container">
-                <div class="left">
-                    <h1>LunchMemo</h1>
-                    LunchMemo helps you do lunch things
-                </div>
-                <div class="right">
-                    <form>
-                        <label for="name">Name</label>
-                        <input type="text" id="name" placeholder="" />
-
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="" />
-
-                        <label for="password">Password</label>
-                        <input type="text" id="password" />
-
-                        <button type="submit" class="btn">Register</button>
-                        <span><a href="#">Log in</a></span>
-                    </form>
-                </div>
+    <header>
+        <h1 class="logo"><span class="lunch">LUNCH</span><span class="memo">memo</span></h1>
+        <nav>
+            Hello, Username <i class="fas fa-user-circle"></i>
+            <div class="nav">
+                <a href="#" class="hide">Logout</a>
+                <a href="#">Register</a> /
+                <a href="#">Login</a>
             </div>
-        </section>
+        </nav>
+    </header>
+
+    <section class="memoshadow animated fadeInDown faster">
+        <div class="register container">
+            <div class="left">
+                <h1 class="logo"><span class="lunch">LUNCH</span><span class="memo">memo</span></h1>
+                <p>Lunch Memo makes it easy to organize lunch with your colleagues and other professionals in your area. Spend less time finding lunch spots and scheduling with everyone and simply your lunch life with LunchMemo.</p>
+            </div>
+            <div class="right">
+                <form>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="" />
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="" />
+
+                    <label for="password">Password</label>
+                    <input type="text" id="password" />
+
+                    <button type="submit" class="btn">Register</button>
+                    <span><a href="#">Log in</a></span>
+                </form>
+            </div>
+        </div>
+    </section>
 
 
-        <section class="bginfo">
-            <a href="#" target="_blank">First Last<br /><span>Title of the photo</span></a>
-        </section>
-        
-        <script src="" async defer></script>
-    </body>
+    <section class="bginfo">
+        <a href="#" target="_blank">First Last<br /><span>Title of the photo</span></a>
+    </section>
+
+    <script src="js/index.js" async defer></script>
+</body>
+
 </html>
