@@ -11,4 +11,7 @@ app.use('/', indexRouter);
 app.use('/', groupRouter);
 app.use('/', userRouter);
 
+var path = require('path');
+app.use(express.static(path.join(__dirname, '../public')));
+
 module.exports = app;
