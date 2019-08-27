@@ -125,10 +125,21 @@ template {
   display: none; }
 
 /*# sourceMappingURL=normalize.min.css.map */
+.form-footer {
+  margin: 1rem auto 0;
+  text-align: center; }
+  .form-footer button {
+    margin-right: 13px; }
+  .form-footer a:link, .form-footer a:visited {
+    color: #d60000; }
+  .form-footer a:hover, .form-footer a:active {
+    color: #481e1e; }
+
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  transform: .4 all; }
 
 body,
 html {
@@ -163,17 +174,18 @@ a:link, a:visited {
 label {
   display: block;
   font-size: 14px;
-  margin-bottom: 8px;
+  margin-bottom: 3px;
   color: #777; }
 
 input {
+  margin-bottom: 7px;
   border: 1px solid #eee;
   padding: 12px;
   outline: none; }
 
 button {
   cursor: pointer;
-  padding: 12px;
+  padding: 12px 12px 9px 12px;
   background: #7C5CBF;
   border: none;
   color: white;
@@ -184,6 +196,13 @@ button {
   button:disabled {
     cursor: default;
     background: #7c5cbf94; }
+
+.btn-red {
+  background-color: #d60000;
+  border-bottom: 3px solid #d60000; }
+  .btn-red:hover {
+    background-color: #ca1818;
+    border-bottom-color: #481e1e; }
 
 ul {
   margin-left: 20px; }
@@ -242,13 +261,14 @@ header {
     letter-spacing: 1px; }
 
 .container {
-  margin: 0 auto; }
+  position: relative;
+  margin: 0 auto;
+  width: 850px;
+  top: 25vh; }
 
 .register {
-  position: relative;
-  width: 850px;
   height: 50vh;
-  top: 25vh;
+  position: relative;
   background-color: #fff;
   box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.4); }
   .register p {
@@ -260,6 +280,17 @@ header {
     line-height: 2.2rem; }
   .register input {
     width: 100%; }
+  .register h3 {
+    margin-bottom: 2rem;
+    font-weight: 300;
+    font-size: 1rem; }
+    .register h3 span {
+      font-size: 1.4rem;
+      font-style: italic;
+      color: #ca1818;
+      width: 100%;
+      display: block;
+      font-weight: 700; }
 
 .left {
   position: absolute;
@@ -267,13 +298,13 @@ header {
   left: 0;
   width: 50%;
   height: 100%;
-  padding: 4.2rem 3.2rem; }
+  padding: 5rem 3.2rem; }
 
 .right {
   width: 50%;
   height: 100%;
   margin-left: 425px;
-  padding: 1.6rem;
+  padding: 4.2rem 3.2rem;
   background-color: #f7f7f7; }
 
 .bginfo {

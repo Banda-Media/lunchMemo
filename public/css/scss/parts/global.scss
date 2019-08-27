@@ -1,17 +1,8 @@
-$primary-color: #7c5cbf;
-$gray: #777;
-$lightgray: #eee;
-$darkgray: #221e1f;
-$yellow: #f7be0d;
-$logoyellow: #ffe081;
-$header-font: 'Rubik', 'Open Sans', Helvetica, Arial, sans-serif;
-$body-font: 'Lato', 'Open Sans', Helvetica, Arial, sans-serif;
-
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transform: .4 all;
 }
 
 body,
@@ -58,11 +49,12 @@ a {
 label {
     display: block;
     font-size: 14px;
-    margin-bottom: 8px;
+    margin-bottom: 3px;
     color: $gray;
 }
 
 input {
+    margin-bottom: 7px;
     border: 1px solid $lightgray;
     padding: 12px;
     outline: none;
@@ -70,7 +62,7 @@ input {
 
 button {
     cursor: pointer;
-    padding: 12px;
+    padding: 12px 12px 9px 12px;
     background: #7C5CBF;
     border: none;
     color: white;
@@ -84,6 +76,16 @@ button {
     &:disabled {
         cursor: default;
         background: #7c5cbf94;
+    }
+}
+
+.btn-red {
+    background-color: #d60000;
+    border-bottom: 3px solid #d60000;
+
+    &:hover {
+        background-color: #ca1818;
+        border-bottom-color: #481e1e;
     }
 }
 

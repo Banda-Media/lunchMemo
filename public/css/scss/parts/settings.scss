@@ -1,0 +1,16 @@
+$primary-color: #7c5cbf;
+$gray: #777;
+$lightgray: #eee;
+$darkgray: #221e1f;
+$yellow: #f7be0d;
+$logoyellow: #ffe081;
+$header-font: 'Rubik', 'Open Sans', Helvetica, Arial, sans-serif;
+$body-font: 'Lato', 'Open Sans', Helvetica, Arial, sans-serif;
+
+@mixin alpha-attribute($attribute, $color, $background) {
+    $percent: alpha($color) * 100%;
+    $opaque: opacify($color, 1);
+    $solid-color: mix($opaque, $background, $percent);
+    #{$attribute}: $solid-color;
+    #{$attribute}: $color;
+  }
