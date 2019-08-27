@@ -135,9 +135,11 @@
       "id": 1,
       "users": [
         1,
-        2
+        3
       ],
-      "categories": [],
+      "categories": [
+        "italian"
+      ],
       "active": "true"
     },
     {

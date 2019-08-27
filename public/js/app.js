@@ -1,3 +1,24 @@
+const lunchGroupRows = {}
+
+function createGroupsFromList(groups) {
+    groups.map(group => {
+        lunchGroupRows[group.name] === undefined && new LunchGroupRow(group)
+    })
+}
+class LunchGroupRow {
+    constructor(group) {
+        this.groupObj = group
+    }
+
+    get isActive() {
+        return this.groupObj.active
+    }
+
+    update() {
+
+    }
+}
+
 var lmRunApp = function() {
     let now = new Date($.now());
     $('#app-widget').addClass('animated fadeInTop')
@@ -47,4 +68,10 @@ var lmRunApp = function() {
                 return e
             })
     })
+
+    setTimeout(() => {
+            createGroupsFromList(lunchmemoAPI.getActiveGroups())
+            lunchGroupRows.map(rowGroup => !rowGroup.isActive && rowGroup.remove())
+        },
+        1000)
 }
