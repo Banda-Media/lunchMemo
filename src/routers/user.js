@@ -48,8 +48,8 @@ router.post(BASE_URL, async(req, res) => {
     }
 })
 
-router.post(`${BASE_URL}/login`, async(req, res) => {
-    console.log(`POST /users/login: ${JSON.stringify(req.body)}`)
+router.post(`/login`, async(req, res) => {
+    console.log(`POST /users/login: ${JSON.stringify(req.body.user)}`)
     try {
         let user = await findFromEmail(req.body.email)
         if (user.password !== req.body.password) throw 'Could not login'
@@ -62,13 +62,12 @@ router.post(`${BASE_URL}/login`, async(req, res) => {
     }
 })
 
-router.post(`${BASE_URL}/logout/:id`, async(req, res) => {
-    console.log(`POST /users/logout/${req.params.id}`)
-    const _id = req.params.id
+router.post(`/logout`, async(req, res) => {
+    console.log(`POST /users/logout ${req.body.user}`)
     try {
-        await setInactive(_id)
-        console.log(`User ${_id} logged out.`)
-        res.status(200).send()
+        await setInactive(req.body.user.id)
+        console.log(`User ${req.body.user} logged out.`)
+        res.status(200).send(req.body.user)
     } catch (e) {
         console.log(e)
         res.status(500).send()
