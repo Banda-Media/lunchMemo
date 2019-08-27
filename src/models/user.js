@@ -21,6 +21,11 @@ const findFromEmail = async function(email) {
     throw "Email not found."
 }
 
+const update = async function(userData) {
+    console.log('user model update to: ', `${BASE_URL}/${userData.id}`)
+    return await axios.patch(`${BASE_URL}/${userData.id}`, userData)
+}
+
 const remove = async function(uid) {
     return await axios.delete(`${BASE_URL}/${uid}`)
 }
@@ -43,6 +48,7 @@ module.exports = {
     findFromId,
     findFromEmail,
     remove,
+    update,
     save,
     setActive,
     setInactive

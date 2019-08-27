@@ -1,18 +1,75 @@
 .form-footer {
     margin: 1rem auto 0;
     text-align: center;
-    
     button {
         margin-right: 13px;
     }
-
     a {
-        &:link, &:visited {
+        &:link,
+        &:visited {
             color: #d60000;
         }
-
-        &:hover, &:active {
+        &:hover,
+        &:active {
             color: #481e1e;
         }
     }
+}
+
+.container {
+    position: relative;
+    margin: 0 auto;
+    width: 850px;
+    top: 25vh;
+    background-color: #fff;
+    box-shadow: 0px 3px 12px rgba(0, 0, 0, .4);
+}
+
+.app {
+    height: 50vh;
+    position: relative;
+    top: 25vh;
+}
+
+.register {
+    height: 50vh;
+    position: relative;
+    p {
+        margin-top: 2rem;
+        font-family: $header-font;
+        font-size: 1.2rem;
+        font-weight: 300;
+        font-style: italic;
+        line-height: 2.2rem;
+    }
+    h3 {
+        margin-bottom: 1.4rem;
+        font-weight: 300;
+        font-size: 1rem;
+        span {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: #ca1818;
+            width: 100%;
+            display: block;
+            font-weight: 700;
+        }
+    }
+}
+
+.left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    padding: 5rem 3.2rem;
+}
+
+.right {
+    width: 50%;
+    height: 100%;
+    margin-left: 425px;
+    padding: 4.2rem 3.2rem;
+    background-color: #f7f7f7;
 }

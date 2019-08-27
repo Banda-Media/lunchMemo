@@ -135,6 +135,56 @@ template {
   .form-footer a:hover, .form-footer a:active {
     color: #481e1e; }
 
+.container {
+  position: relative;
+  margin: 0 auto;
+  width: 850px;
+  top: 25vh;
+  background-color: #fff;
+  box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.4); }
+
+.app {
+  height: 50vh;
+  position: relative;
+  top: 25vh; }
+
+.register {
+  height: 50vh;
+  position: relative; }
+  .register p {
+    margin-top: 2rem;
+    font-family: "Rubik", "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 2.2rem; }
+  .register h3 {
+    margin-bottom: 1.4rem;
+    font-weight: 300;
+    font-size: 1rem; }
+    .register h3 span {
+      font-size: 1.4rem;
+      font-style: italic;
+      color: #ca1818;
+      width: 100%;
+      display: block;
+      font-weight: 700; }
+
+.left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  padding: 5rem 3.2rem; }
+
+.right {
+  width: 50%;
+  height: 100%;
+  margin-left: 425px;
+  padding: 4.2rem 3.2rem;
+  background-color: #f7f7f7; }
+
 * {
   margin: 0;
   padding: 0;
@@ -260,52 +310,8 @@ header {
     font-size: 1.8rem;
     letter-spacing: 1px; }
 
-.container {
-  position: relative;
-  margin: 0 auto;
-  width: 850px;
-  top: 25vh; }
-
-.register {
-  height: 50vh;
-  position: relative;
-  background-color: #fff;
-  box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.4); }
-  .register p {
-    margin-top: 2rem;
-    font-family: "Rubik", "Open Sans", Helvetica, Arial, sans-serif;
-    font-size: 1.2rem;
-    font-weight: 300;
-    font-style: italic;
-    line-height: 2.2rem; }
-  .register input {
-    width: 100%; }
-  .register h3 {
-    margin-bottom: 2rem;
-    font-weight: 300;
-    font-size: 1rem; }
-    .register h3 span {
-      font-size: 1.4rem;
-      font-style: italic;
-      color: #ca1818;
-      width: 100%;
-      display: block;
-      font-weight: 700; }
-
-.left {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  padding: 5rem 3.2rem; }
-
-.right {
-  width: 50%;
-  height: 100%;
-  margin-left: 425px;
-  padding: 4.2rem 3.2rem;
-  background-color: #f7f7f7; }
+.timeSelect {
+  width: 30%; }
 
 .bginfo {
   position: absolute;
