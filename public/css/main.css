@@ -1,3 +1,130 @@
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0; }
+
+main {
+  display: block; }
+
+h1 {
+  font-size: 2em;
+  margin: .67em 0; }
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible; }
+
+pre {
+  font-family: monospace,monospace;
+  font-size: 1em; }
+
+a {
+  background-color: transparent; }
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline;
+  text-decoration: underline dotted; }
+
+b, strong {
+  font-weight: bolder; }
+
+code, kbd, samp {
+  font-family: monospace,monospace;
+  font-size: 1em; }
+
+small {
+  font-size: 80%; }
+
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sub {
+  bottom: -.25em; }
+
+sup {
+  top: -.5em; }
+
+img {
+  border-style: none; }
+
+button, input, optgroup, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0; }
+
+button, input {
+  overflow: visible; }
+
+button, select {
+  text-transform: none; }
+
+[type=button], [type=reset], [type=submit], button {
+  -webkit-appearance: button; }
+
+[type=button]::-moz-focus-inner, [type=reset]::-moz-focus-inner, [type=submit]::-moz-focus-inner, button::-moz-focus-inner {
+  border-style: none;
+  padding: 0; }
+
+[type=button]:-moz-focusring, [type=reset]:-moz-focusring, [type=submit]:-moz-focusring, button:-moz-focusring {
+  outline: 1px dotted ButtonText; }
+
+fieldset {
+  padding: .35em .75em .625em; }
+
+legend {
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal; }
+
+progress {
+  vertical-align: baseline; }
+
+textarea {
+  overflow: auto; }
+
+[type=checkbox], [type=radio] {
+  box-sizing: border-box;
+  padding: 0; }
+
+[type=number]::-webkit-inner-spin-button, [type=number]::-webkit-outer-spin-button {
+  height: auto; }
+
+[type=search] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px; }
+
+[type=search]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit; }
+
+details {
+  display: block; }
+
+summary {
+  display: list-item; }
+
+template {
+  display: none; }
+
+[hidden] {
+  display: none; }
+
+/*# sourceMappingURL=normalize.min.css.map */
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +138,7 @@ html {
 body {
   line-height: 1.4;
   color: #333333;
-  font-family: "Overpass", "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 16px;
   background-image: url(../img/lunchmemo-bg.jpg);
   background-size: cover;
@@ -28,10 +155,7 @@ body {
  * Text Styles
  */
 h1, h2, h3, h4, h5 {
-  font-family: "Chivo", "Times New Roman", serif; }
-
-h1 {
-  margin-bottom: 16px; }
+  font-family: "Rubik", "Open Sans", Helvetica, Arial, sans-serif; }
 
 a:link, a:visited {
   text-decoration: none; }
@@ -43,7 +167,7 @@ label {
   color: #777; }
 
 input {
-  border: 1px solid #eeeeee;
+  border: 1px solid #eee;
   padding: 12px;
   outline: none; }
 
@@ -64,14 +188,58 @@ button {
 ul {
   margin-left: 20px; }
 
+.hide {
+  display: none;
+  opacity: 0; }
+
 header {
+  z-index: 2;
   position: fixed;
   display: flex;
   justify-content: space-between;
   width: 100%;
-  background-color: #fff;
-  z-index: 2;
-  box-shadow: 0px 2px 0px rgba(22, 14, 39, 0.1); }
+  padding: 1.4rem 1.6rem;
+  box-shadow: 0px 2px 0px rgba(22, 14, 39, 0.1);
+  background-color: #fff; }
+  header nav {
+    text-align: right; }
+    header nav .fas {
+      color: #f7be0d;
+      font-size: 1.2rem; }
+
+.logo {
+  margin: 0;
+  color: #221e1f;
+  text-transform: lowercase;
+  font-weight: 300; }
+  .logo span.lunch {
+    z-index: 1;
+    position: relative;
+    padding: 5px 12px 0 16px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 3px; }
+    .logo span.lunch:after {
+      content: "";
+      z-index: -1;
+      position: absolute;
+      top: -1px;
+      left: 0px;
+      width: 100%;
+      height: 46px;
+      transform: rotate(-1deg);
+      box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
+      border-top: 1px solid #eab102;
+      border-right: 1px solid #ffe081;
+      border-left: 1px solid #ffe081;
+      background-color: #ffe081; }
+  .logo span.memo {
+    z-index: 1;
+    position: absolute;
+    margin-top: 3px;
+    margin-left: -11px;
+    font-size: 1.8rem;
+    letter-spacing: 1px; }
 
 .container {
   margin: 0 auto; }
@@ -81,9 +249,17 @@ header {
   width: 850px;
   height: 50vh;
   top: 25vh;
-  padding: 1.6rem;
   background-color: #fff;
   box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.4); }
+  .register p {
+    margin-top: 2rem;
+    font-family: "Rubik", "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 2.2rem; }
+  .register input {
+    width: 100%; }
 
 .left {
   position: absolute;
@@ -91,11 +267,14 @@ header {
   left: 0;
   width: 50%;
   height: 100%;
-  padding: 1.6rem 0 1.6rem 1.6rem;
-  background-color: #7c5cbf; }
+  padding: 4.2rem 3.2rem; }
 
 .right {
-  margin-left: 425px; }
+  width: 50%;
+  height: 100%;
+  margin-left: 425px;
+  padding: 1.6rem;
+  background-color: #f7f7f7; }
 
 .bginfo {
   position: absolute;
