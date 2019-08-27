@@ -116,7 +116,8 @@ var lmRunApp = function() {
             })
     })
 
-    setTimeout(async function() {
+    setInterval(async function() {
+            console.log('running!!!')
             lunchmemoAPI.getActiveGroups()
                 .then(res => createGroupsFromList(res.groups))
                 .catch(e => {
@@ -126,5 +127,5 @@ var lmRunApp = function() {
 
             Object.values(lunchGroupRows).map(rowGroup => !rowGroup.isActive && rowGroup.remove())
         },
-        1000)
+        5000)
 }
