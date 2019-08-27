@@ -118,10 +118,11 @@
       "active": "true"
     },
     {
+      "id": 2,
       "users": [
         1
       ],
-      "id": 2
+      "active": "true"
     }
   ],
   "restaurants": [
