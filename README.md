@@ -1,14 +1,25 @@
-# LunchMemo
+
+<div style="display:flex; flex-direction: column; justify-content:center; align-items: center">
+    <h1 style="text-align: center">LunchMemo</h1>
+    <img src="https://github.com/bobbypwang/LunchMemo/blob/dev/public/img/icon/android-chrome-192x192.png?raw=true" alt="LunchMemo logo">
+</div>
+
 Lunch Memo makes it easy to organize lunch with your colleagues and other professionals in your area.  Spend less time finding lunch spots and scheduling with everyone and simply your lunch life with LunchMemo.
 
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/bobbypwang/lunchmemo)
+
+
 -------------
+
 # Setup
 ### Installation
 *   Clone the [repo]('https://github.com/bobbypwang/LunchMemo')
 *   Install the server dependencies with: ```npm install```
 *   Run the local server using ```npm run start```
 *   Open ```http://localhost:3000``` and Have fun!
+
 -------------
+
 ### Environment Variables
 #### Set up API Access
 *   Obtain a [Yelp API Key](https://www.yelp.com/developers/documentation/v3/authentication)
@@ -24,6 +35,7 @@ Lunch Memo makes it easy to organize lunch with your colleagues and other profes
 | `LUNCHMEMO_MONGODB_URL`     | The generated Mongo DB Cluster connection URI   |  
 
 -------------
+
 # Authors
 Andres Weber
 Bobby Wang

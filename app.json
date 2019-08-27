@@ -1,0 +1,7 @@
+{
+    "name": "LunchMemo",
+    "description": "Lunch Memo makes it easy to organize lunch with your colleagues and other professionals in your area. Spend less time finding lunch spots and scheduling with everyone and simply your lunch life with LunchMemo.",
+    "repository": "https://github.com/bobbypwang/LunchMemo",
+    "logo": "https://node-js-sample.herokuapp.com/node.svg",
+    "keywords": ["lunch", "company", "eat", "yelp", "api", "express", "node", "nodeJS", "javascript", "npm"]
+}
