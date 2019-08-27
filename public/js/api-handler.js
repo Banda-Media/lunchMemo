@@ -7,7 +7,7 @@ class APIHandler {
         return axios.post(`${this.BASE_URL}/users/`, userData)
         .then(res => {
             console.log(userData)
-            axios.post(`${this.BASE_URL}/login/`, userData)
+            axios.post(`/login/`, {user: userData})
             return userData
         })
         .catch(err => {
@@ -15,5 +15,6 @@ class APIHandler {
             return err
         })
     }
+
 }
 

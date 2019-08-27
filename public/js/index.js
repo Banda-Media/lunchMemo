@@ -15,9 +15,6 @@ $(document).ready(() => {
             .then( res => {
                 $(".register").addClass("animated fadeOut faster")
             })
-        
-
-
     }
 
 })
