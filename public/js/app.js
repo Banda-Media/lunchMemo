@@ -31,7 +31,6 @@ var lmRunApp = function() {
     });
 
     $("#profile-btn").click(() => {
-        window.me = { id: 1 }
         let userUpdateData = {
             id: window.me.id,
             startRange: $('#timepicker-start').val(),

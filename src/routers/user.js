@@ -7,7 +7,10 @@ router.get(USER_BASE_ROUTE, async(req, res) => {
     console.log(`GET /users: ${req.body}`)
     try {
         const users = await findAll()
-        res.status(200).send(users)
+        res.status(200).send(users.map(user => {
+            delete user.password
+            return user
+        }))
     } catch (e) {
         console.log(e)
         res.status(400).send(e)
@@ -68,9 +71,9 @@ router.post(`/login`, async(req, res) => {
         if (user.password !== req.body.password) throw 'Could not login'
         await setActive(user.id)
         console.log(`User ${user.id} logged in.`)
-        let x = await findFromId(user.id)
-        console.log(x)
-        res.status(200).send({ user:  x.data})
+        user = await findFromId(user.id)
+        delete user.password
+        res.status(200).send({ user })
     } catch (e) {
         console.log(e)
         res.status(400).send(e)

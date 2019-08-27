@@ -5,10 +5,10 @@
       "name": "Andres",
       "email": "hello@andresweber.com",
       "password": "password",
-      "groupSize": "md",
+      "groupSize": "sm",
       "active": true,
-      "startRange": "10:45 AM",
-      "endRange": "11:00 AM",
+      "startRange": "5:00 PM",
+      "endRange": "6:00 PM",
       "start": "3:00 PM",
       "end": "4:00 PM",
       "size": "lg"
@@ -18,10 +18,10 @@
       "name": "Bobby",
       "email": "hello@bobbywang.net",
       "password": "password",
-      "groupSize": "md",
-      "active": false,
-      "startRange": "August 26, 2019 12:00:00",
-      "endRange": "August 26, 2019 12:30:00"
+      "groupSize": "sm",
+      "active": true,
+      "startRange": "5:00 PM",
+      "endRange": "6:00 PM"
     },
     {
       "name": "asdasd",
