@@ -110,16 +110,19 @@
       "id": 1,
       "users": [
         1,
-        2
+        3
       ],
-      "categories": [],
+      "categories": [
+        "italian"
+      ],
       "active": "true"
     },
     {
+      "id": 2,
       "users": [
         1
       ],
-      "id": 2
+      "active": "true"
     }
   ],
   "restaurants": [

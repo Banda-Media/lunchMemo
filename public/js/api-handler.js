@@ -3,6 +3,17 @@ class APIHandler {
         this.API_BASE_URL = baseUrl;
     }
 
+    getActiveGroups() {
+        return axios.get(`${this.API_BASE_URL}/active/groups`)
+            .then(res => {
+                return res.data
+            })
+            .catch(e => {
+                console.log(e)
+                return e
+            })
+    }
+
     createOneRegister(userData) {
         return axios.post(`${this.API_BASE_URL}/users/`, userData)
             .then(res => {
