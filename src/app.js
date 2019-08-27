@@ -8,8 +8,7 @@ const restaurantRouter = require('./routers/restaurant');
 
 const app = express();
 
-
-app.use(cors());
+app.use(cors())
 app.use(express.json());
 app.use('/', indexRouter);
 app.use('/', groupRouter);

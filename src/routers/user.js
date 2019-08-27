@@ -1,30 +1,43 @@
 const express = require('express')
-const { findFromId, findAll, findFromEmail, save, remove, setInactive, setActive } = require('../models/user')
+const { findFromId, findAll, findFromEmail, update, save, remove, setInactive, setActive } = require('../models/user')
 const router = new express.Router()
-const BASE_URL = '/users'
+const USER_BASE_ROUTE = '/users'
 
-router.get(BASE_URL, async(req, res) => {
+router.get(USER_BASE_ROUTE, async(req, res) => {
     console.log(`GET /users: ${req.body}`)
     try {
         const users = await findAll()
         res.status(200).send(users)
     } catch (e) {
+        console.log(e)
         res.status(400).send(e)
     }
 })
 
-router.get(`${BASE_URL}/:id`, async(req, res) => {
+router.patch(USER_BASE_ROUTE, async(req, res) => {
+    console.log(`PATCH /users: ${req.body.user}`)
+    try {
+        const user = await update(req.body.user)
+        res.status(200).send(user.data)
+    } catch (e) {
+        console.log(e)
+        res.status(400).send(e)
+    }
+})
+
+router.get(`${USER_BASE_ROUTE}/:id`, async(req, res) => {
     console.log(`GET /users/${req.params.id}: ${req.body}`)
     const _id = req.params.id
     try {
         const user = await findFromId(_id)
         res.status(200).send({ user })
     } catch (e) {
+        console.log(e)
         res.status(400).send(e)
     }
 })
 
-router.delete(`${BASE_URL}/:id`, async(req, res) => {
+router.delete(`${USER_BASE_ROUTE}/:id`, async(req, res) => {
     console.log(`DELETE /users/${req.params.id}: ${req.body}`)
     const _id = req.params.id
     try {
@@ -37,7 +50,7 @@ router.delete(`${BASE_URL}/:id`, async(req, res) => {
     }
 })
 
-router.post(BASE_URL, async(req, res) => {
+router.post(USER_BASE_ROUTE, async(req, res) => {
     console.log(`POST /users: ${JSON.stringify(req.body)}`)
     try {
         await save(req.body)

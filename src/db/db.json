@@ -5,10 +5,13 @@
       "name": "Andres",
       "email": "hello@andresweber.com",
       "password": "password",
-      "groupSize": "sm",
+      "groupSize": "md",
       "active": true,
-      "startRange": "August 26, 2019 12:00:00",
-      "endRange": "August 26, 2019 12:30:00"
+      "startRange": "10:45 AM",
+      "endRange": "11:00 AM",
+      "start": "3:00 PM",
+      "end": "4:00 PM",
+      "size": "lg"
     },
     {
       "id": 2,
@@ -103,6 +106,28 @@
       "email": "chris@chris.com",
       "password": "asdasdsad",
       "id": 16
+    },
+    {
+      "name": "asdfasef",
+      "email": "asfsaef@kalsd.com",
+      "password": "asdf",
+      "id": 17
+    },
+    {
+      "name": "asefijko",
+      "email": "kasojfk@sad.com",
+      "password": "aokejf",
+      "id": 18
+    },
+    {
+      "name": "Fick",
+      "email": "hello@nick.com",
+      "password": "fastword",
+      "groupSize": "md",
+      "active": true,
+      "startRange": "August 26, 2019 12:15:00",
+      "endRange": "August 26, 2019 12:45:00",
+      "id": 19
     }
   ],
   "groups": [
