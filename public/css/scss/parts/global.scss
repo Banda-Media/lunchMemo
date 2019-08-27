@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transform: .4 all;
 }
 
 body,
@@ -99,6 +98,7 @@ ul {
 header {
     z-index: 2;
     position: fixed;
+    top: 0;
     display: flex;
     justify-content: space-between;
     width: 100%;
