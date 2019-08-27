@@ -1,13 +1,10 @@
 
-<div style="display:flex; flex-direction: column; justify-content:center; align-items: center">
+<div style="display:flex; flex-direction: column; justify-content:center; align-items: center; text-align:center;">
     <h1 style="text-align: center">LunchMemo</h1>
     <img src="https://github.com/bobbypwang/LunchMemo/blob/dev/public/img/icon/android-chrome-192x192.png?raw=true" alt="LunchMemo logo">
+    <p style="font-size: 1.35rem; font-weight: 500; padding: 2rem; text-align: center"> Lunch Memo makes it easy to organize lunch with your colleagues and other professionals in your area.  Spend less time finding lunch spots and scheduling with everyone and simply your lunch life with LunchMemo.</p>
+    <a href="https://heroku.com/deploy?template=https://github.com/bobbypwang/lunchmemo"><img alt="deploy" src="https://www.herokucdn.com/deploy/button.png"></a>
 </div>
-
-Lunch Memo makes it easy to organize lunch with your colleagues and other professionals in your area.  Spend less time finding lunch spots and scheduling with everyone and simply your lunch life with LunchMemo.
-
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/bobbypwang/lunchmemo)
-
 
 -------------
 
