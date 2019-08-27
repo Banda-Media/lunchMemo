@@ -1,26 +1,32 @@
 const express = require('express')
-const { Group, findAll, save, remove } = require('../models/group')
+const { findFromId, findAll, save, remove, setInactive, setActive } = require('../models/group')
 const router = new express.Router()
+const BASE_URL = '/groups'
 
-router.get('/groups', async(req, res) => {
+router.get(BASE_URL, async(req, res) => {
     try {
         const groups = await findAll()
         res.status(201).send(groups)
     } catch (e) {
+        console.log(e)
         res.status(400).send(e)
     }
 })
 
-router.get('/groups/:uid', async(req, res) => {
+router.get(`${BASE_URL}/:id`, async(req, res) => {
+    console.log(`GET /groups/${req.params.id}: ${req.body}`)
+    const _id = req.params.id
     try {
-        const groups = await findFromId(req.params.uid)
-        res.status(201).send(groups)
+        const group = await findFromId(_id)
+        res.status(200).send({ group })
     } catch (e) {
+        console.log(e)
         res.status(400).send(e)
     }
 })
 
-router.get('/groups/active', async(req, res) => {
+router.get(`/active${BASE_URL}`, async(req, res) => {
+    console.log(`GET /active/groups`)
     try {
         const groups = await findAll()
         res.status(200).send({ groups: groups.filter(g => g.active) })
@@ -29,24 +35,28 @@ router.get('/groups/active', async(req, res) => {
     }
 })
 
-router.post('/groups', async(req, res) => {
-    const group = new Group(req.body)
+router.post(`${BASE_URL}`, async(req, res) => {
+    console.log(`POST /groups: ${JSON.stringify(req.body)}`)
     try {
-        await save(group)
-        res.status(201).send({ group })
+        req.body.active = true
+        await save(req.body)
+        res.status(201).send({ group: req.body })
     } catch (e) {
+        console.log(e)
         res.status(400).send(e)
     }
 })
 
-router.delete('/groups/:uid', async(req, res) => {
+router.delete(`${BASE_URL}/:id`, async(req, res) => {
+    console.log(`DELETE /groups/${req.params.id}: ${req.body}`)
+    const _id = req.params.id
     try {
-        const group = findFromId(req.params.uid)
-        await remove(req.params.uid)
-        console.log(`Deleted group at id ${req.params.uid}`)
-        res.status(201).send({ group })
+        const group = await findFromId(_id)
+        await remove(_id)
+        res.status(200).send({ group })
     } catch (e) {
-        res.status(400).send(e)
+        console.log(e)
+        res.status(500).send()
     }
 })
 
