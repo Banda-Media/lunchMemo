@@ -33,7 +33,7 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        <header>
+        <header class="hide">
             <h1 class="logo"><span class="lunch">LUNCH</span><span class="memo">memo</span></h1>
             <nav>
                 Hello, Username <i class="fas fa-user-circle"></i>
@@ -53,7 +53,7 @@
                             <p>Lunch Memo makes it easy to organize lunch with your colleagues and other professionals in your area. Spend less time finding lunch spots and scheduling with everyone and simply your lunch life with LunchMemo.</p>
                         </div>
                         <div class="right">
-                            <h3>Hungry? Create an account below</h3>
+                            <h3><span>Hungry?</span>Create an account below to get started</h3>
                             <form id="fp-registration">
                                 <label for="name">Name</label>
                                 <input type="text" id="name" required minlength=3 />
@@ -64,8 +64,10 @@
                                 <label for="password">Password</label>
                                 <input type="password" id="password" required />
         
-                                <button type="submit" class="btn-red">Register</button>
-                                <span><a href="#">Log in</a></span>
+                                <div class="form-footer">
+                                    <button type="submit" class="btn-red">Register</button>
+                                    <span><a href="#">Log in</a></span>
+                                </div>
                             </form>
                         </div>
                     </div>

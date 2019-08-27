@@ -1,0 +1,18 @@
+.form-footer {
+    margin: 1rem auto 0;
+    text-align: center;
+    
+    button {
+        margin-right: 13px;
+    }
+
+    a {
+        &:link, &:visited {
+            color: #d60000;
+        }
+
+        &:hover, &:active {
+            color: #481e1e;
+        }
+    }
+}

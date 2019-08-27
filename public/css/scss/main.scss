@@ -1,4 +1,5 @@
 
+@import 'parts/settings';
 @import 'parts/normalize';
 @import 'parts/layout';
 @import 'parts/global';
@@ -28,6 +29,22 @@
     input {
         width: 100%;
     }
+
+
+    h3 {
+        margin-bottom: 2rem;
+        font-weight: 300;
+        font-size: 1rem;
+
+        span {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: #ca1818;
+            width: 100%;
+            display: block;
+            font-weight: 700;
+        }
+    }
 }
 
 .left {
@@ -36,14 +53,14 @@
     left: 0;
     width: 50%;
     height: 100%;
-    padding: 4.2rem 3.2rem;
+    padding: 5rem 3.2rem;
 }
 
 .right {
     width: 50%;
     height: 100%;
     margin-left: 425px;
-    padding: 1.6rem;
+    padding: 4.2rem 3.2rem;
     background-color: #f7f7f7;
 }
 
