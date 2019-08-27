@@ -11,9 +11,12 @@ const router = new express.Router()
  */
 router.post('/API/search/restaurants', async(req, res) => {
     try {
-        let yelpRestaurants = await YelpApi.getInstance().search(req.params.searchTerms, req.params.location)
+        console.log(req)
+        console.log(`POST /API/search/restaurants searchTerms: ${req.body.searchTerms}, locations: ${req.body.location}`)
+        let yelpRestaurants = await YelpAPI.getInstance().search(req.body.searchTerms, req.body.location)
         res.status(201).send({ yelpRestaurants })
     } catch (e) {
+        console.log(e)
         res.status(400).send(e)
     }
 })
