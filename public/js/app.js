@@ -3,7 +3,9 @@ const lunchGroupRows = {}
 
 function createGroupsFromList(groups) {
     groups.map(group => {
-        lunchGroupRows[group.name] === undefined && new LunchGroupRow(group)
+        if (lunchGroupRows[group.name] === undefined && group.active == "true") {
+            lunchGroupRows[group.name] = new LunchGroupRow(group)
+        }
     })
 }
 class LunchGroupRow {
@@ -55,12 +57,18 @@ class LunchGroupRow {
     }
 
     get isActive() {
-        return this.groupObj.active
+        return this.groupObj.active == "true"
     }
 
     addMember(user) {
         this.groupObj.users.append(user.id)
     }
+
+    remove() {
+        console.log('Removing ')
+        this.div.remove()
+    }
+
     update() {
 
     }
@@ -117,7 +125,7 @@ var lmRunApp = function() {
     })
 
     setInterval(async function() {
-            console.log('running!!!')
+            console.log('Checking for active/inactive groups...')
             lunchmemoAPI.getActiveGroups()
                 .then(res => createGroupsFromList(res.groups))
                 .catch(e => {
@@ -125,7 +133,13 @@ var lmRunApp = function() {
                     return e
                 })
 
-            Object.values(lunchGroupRows).map(rowGroup => !rowGroup.isActive && rowGroup.remove())
+            Object.values(lunchGroupRows).map(rowGroup => {
+                console.log(rowGroup.isActive, rowGroup)
+                if (!rowGroup.isActive) {
+                    console.log(`Removing group ${rowGroup.groupObj.name}`)
+                    rowGroup.remove()
+                }
+            })
         },
         5000)
 }
