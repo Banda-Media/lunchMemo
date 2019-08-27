@@ -55,7 +55,9 @@ router.post(`/login`, async(req, res) => {
         if (user.password !== req.body.password) throw 'Could not login'
         await setActive(user.id)
         console.log(`User ${user.id} logged in.`)
-        res.status(200).send({ user: await findFromId(user.id) })
+        let x = await findFromId(user.id)
+        console.log(x)
+        res.status(200).send({ user:  x.data})
     } catch (e) {
         console.log(e)
         res.status(400).send(e)
