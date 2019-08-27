@@ -5,10 +5,10 @@
       "name": "Andres",
       "email": "hello@andresweber.com",
       "password": "password",
-      "groupSize": "sm",
+      "groupSize": "md",
       "active": true,
-      "startRange": "3:00 PM",
-      "endRange": "4:00 PM",
+      "startRange": "10:45 AM",
+      "endRange": "11:00 AM",
       "start": "3:00 PM",
       "end": "4:00 PM",
       "size": "lg"

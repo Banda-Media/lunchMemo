@@ -16,7 +16,8 @@
     }
 }
 
-.container {
+.container,
+.app-body {
     position: relative;
     margin: 0 auto;
     width: 850px;
@@ -29,6 +30,11 @@
     height: 50vh;
     position: relative;
     top: 25vh;
+    display: flex;
+    justify-content: center;
+    select {
+        height: 2.9rem;
+    }
 }
 
 .register {

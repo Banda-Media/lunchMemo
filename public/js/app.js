@@ -1,9 +1,10 @@
 var lmRunApp = function() {
     let now = new Date($.now());
+    $('#app-widget').addClass('animated fadeInTop')
     $('#app-widget').removeClass('hide')
     $('header').removeClass('hide')
-    $('.register').addClass('hide')
-    $('.login').addClass('hide')
+
+    $('.container').addClass('animated fadeOut faster')
 
     $('.timepickerStart').timepicker({
         timeFormat: 'h:mm p',
