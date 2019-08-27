@@ -54,6 +54,7 @@ label {
 }
 
 input {
+    width: 100%;
     margin-bottom: 7px;
     border: 1px solid $lightgray;
     padding: 12px;
@@ -62,12 +63,11 @@ input {
 
 button {
     cursor: pointer;
-    padding: 12px 12px 9px 12px;
+    padding: 12px 2rem;
     background: #7C5CBF;
     border: none;
-    color: white;
+    color: #fff;
     font-size: 16px;
-    transition: background .3s ease;
 
     &:hover {
         background: #6b47b8;
@@ -81,11 +81,9 @@ button {
 
 .btn-red {
     background-color: #d60000;
-    border-bottom: 3px solid #d60000;
 
     &:hover {
         background-color: #ca1818;
-        border-bottom-color: #481e1e;
     }
 }
 
