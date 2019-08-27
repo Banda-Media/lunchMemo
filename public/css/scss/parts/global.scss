@@ -87,6 +87,14 @@ button {
     }
 }
 
+.btn-red {
+    background-color: #d42032;
+
+    &:hover {
+        background-color: #d42032;
+    }
+}
+
 ul {
     margin-left: 20px;
 }
