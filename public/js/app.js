@@ -51,6 +51,7 @@ class LunchGroupRow {
         this.children.map(child => this.div.appendChild(child))
         groupsWidget.append(this.div)
         this.update()
+
     }
 
     get sizeRange() {
@@ -80,7 +81,7 @@ class LunchGroupRow {
 
     async updateAttendeesView() {
         let maxSize = parseInt(this.sizeRange.split('-')[1])
-        console.log('maximum size is ', maxSize)
+
         Array(this.attendeeUL.childNodes.length).fill().map((_, i) => i >= maxSize && this.attendeeUL.childNodes[i].remove())
 
         Array(maxSize).fill().map((_, i) => {
@@ -171,6 +172,9 @@ var lmRunApp = function() {
                     rowGroup.update()
                 }
             })
+            console.log($(window).innerHeight())
+            console.log($('.app-wrap').height())
+            $(window).innerHeight($('.app-wrap').height())
         },
         5000)
 }
