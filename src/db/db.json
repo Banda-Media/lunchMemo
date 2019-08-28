@@ -142,6 +142,7 @@
         4,
         5
       ],
+<<<<<<< HEAD
       "active": true,
       "id": 4,
       "name": "powerdudes"
@@ -184,6 +185,8 @@
       "name": "Coyo Taco",
       "category": "Mexican",
       "openTime": "11:00"
+=======
+>>>>>>> 0305d546d7fc6b9aea443acbe8e9620fb18edf47
     }
   ]
 }
