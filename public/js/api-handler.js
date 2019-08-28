@@ -1,7 +1,9 @@
 class APIHandler {
     constructor() {
-        console.log(`Creating API Handler using BASEURL: http://localhost:${env.PORT || 3000}`)
-        this.API_BASE_URL = `http://localhost:${env.PORT || 3000}`;
+        this.PORT = env.PORT || 3000
+        this.SERVER = (this.PORT === 3000) ? `http://localhost:${this.PORT}` : `https://lunch-memo.herokuapp.com/${this.PORT}`
+        console.log(`Creating API Handler using BASEURL: ${this.SERVER}`)
+        this.API_BASE_URL = `${this.SERVER}`;
     }
 
     getActiveGroups() {
