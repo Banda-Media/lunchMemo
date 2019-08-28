@@ -40,11 +40,24 @@ class APIHandler {
     createUser(userData) {
         return axios.post(`${this.API_BASE_URL}/users/`, userData)
             .then(res => {
-                console.log(userData)
-                axios.post(`${this.API_BASE_URL}/login/`, { password: userData.password, email: userData.email })
-                window.me = res.data.user.id
+                this.userLogin({ password: userData.password, email: userData.email })
+            })
+            .catch(e => {
+                console.log(e)
+                return e
+            })
+    }
+
+    userLogin(userData) {
+        return axios.post(`${this.API_BASE_URL}/login/`, { password: userData.password, email: userData.email })
+            .then(res => {
+                window.me = res.data.user
                 lmRunApp()
                 return res
+            })
+            .catch(err => {
+                console.log(err)
+                return err
             })
     }
 
@@ -80,31 +93,6 @@ class APIHandler {
             .catch(e => {
                 console.log(e)
                 return e
-            })
-    }
-
-    userLogin(userData) {
-        return axios.post(`${this.API_BASE_URL}/login/`, { password: userData.password, email: userData.email })
-            .then(res => {
-                window.me = res.data.user
-                lmRunApp()
-                return res
-            })
-            .catch(err => {
-                console.log(err)
-                return err
-            })
-    }
-
-    updateOneRegister(userData) {
-        return axios.patch(`${this.API_BASE_URL}/users`, { user: userData })
-            .then(res => {
-                console.log('Updated user: ', userData)
-                return userData
-            })
-            .catch(err => {
-                console.log(err)
-                return err
             })
     }
 }
