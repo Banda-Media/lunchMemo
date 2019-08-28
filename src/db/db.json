@@ -114,11 +114,9 @@
       "name": "ironhack",
       "users": [
         1,
-        3
+        2
       ],
-      "categories": [
-        "italian"
-      ],
+      "categories": [],
       "active": "true"
     },
     {
@@ -136,12 +134,12 @@
       "id": 3,
       "name": "Teletubbies",
       "users": [
+        1,
+        2,
         4,
-        6,
-        8,
-        10
+        5
       ],
-      "active": "false"
+      "active": true
     }
   ]
 }

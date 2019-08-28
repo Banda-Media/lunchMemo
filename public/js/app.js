@@ -109,11 +109,12 @@ class LunchGroupRow {
 
 var lmRunApp = function() {
     let now = new Date($.now());
-    $('#app-widget').addClass('animated fadeInTop')
     $('#app-widget').removeClass('hide')
     $('header').removeClass('hide')
+    $('#app-widget').addClass('animated fadeIn faster')
+    $('header').addClass('animated fadeInTop')
 
-    $('.container').addClass('animated fadeOut faster')
+    $('.container.register-login').addClass('animated fadeOut faster')
 
     $('.timepickerStart').timepicker({
         timeFormat: 'h:mm p',
