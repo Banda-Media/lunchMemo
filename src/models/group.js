@@ -11,6 +11,10 @@ const findFromId = async function(uid) {
     return group.data
 }
 
+const update = async function(group) {
+    return await axios.patch(`${BASE_URL}/${group.id}`, group)
+}
+
 const remove = async function(uid) {
     return await axios.delete(`${BASE_URL}/${uid}`)
 }
@@ -27,12 +31,12 @@ const setInactive = async function(uid) {
     return await axios.patch(`${BASE_URL}/${uid}`, { active: false })
 }
 
-
 module.exports = {
     findAll,
     findFromId,
     remove,
     save,
+    update,
     setActive,
     setInactive
 }

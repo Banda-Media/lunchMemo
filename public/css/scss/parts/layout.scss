@@ -16,42 +16,136 @@
     }
 }
 
-.container,
-.app-body {
+.container {
     position: relative;
     margin: 0 auto;
-    width: 850px;
-    top: 25vh;
-    background-color: #fff;
-    box-shadow: 0px 3px 12px rgba(0, 0, 0, .4);
-}
 
-.app {
-    height: 50vh;
-    position: relative;
-    top: 25vh;
-    display: flex;
-    justify-content: center;
-    select {
-        height: 2.9rem;
+    &.register-login {
+        width: 850px;
+        top: 25vh;
+        background-color: #fff;
+        box-shadow: 0px 3px 12px rgba(0, 0, 0, .4);
+    }
+
+    &.app-host-lunch {
+        padding-top: 190px;
+        background-color: unset;
+        text-align: center;
+
+        input {
+            height: 3rem;
+            position: relative;
+
+            &#group-name {
+                width: 240px;
+            }
+
+            &.timeSelect {
+                width: 120px;
+
+                &:after {
+                    content: "\f0d7";
+                    color: #000;
+                    padding: 12px 8px;
+                    position: absolute; right: 0; top: 0;
+                    background: red;
+                    z-index: 1;
+                    text-align: center;
+                    width: 10%;
+                    height: 100%;      
+                    pointer-events: none;
+                    box-sizing: border-box;   
+                }
+            }
+        }
+
+        select {
+            height: 3rem;
+            border: none;
+            padding: 0px 11px;
+
+            &:required:invalid {
+                color: gray;
+              }
+
+            option[value=""][disabled] {
+                display: none;
+            }
+
+            option {
+                color: black;
+            }
+        }
+
+        h2 {
+            font-size: 2.4rem;
+            font-weight: 300;
+            color: #fff;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        button {
+            padding: 15px 2rem 14px;
+            height: 3rem;
+        }
+    }
+
+    &.groups-wrapper {
+        width: 93%;
+        margin-top: 3rem;
+        background-color: #fff;
+        box-shadow: 0px 3px 12px rgba(0, 0, 0, .4);
+
+        .group-container {
+            margin-bottom: 1.6rem;
+            border-bottom: 1px solid gray;
+            padding: 1.6rem 2rem;
+            display: flex;
+            justify-content: space-between;
+
+            .attendee-list {
+                display: flex;
+
+                li {
+                    margin-right: 7px;
+                    color: $lightgray;
+
+                    &.host {
+                        color: $red;
+                    }
+
+                    &.occupied {
+                        color: $red;
+                    }
+                }
+            }
+        }
     }
 }
 
+
 .register {
-    height: 50vh;
+    height: 42vh;
     position: relative;
+
     p {
-        margin-top: 2rem;
+        margin-top: 4rem;
         font-family: $header-font;
         font-size: 1.2rem;
         font-weight: 300;
         font-style: italic;
         line-height: 2.2rem;
+        clear: both;
     }
+
     h3 {
         margin-bottom: 1.4rem;
         font-weight: 300;
         font-size: 1rem;
+
         span {
             font-size: 1.4rem;
             font-style: italic;
@@ -69,7 +163,7 @@
     left: 0;
     width: 50%;
     height: 100%;
-    padding: 5rem 3.2rem;
+    padding: 4rem 3.2rem;
 }
 
 .right {
