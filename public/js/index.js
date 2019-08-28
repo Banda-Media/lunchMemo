@@ -1,4 +1,4 @@
-const lunchmemoAPI = new APIHandler(`http://localhost:3000`)
+const lunchmemoAPI = new APIHandler(`https://lunch-memo.herokuapp.com/`)
 var currentPage = "registration"
 
 var lmRunRegistration = function() {
@@ -31,7 +31,9 @@ $(document).ready(() => {
         }
 
         lunchmemoAPI.userLogin(userData)
-            .then(res => {})
+            .then(res => {
+                console.log('Successfully logged in.')
+            })
             .catch(err => {
                 console.log(err)
                 $(".error").text("User not found. Please try again.")
