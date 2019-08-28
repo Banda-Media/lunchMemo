@@ -18,12 +18,13 @@ const findFromEmail = async function(email) {
     const users = await findAll()
     console.log('all users', users)
     for (i = 0; i < users.length - 1; i++) {
+        console.log(`${users[i].email.toLowerCase()} === ${email.toLowerCase()}`, users[i].email.toLowerCase() === email.toLowerCase())
         if (users[i].email.toLowerCase() === email.toLowerCase()) {
             console.log('found email')
             return users[i]
         }
     }
-    throw "Email not found."
+    new Error("Email not found.")
 }
 
 const update = async function(userData) {
