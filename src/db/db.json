@@ -24,18 +24,21 @@
       "name": "asdasd",
       "email": "sadasd",
       "password": "dsadasd",
+      "groupSize": "md",
       "id": 3
     },
     {
       "name": "asdasd",
       "email": "dsadasd@Edasdasd.com",
       "password": "sadsasd",
+      "groupSize": "md",
       "id": 4
     },
     {
       "name": "",
       "email": "",
       "password": "",
+      "groupSize": "md",
       "id": 5
     },
     {
