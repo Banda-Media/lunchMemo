@@ -7,8 +7,8 @@
       "password": "password",
       "groupSize": "sm",
       "active": true,
-      "startRange": "August 26, 2019 12:00:00",
-      "endRange": "August 26, 2019 12:30:00"
+      "startRange": "10:15 AM",
+      "endRange": "11:15 AM"
     },
     {
       "id": 2,
@@ -16,162 +16,20 @@
       "email": "hello@bobbywang.net",
       "password": "password",
       "groupSize": "md",
-      "active": true,
-      "startRange": "August 26, 2019 12:00:00",
-      "endRange": "August 26, 2019 12:30:00"
+      "active": true
     },
     {
-      "name": "asdasd",
-      "email": "sadasd",
-      "password": "dsadasd",
-      "id": 3
-    },
-    {
-      "name": "asdasd",
-      "email": "dsadasd@Edasdasd.com",
-      "password": "sadsasd",
-      "id": 4
-    },
-    {
-      "name": "asdsad",
-      "email": "asdasd@dadasd.com",
-      "password": "sadasd",
-      "id": 8
-    },
-    {
-      "name": "asdasdsad",
-      "email": "sadasd@dasdasd.com",
-      "password": "sdasd",
-      "id": 9
-    },
-    {
-      "name": "asdasdsad",
-      "email": "sadasd@dasdasd.com",
-      "password": "sdasd",
-      "id": 10
-    },
-    {
-      "name": "sadasd",
-      "email": "asdasd@saddasd.com",
-      "password": "sadasd",
-      "id": 11
-    },
-    {
-      "name": "asdasd",
-      "email": "sadasd@dasdasd.com",
-      "password": "asdaasdasd",
-      "id": 12
-    },
-    {
-      "name": "asdasd",
-      "email": "saasd@asdasd.com",
-      "password": "sadasd",
-      "id": 13
-    },
-    {
-      "name": "asdasd",
-      "email": "saddasd@assdasd.com",
-      "password": "sadasd",
-      "id": 14
-    },
-    {
-      "name": "dsdsa",
-      "email": "dasdasd@asddasdsd.com",
-      "password": "asdasdsad",
-      "id": 15
-    },
-    {
+      "id": 3,
       "name": "Chris",
       "email": "chris@chris.com",
-      "password": "asdasdsad",
-      "id": 16
+      "password": "asdasdsad"
+    },
+    {
+      "id": 4,
+      "name": "Miss",
+      "email": "fake@stupid.com",
+      "password": "asdafed"
     }
   ],
-  "groups": [
-    {
-      "id": 1,
-      "users": [
-        1,
-        2
-      ],
-      "categories": [],
-      "active": "true",
-      "name": "powerbats"
-    },
-    {
-      "name": "vicious scythers",
-      "users": [
-        2,
-        4,
-        8,
-        9
-      ],
-      "active": true,
-      "id": 2
-    },
-    {
-      "name": "groupname",
-      "users": [
-        2,
-        4
-      ],
-      "active": true,
-      "id": 3
-    },
-    {
-      "users": [
-        1
-      ],
-      "name": "batmen",
-      "startTime": "10:00 AM",
-      "endTime": "11:15 AM",
-      "groupSize": "m   d",
-      "active": true,
-      "id": 4
-    },
-    {
-      "users": [
-        1
-      ],
-      "name": "bobbies",
-      "startTime": "11:15 AM",
-      "endTime": "4:15 PM",
-      "groupSize": "lg",
-      "active": true,
-      "id": 5
-    },
-    {
-      "users": [
-        1
-      ],
-      "name": "testicles",
-      "startTime": "10:15 AM",
-      "endTime": "11:15 AM",
-      "groupSize": null,
-      "active": true,
-      "id": 6
-    },
-    {
-      "users": [
-        1
-      ],
-      "name": "testbutts",
-      "startTime": "10:15 AM",
-      "endTime": "3:30 PM",
-      "groupSize": "lg",
-      "active": true,
-      "id": 7
-    },
-    {
-      "users": [
-        1
-      ],
-      "name": "butts",
-      "startTime": "3:15 PM",
-      "endTime": "3:45 PM",
-      "groupSize": "sm",
-      "active": true,
-      "id": 8
-    }
-  ]
+  "groups": []
 }
