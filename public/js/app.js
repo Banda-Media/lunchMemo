@@ -8,7 +8,7 @@ const sizeLookup = {
 
 function createGroupsFromList(groups) {
     groups.map(group => {
-        if (lunchGroupRows[group.name] === undefined && group.active == "true") {
+        if (lunchGroupRows[group.name] === undefined && String(group.active) == "true") {
             lunchGroupRows[group.name] = new LunchGroupRow(group)
         }
     })
@@ -56,7 +56,6 @@ class LunchGroupRow {
     get sizeRange() {
         return lunchmemoAPI.getUserById(this.groupObj.users[0])
             .then(res => {
-                console.log('got response for sizeRange', res, sizeLookup[res.user.groupSize])
                 return sizeLookup[res.user.groupSize]
             })
             .catch(e => {
@@ -66,7 +65,7 @@ class LunchGroupRow {
     }
 
     get isActive() {
-        return this.groupObj.active == "true"
+        return String(this.groupObj.active) == "true"
     }
 
     addMember(user) {
@@ -78,7 +77,6 @@ class LunchGroupRow {
     }
 
     createUserView(className) {
-        console.log('creating user view.')
         let li = document.createElement('LI')
         let i = document.createElement('I')
         li.appendChild(i)
@@ -161,14 +159,16 @@ var lmRunApp = function() {
     setInterval(async function() {
             console.log('Checking for active/inactive groups...')
             lunchmemoAPI.getActiveGroups()
-                .then(res => createGroupsFromList(res.groups))
+                .then(res => {
+                    console.log(`Found ${res.groups.length} active groups`)
+                    createGroupsFromList(res.groups)
+                })
                 .catch(e => {
                     console.log(e)
                     return e
                 })
 
             Object.values(lunchGroupRows).map(rowGroup => {
-                console.log(rowGroup.isActive, rowGroup)
                 if (!rowGroup.isActive) {
                     rowGroup.remove()
                 } else {
