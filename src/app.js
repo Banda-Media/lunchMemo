@@ -8,7 +8,6 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors());
-app.use(allowCrossDomain)
 app.use(express.json());
 app.use('/', indexRouter);
 app.use('/', groupRouter);
