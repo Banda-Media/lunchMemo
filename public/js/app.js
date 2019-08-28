@@ -126,7 +126,7 @@ class LunchGroupRow {
         } catch (e) {
             console.log('Ran into error trying to update group object.  Removing. Error:', e.message)
             this.remove()
-        })
+        }
     }
 }
 
