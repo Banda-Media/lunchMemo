@@ -1,5 +1,5 @@
 const axios = require('axios')
-const DB_GROUPS_BASE_URL = "http://localhost:3001/groups"
+const DB_GROUPS_BASE_URL = "http://localhost/groups"
 
 const findAll = async function() {
     const groups = await axios.get(`${DB_GROUPS_BASE_URL}`)

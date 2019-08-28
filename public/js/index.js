@@ -1,4 +1,4 @@
-const lunchmemoAPI = new APIHandler(`http://localhost:3000`)
+const lunchmemoAPI = new APIHandler(`http://localhost`)
 var currentPage = "registration"
 var appInterval = ""
 
