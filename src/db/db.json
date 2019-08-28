@@ -133,52 +133,10 @@
     },
     {
       "users": [
-        1,
         2,
         4,
         5
       ],
-      "active": true,
-      "id": 4
-    },
-    {
-      "users": [
-        1,
-        2,
-        4,
-        5
-      ],
-      "name": "powermen",
-      "active": true,
-      "id": 5
-    },
-    {
-      "users": [
-        2,
-        4,
-        5
-      ],
-      "name": "powermen",
-      "active": true,
-      "id": 6
-    },
-    {
-      "users": [
-        2,
-        4,
-        5
-      ],
-      "name": "powermenssss",
-      "active": true,
-      "id": 7
-    }
-  ],
-  "restaurants": [
-    {
-      "id": 1,
-      "name": "Coyo Taco",
-      "category": "Mexican",
-      "openTime": "11:00"
     }
   ]
 }
