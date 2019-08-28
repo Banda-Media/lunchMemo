@@ -1,5 +1,5 @@
 const axios = require('axios')
-const DB_USER_BASE_URL = "http://localhost/users"
+const DB_USER_BASE_URL = "https://lunch-memo.herokuapp.com/users"
 
 const findAll = async function() {
     const users = await axios.get(`${DB_USER_BASE_URL}`)
