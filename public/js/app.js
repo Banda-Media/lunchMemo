@@ -123,7 +123,7 @@ class LunchGroupRow {
                 this.joinLeaveBtn.innerHTML = 'Leave'
             }
             this.updateAttendeesView()
-        } catch (e => {
+        } catch (e) {
             console.log('Ran into error trying to update group object.  Removing. Error:', e.message)
             this.remove()
         })
