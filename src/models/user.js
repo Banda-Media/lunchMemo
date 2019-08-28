@@ -1,5 +1,5 @@
 const axios = require('axios')
-const DB_USER_BASE_URL = "http://localhost:3001/users"
+const DB_USER_BASE_URL = "http://localhost/users"
 
 const findAll = async function() {
     const users = await axios.get(`${DB_USER_BASE_URL}`)
