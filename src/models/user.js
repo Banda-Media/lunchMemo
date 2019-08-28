@@ -17,13 +17,14 @@ const findFromEmail = async function(email) {
     console.log('find from email!!!')
     const users = await findAll()
     console.log('all users', users)
-    users.map( user => {
+    for (let i =0; i < users.length; i++) {
+        let user = users[i]
         console.log(`${user.email.toLowerCase()} === ${email.toLowerCase()}`, user.email.toLowerCase() === email.toLowerCase())
         if (user.email.toLowerCase() === email.toLowerCase()) {
             console.log(`found user with matching email: ${JSON.stringify(user)}`)
             return user
         }
-    })
+    }
     new Error("Email not found.")
 }
 
