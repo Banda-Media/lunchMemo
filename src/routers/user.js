@@ -1,7 +1,7 @@
 const express = require('express')
 const { findFromId, findAll, findFromEmail, update, save, remove, setInactive, setActive } = require('../models/user')
 const router = new express.Router()
-const USER_BASE_ROUTE = 'api/users'
+const USER_BASE_ROUTE = '/api/users'
 
 router.get(USER_BASE_ROUTE, async(req, res) => {
     console.log(`GET /users: ${req.body}`)
