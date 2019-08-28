@@ -1,4 +1,4 @@
-const lunchmemoAPI = new APIHandler(`https://lunch-memo.herokuapp.com/`)
+const lunchmemoAPI = new APIHandler(`https://lunch-memo.herokuapp.com`)
 var currentPage = "registration"
 
 var lmRunRegistration = function() {
