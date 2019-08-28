@@ -105,7 +105,34 @@
             padding: 1.6rem 2rem;
             display: flex;
             justify-content: space-between;
-
+            .attendees {
+                width: 10%;
+            }
+            .group-time-range {
+                display: flex;
+                align-items: center;
+                div {
+                    margin-right: 14px;
+                    span {
+                        margin-right: 5px;
+                    }
+                }
+            }
+            .btn-join, .btn-leave{
+                width: 100px;
+            }
+            .btn-join{
+                background-color: $yellow;
+                &:hover{
+                    background-color: $yellow;
+                }
+            }
+            .btn-leave{
+                background-color: $red;
+                &:hover{
+                    background-color: $red;
+                }
+            }
             .attendee-list {
                 display: flex;
 

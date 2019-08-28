@@ -278,6 +278,25 @@ template {
       padding: 1.6rem 2rem;
       display: flex;
       justify-content: space-between; }
+      .container.groups-wrapper .group-container .attendees {
+        width: 10%; }
+      .container.groups-wrapper .group-container .group-time-range {
+        display: flex;
+        align-items: center; }
+        .container.groups-wrapper .group-container .group-time-range div {
+          margin-right: 14px; }
+          .container.groups-wrapper .group-container .group-time-range div span {
+            margin-right: 5px; }
+      .container.groups-wrapper .group-container .btn-join, .container.groups-wrapper .group-container .btn-leave {
+        width: 100px; }
+      .container.groups-wrapper .group-container .btn-join {
+        background-color: #f7be0d; }
+        .container.groups-wrapper .group-container .btn-join:hover {
+          background-color: #f7be0d; }
+      .container.groups-wrapper .group-container .btn-leave {
+        background-color: #d50000; }
+        .container.groups-wrapper .group-container .btn-leave:hover {
+          background-color: #d50000; }
       .container.groups-wrapper .group-container .attendee-list {
         display: flex; }
         .container.groups-wrapper .group-container .attendee-list li {
