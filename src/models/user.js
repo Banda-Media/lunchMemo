@@ -3,6 +3,7 @@ const BASE_URL = "https://lunch-memo.herokuapp.com/users"
 
 const findAll = async function() {
     const users = await axios.get(`${BASE_URL}`)
+    console.log('got all users: ', users.data)
     return users.data
 }
 
