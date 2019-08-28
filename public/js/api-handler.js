@@ -1,6 +1,7 @@
 class APIHandler {
     constructor() {
-        this.API_BASE_URL = `http://localhost:${env.PORT}`;
+        console.log(`Creating API Handler using BASEURL: http://localhost:${env.PORT || 3000}`)
+        this.API_BASE_URL = `http://localhost:${env.PORT || 3000}`;
     }
 
     getActiveGroups() {
