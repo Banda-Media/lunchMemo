@@ -14,7 +14,6 @@ const findFromId = async function(uid) {
 const findFromEmail = async function(email) {
     const users = await findAll()
     for (i = 0; i < users.length - 1; i++) {
-        console.log(users[i])
         if (users[i].email.toLowerCase() === email.toLowerCase()) {
             return users[i]
         }
