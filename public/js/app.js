@@ -125,6 +125,9 @@ class LunchGroupRow {
             if (this.groupObj.users.includes(window.me.id)) {
                 this.joinLeaveBtn.className = "btn btn-leave"
                 this.joinLeaveBtn.innerHTML = 'Leave'
+            } else {
+                this.joinLeaveBtn.className = "btn btn-join"
+                this.joinLeaveBtn.innerHTML = 'Join'
             }
             this.updateAttendeesView()
         } catch (e) {
@@ -175,13 +178,13 @@ var lmRunApp = function () {
             name: $('#group-name').val(),
             startTime: $('#timepicker-start').val(),
             endTime: $('#timepicker-end').val(),
-            groupSize: $('#group-size-select').val(),
+            groupSize: $('#group-size-select').val() || 'sm',
             active: true
         }
         lunchmemoAPI.createGroup(groupData)
             .then(res => {
                 console.log('created group.')
-                $('$group-name').text('')
+                $('#group-name').text('')
             })
             .catch(e => {
                 console.log(e)
