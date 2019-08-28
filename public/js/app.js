@@ -129,6 +129,7 @@ var lmRunApp = function() {
     $('#app-widget').addClass('animated fadeIn faster')
     $('header').addClass('animated fadeInTop')
 
+    $('#username-nav').html(window.me.name)
 
     $('.container.register-login').addClass('hide animated fadeOut faster')
 
