@@ -36,9 +36,9 @@
       "users": [
         1
       ],
-      "name": "bob men",
+      "name": "bobs",
       "startTime": "10:00 AM",
-      "endTime": "11:15 AM",
+      "endTime": "11:00 AM",
       "groupSize": "sm",
       "active": true,
       "id": 1
@@ -47,12 +47,56 @@
       "users": [
         1
       ],
-      "name": "boba drinkers",
-      "startTime": "10:45 AM",
-      "endTime": "12:30 PM",
-      "groupSize": "m   d",
+      "name": "bob men",
+      "startTime": "10:30 AM",
+      "endTime": "11:15 AM",
+      "groupSize": "md",
       "active": true,
       "id": 2
+    },
+    {
+      "users": [
+        1
+      ],
+      "name": "boba drinkers",
+      "startTime": "1:45 PM",
+      "endTime": "2:15 PM",
+      "groupSize": "lg",
+      "active": true,
+      "id": 3
+    },
+    {
+      "users": [
+        1
+      ],
+      "name": "boba sippers",
+      "startTime": "1:45 PM",
+      "endTime": "2:15 PM",
+      "groupSize": "lg",
+      "active": true,
+      "id": 4
+    },
+    {
+      "users": [
+        1
+      ],
+      "name": "boba munchers",
+      "startTime": "1:45 PM",
+      "endTime": "2:15 PM",
+      "groupSize": "lg",
+      "active": true,
+      "id": 5
+    },
+    {
+      "users": [
+        1
+      ],
+      "name": "boba slurpers",
+      "startTime": "1:45 PM",
+      "endTime": "2:15 PM",
+      "groupSize": "lg",
+      "active": true,
+      "id": 6
     }
   ]
 }

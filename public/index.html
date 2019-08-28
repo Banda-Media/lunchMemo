@@ -36,88 +36,92 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-    <header class="hide">
-        <h1 class="logo"><span class="lunch">LUNCH</span><span class="memo">memo</span></h1>
-        <nav>
-            Hello, Username <i class="fas fa-user-circle"></i>
-            <div class="nav">
-                <a href="#" class="hide">Logout</a>
-                <a href="#">Register</a> /
-                <a href="#">Login</a>
-            </div>
-        </nav>
-    </header>
+    <div class="app-wrap">
+        <header class="hide">
+            <h1 class="logo"><span class="lunch">LUNCH</span><span class="memo">memo</span></h1>
+            <nav>
+                Hello, Username <i class="fas fa-user-circle"></i>
+                <div class="nav">
+                    <a href="#" class="hide">Logout</a>
+                    <a href="#">Register</a> /
+                    <a href="#">Login</a>
+                </div>
+            </nav>
+        </header>
 
-    <section id="app-widget" class="container app-host-lunch hide">
-        <div class="app-header">
-            <h2>Start a lunch group</h2>
-            <input id="group-name" type="text" placeholder="Your group name" />
-            <input id="timepicker-start" class="timepickerStart timeSelect" placeholder="Start Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime"
-                min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
-            <input id="timepicker-end" class="timepickerEnd timeSelect" placeholder="End Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime"
-                min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
-            <select id="group-size-select">
-                <option value="" disabled selected>Group Size</option>
-                <option label="Small (1-2)" value="sm"></option>
-                <option label="Medium (3-5)" value="md"></option>
-                <option label="Large (5-8)" value="lg"></option>
-            </select>
-            <button id="profile-btn" type="button" class="timePickerButton btn-red">Set Profile</button>
+        <section id="app-widget" class="container app-host-lunch hide">
+            <div class="app-header">
+                <h2>Start a lunch group</h2>
+                <input id="group-name" type="text" placeholder="Your group name" />
+                <input id="timepicker-start" class="timepickerStart timeSelect" placeholder="Start Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime"
+                    min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
+                <input id="timepicker-end" class="timepickerEnd timeSelect" placeholder="End Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime"
+                    min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
+                <select id="group-size-select">
+                    <option value="" disabled selected>Group Size</option>
+                    <option label="Small (1-2)" value="sm"></option>
+                    <option label="Medium (3-5)" value="md"></option>
+                    <option label="Large (5-8)" value="lg"></option>
+                </select>
+                <button id="profile-btn" type="button" class="timePickerButton btn-red">Set Profile</button>
+            </div>
+        </section>
+
+        <section class="container register-login animated fadeInDown faster">
+            <div class="register">
+                <div class="left">
+                    <h1 class="logo"><span class="lunch">LUNCH</span><span class="memo">memo</span></h1>
+                    <p>Lunch Memo makes it easy to organize lunch with your colleagues and other professionals in your area. Spend less time finding lunch spots and scheduling with everyone and simplify your lunch life.</p>
+                </div>
+                <div class="right widget-register hide">
+                    <h3><span>Hungry?</span>Create an account below to get started</h3>
+                    <form id="fp-registration">
+                        <label for="name">Name</label>
+                        <input type="text" id="register-name" required minlength=3 />
+
+                        <label for="email">Email</label>
+                        <input type="email" id="register-email" required minlength=3 />
+
+                        <label for="password">Password</label>
+                        <input type="password" id="register-password" required />
+
+                        <div class="form-footer">
+                            <button type="submit" class="btn-red">Register</button>
+                            <span><a href="#" class="go-login">Log in</a></span>
+                        </div>
+                    </form>
+                </div>
+                <!-- right side registration-->
+                <div class="right widget-login">
+                    <h3><span>Hungry?</span>Log in below to get started</h3>
+                    <form id="fp-login">
+                        <label for="email">Email</label>
+                        <input type="email" id="login-email" required minlength=3 />
+
+                        <label for="password">Password</label>
+                        <input type="password" id="login-password" required />
+
+                        <div class="form-footer">
+                            <button type="submit" class="btn-red">Log in</button>
+                            <span><a href="#" class="go-register">Register</a></span>
+                            <div class="error"></div>
+                        </div>
+                    </form>
+                </div>
+                <!-- right side registration-->
+            </div>
+        </section>
+
+        <section class="container groups-wrapper hide">
+        </section>
+    </div>
+    <!-- .app-wrap-->
+
+    <div class="site-background">
+        <div class="bginfo">
+            <a href="#" target="_blank">First Last<br /><span>Title of the photo</span></a>
         </div>
-    </section>
-
-    <section class="container register-login animated fadeInDown faster">
-        <div class="register">
-            <div class="left">
-                <h1 class="logo"><span class="lunch">LUNCH</span><span class="memo">memo</span></h1>
-                <p>Lunch Memo makes it easy to organize lunch with your colleagues and other professionals in your area. Spend less time finding lunch spots and scheduling with everyone and simplify your lunch life.</p>
-            </div>
-            <div class="right widget-register hide">
-                <h3><span>Hungry?</span>Create an account below to get started</h3>
-                <form id="fp-registration">
-                    <label for="name">Name</label>
-                    <input type="text" id="register-name" required minlength=3 />
-
-                    <label for="email">Email</label>
-                    <input type="email" id="register-email" required minlength=3 />
-
-                    <label for="password">Password</label>
-                    <input type="password" id="register-password" required />
-
-                    <div class="form-footer">
-                        <button type="submit" class="btn-red">Register</button>
-                        <span><a href="#" class="go-login">Log in</a></span>
-                    </div>
-                </form>
-            </div>
-            <!-- right side registration-->
-            <div class="right widget-login">
-                <h3><span>Hungry?</span>Log in below to get started</h3>
-                <form id="fp-login">
-                    <label for="email">Email</label>
-                    <input type="email" id="login-email" required minlength=3 />
-
-                    <label for="password">Password</label>
-                    <input type="password" id="login-password" required />
-
-                    <div class="form-footer">
-                        <button type="submit" class="btn-red">Log in</button>
-                        <span><a href="#" class="go-register">Register</a></span>
-                        <div class="error"></div>
-                    </div>
-                </form>
-            </div>
-            <!-- right side registration-->
-        </div>
-    </section>
-
-    <section class="container groups-wrapper hide">
-    </section>
-
-
-    <section class="bginfo">
-        <a href="#" target="_blank">First Last<br /><span>Title of the photo</span></a>
-    </section>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     <script src="js/config.js"></script>
