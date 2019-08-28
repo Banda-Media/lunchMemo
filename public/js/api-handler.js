@@ -4,7 +4,7 @@ class APIHandler {
     }
 
     getActiveGroups() {
-        return axios.get(`${this.API_BASE_URL}/active/groups`)
+        return axios.get(`${this.API_BASE_URL}/api/active/groups`)
             .then(res => {
                 return res.data
             })
