@@ -1,6 +1,6 @@
 class APIHandler {
     constructor() {
-        this.API_BASE_URL = `http://localhost:22876`;
+        this.API_BASE_URL = `https://lunch-memo.herokuapp.com`;
     }
 
     getActiveGroups() {
