@@ -82,6 +82,7 @@ class APIHandler {
                 return e
             })
     }
+
     userLogin(userData) {
         return axios.post(`${this.API_BASE_URL}/login/`, { password: userData.password, email: userData.email })
             .then(res => {
@@ -90,9 +91,11 @@ class APIHandler {
                 return res
             })
             .catch(err => {
+                console.log(err)
                 return err
             })
     }
+
     updateOneRegister(userData) {
         return axios.patch(`${this.API_BASE_URL}/users`, { user: userData })
             .then(res => {

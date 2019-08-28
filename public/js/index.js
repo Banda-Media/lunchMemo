@@ -2,6 +2,7 @@ const lunchmemoAPI = new APIHandler(`http://localhost:3000`)
 var currentPage = "registration"
 
 var lmRunRegistration = function() {
+    clearInterval(appInterval)
     currentPage = "registration"
     $('.container.app-host-lunch, .container.groups-wrapper, header').addClass('hide')
     $('.container.register-login').removeClass('hide').removeClass('fadeOut').addClass('animated fadeIn faster')
@@ -18,7 +19,7 @@ $(document).ready(() => {
             password: $("#register-password").val()
         }
 
-        lunchmemoAPI.createOneRegister(userData)
+        lunchmemoAPI.createUser(userData)
     }
 
     document.getElementById("fp-login").onsubmit = async function(e) {
