@@ -1,6 +1,6 @@
 class APIHandler {
     constructor() {
-        this.API_BASE_URL = 'http://localhost:3000';
+        this.API_BASE_URL = `http://localhost:${process.env.PORT || 3000}`;
     }
 
     getActiveGroups() {
