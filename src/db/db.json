@@ -113,13 +113,16 @@
         2
       ],
       "categories": [],
-      "active": "true"
+      "active": "true",
+      "name": "jesusss"
     },
     {
       "users": [
         1
       ],
-      "id": 2
+      "id": 2,
+      "name": "christ",
+      "active": false
     },
     {
       "users": [
@@ -129,7 +132,30 @@
         5
       ],
       "active": true,
-      "id": 3
+      "id": 3,
+      "name": "dangeroumouse"
+    },
+    {
+      "users": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "active": true,
+      "id": 4,
+      "name": "powerdudes"
+    },
+    {
+      "users": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "name": "powermen",
+      "active": true,
+      "id": 5
     },
     {
       "users": [
@@ -137,38 +163,27 @@
         4,
         5
       ],
-      "active": "true"
-    },
-    {
-      "name": "Postmen",
-      "users": [
-        2,
-        5,
-        7,
-        8
-      ],
-      "active": true,
-      "id": 4
-    },
-    {
-      "name": "Batmen",
-      "users": [
-        2,
-        5,
-        7,
-        8
-      ],
-      "active": true,
-      "id": 5
-    },
-    {
-      "name": "Poop People",
-      "users": [
-        2,
-        5
-      ],
+      "name": "powermen",
       "active": true,
       "id": 6
+    },
+    {
+      "users": [
+        2,
+        4,
+        5
+      ],
+      "name": "powermenssss",
+      "active": true,
+      "id": 7
+    }
+  ],
+  "restaurants": [
+    {
+      "id": 1,
+      "name": "Coyo Taco",
+      "category": "Mexican",
+      "openTime": "11:00"
     }
   ]
 }
