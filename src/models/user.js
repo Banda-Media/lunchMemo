@@ -1,14 +1,13 @@
 const axios = require('axios')
-const BASE_URL = "https://lunch-memo.herokuapp.com/users"
+const DB_USER_BASE_URL = "http://localhost:3001/users"
 
 const findAll = async function() {
-    const users = await axios.get(`${BASE_URL}`)
-    console.log('got all users: ', users.data)
+    const users = await axios.get(`${DB_USER_BASE_URL}`)
     return users.data
 }
 
 const findFromId = async function(uid) {
-    const user = await axios.get(`${BASE_URL}/${uid}`)
+    const user = await axios.get(`${DB_USER_BASE_URL}/${uid}`)
     return user.data
 }
 
@@ -23,24 +22,24 @@ const findFromEmail = async function(email) {
 }
 
 const update = async function(userData) {
-    console.log('user model update to: ', `${BASE_URL}/${userData.id}`)
-    return await axios.patch(`${BASE_URL}/${userData.id}`, userData)
+    console.log(userData.id)
+    return await axios.patch(`${DB_USER_BASE_URL}/${userData.id}`, userData)
 }
 
 const remove = async function(uid) {
-    return await axios.delete(`${BASE_URL}/${uid}`)
+    return await axios.delete(`${DB_USER_BASE_URL}/${uid}`)
 }
 
 const save = async function(userData) {
-    return await axios.post(`${BASE_URL}`, userData)
+    return await axios.post(`${DB_USER_BASE_URL}`, userData)
 }
 
 const setActive = async function(uid) {
-    return await axios.patch(`${BASE_URL}/${uid}`, { active: true })
+    return await axios.patch(`${DB_USER_BASE_URL}/${uid}`, { active: true })
 }
 
 const setInactive = async function(uid) {
-    return await axios.patch(`${BASE_URL}/${uid}`, { active: false })
+    return await axios.patch(`${DB_USER_BASE_URL}/${uid}`, { active: false })
 }
 
 

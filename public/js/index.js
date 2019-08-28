@@ -1,8 +1,9 @@
-const lunchmemoAPI = new APIHandler(`https://lunch-memo.herokuapp.com`)
+const lunchmemoAPI = new APIHandler(`http://localhost:3000`)
 var currentPage = "registration"
 var appInterval = ""
 
 var lmRunRegistration = function() {
+    window.me = {}
     clearInterval(appInterval)
     currentPage = "registration"
     $('.container.app-host-lunch, .container.groups-wrapper, header').addClass('hide')

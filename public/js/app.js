@@ -168,7 +168,9 @@ var lmRunApp = function() {
             active: true
         }
         lunchmemoAPI.createGroup(groupData)
-            .then(res => {})
+            .then(res => {
+                console.log('created group.')
+            })
             .catch(e => {
                 console.log(e)
                 return e
