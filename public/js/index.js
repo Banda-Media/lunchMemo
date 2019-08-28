@@ -1,4 +1,5 @@
-const lunchmemoAPI = new APIHandler(`http://localhost`)
+var HOST = 'https://lunch-memo.herokuapp.com'
+const lunchmemoAPI = new APIHandler(HOST)
 var currentPage = "registration"
 var appInterval = ""
 
