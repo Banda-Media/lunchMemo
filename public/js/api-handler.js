@@ -43,6 +43,7 @@ class APIHandler {
     createUser(userData) {
         return axios.post(`${this.API_BASE_URL}/api/users/`, userData)
             .then(res => {
+                console.log('API Handler has successfully created user using data (attempting to login next): ', userData)
                 this.userLogin({ password: userData.password, email: userData.email })
             })
             .catch(e => {
