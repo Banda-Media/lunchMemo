@@ -8,7 +8,6 @@ router.get(USER_BASE_ROUTE, async(req, res) => {
     try {
         const users = await findAll()
         res.status(200).send(users.map(user => {
-            delete user.password
             return user
         }))
     } catch (e) {
