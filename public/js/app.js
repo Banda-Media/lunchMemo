@@ -162,6 +162,7 @@ var lmRunApp = function() {
                 .then(res => {
                     console.log(`Found ${res.groups.length} active groups`)
                     createGroupsFromList(res.groups)
+                    $(".site-background").height($(".app-wrap").height() + 130)
                 })
                 .catch(e => {
                     console.log(e)
