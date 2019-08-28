@@ -1,6 +1,6 @@
 class APIHandler {
     constructor() {
-        this.API_BASE_URL = `https://lunch-memo.herokuapp.com`;
+        this.API_BASE_URL = `http://localhost:${process.env.PORT}`;
     }
 
     getActiveGroups() {
