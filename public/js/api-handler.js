@@ -49,7 +49,6 @@ class APIHandler {
     }
 
     userLogin(userData) {
-        console.log(`POST: ${this.API_BASE_URL}/login/`, { password: userData.password, email: userData.email })
         return axios.post(`${this.API_BASE_URL}/login/`, { password: userData.password, email: userData.email })
             .then(res => {
                 window.me = res.data.user
