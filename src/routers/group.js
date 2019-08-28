@@ -1,7 +1,7 @@
 const express = require('express')
 const { findFromId, findAll, save, remove, update, setInactive, setActive } = require('../models/group')
 const router = new express.Router()
-const GROUP_BASE_ROUTE = '/groups'
+const GROUP_BASE_ROUTE = 'api/groups'
 
 router.get(GROUP_BASE_ROUTE, async(req, res) => {
     try {
@@ -36,7 +36,7 @@ router.patch(GROUP_BASE_ROUTE, async(req, res) => {
     }
 })
 
-router.get(`/active${GROUP_BASE_ROUTE}`, async(req, res) => {
+router.get(`/active/groups`, async(req, res) => {
     console.log(`GET /active/groups`)
     try {
         const groups = await findAll()

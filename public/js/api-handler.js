@@ -15,7 +15,7 @@ class APIHandler {
     }
 
     getUserById(_id) {
-        return axios.get(`${this.API_BASE_URL}/users/${_id}`)
+        return axios.get(`${this.API_BASE_URL}/api/users/${_id}`)
             .then(res => {
                 return res.data
             })
@@ -27,7 +27,7 @@ class APIHandler {
 
 
     getGroupById(_id) {
-        return axios.get(`${this.API_BASE_URL}/groups/${_id}`)
+        return axios.get(`${this.API_BASE_URL}/api/groups/${_id}`)
             .then(res => {
                 return res.data
             })
@@ -38,7 +38,7 @@ class APIHandler {
     }
 
     createUser(userData) {
-        return axios.post(`${this.API_BASE_URL}/users/`, userData)
+        return axios.post(`${this.API_BASE_URL}/api/users/`, userData)
             .then(res => {
                 this.userLogin({ password: userData.password, email: userData.email })
             })
@@ -62,7 +62,7 @@ class APIHandler {
     }
 
     deleteGroup(groupIndex) {
-        return axios.delete(`${this.API_BASE_URL}/groups/${groupIndex}`)
+        return axios.delete(`${this.API_BASE_URL}/api/groups/${groupIndex}`)
             .then(res => {
                 console.log(`Delete group ${groupIndex}`)
             })
@@ -73,7 +73,7 @@ class APIHandler {
     }
 
     createGroup(groupData) {
-        return axios.post(`${this.API_BASE_URL}/groups/`, groupData)
+        return axios.post(`${this.API_BASE_URL}/api/groups/`, groupData)
             .then(res => {
                 console.log(`Created group ${res.data.group}`)
                 return res.data.group
@@ -85,7 +85,7 @@ class APIHandler {
     }
 
     updateGroup(groupData) {
-        return axios.patch(`${this.API_BASE_URL}/groups/`, groupData)
+        return axios.patch(`${this.API_BASE_URL}/api/groups/`, groupData)
             .then(res => {
                 console.log(`Updated group ${res.data.group}`)
                 return res.data.group
