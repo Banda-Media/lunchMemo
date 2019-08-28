@@ -52,10 +52,11 @@ class APIHandler {
     }
 
     userLogin(userData) {
-        return axios.post(`${this.API_BASE_URL}/login/`, { password: userData.password, email: userData.email })
+        console.log('API Handler attempting to login using data: ', userData)
+        return axios.post(`${this.API_BASE_URL}/login/`, userData)
             .then(res => {
                 window.me = res.data.user
-                console.log(userData.email)
+                console.log('Logging in.', userData.email)
                 lmRunApp()
                 return res
             })
