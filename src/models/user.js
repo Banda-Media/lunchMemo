@@ -20,7 +20,7 @@ const findFromEmail = async function(email) {
     users.map( user => {
         console.log(`${user.email.toLowerCase()} === ${email.toLowerCase()}`, user.email.toLowerCase() === email.toLowerCase())
         if (user.email.toLowerCase() === email.toLowerCase()) {
-            console.log(`found user with matching email: ${user}`)
+            console.log(`found user with matching email: ${JSON.stringify(user)}`)
             return user
         }
     })
