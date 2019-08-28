@@ -14,6 +14,29 @@ class APIHandler {
             })
     }
 
+    getUserById(_id) {
+        return axios.get(`${this.API_BASE_URL}/users/${_id}`)
+            .then(res => {
+                return res.data
+            })
+            .catch(e => {
+                console.log(e)
+                return e
+            })
+    }
+
+
+    getGroupById(_id) {
+        return axios.get(`${this.API_BASE_URL}/groups/${_id}`)
+            .then(res => {
+                return res.data
+            })
+            .catch(e => {
+                console.log(e)
+                return e
+            })
+    }
+
     createOneRegister(userData) {
         return axios.post(`${this.API_BASE_URL}/users/`, userData)
             .then(res => {

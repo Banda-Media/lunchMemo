@@ -1,5 +1,10 @@
 const groupsWidget = $('.groups-wrapper')
 const lunchGroupRows = {}
+const sizeLookup = {
+    'sm': "1-2",
+    'md': "3-5",
+    'lg': "6-8"
+}
 
 function createGroupsFromList(groups) {
     groups.map(group => {
@@ -22,15 +27,7 @@ class LunchGroupRow {
         this.joinLeaveBtn = document.createElement('BUTTON')
         this.attendeeUL = document.createElement('ul')
 
-        let fieldNames = ['host', 'empty', 'occupied']
-        fieldNames.map(className => {
-            let li = document.createElement('LI')
-            let i = document.createElement('I')
-            li.appendChild(i)
-            li.className = className
-            i.className = 'fas fa-user-alt'
-            this.attendeeUL.appendChild(li)
-        })
+        this.fieldNames = ['host', 'empty', 'occupied']
 
         this.attendeesDiv.appendChild(this.hostnameDiv)
         this.attendeesDiv.appendChild(this.attendeeUL)
@@ -56,6 +53,18 @@ class LunchGroupRow {
         this.update()
     }
 
+    get sizeRange() {
+        return lunchmemoAPI.getUserById(this.groupObj.users[0])
+            .then(res => {
+                console.log('got response for sizeRange', res, sizeLookup[res.user.groupSize])
+                return sizeLookup[res.user.groupSize]
+            })
+            .catch(e => {
+                console.log(e)
+                return e
+            })
+    }
+
     get isActive() {
         return this.groupObj.active == "true"
     }
@@ -65,12 +74,36 @@ class LunchGroupRow {
     }
 
     remove() {
-        console.log('Removing ')
         this.div.remove()
     }
 
-    update() {
+    createUserView(className) {
+        console.log('creating user view.')
+        let li = document.createElement('LI')
+        let i = document.createElement('I')
+        li.appendChild(i)
+        li.className = className
+        i.className = 'fas fa-user-alt'
+        this.attendeeUL.appendChild(li)
+    }
 
+    async updateAttendeesView() {
+        let sizeRange = await this.sizeRange
+        let maxSize = parseInt(sizeRange.split('-')[1])
+        Array(this.attendeeUL.childNodes.length).fill().map((_, i) => i >= maxSize && this.attendeeUL.childNodes[i].remove())
+
+        Array(maxSize).fill().map((_, i) => {
+            let currentUser = this.groupObj.users[i]
+            let currentLine = this.attendeeUL.childNodes[i]
+            if (currentLine === undefined) this.createUserView((i === 0) ? 'host' : 'empty')
+            this.attendeeUL.childNodes[i].className = (currentUser) ? 'occupied' : 'empty'
+        })
+    }
+
+    async update() {
+        this.groupObj = (await lunchmemoAPI.getGroupById(this.groupObj.id)).group
+        this.hostnameDiv.innerHTML = this.groupObj.name
+        this.updateAttendeesView()
     }
 }
 
@@ -136,8 +169,9 @@ var lmRunApp = function() {
             Object.values(lunchGroupRows).map(rowGroup => {
                 console.log(rowGroup.isActive, rowGroup)
                 if (!rowGroup.isActive) {
-                    console.log(`Removing group ${rowGroup.groupObj.name}`)
                     rowGroup.remove()
+                } else {
+                    rowGroup.update()
                 }
             })
         },
