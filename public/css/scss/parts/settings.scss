@@ -3,9 +3,11 @@ $gray: #777;
 $lightgray: #eee;
 $darkgray: #221e1f;
 $yellow: #f7be0d;
+$red: #d50000;
 $logoyellow: #ffe081;
 $header-font: 'Rubik', 'Open Sans', Helvetica, Arial, sans-serif;
 $body-font: 'Lato', 'Open Sans', Helvetica, Arial, sans-serif;
+$font-awesome: 'Font Awesome 5 Free';
 
 @mixin alpha-attribute($attribute, $color, $background) {
     $percent: alpha($color) * 100%;

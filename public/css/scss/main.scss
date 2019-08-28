@@ -1,11 +1,8 @@
 @import 'parts/settings';
 @import 'parts/normalize';
+@import 'parts/timepicker';
 @import 'parts/layout';
 @import 'parts/global';
-
-.timeSelect {
-    width: 30%;
-}
 
 .bginfo {
     position: absolute;

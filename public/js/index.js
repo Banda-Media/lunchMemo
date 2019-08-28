@@ -12,9 +12,6 @@ $(document).ready(() => {
         }
 
         lunchmemoAPI.createOneRegister(userData)
-            .then(res => {
-                $(".register").addClass("animated fadeOut faster")
-            })
     }
 
     document.getElementById("fp-login").onsubmit = async function(e) {
