@@ -228,6 +228,8 @@ template {
     .container.app-host-lunch input {
       height: 3rem;
       position: relative; }
+      .container.app-host-lunch input#group-name {
+        width: 240px; }
       .container.app-host-lunch input.timeSelect {
         width: 120px; }
         .container.app-host-lunch input.timeSelect:after {
@@ -248,6 +250,12 @@ template {
       height: 3rem;
       border: none;
       padding: 0px 11px; }
+      .container.app-host-lunch select:required:invalid {
+        color: gray; }
+      .container.app-host-lunch select option[value=""][disabled] {
+        display: none; }
+      .container.app-host-lunch select option {
+        color: black; }
     .container.app-host-lunch h2 {
       font-size: 2.4rem;
       font-weight: 300;
@@ -256,6 +264,9 @@ template {
       margin-bottom: 1rem;
       letter-spacing: 3px;
       text-transform: uppercase; }
+    .container.app-host-lunch button {
+      padding: 15px 2rem 14px;
+      height: 3rem; }
   .container.groups-wrapper {
     width: 93%;
     margin-top: 3rem;

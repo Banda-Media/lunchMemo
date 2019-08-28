@@ -36,6 +36,10 @@
             height: 3rem;
             position: relative;
 
+            &#group-name {
+                width: 240px;
+            }
+
             &.timeSelect {
                 width: 120px;
 
@@ -58,7 +62,19 @@
         select {
             height: 3rem;
             border: none;
-            padding: 0px 11px;;
+            padding: 0px 11px;
+
+            &:required:invalid {
+                color: gray;
+              }
+
+            option[value=""][disabled] {
+                display: none;
+            }
+
+            option {
+                color: black;
+            }
         }
 
         h2 {
@@ -69,6 +85,11 @@
             margin-bottom: 1rem;
             letter-spacing: 3px;
             text-transform: uppercase;
+        }
+
+        button {
+            padding: 15px 2rem 14px;
+            height: 3rem;
         }
     }
 

@@ -51,13 +51,15 @@
     <section id="app-widget" class="container app-host-lunch hide">
         <div class="app-header">
             <h2>Start a lunch group</h2>
-            <input id="timepicker-start" class="timepickerStart timeSelect" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime"
+            <input id="group-name" type="text" placeholder="Your group name" />
+            <input id="timepicker-start" class="timepickerStart timeSelect" placeholder="Start Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime"
                 max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
-            <input id="timepicker-end" class="timepickerEnd timeSelect" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime"
+            <input id="timepicker-end" class="timepickerEnd timeSelect" placeholder="End Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime"
                 max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
             <select id="group-size-select">
+                <option value="" disabled selected>Group Size</option>
                 <option label="Small (1-2)" value="sm"></option>
-                <option label="Medium (3-5)" value="md"></option>
+                <option label="Medium (3-5)" value="m   d"></option>
                 <option label="Large (5-8)" value="lg"></option>
             </select>
             <button id="profile-btn" type="button" class="timePickerButton btn-red">Set Profile</button>

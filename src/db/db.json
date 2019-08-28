@@ -24,21 +24,18 @@
       "name": "asdasd",
       "email": "sadasd",
       "password": "dsadasd",
-      "groupSize": "md",
       "id": 3
     },
     {
       "name": "asdasd",
       "email": "dsadasd@Edasdasd.com",
       "password": "sadsasd",
-      "groupSize": "md",
       "id": 4
     },
     {
       "name": "",
       "email": "",
       "password": "",
-      "groupSize": "md",
       "id": 5
     },
     {
@@ -154,6 +151,26 @@
       "name": "powermen",
       "active": true,
       "id": 5
+    },
+    {
+      "users": [
+        2,
+        4,
+        5
+      ],
+      "name": "powermen",
+      "active": true,
+      "id": 6
+    },
+    {
+      "users": [
+        2,
+        4,
+        5
+      ],
+      "name": "powermenssss",
+      "active": true,
+      "id": 7
     }
   ],
   "restaurants": [
