@@ -134,12 +134,42 @@
       "id": 3,
       "name": "Teletubbies",
       "users": [
-        1,
         2,
         4,
         5
       ],
-      "active": true
+      "active": "true"
+    },
+    {
+      "name": "Postmen",
+      "users": [
+        2,
+        5,
+        7,
+        8
+      ],
+      "active": true,
+      "id": 4
+    },
+    {
+      "name": "Batmen",
+      "users": [
+        2,
+        5,
+        7,
+        8
+      ],
+      "active": true,
+      "id": 5
+    },
+    {
+      "name": "Poop People",
+      "users": [
+        2,
+        5
+      ],
+      "active": true,
+      "id": 6
     }
   ]
 }
