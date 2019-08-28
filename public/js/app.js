@@ -149,9 +149,9 @@ var lmRunApp = function () {
         timeFormat: 'h:mm p',
         interval: 15,
         minTime: '10:00am',
-        maxTime: '5:00pm',
+        maxTime: '6:00pm',
         defaultTime: String(now.getHours()),
-        startTime: '10:00',
+        startTime: String(now.getHours()),
         dynamic: true,
         dropdown: true,
         scrollbar: true
@@ -163,8 +163,8 @@ var lmRunApp = function () {
         minTime: '8:00am',
         maxTime: '6:00pm',
         defaultTime: String(now.getHours() + 1),
-        startTime: '10:30',
-        dynamic: false,
+        startTime: String(now.getHours() + 1),
+        dynamic: true,
         dropdown: true,
         scrollbar: true
     });
@@ -197,13 +197,13 @@ var lmRunApp = function () {
                     console.log(e)
                     return e
                 })
-            currentPage == "app" && $(".site-background").height($(".app-wrap").height() + 130)
+            currentPage == "app" && $(".site-background").height($(".app-wrap").height() + 300)
 
             Object.values(lunchGroupRows).map(rowGroup => {
                 rowGroup.update()
             })
 
-            currentPage == "app" && $(".site-background").height($(".app-wrap").height() + 130)
+            currentPage == "app" && $(".site-background").height($(".app-wrap").height() + 300)
         },
         1000)
 }

@@ -50,13 +50,13 @@
         <section id="app-widget" class="container app-host-lunch hide">
             <div class="app-header">
                 <h2>Start a lunch group</h2>
-                <input id="group-name" type="text" placeholder="Your group name" />
-                <input id="timepicker-start" class="timepickerStart timeSelect" placeholder="Start Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime"
+                <input required id="group-name" type="text" placeholder="Your group name" />
+                <input required id="timepicker-start" class="timepickerStart timeSelect" placeholder="Start Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime"
                     min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
-                <input id="timepicker-end" class="timepickerEnd timeSelect" placeholder="End Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime"
+                <input required id="timepicker-end" class="timepickerEnd timeSelect" placeholder="End Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime"
                     min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
-                <select id="group-size-select">
-                    <option value="" disabled selected>Group Size</option>
+                <select required id="group-size-select">
+                    <option value="" disabled selected hidden>Group Size</option>
                     <option label="Small (1-2)" value="sm"></option>
                     <option label="Medium (3-5)" value="md"></option>
                     <option label="Large (5-8)" value="lg"></option>
