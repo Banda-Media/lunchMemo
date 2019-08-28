@@ -52,10 +52,10 @@
         <div class="app-header">
             <h2>Start a lunch group</h2>
             <input id="group-name" type="text" placeholder="Your group name" />
-            <input id="timepicker-start" class="timepickerStart timeSelect" placeholder="Start Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime"
-                max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
-            <input id="timepicker-end" class="timepickerEnd timeSelect" placeholder="End Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime"
-                max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
+            <input id="timepicker-start" class="timepickerStart timeSelect" placeholder="Start Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime"
+                min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
+            <input id="timepicker-end" class="timepickerEnd timeSelect" placeholder="End Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime"
+                min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
             <select id="group-size-select">
                 <option value="" disabled selected>Group Size</option>
                 <option label="Small (1-2)" value="sm"></option>
@@ -112,44 +112,6 @@
     </section>
 
     <section class="container groups-wrapper hide">
-        <!--Add group rows below
-            <div class="group-container>
-              <div class="attendees">
-                <div class="hostname"></div>
-                <ul class="attendee-list">
-                    <li class="host"><i class="fas fa-user-alt"></i></li>
-                    <li class="empty"><i class="fas fa-user-alt"></i></li>
-                    <li class="occupied"><i class="fas fa-user-alt"></i></li>
-                </ul>
-              </div>
-              <div class="group-time-range">
-                <div class="start-time"></div>
-                <div class="end-time"></div>
-              </div>
-              <div class="join-leave">
-                <button class="btn btn-join-leave">Join</button>
-              </div>
-            </div>
-        -->
-        <div class="group-container">
-            <div class="attendees">
-                <h3 class="hostname">Power Rangers</h3>
-                <ul class="attendee-list">
-                    <li class="host"><i class="fas fa-user-alt"></i></li>
-                    <li class="occupied"><i class="fas fa-user-alt"></i></li>
-                    <li class="occupied"><i class="fas fa-user-alt"></i></li>
-                    <li class="empty"><i class="fas fa-user-alt"></i></li>
-                    <li class="empty"><i class="fas fa-user-alt"></i></li>
-                </ul>
-            </div>
-            <div class="group-time-range">
-                <div class="start-time"><span>Start Time:</span>12:00 PM</div>
-                <div class="end-time"><span>End Time:</span>2:00 PM</div>
-            </div>
-            <div class="join-leave">
-                <button class="btn btn-join-leave">Join</button>
-            </div>
-        </div>
     </section>
 
 

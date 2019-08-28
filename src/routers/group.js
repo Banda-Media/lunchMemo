@@ -51,8 +51,8 @@ router.post(`${GROUP_BASE_ROUTE}`, async(req, res) => {
     try {
         let group = req.body
 
-        let requiredFields = ['name']
-        requiredFields.map(field => group.name === "" && new Error(`Must enter group.${field}`))
+        let requiredFields = ['name', 'startTime', 'endTime']
+        requiredFields.map(field => (group[field] === undefined || group[field] === "") && new Error(`Must enter group.${field}`))
 
         const groups = await findAll()
         groups.map(existingGroup => existingGroup.name == group.name)

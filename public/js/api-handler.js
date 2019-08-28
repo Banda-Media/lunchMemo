@@ -37,7 +37,7 @@ class APIHandler {
             })
     }
 
-    createOneRegister(userData) {
+    createUser(userData) {
         return axios.post(`${this.API_BASE_URL}/users/`, userData)
             .then(res => {
                 console.log(userData)
@@ -45,6 +45,18 @@ class APIHandler {
                 window.me = res.data.user.id
                 lmRunApp()
                 return res
+            })
+    }
+
+    createGroup(groupData) {
+        return axios.post(`${this.API_BASE_URL}/groups/`, groupData)
+            .then(res => {
+                console.log(`Created group ${res.data.group}`)
+                return res.data.group
+            })
+            .catch(e => {
+                console.log(e)
+                return e
             })
     }
 

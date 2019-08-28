@@ -33,24 +33,6 @@
       "id": 4
     },
     {
-      "name": "",
-      "email": "",
-      "password": "",
-      "id": 5
-    },
-    {
-      "name": "",
-      "email": "",
-      "password": "",
-      "id": 6
-    },
-    {
-      "name": "",
-      "email": "",
-      "password": "",
-      "id": 7
-    },
-    {
       "name": "asdsad",
       "email": "asdasd@dadasd.com",
       "password": "sadasd",
@@ -113,30 +95,83 @@
         2
       ],
       "categories": [],
-      "active": "true"
+      "active": "true",
+      "name": "powerbats"
     },
     {
+      "name": "vicious scythers",
       "users": [
-        1
+        2,
+        4,
+        8,
+        9
       ],
+      "active": true,
       "id": 2
     },
     {
+      "name": "groupname",
       "users": [
-        1,
         2,
-        4,
-        5
+        4
       ],
       "active": true,
       "id": 3
     },
     {
       "users": [
-        2,
-        4,
-        5
+        1
       ],
+      "name": "batmen",
+      "startTime": "10:00 AM",
+      "endTime": "11:15 AM",
+      "groupSize": "m   d",
+      "active": true,
+      "id": 4
+    },
+    {
+      "users": [
+        1
+      ],
+      "name": "bobbies",
+      "startTime": "11:15 AM",
+      "endTime": "4:15 PM",
+      "groupSize": "lg",
+      "active": true,
+      "id": 5
+    },
+    {
+      "users": [
+        1
+      ],
+      "name": "testicles",
+      "startTime": "10:15 AM",
+      "endTime": "11:15 AM",
+      "groupSize": null,
+      "active": true,
+      "id": 6
+    },
+    {
+      "users": [
+        1
+      ],
+      "name": "testbutts",
+      "startTime": "10:15 AM",
+      "endTime": "3:30 PM",
+      "groupSize": "lg",
+      "active": true,
+      "id": 7
+    },
+    {
+      "users": [
+        1
+      ],
+      "name": "butts",
+      "startTime": "3:15 PM",
+      "endTime": "3:45 PM",
+      "groupSize": "sm",
+      "active": true,
+      "id": 8
     }
   ]
 }
