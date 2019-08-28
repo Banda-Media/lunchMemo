@@ -77,8 +77,6 @@ class LunchGroupRow {
             this.joinLeaveBtn.innerHTML = 'Leave'
         }
         if (!this.groupObj.users.length) {
-            lunchmemoAPI.deleteGroup(this.groupObj.id)
-            delete lunchGroupRows[this.groupObj.name]
             this.remove()
         }
         lunchmemoAPI.updateGroup({
@@ -87,7 +85,12 @@ class LunchGroupRow {
     }
 
     remove() {
-        this.div.remove()
+        try {
+            lunchmemoAPI.deleteGroup(this.groupObj.id)
+        } finally {
+            delete lunchGroupRows[this.groupObj.name]
+            this.div.remove()
+        }
     }
 
     createUserView(className) {
@@ -108,6 +111,7 @@ class LunchGroupRow {
             let currentUser = this.groupObj.users[i]
             let currentLine = this.attendeeUL.childNodes[i]
             if (currentLine === undefined) this.createUserView((i === 0) ? 'host' : 'empty')
+            this.attendeeUL.childNodes[i].title = (currentUser) ? currentUser.name : ''
             this.attendeeUL.childNodes[i].className = (currentUser) ? 'occupied' : 'empty'
         })
     }
