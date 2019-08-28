@@ -65,7 +65,7 @@ router.post(USER_BASE_ROUTE, async(req, res) => {
 })
 
 router.post(`/login`, async(req, res) => {
-    console.log(`POST /users/login: ${JSON.stringify(req.body.user)}`)
+    console.log(`POST /users/login: ${JSON.stringify(req.body)}`)
     try {
         let user = await findFromEmail(req.body.email)
         if (user.password !== req.body.password) throw 'Could not login'
