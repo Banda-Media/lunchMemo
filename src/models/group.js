@@ -1,5 +1,5 @@
 const axios = require('axios')
-const BASE_URL = "http://localhost:3001/groups"
+const BASE_URL = "https://lunch-memo.herokuapp.com/groups"
 
 const findAll = async function() {
     const groups = await axios.get(`${BASE_URL}`)
