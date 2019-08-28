@@ -37,7 +37,7 @@ class APIHandler {
             })
     }
 
-    createOneRegister(userData) {
+    createUser(userData) {
         return axios.post(`${this.API_BASE_URL}/users/`, userData)
             .then(res => {
                 console.log(userData)
@@ -48,6 +48,40 @@ class APIHandler {
             })
     }
 
+    deleteGroup(groupIndex) {
+        return axios.delete(`${this.API_BASE_URL}/groups/${groupIndex}`)
+            .then(res => {
+                console.log(`Delete group ${groupIndex}`)
+            })
+            .catch(e => {
+                console.log(e)
+                return e
+            })
+    }
+
+    createGroup(groupData) {
+        return axios.post(`${this.API_BASE_URL}/groups/`, groupData)
+            .then(res => {
+                console.log(`Created group ${res.data.group}`)
+                return res.data.group
+            })
+            .catch(e => {
+                console.log(e)
+                return e
+            })
+    }
+
+    updateGroup(groupData) {
+        return axios.patch(`${this.API_BASE_URL}/groups/`, groupData)
+            .then(res => {
+                console.log(`Updated group ${res.data.group}`)
+                return res.data.group
+            })
+            .catch(e => {
+                console.log(e)
+                return e
+            })
+    }
     userLogin(userData) {
         return axios.post(`${this.API_BASE_URL}/login/`, { password: userData.password, email: userData.email })
             .then(res => {
