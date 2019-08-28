@@ -31,5 +31,28 @@
       "password": "asdafed"
     }
   ],
-  "groups": []
+  "groups": [
+    {
+      "users": [
+        1
+      ],
+      "name": "bob men",
+      "startTime": "10:00 AM",
+      "endTime": "11:15 AM",
+      "groupSize": "sm",
+      "active": true,
+      "id": 1
+    },
+    {
+      "users": [
+        1
+      ],
+      "name": "boba drinkers",
+      "startTime": "10:45 AM",
+      "endTime": "12:30 PM",
+      "groupSize": "m   d",
+      "active": true,
+      "id": 2
+    }
+  ]
 }
