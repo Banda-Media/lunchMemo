@@ -81,7 +81,9 @@ class LunchGroupRow {
             delete lunchGroupRows[this.groupObj.name]
             this.remove()
         }
-        lunchmemoAPI.updateGroup({ group: this.groupObj })
+        lunchmemoAPI.updateGroup({
+            group: this.groupObj
+        })
     }
 
     remove() {
@@ -111,19 +113,24 @@ class LunchGroupRow {
     }
 
     async update() {
-        this.groupObj = (await lunchmemoAPI.getGroupById(this.groupObj.id)).group
-        this.hostnameH3.innerHTML = this.groupObj.name
-        this.startTimeDiv.innerHTML = `<span>Start:</span>${this.groupObj.startTime}`
-        this.endTimeDiv.innerHTML = `<span>End:</span>${this.groupObj.endTime}`
-        if (this.groupObj.users.includes(window.me.id)) {
-            this.joinLeaveBtn.className = "btn btn-leave"
-            this.joinLeaveBtn.innerHTML = 'Leave'
-        }
-        this.updateAttendeesView()
+        try {
+            this.groupObj = (await lunchmemoAPI.getGroupById(this.groupObj.id)).group
+            this.hostnameH3.innerHTML = this.groupObj.name
+            this.startTimeDiv.innerHTML = `<span>Start:</span>${this.groupObj.startTime}`
+            this.endTimeDiv.innerHTML = `<span>End:</span>${this.groupObj.endTime}`
+            if (this.groupObj.users.includes(window.me.id)) {
+                this.joinLeaveBtn.className = "btn btn-leave"
+                this.joinLeaveBtn.innerHTML = 'Leave'
+            }
+            this.updateAttendeesView()
+        } catch (e => {
+            console.log('Ran into error trying to update group object.  Removing. Error:', e.message)
+            this.remove()
+        })
     }
 }
 
-var lmRunApp = function() {
+var lmRunApp = function () {
     currentPage = "app"
     let now = new Date($.now());
     $('#app-widget, header, .container.groups-wrapper').removeClass('hide')
@@ -177,7 +184,7 @@ var lmRunApp = function() {
             })
     })
 
-    appInterval = setInterval(async function() {
+    appInterval = setInterval(async function () {
             lunchmemoAPI.getActiveGroups()
                 .then(res => {
                     createGroupsFromList(res.groups)
@@ -189,11 +196,7 @@ var lmRunApp = function() {
             currentPage == "app" && $(".site-background").height($(".app-wrap").height() + 130)
 
             Object.values(lunchGroupRows).map(rowGroup => {
-                if (!rowGroup.isActive) {
-                    rowGroup.remove()
-                } else {
-                    rowGroup.update()
-                }
+                rowGroup.update()
             })
 
             currentPage == "app" && $(".site-background").height($(".app-wrap").height() + 130)
