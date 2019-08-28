@@ -1,5 +1,4 @@
-var HOST = 'https://lunch-memo.herokuapp.com'
-const lunchmemoAPI = new APIHandler(HOST)
+const lunchmemoAPI = new APIHandler()
 var currentPage = "registration"
 var appInterval = ""
 
@@ -35,6 +34,8 @@ $(document).ready(() => {
 
         lunchmemoAPI.userLogin(userData)
             .then(res => {
+                console.log(userData)
+                console.log(res)
                 console.log('Successfully logged in.')
             })
             .catch(err => {

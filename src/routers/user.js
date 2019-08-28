@@ -72,7 +72,7 @@ router.post(`/login`, async(req, res) => {
         delete user.password
         res.status(200).send({ user })
     } catch (e) {
-        console.log(e)
+        console.log(e.message)
         res.status(400).send(e)
     }
 })

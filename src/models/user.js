@@ -1,8 +1,10 @@
 const axios = require('axios')
-const DB_USER_BASE_URL = "https://lunch-memo.herokuapp.com/users"
+const DB_USER_BASE_URL = "http://localhost:3001/users"
 
 const findAll = async function() {
+    console.log('findAll()')
     const users = await axios.get(`${DB_USER_BASE_URL}`)
+    console.log("found all")
     return users.data
 }
 
@@ -12,9 +14,12 @@ const findFromId = async function(uid) {
 }
 
 const findFromEmail = async function(email) {
+    console.log('find from email!!!')
     const users = await findAll()
+    console.log('all users', users)
     for (i = 0; i < users.length - 1; i++) {
         if (users[i].email.toLowerCase() === email.toLowerCase()) {
+            console.log('found email')
             return users[i]
         }
     }

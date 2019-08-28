@@ -1,6 +1,6 @@
 class APIHandler {
-    constructor(baseUrl) {
-        this.API_BASE_URL = baseUrl;
+    constructor() {
+        this.API_BASE_URL = 'http://localhost:3000';
     }
 
     getActiveGroups() {
@@ -52,6 +52,7 @@ class APIHandler {
         return axios.post(`${this.API_BASE_URL}/login/`, { password: userData.password, email: userData.email })
             .then(res => {
                 window.me = res.data.user
+                console.log(userData.email)
                 lmRunApp()
                 return res
             })
