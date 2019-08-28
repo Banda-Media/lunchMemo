@@ -175,7 +175,7 @@ var lmRunApp = function() {
             })
     })
 
-    var appInterval = setInterval(async function() {
+    appInterval = setInterval(async function() {
             lunchmemoAPI.getActiveGroups()
                 .then(res => {
                     createGroupsFromList(res.groups)
