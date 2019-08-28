@@ -107,21 +107,21 @@ class LunchGroupRow {
 
 var lmRunApp = function() {
     let now = new Date($.now());
-    $('#app-widget').removeClass('hide')
-    $('header').removeClass('hide')
+    $('#app-widget, header, .container.groups-wrapper').removeClass('hide')
     $('#app-widget').addClass('animated fadeIn faster')
     $('header').addClass('animated fadeInTop')
 
-    $('.container.register-login').addClass('animated fadeOut faster')
+
+    $('.container.register-login').addClass('hide animated fadeOut faster')
 
     $('.timepickerStart').timepicker({
         timeFormat: 'h:mm p',
         interval: 15,
-        minTime: '8:00am',
-        maxTime: '6:00pm',
+        minTime: '10:00am',
+        maxTime: '5:00pm',
         defaultTime: String(now.getHours()),
         startTime: '10:00',
-        dynamic: false,
+        dynamic: true,
         dropdown: true,
         scrollbar: true
     });

@@ -25,7 +25,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Rubik:300,300i,700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" rel="stylesheet">
@@ -51,64 +50,64 @@
 
     <section id="app-widget" class="container app-host-lunch hide">
         <div class="app-header">
-            <input id="timepicker-start" class="timepickerStart timeSelect" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime"
+            <h2>Start a lunch group</h2>
+            <input id="group-name" type="text" placeholder="Your group name" />
+            <input id="timepicker-start" class="timepickerStart timeSelect" placeholder="Start Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime"
                 max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
-            <input id="timepicker-end" class="timepickerEnd timeSelect" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime"
+            <input id="timepicker-end" class="timepickerEnd timeSelect" placeholder="End Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime"
                 max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
             <select id="group-size-select">
+                <option value="" disabled selected>Group Size</option>
                 <option label="Small (1-2)" value="sm"></option>
-                <option label="Medium (3-5)" value="md"></option>
+                <option label="Medium (3-5)" value="m   d"></option>
                 <option label="Large (5-8)" value="lg"></option>
             </select>
             <button id="profile-btn" type="button" class="timePickerButton btn-red">Set Profile</button>
         </div>
     </section>
 
-    <section class="animated fadeInDown faster">
-
-        <div class="container register-login">
-            <div class="register">
-                <div class="left">
-                    <h1 class="logo"><span class="lunch">LUNCH</span><span class="memo">memo</span></h1>
-                    <p>Lunch Memo makes it easy to organize lunch with your colleagues and other professionals in your area. Spend less time finding lunch spots and scheduling with everyone and simplify your lunch life.</p>
-                </div>
-                <div class="right widget-register hide">
-                    <h3><span>Hungry?</span>Create an account below to get started</h3>
-                    <form id="fp-registration">
-                        <label for="name">Name</label>
-                        <input type="text" id="register-name" required minlength=3 />
-
-                        <label for="email">Email</label>
-                        <input type="email" id="register-email" required minlength=3 />
-
-                        <label for="password">Password</label>
-                        <input type="password" id="register-password" required />
-
-                        <div class="form-footer">
-                            <button type="submit" class="btn-red">Register</button>
-                            <span><a href="#" class="go-login">Log in</a></span>
-                        </div>
-                    </form>
-                </div>
-                <!-- right side registration-->
-                <div class="right widget-login">
-                    <h3><span>Hungry?</span>Log in below to get started</h3>
-                    <form id="fp-login">
-                        <label for="email">Email</label>
-                        <input type="email" id="login-email" required minlength=3 />
-
-                        <label for="password">Password</label>
-                        <input type="password" id="login-password" required />
-
-                        <div class="form-footer">
-                            <button type="submit" class="btn-red">Log in</button>
-                            <span><a href="#" class="go-register">Register</a></span>
-                            <div class="error"></div>
-                        </div>
-                    </form>
-                </div>
-                <!-- right side registration-->
+    <section class="container register-login animated fadeInDown faster">
+        <div class="register">
+            <div class="left">
+                <h1 class="logo"><span class="lunch">LUNCH</span><span class="memo">memo</span></h1>
+                <p>Lunch Memo makes it easy to organize lunch with your colleagues and other professionals in your area. Spend less time finding lunch spots and scheduling with everyone and simplify your lunch life.</p>
             </div>
+            <div class="right widget-register hide">
+                <h3><span>Hungry?</span>Create an account below to get started</h3>
+                <form id="fp-registration">
+                    <label for="name">Name</label>
+                    <input type="text" id="register-name" required minlength=3 />
+
+                    <label for="email">Email</label>
+                    <input type="email" id="register-email" required minlength=3 />
+
+                    <label for="password">Password</label>
+                    <input type="password" id="register-password" required />
+
+                    <div class="form-footer">
+                        <button type="submit" class="btn-red">Register</button>
+                        <span><a href="#" class="go-login">Log in</a></span>
+                    </div>
+                </form>
+            </div>
+            <!-- right side registration-->
+            <div class="right widget-login">
+                <h3><span>Hungry?</span>Log in below to get started</h3>
+                <form id="fp-login">
+                    <label for="email">Email</label>
+                    <input type="email" id="login-email" required minlength=3 />
+
+                    <label for="password">Password</label>
+                    <input type="password" id="login-password" required />
+
+                    <div class="form-footer">
+                        <button type="submit" class="btn-red">Log in</button>
+                        <span><a href="#" class="go-register">Register</a></span>
+                        <div class="error"></div>
+                    </div>
+                </form>
+            </div>
+            <!-- right side registration-->
         </div>
     </section>
 
@@ -130,8 +129,27 @@
               <div class="join-leave">
                 <button class="btn btn-join-leave">Join</button>
               </div>
-            </div>"
+            </div>
         -->
+        <div class="group-container">
+            <div class="attendees">
+                <h3 class="hostname">Power Rangers</h3>
+                <ul class="attendee-list">
+                    <li class="host"><i class="fas fa-user-alt"></i></li>
+                    <li class="occupied"><i class="fas fa-user-alt"></i></li>
+                    <li class="occupied"><i class="fas fa-user-alt"></i></li>
+                    <li class="empty"><i class="fas fa-user-alt"></i></li>
+                    <li class="empty"><i class="fas fa-user-alt"></i></li>
+                </ul>
+            </div>
+            <div class="group-time-range">
+                <div class="start-time"><span>Start Time:</span>12:00 PM</div>
+                <div class="end-time"><span>End Time:</span>2:00 PM</div>
+            </div>
+            <div class="join-leave">
+                <button class="btn btn-join-leave">Join</button>
+            </div>
+        </div>
     </section>
 
 
