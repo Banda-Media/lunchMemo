@@ -1,71 +1,21 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "name": "Andres",
-      "email": "hello@andresweber.com",
-      "password": "password",
-      "groupSize": "sm",
-      "active": true,
-      "startRange": "10:15 AM",
-      "endRange": "11:15 AM"
-    },
-    {
-      "id": 2,
-      "name": "Bobby",
-      "email": "hello@bobbywang.net",
-      "password": "password",
-      "groupSize": "md",
-      "active": true
-    },
-    {
-      "id": 3,
-      "name": "Chris",
-      "email": "chris@chris.com",
-      "password": "asdasdsad"
-    },
-    {
-      "id": 4,
-      "name": "Miss",
-      "email": "fake@stupid.com",
-      "password": "asdafed"
+    "users": [{
+            "id": 1,
+            "name": "Andres",
+            "email": "hello@andresweber.com",
+            "password": "password",
+            "groupSize": "sm",
+            "active": true
+        },
+        {
+            "id": 2,
+            "name": "Bobby",
+            "email": "hello@bobbywang.net",
+            "password": "password",
+            "groupSize": "md",
+            "active": true
+        }
     }
-  ],
-  "groups": [
-    {
-      "users": [
-        1,
-        2
-      ],
-      "name": "bob men",
-      "startTime": "10:30 AM",
-      "endTime": "11:15 AM",
-      "groupSize": "md",
-      "active": true,
-      "id": 2
-    },
-    {
-      "users": [
-        2
-      ],
-      "name": "boba drinkers",
-      "startTime": "1:45 PM",
-      "endTime": "2:15 PM",
-      "groupSize": "lg",
-      "active": true,
-      "id": 3
-    },
-    {
-      "users": [
-        2,
-        1
-      ],
-      "name": "boba munchers",
-      "startTime": "1:45 PM",
-      "endTime": "2:15 PM",
-      "groupSize": "lg",
-      "active": true,
-      "id": 5
-    }
-  ]
+],
+"groups": []
 }

@@ -1,5 +1,6 @@
 const lunchmemoAPI = new APIHandler(`https://lunch-memo.herokuapp.com`)
 var currentPage = "registration"
+var appInterval = ""
 
 var lmRunRegistration = function() {
     clearInterval(appInterval)
