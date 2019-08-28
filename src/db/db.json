@@ -108,6 +108,7 @@
   "groups": [
     {
       "id": 1,
+      "name": "ironhack",
       "users": [
         1,
         2
@@ -116,28 +117,26 @@
       "active": "true"
     },
     {
-      "users": [
-        1
-      ],
-      "id": 2
-    },
-    {
+      "id": 2,
+      "name": "Power Rangers",
       "users": [
         1,
         2,
         4,
         5
       ],
-      "active": true,
-      "id": 3
-    }
-  ],
-  "restaurants": [
+      "active": "true"
+    },
     {
-      "id": 1,
-      "name": "Coyo Taco",
-      "category": "Mexican",
-      "openTime": "11:00"
+      "id": 3,
+      "name": "Teletubbies",
+      "users": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "active": true
     }
   ]
 }

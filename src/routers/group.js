@@ -49,9 +49,18 @@ router.get(`/active${GROUP_BASE_ROUTE}`, async(req, res) => {
 router.post(`${GROUP_BASE_ROUTE}`, async(req, res) => {
     console.log(`POST /groups: ${JSON.stringify(req.body)}`)
     try {
-        req.body.active = true
-        await save(req.body)
-        res.status(201).send({ group: req.body })
+        let group = req.body
+
+        let requiredFields = ['name']
+        requiredFields.map(field => group.name === "" && new Error(`Must enter group.${field}`))
+
+        const groups = await findAll()
+        groups.map(existingGroup => existingGroup.name == group.name)
+
+        group.active = true
+        group.users = group.users || []
+        await save(group)
+        res.status(201).send({ group })
     } catch (e) {
         console.log(e)
         res.status(400).send(e)
