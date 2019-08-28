@@ -57,8 +57,8 @@
     },
     {
       "users": [
-        1,
-        2
+        2,
+        1
       ],
       "name": "boba munchers",
       "startTime": "1:45 PM",
@@ -66,17 +66,6 @@
       "groupSize": "lg",
       "active": true,
       "id": 5
-    },
-    {
-      "users": [
-        1
-      ],
-      "name": "boba slurpers",
-      "startTime": "1:45 PM",
-      "endTime": "2:15 PM",
-      "groupSize": "lg",
-      "active": true,
-      "id": 6
     }
   ]
 }

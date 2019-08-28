@@ -1,4 +1,11 @@
 const lunchmemoAPI = new APIHandler(`http://localhost:3000`)
+var currentPage = "registration"
+
+var lmRunRegistration = function() {
+    currentPage = "registration"
+    $('.container.app-host-lunch, .container.groups-wrapper, header').addClass('hide')
+    $('.container.register-login').removeClass('hide').removeClass('fadeOut').addClass('animated fadeIn faster')
+}
 
 $(document).ready(() => {
 

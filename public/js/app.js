@@ -124,6 +124,7 @@ class LunchGroupRow {
 }
 
 var lmRunApp = function() {
+    currentPage = "app"
     let now = new Date($.now());
     $('#app-widget, header, .container.groups-wrapper').removeClass('hide')
     $('#app-widget').addClass('animated fadeIn faster')
@@ -183,7 +184,7 @@ var lmRunApp = function() {
                     console.log(e)
                     return e
                 })
-            $(".site-background").height($(".app-wrap").height() + 130)
+            currentPage == "app" && $(".site-background").height($(".app-wrap").height() + 130)
 
             Object.values(lunchGroupRows).map(rowGroup => {
                 if (!rowGroup.isActive) {
@@ -193,7 +194,7 @@ var lmRunApp = function() {
                 }
             })
 
-            $(".site-background").height($(".app-wrap").height() + 130)
+            currentPage == "app" && $(".site-background").height($(".app-wrap").height() + 130)
         },
-        5000)
+        1000)
 }
