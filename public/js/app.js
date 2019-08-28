@@ -43,8 +43,10 @@ class LunchGroupRow {
         this.startTimeDiv.className = "start-time"
         this.endTimeDiv.className = "end-time"
         this.joinLeaveDiv.className = "join-leave"
-        this.joinLeaveBtn.className = "btn btn-join-leave"
+        this.joinLeaveBtn.className = "btn btn-join"
         this.joinLeaveBtn.innerHTML = "Join"
+
+        this.joinLeaveBtn.onclick = this.btnJoinLeavePressed.bind(this)
 
         this.children = [this.attendeesDiv, this.groupTimeDiv, this.joinLeaveDiv]
 
@@ -62,8 +64,21 @@ class LunchGroupRow {
         return String(this.groupObj.active) == "true"
     }
 
-    addMember(user) {
-        this.groupObj.users.append(user.id)
+    btnJoinLeavePressed() {
+        if (this.groupObj.users.includes(window.me.id)) {
+            console.log('User was in group...splicing out of the user group and setting button back to join.')
+            this.groupObj.users.splice(this.groupObj.users.indexOf(window.me.id), 1)
+            this.joinLeaveBtn.className = "btn btn-join"
+            this.joinLeaveBtn.innerHTML = 'Join'
+        } else if (this.groupObj.maxSize == this.groupObj.users.length) {
+            new Error('Maximum group size reached...sorry!')
+        } else {
+            console.log('User was not in group...adding to user list and setting button back to leave.')
+            this.groupObj.users.push(window.me.id)
+            this.joinLeaveBtn.className = "btn btn-leave"
+            this.joinLeaveBtn.innerHTML = 'Leave'
+        }
+        lunchmemoAPI.updateGroup(this.groupObj)
     }
 
     remove() {
@@ -97,6 +112,10 @@ class LunchGroupRow {
         this.hostnameH3.innerHTML = this.groupObj.name
         this.startTimeDiv.innerHTML = `<span>Start:</span>${this.groupObj.startTime}`
         this.endTimeDiv.innerHTML = `<span>End:</span>${this.groupObj.endTime}`
+        if (this.groupObj.users.includes(window.me.id)) {
+            this.joinLeaveBtn.className = "btn btn-leave"
+            this.joinLeaveBtn.innerHTML = 'Leave'
+        }
         this.updateAttendeesView()
     }
 }
@@ -164,6 +183,7 @@ var lmRunApp = function() {
                     console.log(e)
                     return e
                 })
+            $(".site-background").height($(".app-wrap").height() + 130)
 
             Object.values(lunchGroupRows).map(rowGroup => {
                 if (!rowGroup.isActive) {
@@ -172,9 +192,8 @@ var lmRunApp = function() {
                     rowGroup.update()
                 }
             })
-            console.log($(window).innerHeight())
-            console.log($('.app-wrap').height())
-            $(window).innerHeight($('.app-wrap').height())
+
+            $(".site-background").height($(".app-wrap").height() + 130)
         },
         5000)
 }

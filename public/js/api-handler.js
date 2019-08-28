@@ -60,6 +60,17 @@ class APIHandler {
             })
     }
 
+    updateGroup(groupData) {
+        return axios.patch(`${this.API_BASE_URL}/groups/`, groupData)
+            .then(res => {
+                console.log(`Updated group ${res.data.group}`)
+                return res.data.group
+            })
+            .catch(e => {
+                console.log(e)
+                return e
+            })
+    }
     userLogin(userData) {
         return axios.post(`${this.API_BASE_URL}/login/`, { password: userData.password, email: userData.email })
             .then(res => {
