@@ -66,19 +66,22 @@ class LunchGroupRow {
 
     btnJoinLeavePressed() {
         if (this.groupObj.users.includes(window.me.id)) {
-            console.log('User was in group...splicing out of the user group and setting button back to join.')
             this.groupObj.users.splice(this.groupObj.users.indexOf(window.me.id), 1)
             this.joinLeaveBtn.className = "btn btn-join"
             this.joinLeaveBtn.innerHTML = 'Join'
         } else if (this.groupObj.maxSize == this.groupObj.users.length) {
             new Error('Maximum group size reached...sorry!')
         } else {
-            console.log('User was not in group...adding to user list and setting button back to leave.')
             this.groupObj.users.push(window.me.id)
             this.joinLeaveBtn.className = "btn btn-leave"
             this.joinLeaveBtn.innerHTML = 'Leave'
         }
-        lunchmemoAPI.updateGroup(this.groupObj)
+        if (!this.groupObj.users.length) {
+            lunchmemoAPI.deleteGroup(this.groupObj.id)
+            delete lunchGroupRows[this.groupObj.name]
+            this.remove()
+        }
+        lunchmemoAPI.updateGroup({ group: this.groupObj })
     }
 
     remove() {
@@ -163,9 +166,7 @@ var lmRunApp = function() {
             active: true
         }
         lunchmemoAPI.createGroup(groupData)
-            .then(res => {
-                console.log('Successfully created group.', res)
-            })
+            .then(res => {})
             .catch(e => {
                 console.log(e)
                 return e
@@ -173,10 +174,8 @@ var lmRunApp = function() {
     })
 
     setInterval(async function() {
-            console.log('Checking for active/inactive groups...')
             lunchmemoAPI.getActiveGroups()
                 .then(res => {
-                    console.log(`Found ${res.groups.length} active groups`)
                     createGroupsFromList(res.groups)
                 })
                 .catch(e => {

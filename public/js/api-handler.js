@@ -48,6 +48,17 @@ class APIHandler {
             })
     }
 
+    deleteGroup(groupIndex) {
+        return axios.delete(`${this.API_BASE_URL}/groups/${groupIndex}`)
+            .then(res => {
+                console.log(`Delete group ${groupIndex}`)
+            })
+            .catch(e => {
+                console.log(e)
+                return e
+            })
+    }
+
     createGroup(groupData) {
         return axios.post(`${this.API_BASE_URL}/groups/`, groupData)
             .then(res => {
