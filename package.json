@@ -8,7 +8,7 @@
     "src": "src"
   },
   "scripts": {
-    "start": "node src/index.js",
+    "start": "./bin/env.sh > ./public/js/env.js && node src/index.js",
     "dev": "nodemon src/index.js",
     "sass:compile": "node-sass --include-path sass ./public/css/scss/main.scss ./public/css/main.css"
   },

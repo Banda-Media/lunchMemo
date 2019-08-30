@@ -40,18 +40,17 @@
         <header class="hide">
             <h1 class="logo"><span class="lunch">LUNCH</span><span class="memo">memo</span></h1>
             <nav>
-                Hello, Username <i class="fas fa-user-circle"></i>
+                Hello, <span id="username-nav"></span> <i class="fas fa-user-circle"></i>
                 <div class="nav">
-                    <a href="#" class="hide">Logout</a>
-                    <a href="#">Register</a> /
-                    <a href="#">Login</a>
+                    <a href="#" onclick="lmRunRegistration()">Logout</a>
                 </div>
             </nav>
         </header>
-    
+
         <section id="app-widget" class="container app-host-lunch hide">
             <div class="app-header">
                 <h2>Start a lunch group</h2>
+<<<<<<< HEAD
                 <input id="group-name" type="text" placeholder="Your group name" />
                 <input id="timepicker-start" class="timepickerStart timeSelect" placeholder="Start Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime" min-time="model.options.minTime"
                     max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
@@ -60,32 +59,42 @@
                     max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
                 <select id="group-size-select">
                     <option value="" disabled selected>Group Size</option>
+=======
+                <input required id="group-name" type="text" placeholder="Your group name" />
+                <input required id="timepicker-start" class="timepickerStart timeSelect" placeholder="Start Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime"
+                    min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
+                <input required id="timepicker-end" class="timepickerEnd timeSelect" placeholder="End Time" jt-timepicker="" time="model.time" time-string="model.timeString" default-time="model.options.defaultTime" time-format="model.options.timeFormat" start-time="model.options.startTime"
+                    min-time="model.options.minTime" max-time="model.options.maxTime" interval="model.options.interval" dynamic="model.options.dynamic" scrollbar="model.options.scrollbar" dropdown="model.options.dropdown">
+                <select required id="group-size-select">
+                    <option value="" disabled selected hidden>Group Size</option>
+>>>>>>> dev
                     <option label="Small (1-2)" value="sm"></option>
-                    <option label="Medium (3-5)" value="m   d"></option>
+                    <option label="Medium (3-5)" value="md"></option>
                     <option label="Large (5-8)" value="lg"></option>
                 </select>
-                <button id="profile-btn" type="button" class="timePickerButton btn-red">Set Profile</button>
+                <button id="profile-btn" type="button" class="timePickerButton btn-red">Create Group</button>
             </div>
         </section>
-    
+
         <section class="container register-login animated fadeInDown faster">
             <div class="register">
                 <div class="left">
                     <h1 class="logo"><span class="lunch">LUNCH</span><span class="memo">memo</span></h1>
-                    <p>Lunch Memo makes it easy to organize lunch with your colleagues and other professionals in your area. Spend less time finding lunch spots and scheduling with everyone and simplify your lunch life.</p>
+                    <p>Lunch Memo makes it easy to organize lunch with your colleagues and other professionals in your area. Spend less time finding lunch spots and scheduling with everyone and simplify your lunch life.
+                    </p>
                 </div>
                 <div class="right widget-register hide">
                     <h3><span>Hungry?</span>Create an account below to get started</h3>
                     <form id="fp-registration">
                         <label for="name">Name</label>
                         <input type="text" id="register-name" required minlength=3 />
-    
+
                         <label for="email">Email</label>
                         <input type="email" id="register-email" required minlength=3 />
-    
+
                         <label for="password">Password</label>
                         <input type="password" id="register-password" required />
-    
+
                         <div class="form-footer">
                             <button type="submit" class="btn-red">Register</button>
                             <span><a href="#" class="go-login">Log in</a></span>
@@ -98,10 +107,10 @@
                     <form id="fp-login">
                         <label for="email">Email</label>
                         <input type="email" id="login-email" required minlength=3 />
-    
+
                         <label for="password">Password</label>
                         <input type="password" id="login-password" required />
-    
+
                         <div class="form-footer">
                             <button type="submit" class="btn-red">Log in</button>
                             <span><a href="#" class="go-register">Register</a></span>
@@ -112,48 +121,11 @@
                 <!-- right side registration-->
             </div>
         </section>
-    
+
         <section class="container groups-wrapper hide">
-            <!--Add group rows below
-                <div class="group-container>
-                    <div class="attendees">
-                    <div class="hostname"></div>
-                    <ul class="attendee-list">
-                        <li class="host"><i class="fas fa-user-alt"></i></li>
-                        <li class="empty"><i class="fas fa-user-alt"></i></li>
-                        <li class="occupied"><i class="fas fa-user-alt"></i></li>
-                    </ul>
-                    </div>
-                    <div class="group-time-range">
-                    <div class="start-time"></div>
-                    <div class="end-time"></div>
-                    </div>
-                    <div class="join-leave">
-                    <button class="btn btn-join-leave">Join</button>
-                    </div>
-                </div>
-            -->
-            <div class="group-container">
-                <div class="attendees">
-                    <h3 class="hostname">Power Rangers</h3>
-                    <ul class="attendee-list">
-                        <li class="host"><i class="fas fa-user-alt"></i></li>
-                        <li class="occupied"><i class="fas fa-user-alt"></i></li>
-                        <li class="occupied"><i class="fas fa-user-alt"></i></li>
-                        <li class="empty"><i class="fas fa-user-alt"></i></li>
-                        <li class="empty"><i class="fas fa-user-alt"></i></li>
-                    </ul>
-                </div>
-                <div class="group-time-range">
-                    <div class="start-time"><span>Start:</span>12:00 PM</div>
-                    <div class="end-time"><span>End:</span>2:00 PM</div>
-                </div>
-                <div class="join-leave">
-                    <button class="btn btn-join-leave">Join</button>
-                </div>
-            </div>
         </section>
-    </div> <!-- .app-wrap-->
+    </div>
+    <!-- .app-wrap-->
 
     <div class="site-background">
         <div class="bginfo">
@@ -162,6 +134,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script src="js/env.js"></script>
     <script src="js/config.js"></script>
     <script src="js/api-handler.js"></script>
     <script src="js/index.js"></script>

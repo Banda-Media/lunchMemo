@@ -1,45 +1,52 @@
 const axios = require('axios')
-const BASE_URL = "http://localhost:3001/users"
+const DB_USER_BASE_URL = "http://localhost:3001/users"
 
 const findAll = async function() {
-    const users = await axios.get(`${BASE_URL}`)
+    console.log('findAll()')
+    const users = await axios.get(`${DB_USER_BASE_URL}`)
+    console.log("found all")
     return users.data
 }
 
 const findFromId = async function(uid) {
-    const user = await axios.get(`${BASE_URL}/${uid}`)
+    const user = await axios.get(`${DB_USER_BASE_URL}/${uid}`)
     return user.data
 }
 
 const findFromEmail = async function(email) {
+    console.log('find from email!!!')
     const users = await findAll()
-    for (i = 0; i < users.length - 1; i++) {
-        if (users[i].email === email) {
-            return users[i]
+    console.log('all users', users)
+    for (let i =0; i < users.length; i++) {
+        let user = users[i]
+        console.log(`${user.email.toLowerCase()} === ${email.toLowerCase()}`, user.email.toLowerCase() === email.toLowerCase())
+        if (user.email.toLowerCase() === email.toLowerCase()) {
+            console.log(`found user with matching email: ${JSON.stringify(user)}`)
+            return user
         }
     }
-    throw "Email not found."
+    new Error("Email not found.")
 }
 
 const update = async function(userData) {
-    console.log('user model update to: ', `${BASE_URL}/${userData.id}`)
-    return await axios.patch(`${BASE_URL}/${userData.id}`, userData)
+    console.log(userData.id)
+    return await axios.patch(`${DB_USER_BASE_URL}/${userData.id}`, userData)
 }
 
 const remove = async function(uid) {
-    return await axios.delete(`${BASE_URL}/${uid}`)
+    return await axios.delete(`${DB_USER_BASE_URL}/${uid}`)
 }
 
 const save = async function(userData) {
-    return await axios.post(`${BASE_URL}`, userData)
+    return await axios.post(`${DB_USER_BASE_URL}`, userData)
 }
 
 const setActive = async function(uid) {
-    return await axios.patch(`${BASE_URL}/${uid}`, { active: true })
+    return await axios.patch(`${DB_USER_BASE_URL}/${uid}`, { active: true })
 }
 
 const setInactive = async function(uid) {
-    return await axios.patch(`${BASE_URL}/${uid}`, { active: false })
+    return await axios.patch(`${DB_USER_BASE_URL}/${uid}`, { active: false })
 }
 
 
