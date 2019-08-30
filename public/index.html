@@ -40,8 +40,9 @@
         <header class="hide">
             <h1 class="logo"><span class="lunch">LUNCH</span><span class="memo">memo</span></h1>
             <nav>
-                Hello, <span id="username-nav"></span> <i class="fas fa-user-circle"></i>
+                <a href="#" class="mobile-menu"><i class="fas fa-bars"></i></a>
                 <div class="nav">
+                    Hello, <span id="username-nav"></span> <i class="fas fa-user-circle"></i><br />
                     <a href="#" onclick="lmRunRegistration()">Logout</a>
                 </div>
             </nav>
@@ -72,7 +73,7 @@
                     <p>Lunch Memo makes it easy to organize lunch with your colleagues and other professionals in your area. Spend less time finding lunch spots and scheduling with everyone and simplify your lunch life.
                     </p>
                 </div>
-                <div class="right widget-register hide">
+                <div class="right widget-register">
                     <h3><span>Hungry?</span>Create an account below to get started</h3>
                     <form id="fp-registration">
                         <label for="name">Name</label>
@@ -88,11 +89,12 @@
                             <button type="submit" class="btn-red">Register</button>
                             <span><a href="#" class="go-login">Log in</a></span>
                         </div>
+       
+                        <div class="notice">Site not yet secure.<br />Please do not use a real password.</div>
                     </form>
                 </div>
-                <!-- right side registration-->
-                <div class="right widget-login">
-                    <h3><span>Hungry?</span>Log in below to get started</h3>
+                <div class="right widget-login hide">
+                    <h3><span>Hungry?</span>Log in below to get connected</h3>
                     <form id="fp-login">
                         <label for="email">Email</label>
                         <input type="email" id="login-email" required minlength=3 />
@@ -103,11 +105,11 @@
                         <div class="form-footer">
                             <button type="submit" class="btn-red">Log in</button>
                             <span><a href="#" class="go-register">Register</a></span>
-                            <div class="error"></div>
                         </div>
+
+                        <div class="notice error"></div>
                     </form>
                 </div>
-                <!-- right side registration-->
             </div>
         </section>
 

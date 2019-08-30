@@ -196,18 +196,16 @@ var lmRunApp = function () {
             lunchmemoAPI.getActiveGroups()
                 .then(res => {
                     createGroupsFromList(res.groups)
+                    $(".site-background").height($(".app-wrap").height() + 130)
                 })
                 .catch(e => {
                     console.log(e)
                     return e
                 })
-            currentPage == "app" && $(".site-background").height($(".app-wrap").height() + 300)
 
             Object.values(lunchGroupRows).map(rowGroup => {
                 rowGroup.update()
             })
-
-            currentPage == "app" && $(".site-background").height($(".app-wrap").height() + 300)
         },
         1000)
 }
