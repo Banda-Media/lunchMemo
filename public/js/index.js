@@ -34,13 +34,9 @@ $(document).ready(() => {
 
         lunchmemoAPI.userLogin(userData)
             .then(res => {
-                console.log(userData)
-                console.log(res)
-                console.log('Successfully logged in.')
             })
             .catch(err => {
                 console.log(err)
-                $(".error").text("User not found. Please try again.")
                 return err
             })
     }
