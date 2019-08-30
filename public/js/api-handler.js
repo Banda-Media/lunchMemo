@@ -63,6 +63,7 @@ class APIHandler {
             })
             .catch(err => {
                 console.log(err)
+                $(".notice").text("User not found. Please try again.")
                 return err
             })
     }

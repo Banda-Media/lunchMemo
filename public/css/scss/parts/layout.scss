@@ -97,17 +97,19 @@
         width: 93%;
         margin-top: 3rem;
         background-color: #fff;
+        border-radius: 5px;
         box-shadow: 0px 3px 12px rgba(0, 0, 0, .4);
 
         .group-container {
-            margin-bottom: 1.6rem;
-            border-bottom: 1px solid gray;
+            border-bottom: 1px solid #eee;
             padding: 1.6rem 2rem;
             display: flex;
             justify-content: space-between;
+
             .attendees {
                 width: 10%;
             }
+
             .group-time-range {
                 display: flex;
                 align-items: center;
@@ -118,15 +120,18 @@
                     }
                 }
             }
+
             .btn-join, .btn-leave{
                 width: 100px;
             }
+
             .btn-join{
                 background-color: $yellow;
                 &:hover{
                     background-color: $yellow;
                 }
             }
+
             .btn-leave{
                 background-color: $red;
                 &:hover{
@@ -155,12 +160,8 @@
 
 
 .register {
-<<<<<<< HEAD
-    height: 480px;
-=======
-    height: 450px;
->>>>>>> dev
-    position: relative;
+    display: flex;
+    flex-wrap: wrap;
 
     p {
         margin-top: 80px;
@@ -186,21 +187,125 @@
             font-weight: 700;
         }
     }
+
+    .notice {
+        margin-top: 1rem;
+        text-align: center;
+        font-size: .8rem;
+        color: #999;
+
+        &.error {
+            color: red;
+        }
+    }
 }
 
-.left {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    padding: 4rem 3.2rem;
-}
-
+.left, 
 .right {
     width: 50%;
     height: 100%;
-    margin-left: 425px;
-    padding: 4.2rem 3.2rem;
+    padding: 4rem 3.2rem 2.2rem
+}
+
+.right {
     background-color: #f7f7f7;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+.nav {
+    display: block;
+    margin-top: 5px;
+}
+
+@media (max-width: 975px) {
+
+    .container {
+        position: relative;
+        margin: 0 auto;
+    
+        &.register-login {
+            width: 80%;
+            top: 0;
+            margin-top: 10%;
+            background-color: #fff;
+            box-shadow: 0px 3px 12px rgba(0, 0, 0, .4);
+        }
+
+        &.app-host-lunch {
+            padding-top: 125px;
+
+            h2 {
+                line-height: 2rem;
+            }
+
+            input {
+                width: 95%;
+
+                &#group-name {
+                    width: 93%;
+                }
+            }
+        }
+
+        &.groups-wrapper {
+            .group-container {
+                display: block;
+                position: relative;
+
+                .group-time-range {
+                    display:block;
+                }
+
+                .join-leave {
+                    float: right;
+                    position: absolute;
+                    right: 1.6rem;
+                    top: 1.6rem;
+                }
+            }
+        }
+
+    }
+
+    .logo {
+        width: 230px;
+    }
+
+    .register {
+        .left,
+        .right {
+            width: 100%;
+        }
+    }
+
+}
+
+@media (max-width:468px) {
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .container {
+        &.register-login {
+            width: 94%;
+            margin: 3%;
+        }
+    }
+
+    .register {
+        .left, .right {
+            padding: 2rem;
+        }
+        p {
+        font-size: .9rem;
+        line-height: 1.6rem;
+    }}
 }

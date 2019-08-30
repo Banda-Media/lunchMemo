@@ -26,49 +26,6 @@
   ],
   "groups": [
     {
-<<<<<<< HEAD
-      "id": 1,
-      "users": [
-        1,
-        2
-      ],
-      "categories": [],
-      "active": "true",
-      "name": "jesusss"
-    },
-    {
-      "users": [
-        1
-      ],
-      "id": 2,
-      "name": "christ",
-      "active": false
-    },
-    {
-      "users": [
-        1,
-        2,
-        4,
-        5
-      ],
-      "active": true,
-      "id": 3,
-      "name": "dangeroumouse"
-    },
-    {
-      "users": [
-        1,
-        2,
-        4,
-        5
-      ],
-      "active": true,
-      "id": 4,
-      "name": "powerdudes"
-    },
-    {
-=======
->>>>>>> dev
       "users": [
         2,
         1
@@ -89,19 +46,7 @@
       "endTime": "11:15 AM",
       "groupSize": "md",
       "active": true,
-<<<<<<< HEAD
-      "id": 7
-    }
-  ],
-  "restaurants": [
-    {
-      "id": 1,
-      "name": "Coyo Taco",
-      "category": "Mexican",
-      "openTime": "11:00"
-=======
       "id": 2
->>>>>>> dev
     }
   ]
 }
