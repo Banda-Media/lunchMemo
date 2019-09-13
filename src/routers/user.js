@@ -8,7 +8,6 @@ const router = new express.Router()
 
 const USER_BASE_ROUTE = '/api/users'
 
-
 router.post(USER_BASE_ROUTE, async(req, res) => {
     console.log('registering new user...')
     const user = new User(req.body)
@@ -21,17 +20,18 @@ router.post(USER_BASE_ROUTE, async(req, res) => {
     }
 })
 
-router.post(`${USER_BASE_ROUTE}/login`, async(req, res) => {
+router.post(`/login`, async(req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
         res.send({ user, token })
     } catch (e) {
+        console.log(e)
         res.status(400).send()
     }
 })
 
-router.post(`${USER_BASE_ROUTE}/logout`, auth, async(req, res) => {
+router.post(`/logout`, auth, async(req, res) => {
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token
@@ -44,7 +44,7 @@ router.post(`${USER_BASE_ROUTE}/logout`, auth, async(req, res) => {
     }
 })
 
-router.post(`${USER_BASE_ROUTE}/logoutAll`, auth, async(req, res) => {
+router.post(`/logoutAll`, auth, async(req, res) => {
     try {
         req.user.tokens = []
         await req.user.save()

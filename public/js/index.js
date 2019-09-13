@@ -1,4 +1,5 @@
 const lunchmemoAPI = new APIHandler()
+var appWidget = $('app-widget')
 var currentPage = "registration"
 var appInterval = ""
 
@@ -33,8 +34,7 @@ $(document).ready(() => {
         }
 
         lunchmemoAPI.userLogin(userData)
-            .then(res => {
-            })
+            .then(res => {})
             .catch(err => {
                 console.log(err)
                 return err

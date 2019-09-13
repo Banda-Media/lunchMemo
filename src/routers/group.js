@@ -4,21 +4,7 @@ const auth = require('../middleware/auth')
 const router = new express.Router()
 
 
-const GROUP_BASE_ROUTE = '/ /groups'
-
-router.post(GROUP_BASE_ROUTE, auth, async(req, res) => {
-    const group = new Group({
-        ...req.body,
-        owner: req.user._id
-    })
-
-    try {
-        await group.save()
-        res.status(201).send(group)
-    } catch (e) {
-        res.status(400).send(e)
-    }
-})
+const GROUP_BASE_ROUTE = '/api/groups'
 
 // GET /api/groups?completed=true
 // GET /api/groups?limit=10&skip=20
@@ -26,11 +12,7 @@ router.post(GROUP_BASE_ROUTE, auth, async(req, res) => {
 router.get(GROUP_BASE_ROUTE, auth, async(req, res) => {
     const match = {}
     const sort = {}
-
-    if (req.query.active) {
-        match.active = req.query.active === 'true'
-    }
-
+    if (req.query.active) match.active = req.query.active === 'true'
     if (req.query.sortBy) {
         const parts = req.query.sortBy.split(':')
         sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
@@ -52,7 +34,23 @@ router.get(GROUP_BASE_ROUTE, auth, async(req, res) => {
     }
 })
 
-router.get(`${GROUP_BASE_ROUTE}/:id`, auth, async(req, res) => {
+router.get(`/api/active/groups`, async(req, res) => {
+    const _id = req.params.id
+
+    try {
+        const groups = await Group.find({})
+
+        if (!groups) {
+            return res.status(404).send()
+        }
+
+        res.send(groups.filter(group => group.active))
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+router.get(`${GROUP_BASE_ROUTE}/:id`, async(req, res) => {
     const _id = req.params.id
 
     try {
@@ -65,6 +63,20 @@ router.get(`${GROUP_BASE_ROUTE}/:id`, auth, async(req, res) => {
         res.send(group)
     } catch (e) {
         res.status(500).send()
+    }
+})
+
+router.post(GROUP_BASE_ROUTE, auth, async(req, res) => {
+    const group = new Group({
+        ...req.body,
+        owner: req.user._id
+    })
+
+    try {
+        await group.save()
+        res.status(201).send(group)
+    } catch (e) {
+        res.status(400).send(e)
     }
 })
 
