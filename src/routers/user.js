@@ -1,93 +1,133 @@
 const express = require('express')
-const { findFromId, findAll, findFromEmail, update, save, remove, setInactive, setActive } = require('../models/user')
+const multer = require('multer')
+const sharp = require('sharp')
+const User = require('../models/user')
+const auth = require('../middleware/auth')
+
 const router = new express.Router()
+
 const USER_BASE_ROUTE = '/api/users'
 
-router.get(USER_BASE_ROUTE, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
-    try {
-        const users = await findAll()
-        res.status(200).send(users)
-    } catch (e) {
-        console.log(e)
-        res.status(400).send(e)
-    }
-})
-
-router.patch(USER_BASE_ROUTE, async(req, res) => {
-    console.log(`${req.method} ${req.path}: ${JSON.stringify(req.body)}`)
-    try {
-        const user = await update(req.body.user)
-        res.status(200).send(user.data)
-    } catch (e) {
-        console.log(e)
-        res.status(400).send(e)
-    }
-})
-
-router.get(`${USER_BASE_ROUTE}/:id`, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
-    const _id = req.params.id
-    try {
-        const user = await findFromId(_id)
-        res.status(200).send({ user })
-    } catch (e) {
-        console.log(e)
-        res.status(400).send(e)
-    }
-})
-
-router.delete(`${USER_BASE_ROUTE}/:id`, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
-    const _id = req.params.id
-    try {
-        const user = await findFromId(_id)
-        await remove(_id)
-        res.status(200).send({ user })
-    } catch (e) {
-        console.log(e)
-        res.status(500).send()
-    }
-})
 
 router.post(USER_BASE_ROUTE, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
+    console.log('registering new user...')
+    const user = new User(req.body)
     try {
-        await save(req.body)
-        res.status(201).send({ user: req.body })
+        await user.save()
+        const token = await user.generateAuthToken()
+        res.status(201).send({ user, token })
     } catch (e) {
-        console.log(e)
         res.status(400).send(e)
     }
 })
 
-router.post(`/login`, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
+router.post(`${USER_BASE_ROUTE}/login`, async(req, res) => {
     try {
-        let user = await findFromEmail(req.body.email)
-        console.log(`findFromEmail returned: ${user}`)
-        if (user.password !== req.body.password) new Error('Could not login')
-        await setActive(user.id)
-        console.log(`User ${user.id} logged in.`)
-        user = await findFromId(user.id)
-        delete user.password
-        res.status(200).send({ user })
+        const user = await User.findByCredentials(req.body.email, req.body.password)
+        const token = await user.generateAuthToken()
+        res.send({ user, token })
     } catch (e) {
-        console.log(e.message)
-        res.status(400).send(e)
+        res.status(400).send()
     }
 })
 
-router.post(`/logout`, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
+router.post(`${USER_BASE_ROUTE}/logout`, auth, async(req, res) => {
     try {
-        await setInactive(req.body.user.id)
-        console.log(`User ${req.body.user} logged out.`)
-        res.status(200).send(req.body.user)
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token.token !== req.token
+        })
+        await req.user.save()
+
+        res.send()
     } catch (e) {
-        console.log(e)
         res.status(500).send()
     }
 })
+
+router.post(`${USER_BASE_ROUTE}/logoutAll`, auth, async(req, res) => {
+    try {
+        req.user.tokens = []
+        await req.user.save()
+        res.send()
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+router.get(`${USER_BASE_ROUTE}/me`, auth, async(req, res) => {
+    res.send(req.user)
+})
+
+router.patch(`${USER_BASE_ROUTE}/me`, auth, async(req, res) => {
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['name', 'email', 'password']
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+    if (!isValidOperation) {
+        return res.status(400).send({ error: 'Invalid updates!' })
+    }
+
+    try {
+        updates.forEach((update) => req.user[update] = req.body[update])
+        await req.user.save()
+        res.send(req.user)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+router.delete(`${USER_BASE_ROUTE}/me`, auth, async(req, res) => {
+    try {
+        await req.user.remove()
+        sendCancelationEmail(req.user.email, req.user.name)
+        res.send(req.user)
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+const upload = multer({
+    limits: {
+        fileSize: 1000000
+    },
+    fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+            return cb(new Error('Please upload an image'))
+        }
+
+        cb(undefined, true)
+    }
+})
+
+router.post(`${USER_BASE_ROUTE}/me/avatar`, auth, upload.single('avatar'), async(req, res) => {
+    const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).png().toBuffer()
+    req.user.avatar = buffer
+    await req.user.save()
+    res.send()
+}, (error, req, res, next) => {
+    res.status(400).send({ error: error.message })
+})
+
+router.delete(`${USER_BASE_ROUTE}/me/avatar`, auth, async(req, res) => {
+    req.user.avatar = undefined
+    await req.user.save()
+    res.send()
+})
+
+router.get(`${USER_BASE_ROUTE}/:id/avatar`, async(req, res) => {
+    try {
+        const user = await User.findById(req.params.id)
+
+        if (!user || !user.avatar) {
+            throw new Error()
+        }
+
+        res.set('Content-Type', 'image/png')
+        res.send(user.avatar)
+    } catch (e) {
+        res.status(404).send()
+    }
+})
+
 
 module.exports = router

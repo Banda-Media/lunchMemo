@@ -1,62 +1,102 @@
-const axios = require('axios')
-const DB_USER_BASE_URL = "http://localhost:3001/users"
+const mongoose = require('mongoose')
+const validator = require('validator')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const Group = require('./group')
 
-const findAll = async function() {
-    console.log('findAll()')
-    const users = await axios.get(`${DB_USER_BASE_URL}`)
-    console.log("found all")
-    return users.data
-}
-
-const findFromId = async function(uid) {
-    const user = await axios.get(`${DB_USER_BASE_URL}/${uid}`)
-    return user.data
-}
-
-const findFromEmail = async function(email) {
-    console.log('find from email!!!')
-    const users = await findAll()
-    console.log('all users', users)
-    for (let i =0; i < users.length; i++) {
-        let user = users[i]
-        console.log(`${user.email.toLowerCase()} === ${email.toLowerCase()}`, user.email.toLowerCase() === email.toLowerCase())
-        if (user.email.toLowerCase() === email.toLowerCase()) {
-            console.log(`found user with matching email: ${JSON.stringify(user)}`)
-            return user
+const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    email: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true,
+        lowercase: true,
+        validate(value) {
+            if (!validator.isEmail(value)) throw new Error('Email is invalid')
         }
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 7,
+        trim: true,
+        validate(value) {
+            if (value.toLowerCase().includes('password')) throw new Error('Password cannot contain "password"')
+        }
+    },
+    tokens: [{
+        token: {
+            type: String,
+            required: true
+        }
+    }],
+    avatar: {
+        type: Buffer
     }
-    new Error("Email not found.")
+}, {
+    timestamps: true
+})
+
+userSchema.methods.toJSON = function() {
+    const user = this
+    const userObject = user.toObject()
+
+    delete userObject.password
+    delete userObject.tokens
+    delete userObject.avatar
+
+    return userObject
 }
 
-const update = async function(userData) {
-    console.log(userData.id)
-    return await axios.patch(`${DB_USER_BASE_URL}/${userData.id}`, userData)
+userSchema.methods.generateAuthToken = async function() {
+    const user = this
+    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET)
+
+    user.tokens = user.tokens.concat({ token })
+    await user.save()
+
+    return token
 }
 
-const remove = async function(uid) {
-    return await axios.delete(`${DB_USER_BASE_URL}/${uid}`)
+userSchema.statics.findByCredentials = async(email, password) => {
+    const user = await User.findOne({ email })
+
+    if (!user) {
+        throw new Error('Unable to login')
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password)
+
+    if (!isMatch) {
+        throw new Error('Unable to login')
+    }
+
+    return user
 }
 
-const save = async function(userData) {
-    return await axios.post(`${DB_USER_BASE_URL}`, userData)
-}
+// Hash the plain text password before saving
+userSchema.pre('save', async function(next) {
+    const user = this
 
-const setActive = async function(uid) {
-    return await axios.patch(`${DB_USER_BASE_URL}/${uid}`, { active: true })
-}
+    if (user.isModified('password')) {
+        user.password = await bcrypt.hash(user.password, 8)
+    }
 
-const setInactive = async function(uid) {
-    return await axios.patch(`${DB_USER_BASE_URL}/${uid}`, { active: false })
-}
+    next()
+})
 
+// Delete user groups when user is removed
+userSchema.pre('remove', async function(next) {
+    const user = this
+    await Group.deleteMany({ users: user._id })
+    next()
+})
 
-module.exports = {
-    findAll,
-    findFromId,
-    findFromEmail,
-    remove,
-    update,
-    save,
-    setActive,
-    setInactive
-}
+const User = mongoose.model('User', userSchema)
+
+module.exports = User

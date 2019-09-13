@@ -1,82 +1,107 @@
 const express = require('express')
-const { findFromId, findAll, save, remove, update, setInactive, setActive } = require('../models/group')
+const Group = require('../models/group')
+const auth = require('../middleware/auth')
 const router = new express.Router()
-const GROUP_BASE_ROUTE = '/api/groups'
 
-router.get(GROUP_BASE_ROUTE, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
+
+const GROUP_BASE_ROUTE = '/ /groups'
+
+router.post(GROUP_BASE_ROUTE, auth, async(req, res) => {
+    const group = new Group({
+        ...req.body,
+        owner: req.user._id
+    })
+
     try {
-        const groups = await findAll()
-        res.status(201).send(groups)
+        await group.save()
+        res.status(201).send(group)
     } catch (e) {
-        console.log(e)
         res.status(400).send(e)
     }
 })
 
-router.get(`${GROUP_BASE_ROUTE}/:id`, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
+// GET /api/groups?completed=true
+// GET /api/groups?limit=10&skip=20
+// GET /api/groups?sortBy=createdAt:desc
+router.get(GROUP_BASE_ROUTE, auth, async(req, res) => {
+    const match = {}
+    const sort = {}
+
+    if (req.query.active) {
+        match.active = req.query.active === 'true'
+    }
+
+    if (req.query.sortBy) {
+        const parts = req.query.sortBy.split(':')
+        sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
+    }
+
+    try {
+        await req.user.populate({
+            path: 'groups',
+            match,
+            options: {
+                limit: parseInt(req.query.limit),
+                skip: parseInt(req.query.skip),
+                sort
+            }
+        }).execPopulate()
+        res.send(req.user.groups)
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+router.get(`${GROUP_BASE_ROUTE}/:id`, auth, async(req, res) => {
     const _id = req.params.id
+
     try {
-        const group = await findFromId(_id)
-        res.status(200).send({ group })
+        const group = await Group.findOne({ _id, owner: req.user._id })
+
+        if (!group) {
+            return res.status(404).send()
+        }
+
+        res.send(group)
     } catch (e) {
-        console.log(e)
+        res.status(500).send()
+    }
+})
+
+router.patch(`${GROUP_BASE_ROUTE}/:id`, auth, async(req, res) => {
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['description', 'completed']
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+    if (!isValidOperation) {
+        return res.status(400).send({ error: 'Invalid updates!' })
+    }
+
+    try {
+        const group = await Group.findOne({ _id: req.params.id, owner: req.user._id })
+
+        if (!group) {
+            return res.status(404).send()
+        }
+
+        updates.forEach((update) => group[update] = req.body[update])
+        await group.save()
+        res.send(group)
+    } catch (e) {
         res.status(400).send(e)
     }
 })
 
-router.patch(GROUP_BASE_ROUTE, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
+router.delete(`${GROUP_BASE_ROUTE}/:id`, auth, async(req, res) => {
     try {
-        const group = await update(req.body.group)
-        res.status(200).send(group.data)
+        const group = await Group.findOneAndDelete({ _id: req.params.id, owner: req.user._id })
+
+        if (!group) {
+            res.status(404).send()
+        }
+
+        res.send(group)
     } catch (e) {
-        console.log(e)
-        res.status(400).send(e)
-    }
-})
-
-router.get(`/api/active/groups`, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
-    try {
-        const groups = await findAll()
-        res.status(200).send({ groups: groups.filter(g => g.active) })
-    } catch (e) {
-        res.status(404).send(e)
-    }
-})
-
-router.post(`${GROUP_BASE_ROUTE}`, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
-    try {
-        let group = req.body
-
-        let requiredFields = ['name', 'startTime', 'endTime']
-        requiredFields.map(field => (group[field] === undefined || group[field] === "") && new Error(`Must enter group.${field}`))
-
-        const groups = await findAll()
-        groups.map(existingGroup => existingGroup.name == group.name)
-
-        group.active = true
-        group.users = group.users || []
-        await save(group)
-        res.status(201).send({ group })
-    } catch (e) {
-        console.log(e)
-        res.status(400).send(e)
-    }
-})
-
-router.delete(`${GROUP_BASE_ROUTE}/:id`, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
-    const _id = req.params.id
-    try {
-        const group = await findFromId(_id)
-        await remove(_id)
-        res.status(200).send({ group })
-    } catch (e) {
-        console.log(e)
         res.status(500).send()
     }
 })
