@@ -13,31 +13,19 @@ const groupSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
-    _creator: {
+    creator: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
     },
-    _users: [{
+    users: [{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
     }]
 }, {
-    timestamps: true
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 })
-
-groupSchema.virtual('creator', {
-    ref: 'User',
-    localField: '_creator',
-    foreignField: 'creator'
-})
-
-groupSchema.virtual('users', [{
-    ref: 'User',
-    localField: '_users',
-    foreignField: 'users'
-}])
 
 const Group = mongoose.model('Group', groupSchema)
 

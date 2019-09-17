@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
         type: Buffer
     }
 }, {
-    timestamps: true
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 })
 
 userSchema.methods.toJSON = function() {
@@ -73,15 +73,13 @@ userSchema.statics.findByCredentials = async(email, password) => {
 
 // Hash the plain text password before saving
 userSchema.pre('save', async function(next) {
-    const user = this
-    if (user.isModified('password')) user.password = await bcrypt.hash(user.password, 8)
+    if (user.isModified('password')) this.password = await bcrypt.hash(this.password, 8)
     next()
 })
 
 // Delete user groups when user is removed
 userSchema.pre('remove', async function(next) {
-    const user = this
-    await Group.deleteMany({ creator: user._id })
+    await Group.deleteMany({ creator: this._id })
     next()
 })
 

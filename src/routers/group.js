@@ -1,15 +1,37 @@
 const express = require('express')
 const Group = require('../models/group')
-const auth = require('../middleware/auth')
 const router = new express.Router()
 
+// const auth = require('../middleware/auth')
 
-const GROUP_BASE_ROUTE = '/api/groups'
+/** 
+ * Creates a new group 
+ * @example
+ * POST /api/groups
+ */
+router.post('/', async(req, res) => {
+    const group = new Group({
+        ...req.body,
+        creator: req.user._id
+    })
 
-// GET /api/groups?completed=true
-// GET /api/groups?limit=10&skip=20
-// GET /api/groups?sortBy=createdAt:desc
-router.get(GROUP_BASE_ROUTE, async(req, res) => {
+    try {
+        await group.save()
+        res.status(201).send(group)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+/** 
+ * Gets groups relevant to req.user 
+ * @example
+ * GET /api/groups
+ * GET /api/groups?active=true
+ * GET /api/groups?limit=10&skip=20
+ * GET /api/groups?sortBy=createdAt:desc
+ */
+router.get('/', async(req, res) => {
     const match = {}
     const sort = {}
     if (req.query.active) match.active = req.query.active === 'true'
@@ -34,19 +56,12 @@ router.get(GROUP_BASE_ROUTE, async(req, res) => {
     }
 })
 
-router.get(`/api/active/groups`, async(req, res) => {
-    const _id = req.params.id
-
-    try {
-        const groups = await Group.find({})
-        if (!groups) return res.status(404).send()
-        res.send(groups.filter(group => group.active))
-    } catch (e) {
-        res.status(500).send()
-    }
-})
-
-router.get(`${GROUP_BASE_ROUTE}/:id`, async(req, res) => {
+/** 
+ * Gets specific group
+ * @example
+ * GET /api/groups/:id 
+ */
+router.get('/:id', async(req, res) => {
     const _id = req.params.id
     try {
         const group = await Group.findOne({ _id, creator: req.user._id })
@@ -57,21 +72,12 @@ router.get(`${GROUP_BASE_ROUTE}/:id`, async(req, res) => {
     }
 })
 
-router.post(GROUP_BASE_ROUTE, async(req, res) => {
-    const group = new Group({
-        ...req.body,
-        creator: req.user._id
-    })
-
-    try {
-        await group.save()
-        res.status(201).send(group)
-    } catch (e) {
-        res.status(400).send(e)
-    }
-})
-
-router.patch(`${GROUP_BASE_ROUTE}/:id`, async(req, res) => {
+/**
+ * Updates a specific group
+ * @example
+ * PATCH /api/groups/:id 
+ */
+router.patch('/:id', async(req, res) => {
     const updates = Object.keys(req.body)
 
     // const allowedUpdates = ['description', 'completed']
@@ -88,7 +94,12 @@ router.patch(`${GROUP_BASE_ROUTE}/:id`, async(req, res) => {
     }
 })
 
-router.delete(`${GROUP_BASE_ROUTE}/:id`, async(req, res) => {
+/**
+ * Deletes a specific group 
+ * @example
+ * DELETE /api/groups/:id
+ */
+router.delete('/:id', async(req, res) => {
     try {
         const group = await Group.findOneAndDelete({ _id: req.params.id, creator: req.user._id })
         if (!group) res.status(404).send()

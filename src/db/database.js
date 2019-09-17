@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const uri = `mongodb+srv://lunchmemoAdmin:${process.env.LUNCHMEMO_MONGODB_PASS}@${process.env.MONGODB_SERVER_URI}`
+const uri = `mongodb+srv://${process.env.LUNCHMEMO_MONGODB_USER}:${process.env.LUNCHMEMO_MONGODB_PASS}@${process.env.LUNCHMEMO_MONGODB_URI}`
 mongoose.connect(uri, { useNewUrlParser: true })
 var connection = mongoose.connection;
 
