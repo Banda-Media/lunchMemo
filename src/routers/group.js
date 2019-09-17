@@ -9,7 +9,7 @@ const GROUP_BASE_ROUTE = '/api/groups'
 // GET /api/groups?completed=true
 // GET /api/groups?limit=10&skip=20
 // GET /api/groups?sortBy=createdAt:desc
-router.get(GROUP_BASE_ROUTE, auth, async(req, res) => {
+router.get(GROUP_BASE_ROUTE, async(req, res) => {
     const match = {}
     const sort = {}
     if (req.query.active) match.active = req.query.active === 'true'
@@ -39,11 +39,7 @@ router.get(`/api/active/groups`, async(req, res) => {
 
     try {
         const groups = await Group.find({})
-
-        if (!groups) {
-            return res.status(404).send()
-        }
-
+        if (!groups) return res.status(404).send()
         res.send(groups.filter(group => group.active))
     } catch (e) {
         res.status(500).send()
@@ -52,24 +48,19 @@ router.get(`/api/active/groups`, async(req, res) => {
 
 router.get(`${GROUP_BASE_ROUTE}/:id`, async(req, res) => {
     const _id = req.params.id
-
     try {
-        const group = await Group.findOne({ _id, owner: req.user._id })
-
-        if (!group) {
-            return res.status(404).send()
-        }
-
+        const group = await Group.findOne({ _id, creator: req.user._id })
+        if (!group) return res.status(404).send()
         res.send(group)
     } catch (e) {
         res.status(500).send()
     }
 })
 
-router.post(GROUP_BASE_ROUTE, auth, async(req, res) => {
+router.post(GROUP_BASE_ROUTE, async(req, res) => {
     const group = new Group({
         ...req.body,
-        owner: req.user._id
+        creator: req.user._id
     })
 
     try {
@@ -80,22 +71,15 @@ router.post(GROUP_BASE_ROUTE, auth, async(req, res) => {
     }
 })
 
-router.patch(`${GROUP_BASE_ROUTE}/:id`, auth, async(req, res) => {
+router.patch(`${GROUP_BASE_ROUTE}/:id`, async(req, res) => {
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['description', 'completed']
-    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
-    if (!isValidOperation) {
-        return res.status(400).send({ error: 'Invalid updates!' })
-    }
+    // const allowedUpdates = ['description', 'completed']
+    // if (!updates.every((update) => allowedUpdates.includes(update))) return res.status(400).send({ error: 'Invalid updates!' })
 
     try {
-        const group = await Group.findOne({ _id: req.params.id, owner: req.user._id })
-
-        if (!group) {
-            return res.status(404).send()
-        }
-
+        const group = await Group.findOne({ _id: req.params.id, creator: req.user._id })
+        if (!group) return res.status(404).send()
         updates.forEach((update) => group[update] = req.body[update])
         await group.save()
         res.send(group)
@@ -104,14 +88,10 @@ router.patch(`${GROUP_BASE_ROUTE}/:id`, auth, async(req, res) => {
     }
 })
 
-router.delete(`${GROUP_BASE_ROUTE}/:id`, auth, async(req, res) => {
+router.delete(`${GROUP_BASE_ROUTE}/:id`, async(req, res) => {
     try {
-        const group = await Group.findOneAndDelete({ _id: req.params.id, owner: req.user._id })
-
-        if (!group) {
-            res.status(404).send()
-        }
-
+        const group = await Group.findOneAndDelete({ _id: req.params.id, creator: req.user._id })
+        if (!group) res.status(404).send()
         res.send(group)
     } catch (e) {
         res.status(500).send()

@@ -6,16 +6,19 @@ const groupSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    groupSize: String,
+    startTime: String,
+    endTime: String,
     active: {
         type: Boolean,
         default: true
     },
-    creator: {
+    _creator: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
     },
-    users: [{
+    _users: [{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
@@ -24,17 +27,17 @@ const groupSchema = new mongoose.Schema({
     timestamps: true
 })
 
-// groupSchema.virtual('creator', {
-//     ref: 'User',
-//     localField: '_id',
-//     foreignField: 'creator'
-// })
+groupSchema.virtual('creator', {
+    ref: 'User',
+    localField: '_creator',
+    foreignField: 'creator'
+})
 
-// groupSchema.virtual('users', [{
-//     ref: 'User',
-//     localField: '_id',
-//     foreignField: 'users'
-// }])
+groupSchema.virtual('users', [{
+    ref: 'User',
+    localField: '_users',
+    foreignField: 'users'
+}])
 
 const Group = mongoose.model('Group', groupSchema)
 

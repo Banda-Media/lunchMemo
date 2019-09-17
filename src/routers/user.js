@@ -26,7 +26,6 @@ router.post(`/login`, async(req, res) => {
         const token = await user.generateAuthToken()
         res.send({ user, token })
     } catch (e) {
-        console.log(e)
         res.status(400).send()
     }
 })
@@ -54,11 +53,11 @@ router.post(`/logoutAll`, auth, async(req, res) => {
     }
 })
 
-router.get(`${USER_BASE_ROUTE}/me`, auth, async(req, res) => {
+router.get(`/me`, auth, async(req, res) => {
     res.send(req.user)
 })
 
-router.patch(`${USER_BASE_ROUTE}/me`, auth, async(req, res) => {
+router.patch(`/me`, auth, async(req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name', 'email', 'password']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
@@ -76,7 +75,7 @@ router.patch(`${USER_BASE_ROUTE}/me`, auth, async(req, res) => {
     }
 })
 
-router.delete(`${USER_BASE_ROUTE}/me`, auth, async(req, res) => {
+router.delete(`/me`, auth, async(req, res) => {
     try {
         await req.user.remove()
         sendCancelationEmail(req.user.email, req.user.name)

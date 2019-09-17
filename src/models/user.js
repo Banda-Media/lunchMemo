@@ -81,7 +81,7 @@ userSchema.pre('save', async function(next) {
 // Delete user groups when user is removed
 userSchema.pre('remove', async function(next) {
     const user = this
-    await Group.deleteMany({ users: user._id })
+    await Group.deleteMany({ creator: user._id })
     next()
 })
 
