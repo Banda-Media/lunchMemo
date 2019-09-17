@@ -1,6 +1,5 @@
 const passport = require("passport");
 const ensureLogin = require("connect-ensure-login");
-const flash = require("connect-flash");
 const bcrypt = require("bcrypt");
 const express = require('express')
 const bcryptSalt = 10;
@@ -12,25 +11,25 @@ router.get("/private-page", ensureLogin.ensureLoggedIn(), (req, res) => {
 });
 
 router.get("/signup", (req, res, next) => {
-  res.render("auth/signup");
+    res.render("auth/signup");
 });
 
 router.post("/signup", (req, res, next) => {
-  const username = req.body.username;
-  const password = req.body.password;
-  const salt     = bcrypt.genSaltSync(bcryptSalt);
-  const hashPass = bcrypt.hashSync(password, salt);
+    const username = req.body.username;
+    const password = req.body.password;
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+    const hashPass = bcrypt.hashSync(password, salt);
 
-  User.create({
-    username,
-    password: hashPass
-  })
-  .then(() => {
-    res.redirect("/");
-  })
-  .catch(error => {
-    console.log(error);
-  })
+    User.create({
+            username,
+            password: hashPass
+        })
+        .then(() => {
+            res.redirect("/");
+        })
+        .catch(error => {
+            console.log(error);
+        })
 });
 
 router.get("/login", (req, res, next) => {
