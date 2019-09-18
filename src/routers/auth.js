@@ -28,7 +28,7 @@ router.post("/signup", (req, res, next) => {
             res.redirect("/");
         })
         .catch(error => {
-            console.log(error);
+            res.status(400).send(error);
         })
 });
 

@@ -10,13 +10,11 @@ const router = new express.Router()
  * POST /api/groups
  */
 router.post('/', async(req, res) => {
-    const group = new Group({
-        ...req.body,
-        creator: req.user._id
-    })
-
     try {
-        await group.save()
+        const group = await Group.create({
+            ...req.body,
+            creator: req.user._id
+        })
         res.status(201).send(group)
     } catch (e) {
         res.status(400).send(e)

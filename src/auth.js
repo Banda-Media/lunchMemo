@@ -1,7 +1,5 @@
 const passport = require("passport");
 const app = require('./app')
-const bcrypt = require("bcrypt");
-const flash = require("connect-flash");
 
 passport.serializeUser((user, cb) => {
     cb(null, user._id);
