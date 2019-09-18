@@ -29,7 +29,7 @@ passport.use(new LocalStrategy({ passReqToCallback: true }, (req, username, pass
     });
 }));
 app.use(session({
-    secret: "our-passport-local-strategy-app",
+    secret: process.env.JWT_SECRET,
     resave: true,
     saveUninitialized: true
 }));
@@ -37,10 +37,9 @@ app.use(flash());
 
 
 app.set('views', path.join(__dirname, 'views'));
-app.set('public', path.join(__dirname, '../public'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, '../public')));
-app.use(favicon(path.join('images', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, '../public', 'images', 'favicon.ico')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
