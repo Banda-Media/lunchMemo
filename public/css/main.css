@@ -1,3 +1,7 @@
+body {
+  background-color: black;
+}
+
 #form {
   margin: 30px auto;
   width: 380px; }

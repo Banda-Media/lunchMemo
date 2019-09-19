@@ -11,6 +11,7 @@ const router = new express.Router()
  */
 router.post('/', async(req, res) => {
     try {
+        console.log('----------------- groups router')
         const group = await Group.create({
             ...req.body,
             creator: req.user._id

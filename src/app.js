@@ -67,10 +67,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use((req, res, next) => {
-    res.status(404);
-    res.render('not-found');
-});
+
 app.use((err, req, res, next) => {
     console.error('ERROR', req.method, req.path, err);
     if (!res.headersSent) {
@@ -85,7 +82,7 @@ app.set('view engine', 'hbs');
 hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 
 // Folder Setup
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 app.use(favicon(path.join(__dirname, '../public', 'img', 'icon', 'favicon.ico')));
 
 // Parser Setup
@@ -103,7 +100,7 @@ app.use(require('node-sass-middleware')({
 // Routing Setup
 app.use('/', indexRouter);
 app.use('/', authRouter);
-app.use('/api/group', groupRouter);
+app.use('/api/groups', groupRouter);
 app.use('/api/user', userRouter);
 app.use('/api/restaurant', restaurantRouter);
 
