@@ -1,93 +1,176 @@
 const express = require('express')
-const { findFromId, findAll, findFromEmail, update, save, remove, setInactive, setActive } = require('../models/user')
+const multer = require('multer')
+const sharp = require('sharp')
+const User = require('../models/User')
+
+// const auth = require('../middleware/auth')
+
 const router = new express.Router()
-const USER_BASE_ROUTE = '/api/users'
 
-router.get(USER_BASE_ROUTE, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
+/** 
+ * Creates a new user 
+ * @example
+ * POST /api/user
+ */
+router.post('/', async(req, res) => {
+    const user = new User(req.body)
     try {
-        const users = await findAll()
-        res.status(200).send(users)
+        await user.save()
+        const token = await user.generateAuthToken()
+        res.status(201).send({ user, token })
     } catch (e) {
-        console.log(e)
         res.status(400).send(e)
     }
 })
 
-router.patch(USER_BASE_ROUTE, async(req, res) => {
-    console.log(`${req.method} ${req.path}: ${JSON.stringify(req.body)}`)
-    try {
-        const user = await update(req.body.user)
-        res.status(200).send(user.data)
-    } catch (e) {
-        console.log(e)
-        res.status(400).send(e)
-    }
-})
-
-router.get(`${USER_BASE_ROUTE}/:id`, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
-    const _id = req.params.id
-    try {
-        const user = await findFromId(_id)
-        res.status(200).send({ user })
-    } catch (e) {
-        console.log(e)
-        res.status(400).send(e)
-    }
-})
-
-router.delete(`${USER_BASE_ROUTE}/:id`, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
-    const _id = req.params.id
-    try {
-        const user = await findFromId(_id)
-        await remove(_id)
-        res.status(200).send({ user })
-    } catch (e) {
-        console.log(e)
-        res.status(500).send()
-    }
-})
-
-router.post(USER_BASE_ROUTE, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
-    try {
-        await save(req.body)
-        res.status(201).send({ user: req.body })
-    } catch (e) {
-        console.log(e)
-        res.status(400).send(e)
-    }
-})
-
+/** 
+ * Obtains a user and a JWT token
+ * @example
+ * POST /api/user/login
+ */
 router.post(`/login`, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
     try {
-        let user = await findFromEmail(req.body.email)
-        console.log(`findFromEmail returned: ${user}`)
-        if (user.password !== req.body.password) new Error('Could not login')
-        await setActive(user.id)
-        console.log(`User ${user.id} logged in.`)
-        user = await findFromId(user.id)
-        delete user.password
-        res.status(200).send({ user })
+        const user = await User.findByCredentials(req.body.email, req.body.password)
+        const token = await user.generateAuthToken()
+        res.send({ user, token })
     } catch (e) {
-        console.log(e.message)
+        res.status(400).send()
+    }
+})
+
+/** 
+ * Removes the current JWT token from the user's registered tokens to logout
+ * @example
+ * POST /api/user/logout
+ */
+router.post(`/logout`, async(req, res) => {
+    try {
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token.token !== req.token
+        })
+        await req.user.save()
+
+        res.send()
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+/** 
+ * Removes the all JWT tokens from the user's registered tokens to reset tokens + logout
+ * @example
+ * POST /api/user/logoutAll
+ */
+router.post(`/logoutAll`, async(req, res) => {
+    try {
+        req.user.tokens = []
+        await req.user.save()
+        res.send()
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+/** 
+ * Obtains a copy of the current logged in user model
+ * @example
+ * GET /api/user/me 
+ */
+router.get(`/me`, async(req, res) => {
+    res.send(req.user)
+})
+
+/** 
+ * Edits fields of the currently logged in user
+ * @example
+ * PATCH /api/user/me 
+ */
+router.patch(`/me`, async(req, res) => {
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['name', 'email', 'password']
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+    if (!isValidOperation) return res.status(400).send({ error: 'Invalid updates!' })
+
+    try {
+        updates.forEach((update) => req.user[update] = req.body[update])
+        await req.user.save()
+        res.send(req.user)
+    } catch (e) {
         res.status(400).send(e)
     }
 })
 
-router.post(`/logout`, async(req, res) => {
-    console.log(`${req.method} ${req.originalUrl}: ${JSON.stringify(req.body)}`)
+/** 
+ * Deletes the currently logged in user
+ * @example
+ * DELETE /api/user/me 
+ */
+router.delete(`/me`, async(req, res) => {
     try {
-        await setInactive(req.body.user.id)
-        console.log(`User ${req.body.user} logged out.`)
-        res.status(200).send(req.body.user)
+        await req.user.remove()
+        res.send(req.user)
     } catch (e) {
-        console.log(e)
         res.status(500).send()
     }
 })
+
+/** 
+ * Uploads an avatar file
+ */
+const upload = multer({
+    limits: {
+        fileSize: 1000000
+    },
+    fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+            return cb(new Error('Please upload an image'))
+        }
+
+        cb(undefined, true)
+    }
+})
+
+/** 
+ * Upload an avatar and save to the user document
+ * @example
+ * POST /api/user/me/avatar "avatar.jpg"
+ */
+router.post(`/me/avatar`, upload.single('avatar'), async(req, res) => {
+    const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).png().toBuffer()
+    req.user.avatar = buffer
+    await req.user.save()
+    res.send()
+}, (error, req, res, next) => {
+    res.status(400).send({ error: error.message })
+})
+
+/** 
+ * Delete the current user's avatar
+ * @example
+ * DELETE /api/user/me/avatar
+ */
+router.delete(`/me/avatar`, async(req, res) => {
+    req.user.avatar = undefined
+    await req.user.save()
+    res.send()
+})
+
+/** 
+ * Get a user's avatar and send back the image
+ * @example
+ * GET /api/user/:id/avatar 
+ */
+router.get(`/:id/avatar`, async(req, res) => {
+    try {
+        const user = await User.findById(req.params.id)
+        if (!user || !user.avatar) throw new Error()
+        res.set('Content-Type', 'image/png')
+        res.send(user.avatar)
+    } catch (e) {
+        res.status(404).send()
+    }
+})
+
 
 module.exports = router

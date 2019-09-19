@@ -1,1 +1,0 @@
-var appWidget = $('app-widget')
