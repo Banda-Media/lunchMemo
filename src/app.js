@@ -84,7 +84,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 hbs.registerPartials(path.join(__dirname, 'views', 'partials'));
 
-// Folder setup
+// Folder Setup
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, '../public', 'img', 'icon', 'favicon.ico')));
 
@@ -92,6 +92,13 @@ app.use(favicon(path.join(__dirname, '../public', 'img', 'icon', 'favicon.ico'))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Sass autobuild Setup
+app.use(require('node-sass-middleware')({
+    src: path.join(__dirname, 'public'),
+    dest: path.join(__dirname, 'public'),
+    sourceMap: true
+}));
 
 // Routing Setup
 app.use('/', indexRouter);
