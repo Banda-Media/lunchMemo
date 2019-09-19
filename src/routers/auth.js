@@ -1,51 +1,64 @@
-const passport = require("passport");
-const ensureLogin = require("connect-ensure-login");
-const bcrypt = require("bcrypt");
-const express = require('express')
-const bcryptSalt = 10;
-const User = require("../models/user");
+const express = require('express');
+const bcrypt = require('bcryptjs');
+const User = require('../models/User');
 const router = express.Router();
+const passport = require('passport')
+const auth = require('../middleware/auth')
 
-router.get("/private-page", ensureLogin.ensureLoggedIn(), (req, res) => {
-    res.render("private", { user: req.user });
+router.get('/signup', (req, res, next) => {
+    res.render('users/signup')
 });
 
-router.get("/signup", (req, res, next) => {
-    res.render("auth/signup");
-});
+router.post('/signup', (req, res, next) => {
+    const salt = bcrypt.genSaltSync(10)
+    req.body.password = bcrypt.hashSync(req.body.password, salt)
 
-router.post("/signup", (req, res, next) => {
-    const username = req.body.username;
-    const password = req.body.password;
-    const salt = bcrypt.genSaltSync(bcryptSalt);
-    const hashPass = bcrypt.hashSync(password, salt);
-
-    User.create({
-            username,
-            password: hashPass
+    User.create(req.body)
+        .then(user => {
+            req.session.currentUser = user
+            req.logIn(user, (err) => {
+                if (!err) {
+                    res.status(201).redirect('/')
+                    req.flash('success', 'Registered and logged in!');
+                } else next(err)
+            })
         })
-        .then(() => {
-            res.redirect("/");
-        })
-        .catch(error => {
-            res.status(400).send(error);
-        })
+        .catch(e => res.status(500).send(e))
 });
 
-router.get("/login", (req, res, next) => {
-    res.render("auth/login", { "message": "error" });
+router.get('/login', (req, res, next) => {
+    res.render('users/login')
+})
+
+router.post('/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+        if (err) {
+            req.flash('failure', `${info.message}`);
+            return next(err);
+        }
+        if (!user) {
+            req.flash('failure', `${info.message}`);
+            return res.redirect('/login');
+        }
+        req.logIn(user, function(err) {
+            if (err) {
+                req.flash('failure', `${info.message}`);
+                return next(err);
+            }
+            req.flash('success', 'Successfully logged in!');
+            return res.redirect('/');
+        });
+    })(req, res, next);
 });
 
-router.post("/login", passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login",
-    failureFlash: true,
-    passReqToCallback: true
-}));
-
-router.get("/logout", (req, res) => {
+router.post('/logout', (req, res, next) => {
+    req.flash('success', 'Logged out!');
     req.logout();
-    res.redirect("/login");
-});
+    res.redirect('/');
+})
+
+router.get('/messages', auth, (req, res, next) => {
+    res.render('users/messages', { user: req.user })
+})
 
 module.exports = router

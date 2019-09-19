@@ -1,0 +1,31 @@
+require('dotenv').config();
+const app = require("../src/app");
+const port = process.env.PORT || 3000;
+const http = require('http');
+app.listen(port, () => {
+    console.log(`Express server is up on port ${port}`);
+});
+
+let server = http.createServer(app);
+
+server.on('error', error => {
+    if (error.syscall !== 'listen') { throw error }
+
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(`Port ${process.env.PORT} requires elevated privileges`);
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(`Port ${process.env.PORT} is already in use`);
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+});
+
+server.listen(port, () => {
+    console.log(`Listening on http://localhost:${process.env.PORT}`);
+});
