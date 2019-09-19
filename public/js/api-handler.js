@@ -1,13 +1,9 @@
 class APIHandler {
-    constructor() {
-        this.PORT = env.PORT || 3000
-        this.SERVER = (this.PORT === 3000) ? `http://localhost:${this.PORT}` : "https://lunch-memo.herokuapp.com"
-        console.log(`Creating API Handler using BASEURL: ${this.SERVER}`)
-        this.API_BASE_URL = `${this.SERVER}`;
-    }
+    constructor() {}
 
     getActiveGroups() {
-        return axios.get(`${this.API_BASE_URL}/api/active/groups`)
+        console.log('API Handler attempting to get active groups')
+        return axios.get(`/api/active/groups`, { headers: { Authorization: window.sessionStorage.authStr } })
             .then(res => {
                 return res.data
             })
@@ -18,7 +14,8 @@ class APIHandler {
     }
 
     getUserById(_id) {
-        return axios.get(`${this.API_BASE_URL}/api/users/${_id}`)
+        console.log('API Handler attempting to get user by ID: ', _id)
+        return axios.get(`/api/users/${_id}`, { headers: { Authorization: window.sessionStorage.authStr } })
             .then(res => {
                 return res.data
             })
@@ -30,7 +27,8 @@ class APIHandler {
 
 
     getGroupById(_id) {
-        return axios.get(`${this.API_BASE_URL}/api/groups/${_id}`)
+        console.log('API Handler attempting to get group by ID: ', _id)
+        return axios.get(`/api/groups/${_id}`, { headers: { Authorization: window.sessionStorage.authStr } })
             .then(res => {
                 return res.data
             })
@@ -41,7 +39,8 @@ class APIHandler {
     }
 
     createUser(userData) {
-        return axios.post(`${this.API_BASE_URL}/api/users/`, userData)
+        console.log('API Handler attempting to create user: ', userData)
+        return axios.post(`/api/users/`, { headers: { Authorization: window.sessionStorage.authStr } }, userData)
             .then(res => {
                 console.log('API Handler has successfully created user using data (attempting to login next): ', userData)
                 this.userLogin({ password: userData.password, email: userData.email })
@@ -54,9 +53,12 @@ class APIHandler {
 
     userLogin(userData) {
         console.log('API Handler attempting to login using data: ', userData)
-        return axios.post(`${this.API_BASE_URL}/login/`, userData)
+        return axios.post(`/login/`, userData)
             .then(res => {
                 window.me = res.data.user
+                console.log(res.data.token)
+                window.sessionStorage.accessToken = res.data.token;
+                window.sessionStorage.authStr = 'Bearer '.concat(res.data.token);
                 console.log('Logging in.', userData.email)
                 lmRunApp()
                 return res
@@ -69,7 +71,7 @@ class APIHandler {
     }
 
     deleteGroup(groupIndex) {
-        return axios.delete(`${this.API_BASE_URL}/api/groups/${groupIndex}`)
+        return axios.delete(`/api/groups/${groupIndex}`, { headers: { Authorization: window.sessionStorage.authStr } })
             .then(res => {
                 console.log(`Delete group ${groupIndex}`)
             })
@@ -80,19 +82,20 @@ class APIHandler {
     }
 
     createGroup(groupData) {
-        return axios.post(`${this.API_BASE_URL}/api/groups/`, groupData)
+        console.log('creating group with data', groupData)
+        return axios.post(`/api/groups/`, { headers: { Authorization: window.sessionStorage.authStr } }, groupData)
             .then(res => {
                 console.log(`Created group ${res.data.group}`)
                 return res.data.group
             })
             .catch(e => {
-                console.log(e)
+                console.log('error received: ', e)
                 return e
             })
     }
 
     updateGroup(groupData) {
-        return axios.patch(`${this.API_BASE_URL}/api/groups/`, groupData)
+        return axios.patch(`/api/groups/`, { headers: { Authorization: window.sessionStorage.authStr } }, groupData)
             .then(res => {
                 console.log(`Updated group ${res.data.group}`)
                 return res.data.group

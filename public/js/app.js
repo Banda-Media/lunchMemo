@@ -137,7 +137,7 @@ class LunchGroupRow {
     }
 }
 
-var lmRunApp = function () {
+var lmRunApp = function() {
     currentPage = "app"
     let now = new Date($.now());
     $('#app-widget, header, .container.groups-wrapper').removeClass('hide')
@@ -173,13 +173,15 @@ var lmRunApp = function () {
     });
 
     $("#profile-btn").click(() => {
+        console.log()
         let groupData = {
-            users: [window.me.id],
             name: $('#group-name').val(),
             startTime: $('#timepicker-start').val(),
             endTime: $('#timepicker-end').val(),
             groupSize: $('#group-size-select').val() || 'sm',
-            active: true
+            active: true,
+            creator: window.me,
+            users: [window.me.id]
         }
         lunchmemoAPI.createGroup(groupData)
             .then(res => {
@@ -187,25 +189,24 @@ var lmRunApp = function () {
                 $('#group-name').text('')
             })
             .catch(e => {
-                console.log(e)
                 return e
             })
     })
 
-    appInterval = setInterval(async function () {
-            lunchmemoAPI.getActiveGroups()
-                .then(res => {
-                    createGroupsFromList(res.groups)
-                    $(".site-background").height($(".app-wrap").height() + 130)
-                })
-                .catch(e => {
-                    console.log(e)
-                    return e
-                })
+    // appInterval = setInterval(async function() {
+    //         lunchmemoAPI.getActiveGroups()
+    //             .then(res => {
+    //                 createGroupsFromList(res)
+    //                 $(".site-background").height($(".app-wrap").height() + 130)
+    //             })
+    //             .catch(e => {
+    //                 console.log(e)
+    //                 return e
+    //             })
 
-            Object.values(lunchGroupRows).map(rowGroup => {
-                rowGroup.update()
-            })
-        },
-        1000)
+    //         Object.values(lunchGroupRows).map(rowGroup => {
+    //             rowGroup.update()
+    //         })
+    //     },
+    //     1000)
 }
