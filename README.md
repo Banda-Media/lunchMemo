@@ -15,7 +15,6 @@
         <img alt="deploy" src="https://www.herokucdn.com/deploy/button.png">
     </a>
 </div>
--------------
 
 # Setup
 ### Installation
