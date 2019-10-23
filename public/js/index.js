@@ -33,7 +33,9 @@ $(document).ready(() => {
         }
 
         lunchmemoAPI.userLogin(userData)
-            .then(res => {})
+            .then(res => {
+                $('.container.register-login').addClass('animated fadeOut faster hide')  
+            })
             .catch(err => {
                 console.log(err)
                 return err
