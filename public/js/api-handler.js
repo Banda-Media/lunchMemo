@@ -15,7 +15,7 @@ class APIHandler {
 
     getUserById(_id) {
         console.log('API Handler attempting to get user by ID: ', _id)
-        return axios.get(`/api/users/${_id}`, { headers: { Authorization: window.sessionStorage.authStr } })
+        return axios.get(`/api/user/${_id}`, { headers: { Authorization: window.sessionStorage.authStr } })
             .then(res => {
                 return res.data
             })
@@ -38,12 +38,13 @@ class APIHandler {
             })
     }
 
-    createUser(userData) {
-        console.log('API Handler attempting to create user: ', userData)
-        return axios.post(`/api/users/`, { headers: { Authorization: window.sessionStorage.authStr } }, userData)
+    createUser = (userData) => {
+        console.log(`API Handler attempting to create user: ${JSON.stringify(userData)}`)
+        return axios.post(`/signup`, userData)
             .then(res => {
-                console.log('API Handler has successfully created user using data (attempting to login next): ', userData)
-                this.userLogin({ password: userData.password, email: userData.email })
+                console.log(`API Handler has successfully created user using data: ${JSON.stringify(userData)}`)
+                window.sessionStorage.me = res.data
+                this.userLogin(userData)
             })
             .catch(e => {
                 console.log(e)
@@ -51,22 +52,20 @@ class APIHandler {
             })
     }
 
-    userLogin(userData) {
-        console.log('API Handler attempting to login using data: ', userData)
-        return axios.post(`/login/`, userData)
+    userLogin = (userData) => {
+        return axios.post(`/api/login`, userData)
             .then(res => {
-                window.me = res.data.user
-                console.log(res.data.token)
-                window.sessionStorage.accessToken = res.data.token;
-                window.sessionStorage.authStr = 'Bearer '.concat(res.data.token);
-                console.log('Logging in.', userData.email)
+                window.sessionStorage.me = JSON.stringify(res.data)
+                window.sessionStorage.accessToken = res.data.token
+                window.sessionStorage.authStr = 'Bearer '.concat(res.data.token)
+                console.log(`Logged in user: `, window.sessionStorage.me)
                 lmRunApp()
                 return res
             })
-            .catch(err => {
-                console.log(err)
+            .catch(e => {
+                console.log(e)
                 $(".notice").text("User not found. Please try again.")
-                return err
+                return e
             })
     }
 

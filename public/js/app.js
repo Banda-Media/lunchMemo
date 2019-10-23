@@ -144,7 +144,7 @@ var lmRunApp = function() {
     $('#app-widget').addClass('animated fadeIn faster')
     $('header').addClass('animated fadeInTop')
 
-    $('#username-nav').html(window.me.name)
+    $('#username-nav').html(window.sessionStorage.me.name)
 
     $('.container.register-login').addClass('hide animated fadeOut faster')
 
@@ -173,7 +173,6 @@ var lmRunApp = function() {
     });
 
     $("#profile-btn").click(() => {
-        console.log()
         let groupData = {
             name: $('#group-name').val(),
             startTime: $('#timepicker-start').val(),

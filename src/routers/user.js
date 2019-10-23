@@ -24,60 +24,12 @@ router.post('/', async(req, res) => {
 })
 
 /** 
- * Obtains a user and a JWT token
- * @example
- * POST /api/user/login
- */
-router.post(`/login`, async(req, res) => {
-    try {
-        const user = await User.findByCredentials(req.body.email, req.body.password)
-        const token = await user.generateAuthToken()
-        res.send({ user, token })
-    } catch (e) {
-        res.status(400).send()
-    }
-})
-
-/** 
- * Removes the current JWT token from the user's registered tokens to logout
- * @example
- * POST /api/user/logout
- */
-router.post(`/logout`, async(req, res) => {
-    try {
-        req.user.tokens = req.user.tokens.filter((token) => {
-            return token.token !== req.token
-        })
-        await req.user.save()
-
-        res.send()
-    } catch (e) {
-        res.status(500).send()
-    }
-})
-
-/** 
- * Removes the all JWT tokens from the user's registered tokens to reset tokens + logout
- * @example
- * POST /api/user/logoutAll
- */
-router.post(`/logoutAll`, async(req, res) => {
-    try {
-        req.user.tokens = []
-        await req.user.save()
-        res.send()
-    } catch (e) {
-        res.status(500).send()
-    }
-})
-
-/** 
  * Obtains a copy of the current logged in user model
  * @example
  * GET /api/user/me 
  */
 router.get(`/me`, async(req, res) => {
-    res.send(req.user)
+    res.json({ user: req.user || 'not logged in' })
 })
 
 /** 
