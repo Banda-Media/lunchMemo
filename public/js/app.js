@@ -192,20 +192,20 @@ var lmRunApp = function() {
             })
     })
 
-    // appInterval = setInterval(async function() {
-    //         lunchmemoAPI.getActiveGroups()
-    //             .then(res => {
-    //                 createGroupsFromList(res)
-    //                 $(".site-background").height($(".app-wrap").height() + 130)
-    //             })
-    //             .catch(e => {
-    //                 console.log(e)
-    //                 return e
-    //             })
+    appInterval = setInterval(async function() {
+            lunchmemoAPI.getActiveGroups()
+                .then(res => {
+                    createGroupsFromList(res)
+                    $(".site-background").height($(".app-wrap").height() + 130)
+                })
+                .catch(e => {
+                    console.log(e)
+                    return e
+                })
 
-    //         Object.values(lunchGroupRows).map(rowGroup => {
-    //             rowGroup.update()
-    //         })
-    //     },
-    //     1000)
+            Object.values(lunchGroupRows).map(rowGroup => {
+                rowGroup.update()
+            })
+        },
+        1000)
 }
