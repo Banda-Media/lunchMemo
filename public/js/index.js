@@ -4,7 +4,6 @@ var currentPage = "registration"
 var appInterval = ""
 
 var lmRunRegistration = function() {
-    window.me = {}
     clearInterval(appInterval)
     currentPage = "registration"
     $('.container.app-host-lunch, .container.groups-wrapper, header').addClass('hide')
@@ -34,7 +33,10 @@ $(document).ready(() => {
         }
 
         lunchmemoAPI.userLogin(userData)
-            .then(res => {})
+            .then(res => {
+                if (res.status != 200) throw new Error(res)
+                $('.container.register-login').addClass('animated fadeOut faster hide')  
+            })
             .catch(err => {
                 console.log(err)
                 return err

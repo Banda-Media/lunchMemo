@@ -13,7 +13,6 @@ const RESTAURANT_BASE_ROUTE = '/api/search/'
  */
 router.post(`${RESTAURANT_BASE_ROUTE}/restaurants`, async(req, res) => {
     try {
-        console.log(`POST /API/search/restaurants searchTerms: ${req.body.searchTerms}, locations: ${req.body.location}`)
         let yelpRestaurants = await YelpAPI.getInstance().search(req.body.searchTerms, req.body.location)
         res.status(201).send({ yelpRestaurants })
     } catch (e) {
