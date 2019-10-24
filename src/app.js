@@ -22,7 +22,7 @@ const indexRouter = require('./routers/index');
 const restaurantRouter = require('./routers/restaurant');
 const authRouter = require('./routers/auth');
 
-const User = require('./models/User')
+const User = require('./models/user')
 
 const app = express();
 const app_name = require('../package.json').name;
