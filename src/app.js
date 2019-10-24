@@ -16,7 +16,13 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session')
 
-const User = require('./models/User')
+const userRouter = require('./routers/user');
+const groupRouter = require('./routers/group');
+const indexRouter = require('./routers/index');
+const restaurantRouter = require('./routers/restaurant');
+const authRouter = require('./routers/auth');
+
+const User = require('./models/user')
 
 const app = express();
 const app_name = require('../package.json').name;

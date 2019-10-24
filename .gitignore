@@ -63,3 +63,7 @@ typings/
 
 # ignoring future react conversion folders
 /client/
+*.zip
+/tests/
+/.ebextensions/
+.npmrc
