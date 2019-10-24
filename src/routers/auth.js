@@ -10,43 +10,46 @@ router.get('/signup', (req, res, next) => {
 });
 
 router.post('/signup', (req, res, next) => {
-    const salt = bcrypt.genSaltSync(10)
-    req.body.password = bcrypt.hashSync(req.body.password, salt)
+    const userData = {
+        password: User.generateHash(req.body.password),
+        email: req.body.email,
+        name: req.body.name
+    }
 
-    User.create(req.body)
+    User.create(userData)
         .then(user => {
             req.session.currentUser = user
             req.logIn(user, (err) => {
-                if (!err) {
-                    res.status(201).redirect('/')
-                    req.flash('success', 'Registered and logged in!');
-                } else next(err)
+                if (!err) req.flash('success', 'Registered and logged in!');
+                else next(err)
             })
+            res.status(201).json(user)
         })
-        .catch(e => res.status(500).send(e))
+        .catch(e => {
+            console.log(e)
+            res.status(500).send(e)
+        })
 });
 
-router.get('/login', (req, res, next) => {
-    res.render('users/login')
-})
-
-router.post('/login', function(req, res, next) {
+router.post('/api/login', function(req, res, next) {
     passport.authenticate('local', function(err, user, info) {
         if (err) {
             req.flash('failure', `${info.message}`);
-            return next(err);
+            return res.status(500).json(info.message);
         }
+        
         if (!user) {
-            req.flash('failure', `${info.message}`);
-            return res.redirect('/login');
+            req.flash('failure', `User credentials not found.`);
+            return res.status(404).send(`User credentials not found. ${info.message}`);
         }
+
         req.logIn(user, function(err) {
             if (err) {
                 req.flash('failure', `${info.message}`);
                 return next(err);
             }
             req.flash('success', 'Successfully logged in!');
-            return res.redirect('/');
+            return res.status(200).json(user);
         });
     })(req, res, next);
 });

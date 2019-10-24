@@ -3,6 +3,7 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Group = require('./group')
+const salt = bcrypt.genSaltSync(10)
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -42,6 +43,14 @@ const userSchema = new mongoose.Schema({
     timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 })
 
+userSchema.statics.generateHash = function(password) {
+    return bcrypt.hashSync(password, salt, null);
+};
+
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};
+
 userSchema.methods.toJSON = function() {
     const user = this
     const userObject = user.toObject()
@@ -73,14 +82,19 @@ userSchema.statics.findByCredentials = async(email, password) => {
 
 // Hash the plain text password before saving
 userSchema.pre('save', async function(next) {
-    if (user.isModified('password')) this.password = await bcrypt.hash(this.password, 8)
+    if (this.isModified('password')) this.password = await bcrypt.hash(this.password, 8)
     next()
 })
 
 // Delete user groups when user is removed
 userSchema.pre('remove', async function(next) {
-    // TODO remove the user from all groups they are a part of as well as delete groups they own.
     await Group.deleteMany({ creator: this._id })
+    let groups = await Group.find({ "users.id": this._id })
+    groups.map(group => {
+        group.users.pop(this._id)
+        group.save()
+    })
+
     next()
 })
 

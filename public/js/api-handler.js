@@ -2,8 +2,7 @@ class APIHandler {
     constructor() {}
 
     getActiveGroups() {
-        console.log('API Handler attempting to get active groups')
-        return axios.get(`/api/active/groups`, { headers: { Authorization: window.sessionStorage.authStr } })
+        return axios.get(`/api/groups?active=true`, { headers: { Authorization: window.sessionStorage.authStr } })
             .then(res => {
                 return res.data
             })
@@ -14,8 +13,7 @@ class APIHandler {
     }
 
     getUserById(_id) {
-        console.log('API Handler attempting to get user by ID: ', _id)
-        return axios.get(`/api/users/${_id}`, { headers: { Authorization: window.sessionStorage.authStr } })
+        return axios.get(`/api/user/${_id}`, { headers: { Authorization: window.sessionStorage.authStr } })
             .then(res => {
                 return res.data
             })
@@ -25,9 +23,7 @@ class APIHandler {
             })
     }
 
-
     getGroupById(_id) {
-        console.log('API Handler attempting to get group by ID: ', _id)
         return axios.get(`/api/groups/${_id}`, { headers: { Authorization: window.sessionStorage.authStr } })
             .then(res => {
                 return res.data
@@ -38,12 +34,11 @@ class APIHandler {
             })
     }
 
-    createUser(userData) {
-        console.log('API Handler attempting to create user: ', userData)
-        return axios.post(`/api/users/`, { headers: { Authorization: window.sessionStorage.authStr } }, userData)
+    createUser = (userData) => {
+        return axios.post(`/signup`, userData)
             .then(res => {
-                console.log('API Handler has successfully created user using data (attempting to login next): ', userData)
-                this.userLogin({ password: userData.password, email: userData.email })
+                window.sessionStorage.me = res.data
+                this.userLogin(userData)
             })
             .catch(e => {
                 console.log(e)
@@ -51,29 +46,27 @@ class APIHandler {
             })
     }
 
-    userLogin(userData) {
-        console.log('API Handler attempting to login using data: ', userData)
-        return axios.post(`/login/`, userData)
+    userLogin = (userData) => {
+        return axios.post(`/api/login`, userData)
             .then(res => {
-                window.me = res.data.user
-                console.log(res.data.token)
-                window.sessionStorage.accessToken = res.data.token;
-                window.sessionStorage.authStr = 'Bearer '.concat(res.data.token);
-                console.log('Logging in.', userData.email)
+                window.sessionStorage.me = JSON.stringify(res.data)
+                window.sessionStorage.accessToken = res.data.token
+                window.sessionStorage.authStr = 'Bearer '.concat(res.data.token)
+                console.log(`Logged in user: `, window.sessionStorage.me)
                 lmRunApp()
                 return res
             })
-            .catch(err => {
-                console.log(err)
+            .catch(e => {
                 $(".notice").text("User not found. Please try again.")
-                return err
+                setTimeout(() => $(".notice").text(""), 3000)
+                return e
             })
     }
 
     deleteGroup(groupIndex) {
         return axios.delete(`/api/groups/${groupIndex}`, { headers: { Authorization: window.sessionStorage.authStr } })
             .then(res => {
-                console.log(`Delete group ${groupIndex}`)
+                console.log(`Deleted group ${groupIndex}`)
             })
             .catch(e => {
                 console.log(e)
@@ -82,11 +75,9 @@ class APIHandler {
     }
 
     createGroup(groupData) {
-        console.log('creating group with data', groupData)
-        return axios.post(`/api/groups/`, { headers: { Authorization: window.sessionStorage.authStr } }, groupData)
+        return axios.post(`/api/groups/`, groupData)
             .then(res => {
-                console.log(`Created group ${res.data.group}`)
-                return res.data.group
+                return res.data
             })
             .catch(e => {
                 console.log('error received: ', e)
@@ -95,9 +86,9 @@ class APIHandler {
     }
 
     updateGroup(groupData) {
-        return axios.patch(`/api/groups/`, { headers: { Authorization: window.sessionStorage.authStr } }, groupData)
+        const { group } = groupData
+        return axios.patch(`/api/groups/${group._id}`, group)
             .then(res => {
-                console.log(`Updated group ${res.data.group}`)
                 return res.data.group
             })
             .catch(e => {

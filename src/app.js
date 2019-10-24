@@ -30,27 +30,31 @@ app.locals.title = app_name;
 
 // Auth Setup
 app.use(session({
-    secret: process.env.HASH_SECRET,
+    secret: process.env.HASH_SECRET || 'insecure-secret',
     saveUninitialized: true,
     resave: true,
 }));
-app.use(passport.initialize())
-app.use(passport.session())
 passport.serializeUser((user, cb) => cb(null, user._id));
+
 passport.deserializeUser((id, cb) => {
     User.findById(id, (err, user) => {
         if (err) { return cb(err); }
         cb(null, user);
     });
 });
-passport.use(new LocalStrategy((username, password, next) => {
-    User.findOne({ username }, (err, user) => {
+
+passport.use(new LocalStrategy({usernameField: 'email'}, (username, password, next) => {
+    User.findOne({ email: username }, (err, user) => {
         if (err) return next(err);
         if (!user) return next(null, false, { message: "Incorrect username" })
-        if (!bcrypt.compareSync(password, user.password)) return next(null, false, { message: "Incorrect password" });
+        if (user.validPassword(password)) return next(null, false, { message: "Incorrect password" });
         return next(null, user);
     });
 }));
+app.use(passport.initialize())
+app.use(passport.session())
+
+
 app.use(flash());
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
@@ -67,14 +71,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-app.use((err, req, res, next) => {
-    console.error('ERROR', req.method, req.path, err);
-    if (!res.headersSent) {
-        res.status(500);
-        res.render('error');
-    }
-});
 
 // Handlebars Setup
 app.set('views', path.join(__dirname, 'views'));
@@ -98,10 +94,10 @@ app.use(require('node-sass-middleware')({
 }));
 
 // Routing Setup
-app.use('/', indexRouter);
-app.use('/', authRouter);
-app.use('/api/groups', groupRouter);
-app.use('/api/user', userRouter);
-app.use('/api/restaurant', restaurantRouter);
+app.use('/', require('./routers/index'));
+app.use('/', require('./routers/auth'));
+app.use('/api/groups', require('./routers/group'));
+app.use('/api/user', require('./routers/user'));
+app.use('/api/restaurant', require('./routers/restaurant'));
 
 module.exports = app;

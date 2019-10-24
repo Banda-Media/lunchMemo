@@ -1,8 +1,7 @@
 const express = require('express')
 const Group = require('../models/group')
 const router = new express.Router()
-
-// const auth = require('../middleware/auth')
+    // const auth = require('../middleware/auth')
 
 /** 
  * Creates a new group 
@@ -11,13 +10,20 @@ const router = new express.Router()
  */
 router.post('/', async(req, res) => {
     try {
-        console.log('----------------- groups router')
-        const group = await Group.create({
-            ...req.body,
-            creator: req.user._id
-        })
-        res.status(201).send(group)
+        const groupData = {
+            active: req.body.active,
+            creator: req.body.creator,
+            endTime: req.body.endTime,
+            groupSize: req.body.groupSize,
+            name: req.body.name,
+            startTime: req.body.startTime,
+            users: req.body.users
+        }
+        const group = await new Group(groupData)
+        await group.save()
+        res.status(201).json(group)
     } catch (e) {
+        console.log(e)
         res.status(400).send(e)
     }
 })
@@ -38,18 +44,17 @@ router.get('/', async(req, res) => {
         const parts = req.query.sortBy.split(':')
         sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
     }
+    const limit = req.query.limit || 50
+    const skip = req.query.skip || 0
 
     try {
-        await req.user.populate({
-            path: 'groups',
-            match,
-            options: {
-                limit: parseInt(req.query.limit),
-                skip: parseInt(req.query.skip),
-                sort
-            }
-        }).execPopulate()
-        res.send(req.user.groups)
+        const groups = await Group
+            .find(match)
+            .limit(limit)
+            .skip(skip)
+            .sort(sort)
+            .populate('users creator')
+        res.send(groups)
     } catch (e) {
         res.status(500).send()
     }
@@ -63,7 +68,9 @@ router.get('/', async(req, res) => {
 router.get('/:id', async(req, res) => {
     const _id = req.params.id
     try {
-        const group = await Group.findOne({ _id, creator: req.user._id })
+        const group = await Group
+            .findById(_id)
+            .populate('creator')
         if (!group) return res.status(404).send()
         res.send(group)
     } catch (e) {
@@ -78,12 +85,9 @@ router.get('/:id', async(req, res) => {
  */
 router.patch('/:id', async(req, res) => {
     const updates = Object.keys(req.body)
-
-    // const allowedUpdates = ['description', 'completed']
-    // if (!updates.every((update) => allowedUpdates.includes(update))) return res.status(400).send({ error: 'Invalid updates!' })
-
+    const _id = req.params.id
     try {
-        const group = await Group.findOne({ _id: req.params.id, creator: req.user._id })
+        const group = await Group.findById(_id)
         if (!group) return res.status(404).send()
         updates.forEach((update) => group[update] = req.body[update])
         await group.save()

@@ -3,18 +3,37 @@ const mongoose = require('mongoose')
 var uri = "mongodb://localhost/lunchmemo"
 if (process.env.LUNCHMEMO_MONGODB_USER) uri = `mongodb+srv://${process.env.LUNCHMEMO_MONGODB_USER}:${process.env.LUNCHMEMO_MONGODB_PASS}@${process.env.LUNCHMEMO_MONGODB_URI}`
 
-mongoose.connect(uri, { useNewUrlParser: true })
-mongoose.set('useCreateIndex', true)
-var connection = mongoose.connection;
+mongoose.connect(uri, {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+        useCreateIndex: true
+    })
+    .then(x => {
+        console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+        return x
+    })
+    .catch(err => {
+        console.error('Error connecting to mongo', err)
+    })
 
-connection.on('connected', () => console.log('Connected to MongoDB database'));
-connection.on('disconnected', () => console.log('Disconnected from MongoDB database'));
+mongoose.connection.on('connected', function() {
+    console.log(`Mongoose default connection is open to ${uri}`);
+});
 
-connection.on('SIGINT', () => {
-    connection.close(() => {
-        console.log('Lost connection to MongoDB database due to process termination');
-        process.exit();
+mongoose.connection.on('error', function(err) {
+    console.log(`Mongoose default connection has occurred ${err} error`);
+});
+
+mongoose.connection.on('disconnected', function() {
+    console.log(`Mongoose default connection is disconnected from ${uri}`);
+});
+
+process.on('SIGINT', function() {
+    mongoose.connection.close(function() {
+        console.log(`Mongoose default connection to ${uri} is disconnected due to application termination`);
+        process.exit(0)
     });
 });
 
+var connection = mongoose.connection;
 module.exports = connection;
