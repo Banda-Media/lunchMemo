@@ -70,7 +70,7 @@ router.get('/:id', async(req, res) => {
     try {
         const group = await Group
             .findById(_id)
-            .populate('creator')
+            .populate('users creator')
         if (!group) return res.status(404).send()
         res.send(group)
     } catch (e) {
