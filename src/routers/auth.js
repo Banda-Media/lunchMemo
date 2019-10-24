@@ -48,7 +48,7 @@ router.post('/api/login', function(req, res, next) {
                 return next(err);
             }
             req.flash('success', 'Successfully logged in!');
-            return res.json(user);
+            return res.status(200).json(user);
         });
     })(req, res, next);
 });

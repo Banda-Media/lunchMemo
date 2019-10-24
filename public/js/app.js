@@ -65,28 +65,26 @@ class LunchGroupRow {
     }
 
     btnJoinLeavePressed() {
-        if (this.groupObj.users.includes(window.me.id)) {
-            this.groupObj.users.splice(this.groupObj.users.indexOf(window.me.id), 1)
+        if (this.groupObj.users.includes(JSON.parse(window.sessionStorage.me)._id)) {
+            this.groupObj.users.splice(this.groupObj.users.indexOf(JSON.parse(window.sessionStorage.me)._id), 1)
             this.joinLeaveBtn.className = "btn btn-join"
             this.joinLeaveBtn.innerHTML = 'Join'
         } else if (this.groupObj.maxSize == this.groupObj.users.length) {
             new Error('Maximum group size reached...sorry!')
         } else {
-            this.groupObj.users.push(window.me.id)
+            this.groupObj.users.push(JSON.parse(window.sessionStorage.me)._id)
             this.joinLeaveBtn.className = "btn btn-leave"
             this.joinLeaveBtn.innerHTML = 'Leave'
         }
         if (!this.groupObj.users.length) {
             this.remove()
         }
-        lunchmemoAPI.updateGroup({
-            group: this.groupObj
-        })
+        lunchmemoAPI.updateGroup({ group: this.groupObj })
     }
 
     remove() {
         try {
-            lunchmemoAPI.deleteGroup(this.groupObj.id)
+            lunchmemoAPI.deleteGroup(this.groupObj._id)
         } finally {
             delete lunchGroupRows[this.groupObj.name]
             this.div.remove()
@@ -118,11 +116,11 @@ class LunchGroupRow {
 
     async update() {
         try {
-            this.groupObj = (await lunchmemoAPI.getGroupById(this.groupObj.id)).group
+            this.groupObj = await lunchmemoAPI.getGroupById(this.groupObj._id)
             this.hostnameH3.innerHTML = this.groupObj.name
             this.startTimeDiv.innerHTML = `<span>Start:</span>${this.groupObj.startTime}`
             this.endTimeDiv.innerHTML = `<span>End:</span>${this.groupObj.endTime}`
-            if (this.groupObj.users.includes(window.me.id)) {
+            if (this.groupObj.users.includes(JSON.parse(window.sessionStorage.me)._id)) {
                 this.joinLeaveBtn.className = "btn btn-leave"
                 this.joinLeaveBtn.innerHTML = 'Leave'
             } else {
@@ -144,7 +142,7 @@ var lmRunApp = function() {
     $('#app-widget').addClass('animated fadeIn faster')
     $('header').addClass('animated fadeInTop')
 
-    $('#username-nav').html(window.sessionStorage.me.name)
+    $('#username-nav').html(JSON.parse(window.sessionStorage.me).name)
 
     $('.container.register-login').addClass('hide animated fadeOut faster')
 
@@ -179,12 +177,11 @@ var lmRunApp = function() {
             endTime: $('#timepicker-end').val(),
             groupSize: $('#group-size-select').val() || 'sm',
             active: true,
-            creator: window.me,
-            users: [window.me.id]
+            creator: JSON.parse(window.sessionStorage.me)._id,
+            users: [JSON.parse(window.sessionStorage.me)._id]
         }
         lunchmemoAPI.createGroup(groupData)
             .then(res => {
-                console.log('created group.')
                 $('#group-name').text('')
             })
             .catch(e => {
@@ -195,7 +192,7 @@ var lmRunApp = function() {
     appInterval = setInterval(async function() {
             lunchmemoAPI.getActiveGroups()
                 .then(res => {
-                    createGroupsFromList(res)
+                    createGroupsFromList(res || [])
                     $(".site-background").height($(".app-wrap").height() + 130)
                 })
                 .catch(e => {

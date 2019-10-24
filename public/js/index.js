@@ -34,6 +34,7 @@ $(document).ready(() => {
 
         lunchmemoAPI.userLogin(userData)
             .then(res => {
+                if (res.status != 200) throw new Error(res)
                 $('.container.register-login').addClass('animated fadeOut faster hide')  
             })
             .catch(err => {
