@@ -6,21 +6,13 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const favicon = require('serve-favicon');
 const hbs = require('hbs');
-const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
-const bcrypt = require('bcryptjs')
 
 const flash = require('express-flash');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session')
-
-const userRouter = require('./routers/user');
-const groupRouter = require('./routers/group');
-const indexRouter = require('./routers/index');
-const restaurantRouter = require('./routers/restaurant');
-const authRouter = require('./routers/auth');
 
 const User = require('./models/user')
 
@@ -86,7 +78,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Sass autobuild Setup
+// Sass auto build Setup
 app.use(require('node-sass-middleware')({
     src: path.join(__dirname, 'public'),
     dest: path.join(__dirname, 'public'),
