@@ -12,6 +12,7 @@
         "dev": "nodemon ./bin/www",
         "sass:compile": "node-sass --include-path sass ./public/css/scss/main.scss ./public/css/main.css"
     },
+    "proxy": "http://localhost:3000",
     "author": "Bobby Wang & Andres Weber",
     "license": "ISC",
     "dependencies": {
@@ -24,7 +25,7 @@
         "express": "^4.17.1",
         "express-flash": "0.0.2",
         "express-session": "^1.16.2",
-        "hbs": "^4.0.4",
+        "hbs": "^4.0.6",
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.6.11",
         "morgan": "^1.9.1",
