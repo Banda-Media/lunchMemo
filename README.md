@@ -1,7 +1,7 @@
 <div align=center>
     <h1 align=center>
         <img align=center
-            src="https://github.com/bobbypwang/LunchMemo/blob/dev/public/img/icon/android-chrome-192x192.png?raw=true"
+            src="https://raw.githubusercontent.com/banda-media/LunchMemo/master/public/img/icon/android-chrome-192x192.png"
             alt="LunchMemo logo">
         <br>
         LunchMemo
