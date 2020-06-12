@@ -37,7 +37,7 @@
         "passport-local": "^1.0.0",
         "serve-favicon": "^2.5.0",
         "sharp": "^0.23.0",
-        "validator": "^11.1.0",
+        "validator": "^13.1.1",
         "yelp-fusion": "^3.0.0"
     },
     "devDependencies": {
