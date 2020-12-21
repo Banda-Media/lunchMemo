@@ -20,27 +20,27 @@
         "bcryptjs": "^2.4.3",
         "connect-ensure-login": "^0.1.1",
         "connect-flash": "^0.1.1",
-        "cookie-parser": "^1.4.4",
-        "dotenv": "^8.1.0",
+        "cookie-parser": "^1.4.5",
+        "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "express-flash": "0.0.2",
-        "express-session": "^1.16.2",
-        "hbs": "^4.0.6",
+        "express-session": "^1.17.1",
+        "hbs": "^4.1.1",
         "heroku-ssl-redirect": "0.0.4",
         "jsonwebtoken": "^8.5.1",
-        "mongoose": "^5.7.6",
+        "mongoose": "^5.11.8",
         "morgan": "^1.9.1",
         "multer": "^1.4.2",
         "node-sass-middleware": "^0.11.0",
         "npm-sass": "^2.3.0",
-        "passport": "^0.4.0",
+        "passport": "^0.4.1",
         "passport-local": "^1.0.0",
         "serve-favicon": "^2.5.0",
-        "sharp": "^0.23.0",
-        "validator": "^11.1.0",
+        "sharp": "^0.26.3",
+        "validator": "^13.5.2",
         "yelp-fusion": "^3.0.0"
     },
     "devDependencies": {
-        "nodemon": "^1.19.1"
+        "nodemon": "^2.0.6"
     }
 }
