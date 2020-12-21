@@ -28,7 +28,8 @@ module.exports = {
   rules: {
     'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Use our .prettierrc file as source
     'react/react-in-jsx-scope': 'off', // React is in the global scope with Next.js so we can ignore.
-    'react/prop-types': 'off'
+    'react/prop-types': 'off',
+    'no-control-regex': 'off'
   },
   plugins: ['import', 'simple-import-sort']
 };
