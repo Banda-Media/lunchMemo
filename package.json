@@ -36,7 +36,7 @@
         "passport": "^0.4.1",
         "passport-local": "^1.0.0",
         "serve-favicon": "^2.5.0",
-        "sharp": "^0.26.3",
+        "sharp": "^0.27.0",
         "validator": "^13.5.2",
         "yelp-fusion": "^3.0.0"
     },
