@@ -1,0 +1,177 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    line-height: 1.4;
+    color: #333333;
+    font-family: $body-font;
+    font-size: 16px;
+}
+
+.site-background {
+    background-image: url(../img/lunchmemo-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    z-index: -1;
+
+    &:before {
+        content: "";
+        display: block;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        min-height: 100vh;
+        background-color: rgba(0,0,0,.1);
+    }
+}
+
+
+/**
+ * Text Styles
+ */
+
+ h1, h2, h3, h4, h5 {
+     font-family: $header-font;
+ }
+
+
+a {
+    transition: all .4s ease-in-out;
+
+    &:link, &:visited {
+        text-decoration: none;
+    }
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 3px;
+    color: $gray;
+}
+
+input {
+    width: 100%;
+    margin-bottom: 7px;
+    border: 1px solid $lightgray;
+    padding: 12px;
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+    padding: 12px 2rem;
+    background: #7C5CBF;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+
+    &:hover {
+        background: #6b47b8;
+    }
+
+    &:disabled {
+        cursor: default;
+        background: #7c5cbf94;
+    }
+}
+
+.btn-red {
+    background-color: #d60000;
+
+    &:hover {
+        background-color: #ca1818;
+    }
+}
+
+ul {
+    list-style-type: none;
+}
+
+.hide {
+    display: none;
+    opacity: 0;
+}
+
+header {
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1.4rem 1.6rem;
+    box-shadow: 0px 2px 0px rgba(22, 14, 39, 0.1);
+    background-color: #fff;
+
+    nav {
+        text-align: right;
+        
+        .fa-bars {
+            line-height: 50px;
+        }
+
+        .fas {
+            color: $yellow;
+            font-size: 1.2rem;
+        }
+    }
+}
+
+.logo {
+    margin: 0;
+    color: $darkgray;
+    text-transform: lowercase;
+    font-weight: 300;
+
+    span.lunch {
+        z-index: 1;
+        position: relative;
+        float: left;
+        display: block;
+        transform: rotate(-2deg);
+        padding:5px 12px 0 16px;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 3px;
+        
+
+        &:after {
+            content: "";
+            z-index: -1;
+            position: absolute;
+            top: 2px;
+            left: 0px;
+            width: 100%;
+            height: 46px;
+            box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
+            border-top: 1px solid #eab102;
+            border-right: 1px solid $logoyellow;
+            border-left: 1px solid $logoyellow;
+            background-color: $logoyellow;
+        }
+    }
+
+    span.memo {
+        z-index: 1;
+        position: absolute;
+        margin-top: 7px;
+        margin-left: -11px;
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+    }
+}
