@@ -11,7 +11,7 @@ jobs:
         node-version: 12.x
     - name: Install dependencies
       run: yarn install
-    - name: Build
-      run: yarn build
+    - name: Build NextJS -> Static
+      run: yarn export
     - name: Ping FeaturePeek
       run: bash <(curl -s https://peek.run/ci)

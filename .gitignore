@@ -82,6 +82,8 @@ typings/
 
 # next.js build output
 .next
+out
+
 
 # ignoring future react conversion folders
 /client/
