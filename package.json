@@ -6,7 +6,7 @@
     "dev": "yarn watch:css && next dev",
     "build": "yarn watch:css && next build",
     "start": "yarn watch:css && next start",
-    "export": "yarn watch:css && next export",
+    "export": "yarn watch:css && yarn build && next export",
     "lint": "eslint --fix .",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "watch:css": "postcss styles/tailwind.css -o styles/main.css"
