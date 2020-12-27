@@ -19,7 +19,6 @@
     "react-dom": "17.0.1"
   },
   "devDependencies": {
-    "@next/plugin-featurepeek": "featurepeek/next-plugin-featurepeek",
     "autoprefixer": "^10.1.0",
     "eslint": "^7.16.0",
     "eslint-config-prettier": "^7.1.0",

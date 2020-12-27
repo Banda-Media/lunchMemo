@@ -394,10 +394,6 @@
   resolved "https://registry.yarnpkg.com/@next/env/-/env-10.0.3.tgz#ef1077d78bf500855576f83090d6fb1ec96272f8"
   integrity sha512-xjJt2VXoSxAydskmt77nJuEtRL782E4ltaj5JtMzJ8YkNUMMu3d5ktpCR+Q3INKHF/RY6zHJ9QzyE3/s1ikbNg==
 
-"@next/plugin-featurepeek@featurepeek/next-plugin-featurepeek":
-  version "0.1.6"
-  resolved "https://codeload.github.com/featurepeek/next-plugin-featurepeek/tar.gz/2c48878c1f079e5e8555f8fa9158d730d0bc7bc5"
-
 "@next/polyfill-module@10.0.3":
   version "10.0.3"
   resolved "https://registry.yarnpkg.com/@next/polyfill-module/-/polyfill-module-10.0.3.tgz#507e99f6dd351dc4a6e45b63dbd397087ece459a"
