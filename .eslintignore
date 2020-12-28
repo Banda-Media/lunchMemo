@@ -1,2 +1,5 @@
 node_modules
 ARCHIVE
+.*.js
+tailwind.js
+*config.js

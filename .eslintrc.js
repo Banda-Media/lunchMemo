@@ -7,9 +7,15 @@ module.exports = {
       jsx: true // Enable JSX since we're using React
     }
   },
+  parser: '@typescript-eslint/parser',
   settings: {
     react: {
       version: 'detect' // Automatically detect the react version
+    },
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
+      }
     }
   },
   env: {
@@ -18,6 +24,8 @@ module.exports = {
     node: true // Enables Node.js global variables and Node.js scoping.
   },
   extends: [
+    'plugin:@typescript-eslint/recommended',
+    'prettier/@typescript-eslint',
     'plugin:prettier/recommended', // Make this the last element so prettier config overrides other formatting rules
     'eslint:recommended',
     'plugin:react/recommended',
@@ -28,7 +36,8 @@ module.exports = {
   rules: {
     'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Use our .prettierrc file as source
     'react/react-in-jsx-scope': 'off', // React is in the global scope with Next.js so we can ignore.
-    'react/prop-types': 'off'
+    'react/prop-types': 'off',
+    'no-control-regex': 'off'
   },
   plugins: ['import', 'simple-import-sort']
 };

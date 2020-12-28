@@ -1,8 +1,8 @@
-name: Build and ping FeaturePeek
-on: push
+name: CI
+on: [push]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    name: Build, lint, and test on Node ${{ matrix.node }} and ${{ matrix.os }}
     env:
       FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       NEXT_PUBLIC_LM_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_LM_FIREBASE_API_KEY}}
@@ -13,15 +13,29 @@ jobs:
       NEXT_PUBLIC_LM_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.NEXT_PUBLIC_LM_FIREBASE_MESSAGING_SENDER_ID}}
       NEXT_PUBLIC_LM_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_LM_FIREBASE_APP_ID}}
       NEXT_PUBLIC_LM_FIREBASE_MEASUREMENT_ID: ${{ secrets.NEXT_PUBLIC_LM_FIREBASE_MEASUREMENT_ID}}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node: ['12.x', '14.x']
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Use node 12.x
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Use Node ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
-      - name: Install dependencies
-        run: yarn install
-      - name: Build NextJS -> Static
-        run: yarn export
-      - name: Ping FeaturePeek
-        run: bash <(curl -s https://peek.run/ci)
+          node-version: ${{ matrix.node }}
+
+      - name: Install deps and build (with cache)
+        uses: bahmutov/npm-install@v1
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Test
+        run: yarn test --ci --coverage --maxWorkers=2
+
+      - name: Build
+        run: yarn build
