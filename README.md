@@ -22,6 +22,15 @@
     </div>
 </div>
 
+# Screenshots
+
+<div align=center>
+    <img src="./docs/screenshots/Home-Login.png" width="500">
+    <img src="./docs/screenshots/Home-Register.png" width="500">
+    <img src="./docs/screenshots/Profile-Group.png" width="500">
+    <img src="./docs/screenshots/Profile-Group-Added.png" width="500">
+</div>
+
 # Setup
 
 ### Installation
