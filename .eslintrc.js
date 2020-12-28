@@ -10,6 +10,11 @@ module.exports = {
   settings: {
     react: {
       version: 'detect' // Automatically detect the react version
+    },
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx']
+      }
     }
   },
   env: {
