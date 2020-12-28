@@ -34,10 +34,13 @@ module.exports = {
     'plugin:import/warnings'
   ],
   rules: {
-    'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Use our .prettierrc file as source
     'react/react-in-jsx-scope': 'off', // React is in the global scope with Next.js so we can ignore.
+    'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Use our .prettierrc file as source
     'react/prop-types': 'off',
     'no-control-regex': 'off'
   },
-  plugins: ['import', 'simple-import-sort']
+  plugins: ['import', 'simple-import-sort'],
+  globals: {
+    React: 'writable'
+  }
 };

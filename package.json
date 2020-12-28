@@ -6,8 +6,8 @@
     "dev": "yarn watch:css && next dev",
     "prebuild": "printenv | sort",
     "build": "yarn watch:css && next build",
+    "postbuild": "next export",
     "start": "yarn watch:css && next start",
-    "export": "yarn watch:css && yarn build && next export",
     "lint": "eslint --fix .",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "watch:css": "postcss styles/tailwind.css -o styles/main.css",
@@ -27,7 +27,8 @@
   ],
   "dependencies": {
     "firebase": "^8.2.1",
-    "nookies": "^2.5.0"
+    "nookies": "^2.5.0",
+    "react-hook-form": "^6.13.1"
   },
   "peerDependencies": {
     "react": ">=17"

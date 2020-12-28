@@ -22,6 +22,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build NextJS -> Static
-        run: yarn export
+        run: yarn build
       - name: Ping FeaturePeek
         run: bash <(curl -s https://peek.run/ci)

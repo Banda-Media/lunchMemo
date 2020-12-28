@@ -1,0 +1,17 @@
+<svg height="128" viewBox="30 0 500 500" width="128">
+  <defs>
+    <path id="a" d="m150 0 150 94-150 94-150-94z"/>
+    <mask id="b" fill="#fff">
+      <use fill="#fff" fill-rule="evenodd"/>
+    </mask>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <g fill-rule="nonzero" transform="translate(128 110)">
+      <g transform="translate(0 150)">
+        <use fill="#0c5166"/>
+        <path d="m150-57.8461538 150 94-150 93.9999998-150-93.9999998z" fill="#093247" opacity=".8"/>
+      </g>
+      <path d="m150 0 150 94-150 94-150-94zm.461538 50.6153846-68.5384611 43.3846154 68.5384611 43.384615 68.538462-43.384615z" fill="#05c5cc"/>
+    </g>
+  </g>
+</svg>
