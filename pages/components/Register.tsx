@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { FormEvent, FC, useState } from 'react';
 import { useRouter } from 'next/router';
+
 import Link from 'next/link';
 import fire from '../../services/firebase';
 import Notification from './Notification';
 
-const Register = () => {
+const Register: FC = () => {
   const router = useRouter();
 
   const [username, setUsername] = useState('');
@@ -13,7 +14,7 @@ const Register = () => {
 
   const [notify, setNotification] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = (e: FormEvent) => {
     e.preventDefault();
 
     if (password !== passConf) {
@@ -21,12 +22,12 @@ const Register = () => {
 
       setPassword('');
       setPassConf('');
-      return null;
+      return;
     }
-    console.log(fire.fire);
 
     fire.user.register(username, password).catch((err) => {
       console.log(err.code, err.message);
+      setNotification(err.message);
     });
 
     router.push('/');
@@ -92,8 +93,8 @@ const Register = () => {
 
       <p className="mt-2 text-center text-md text-gray-600">
         already have an account?{' '}
-        <Link href="/login" className="text-blue-500">
-          Log in
+        <Link href="/login">
+          <button className="text-blue-500">Log in</button>
         </Link>
       </p>
     </div>

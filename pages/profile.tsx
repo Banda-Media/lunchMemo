@@ -1,30 +1,29 @@
-import React from 'react';
-import nookies from 'nookies';
+import React, { FC } from 'react';
 import fire from '../services/firebase';
+// import nookies from 'nookies';
 
-export const getServerSideProps = async (ctx) => {
-  try {
-    const cookies = nookies.get(ctx);
-    console.log(fire);
-    const token = await fire.auth.verifyIdToken(cookies.token);
-    const { uid, email } = token;
+// export const getServerSideProps = async (ctx) => {
+//   try {
+//     const cookies = nookies.get(ctx);
+//     console.log(fire);
+//     const token = await fire.auth.verifyIdToken(cookies.token);
+//     const { uid, email } = token;
 
-    return {
-      props: { message: `Your email is ${email} and your UID is ${uid}.` }
-    };
-  } catch (err) {
-    console.log('errrror', err);
-    return {
-      redirect: {
-        permanent: false,
-        destination: '/login'
-      },
-      props: {}
-    };
-  }
-};
+//     return {
+//       props: { message: `Your email is ${email} and your UID is ${uid}.` }
+//     };
+//   } catch (err) {
+//     return {
+//       redirect: {
+//         permanent: false,
+//         destination: '/login'
+//       },
+//       props: {}
+//     };
+//   }
+// };
 
-const ProfilePage = () => (
+const ProfilePage: FC = () => (
   <div>
     <p>You are soooooo authenticated.</p>
     <button

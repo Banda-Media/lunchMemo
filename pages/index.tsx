@@ -1,7 +1,8 @@
+import { FC } from 'react';
 import CreatePost from '../components/CreatePost';
 import Layout from './components/Layout';
 
-const HomePage = () => {
+const HomePage: FC = () => {
   return (
     <Layout>
       <h3 className="my-4 text-2xl font-semibold text-gray-700">

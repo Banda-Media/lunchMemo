@@ -1,4 +1,6 @@
-const Footer = () => {
+import { FC } from 'react';
+
+const Footer: FC = () => {
   return (
     <div className="container bg-grey-lighter p-8">
       <div className="sm:flex mb-4">

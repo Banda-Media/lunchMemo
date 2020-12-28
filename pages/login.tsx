@@ -1,7 +1,8 @@
+import { FC } from 'react';
 import Login from './components/Login';
 import Layout from './components/Layout';
 
-const LoginPage = () => {
+const LoginPage: FC = () => {
   return (
     <Layout>
       <Login />

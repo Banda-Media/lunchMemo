@@ -7,6 +7,7 @@ module.exports = {
       jsx: true // Enable JSX since we're using React
     }
   },
+  parser: '@typescript-eslint/parser',
   settings: {
     react: {
       version: 'detect' // Automatically detect the react version
@@ -23,6 +24,8 @@ module.exports = {
     node: true // Enables Node.js global variables and Node.js scoping.
   },
   extends: [
+    'plugin:@typescript-eslint/recommended',
+    'prettier/@typescript-eslint',
     'plugin:prettier/recommended', // Make this the last element so prettier config overrides other formatting rules
     'eslint:recommended',
     'plugin:react/recommended',

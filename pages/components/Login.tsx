@@ -1,16 +1,16 @@
-import { useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import fire from '../../services/firebase';
 import Notification from './Notification';
 
-const Login = () => {
+const Login: FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [notify, setNotification] = useState('');
   const router = useRouter();
 
-  const handleLogin = (e) => {
+  const handleLogin = (e: FormEvent) => {
     e.preventDefault();
 
     fire.user.login(username, password).catch((err) => {
@@ -114,8 +114,8 @@ const Login = () => {
 
       <p className="mt-2 text-center text-md text-gray-600">
         {"don't have an account? "}
-        <Link href="/signup" className="text-blue-500">
-          Sign up
+        <Link href="/signup">
+          <button className="text-blue-500">Sign up</button>
         </Link>
       </p>
     </div>

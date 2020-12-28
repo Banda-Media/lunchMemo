@@ -1,6 +1,11 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
-const Notification = ({ delay, message }) => {
+interface ChildProps {
+  delay: number;
+  message: string;
+}
+
+const Notification: FC<ChildProps> = ({ delay, message }) => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {

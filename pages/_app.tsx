@@ -1,7 +1,13 @@
 import '../styles/main.css';
 import AuthProvider from '../hooks/auth';
+import type { ComponentType, FC } from 'react';
 
-const MyApp = ({ Component, pageProps }) => {
+interface Props {
+  Component: ComponentType;
+  pageProps: any;
+}
+
+const MyApp: FC<Props> = ({ Component, pageProps }) => {
   return (
     <AuthProvider>
       <Component {...pageProps} />
