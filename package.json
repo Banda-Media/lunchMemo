@@ -19,6 +19,13 @@
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
+  "size-limit": [
+    {
+      "path": "out/*",
+      "webpack": false,
+      "limit": "1 MB"
+    }
+  ],
   "dependencies": {
     "firebase": "^8.2.1",
     "nookies": "^2.5.0"
