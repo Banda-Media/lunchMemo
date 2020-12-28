@@ -4,6 +4,7 @@
   "private": false,
   "scripts": {
     "dev": "yarn watch:css && next dev",
+    "pre-build": "printenv | sort",
     "build": "yarn watch:css && next build",
     "start": "yarn watch:css && next start",
     "export": "yarn watch:css && yarn build && next export",
@@ -69,7 +70,9 @@
     }
   },
   "jest": {
-    "testPathIgnorePatterns": ["ARCHIVE"]
+    "testPathIgnorePatterns": [
+      "ARCHIVE"
+    ]
   },
   "lint-staged": {
     "./**/*.{js,jsx,ts,tsx}": [
