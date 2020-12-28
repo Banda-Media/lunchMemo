@@ -4,7 +4,7 @@
   "private": false,
   "scripts": {
     "dev": "yarn watch:css && next dev",
-    "pre-build": "printenv | sort",
+    "prebuild": "printenv | sort",
     "build": "yarn watch:css && next build",
     "start": "yarn watch:css && next start",
     "export": "yarn watch:css && yarn build && next export",
@@ -73,7 +73,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "tslint ."
     }
   },
   "jest": {
