@@ -1,10 +1,11 @@
-import { FC, FormEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
+
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import fire from '../../services/firebase';
 import Notification from './Notification';
 
-const Login: FC = () => {
+const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [notify, setNotification] = useState('');
