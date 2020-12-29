@@ -1,4 +1,3 @@
-import React, { FC } from 'react';
 import fire from '../services/firebase';
 // import nookies from 'nookies';
 
@@ -23,7 +22,7 @@ import fire from '../services/firebase';
 //   }
 // };
 
-const ProfilePage: FC = () => (
+const ProfilePage: React.FC = () => (
   <div>
     <p>You are soooooo authenticated.</p>
     <button

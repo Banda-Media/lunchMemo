@@ -2,7 +2,7 @@ import { FormEvent, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import fire from '../../services/firebase';
+import fire from '../services/firebase';
 import Notification from './Notification';
 
 const Login: React.FC = () => {

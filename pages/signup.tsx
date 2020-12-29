@@ -1,8 +1,7 @@
-import { FC } from 'react';
-import Register from './components/Register';
-import Layout from './components/Layout';
+import Register from '../components/Register';
+import Layout from '../components/Layout';
 
-const SignupPage: FC = () => {
+const SignupPage: React.FC = () => {
   return (
     <Layout>
       <Register />

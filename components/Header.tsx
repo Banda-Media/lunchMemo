@@ -1,5 +1,5 @@
 import { FC, MutableRefObject, useRef } from 'react';
-import { useAuth } from '../../hooks/auth';
+import { useAuth } from '../hooks/auth';
 
 const Header: FC = () => {
   const navContent = useRef() as MutableRefObject<HTMLDivElement>;
@@ -10,7 +10,10 @@ const Header: FC = () => {
       <div className="flex items-center flex-shrink-0 text-white mr-6">
         <a className="text-white no-underline hover:text-white hover:no-underline" href="/">
           <span className="text-2xl pl-2">
-            <i className="em em-grinning"></i> Lunch Memo
+            <h1 className="lm-logo">
+              <span className="lm-lunch">LUNCH</span>
+              <span className="lm-memo">memo</span>
+            </h1>
           </span>
         </a>
       </div>

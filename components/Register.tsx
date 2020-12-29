@@ -1,11 +1,11 @@
-import { FormEvent, FC, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import Link from 'next/link';
-import fire from '../../services/firebase';
+import fire from '../services/firebase';
 import Notification from './Notification';
 
-const Register: FC = () => {
+const Register: React.FC = () => {
   const router = useRouter();
 
   const [username, setUsername] = useState('');
@@ -14,7 +14,7 @@ const Register: FC = () => {
 
   const [notify, setNotification] = useState('');
 
-  const handleLogin = (e: FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (password !== passConf) {
