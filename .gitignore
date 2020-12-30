@@ -86,7 +86,7 @@ typings/
 .next
 out
 dist
-
+.vercel
 
 # ignoring future react conversion folders
 /client/
