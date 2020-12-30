@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { setCookie, destroyCookie } from 'nookies';
-import { IUserContextType } from '../types/types.d';
+import { IUserContextType, IEmailLogin } from '../types/types.d';
 import getFirebase from '../utils/firebase/firebase';
 import { signIn } from '../utils/firebase/auth';
 
@@ -10,7 +10,7 @@ const tokenName = 'firebaseToken';
 export const UserContext = React.createContext<IUserContextType | undefined>(undefined);
 
 const UserProvider: React.FC = ({ children }) => {
-  const emailLogin = async ({ email, password, redirectPath }) => {
+  const emailLogin = async ({ email, password, redirectPath }: IEmailLogin) => {
     console.log(`Redirecting to ${redirectPath}`);
     await signIn(email, password)
       .then(() => {

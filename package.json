@@ -6,7 +6,6 @@
     "dev": "yarn watch:css && next dev",
     "prebuild": "printenv | sort",
     "build": "yarn watch:css && next build",
-    "postbuild": "next export",
     "start": "yarn watch:css && next start",
     "lint": "eslint --fix .",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
