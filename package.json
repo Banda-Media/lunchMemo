@@ -10,7 +10,7 @@
     "start": "yarn watch:css && next start",
     "lint": "eslint --fix .",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-    "watch:css": "postcss styles/tailwind.scss -o styles/main.scss",
+    "watch:css": "postcss app/styles/tailwind.scss -o app/styles/main.scss",
     "test": "tsdx test --passWithNoTests",
     "tsstart": "tsdx watch",
     "tsbuild": "tsdx build",
@@ -26,8 +26,11 @@
     }
   ],
   "dependencies": {
+    "@types/cookie": "^0.4.0",
     "@types/react-modal": "^3.10.6",
+    "cookie": "^0.4.1",
     "firebase": "^8.2.1",
+    "firebase-admin": "^9.4.2",
     "nookies": "^2.5.0",
     "react-hook-form": "^6.13.1",
     "react-modal": "^3.12.1",

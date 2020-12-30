@@ -94,3 +94,6 @@ dist
 /tests/
 /.ebextensions/
 .npmrc
+
+# Firebase
+serviceaccount.json

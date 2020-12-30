@@ -24,20 +24,22 @@ module.exports = {
     node: true // Enables Node.js global variables and Node.js scoping.
   },
   extends: [
-    'plugin:@typescript-eslint/recommended',
-    'prettier/@typescript-eslint',
-    'plugin:prettier/recommended', // Make this the last element so prettier config overrides other formatting rules
     'eslint:recommended',
-    'plugin:react/recommended',
+    'plugin:prettier/recommended', // Make this the last element so prettier config overrides other formatting rules
     'plugin:jsx-a11y/recommended',
     'plugin:import/errors',
-    'plugin:import/warnings'
+    'plugin:import/warnings',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier/@typescript-eslint'
   ],
   rules: {
     'react/react-in-jsx-scope': 'off', // React is in the global scope with Next.js so we can ignore.
     'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Use our .prettierrc file as source
     'react/prop-types': 'off',
-    'no-control-regex': 'off'
+    'no-control-regex': 'off',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['error']
   },
   plugins: ['import', 'simple-import-sort'],
   globals: {

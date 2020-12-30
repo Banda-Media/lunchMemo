@@ -1,15 +1,14 @@
-import '../styles/main.scss';
-import AuthProvider from '../hooks/auth';
+import type { AppProps } from 'next/app';
+import AuthProvider from '../app/hooks/AuthContext';
+import UserProvider from '../app/hooks/UserContext';
+import '../app/styles/main.scss';
 
-export interface Props {
-  Component: React.ComponentType;
-  pageProps: any;
-}
-
-const MyApp: React.FC<Props> = ({ Component, pageProps }) => {
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <AuthProvider>
-      <Component {...pageProps} />
+      <UserProvider>
+        <Component {...pageProps} />
+      </UserProvider>
     </AuthProvider>
   );
 };
