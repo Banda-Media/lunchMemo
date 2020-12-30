@@ -1,34 +1,15 @@
-import React, { FC } from 'react';
-import fire from '../services/firebase';
-// import nookies from 'nookies';
+import { logout } from '../app/utils/firebase/auth';
+import { CookieVerificationData } from '../app/utils/verifyCookie';
+import authRedirect from './../app/utils/authRedirect';
 
-// export const getServerSideProps = async (ctx) => {
-//   try {
-//     const cookies = nookies.get(ctx);
-//     console.log(fire);
-//     const token = await fire.auth.verifyIdToken(cookies.token);
-//     const { uid, email } = token;
+export const getServerSideProps = authRedirect;
 
-//     return {
-//       props: { message: `Your email is ${email} and your UID is ${uid}.` }
-//     };
-//   } catch (err) {
-//     return {
-//       redirect: {
-//         permanent: false,
-//         destination: '/login'
-//       },
-//       props: {}
-//     };
-//   }
-// };
-
-const ProfilePage: FC = () => (
+const User: React.FC<CookieVerificationData> = (props) => (
   <div>
-    <p>You are soooooo authenticated.</p>
+    {props.authenticated ? 'Welcome user ' + props.usermail : 'You are a guest'}
     <button
       onClick={async () => {
-        await fire.user.logout();
+        await logout();
         window.location.href = '/';
       }}>
       Sign out
@@ -36,4 +17,4 @@ const ProfilePage: FC = () => (
   </div>
 );
 
-export default ProfilePage;
+export default User;

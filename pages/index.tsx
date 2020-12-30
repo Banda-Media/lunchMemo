@@ -1,18 +1,20 @@
-import { FC } from 'react';
-import CreatePost from '../components/CreatePost';
-import Layout from './components/Layout';
+import Layout from '../app/components/layouts/Layout';
+import Modal from 'react-modal';
+import { useRouter } from 'next/router';
+import authRedirect from './../app/utils/authRedirect';
 
-const HomePage: FC = () => {
+Modal.setAppElement('#__next');
+
+export const getServerSideProps = authRedirect;
+
+const HomePage: React.FC = () => {
+  const router = useRouter();
+
   return (
     <Layout>
-      <h3 className="my-4 text-2xl font-semibold text-gray-700">
-        Welcome to <a href="https://nextjs.org">Next.js!</a>
-      </h3>
-
-      <p>
-        Get started by editing <code>pages/index.js</code>
-      </p>
-      <CreatePost />
+      <Modal isOpen={router.route in ['login', 'signup']}>
+        <div>In the modal</div>
+      </Modal>
     </Layout>
   );
 };

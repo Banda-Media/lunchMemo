@@ -1,11 +1,10 @@
-import { FC } from 'react';
-import Login from './components/Login';
-import Layout from './components/Layout';
+import Layout from '../app/components/layouts/Layout';
+import RegistrationPanel from '../app/components/modules/registration/RegistrationPanel';
 
-const LoginPage: FC = () => {
+const LoginPage: React.FC = () => {
   return (
     <Layout>
-      <Login />
+      <RegistrationPanel />
     </Layout>
   );
 };

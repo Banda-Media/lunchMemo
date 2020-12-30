@@ -8,7 +8,6 @@ const favicon = require('serve-favicon');
 const hbs = require('hbs');
 const logger = require('morgan');
 const path = require('path');
-const sslRedirect = require('heroku-ssl-redirect');
 
 const flash = require('express-flash');
 const passport = require('passport');
@@ -21,7 +20,6 @@ const app = express();
 const app_name = require('../package.json').name;
 app.locals.title = app_name;
 
-app.use(sslRedirect());
 
 // Auth Setup
 app.use(

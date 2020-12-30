@@ -1,16 +1,14 @@
-import '../styles/main.css';
-import AuthProvider from '../hooks/auth';
-import type { ComponentType, FC } from 'react';
+import type { AppProps } from 'next/app';
+import AuthProvider from '../app/hooks/AuthContext';
+import UserProvider from '../app/hooks/UserContext';
+import '../app/styles/main.scss';
 
-interface Props {
-  Component: ComponentType;
-  pageProps: any;
-}
-
-const MyApp: FC<Props> = ({ Component, pageProps }) => {
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <AuthProvider>
-      <Component {...pageProps} />
+      <UserProvider>
+        <Component {...pageProps} />
+      </UserProvider>
     </AuthProvider>
   );
 };

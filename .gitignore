@@ -6,6 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 .vscode
 
+ARCHIVE/node_modules
+
 # Runtime data
 pids
 *.pid
@@ -92,3 +94,6 @@ dist
 /tests/
 /.ebextensions/
 .npmrc
+
+# Firebase
+serviceaccount.json
