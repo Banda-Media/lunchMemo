@@ -4,7 +4,7 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true
   },
-  purge: ['./src/components/**/*.tsx', './pages/**/*.tsx'],
+  purge: ['./app/**/*.tsx', './pages/**/*.tsx'],
   theme: {
     extend: {}
   },

@@ -23,6 +23,7 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
 
     if (sessionCookie) {
       console.log('secure:' + process.env.NEXT_PUBLIC_SECURE_COOKIE);
+      console.log(sessionCookie);
       const options = {
         maxAge: expiresIn,
         httpOnly: true,
@@ -30,9 +31,9 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
         path: '/'
       };
       res.setHeader('Set-Cookie', serialize('user', sessionCookie, options));
-      res.status(200).end(JSON.stringify({ response: 'Succesfull logged in' }));
+      res.status(200).json({ response: 'Succesfull logged in' });
     } else {
-      res.status(401).send('Invalid authentication');
+      res.status(401).json({ response: 'Invalid authentication' });
     }
   }
 };

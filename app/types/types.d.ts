@@ -38,3 +38,8 @@ export interface Firebase {
 export interface IUserContextType {
   emailLogin: (value: IEmailLogin) => void;
 }
+
+export interface CookieVerificationData {
+  authenticated: boolean;
+  usermail: string | undefined;
+}
