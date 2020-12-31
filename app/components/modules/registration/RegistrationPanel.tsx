@@ -1,7 +1,10 @@
 import Login from './Login';
 import SignUp from './SignUp';
+import { useState } from 'react';
 
 const RegistrationPanel: React.FC = () => {
+  const [isLogin] = useState(false);
+
   return (
     <section className="bg-white md:w-3/4 lg:w-3/5 mx-auto register-login animated fadeInDown faster">
       <div className="register content-center ">
@@ -16,19 +19,14 @@ const RegistrationPanel: React.FC = () => {
             simplify your lunch life.
           </p>
         </div>
-
-        <div className="right widget-register">
+        <div className="right widget-login">
           <h3>
-            <span>Hungry?</span>Create an account below to get started
+            <span>Hungry?</span>
+            {isLogin ? 'Log in ' : 'Create an account '} below to get started
           </h3>
-          <SignUp />
+          {isLogin ? <Login /> : <SignUp />}
         </div>
-        <div className="right widget-login hide">
-          <h3>
-            <span>Hungry?</span>Log in below to get connected
-          </h3>
-          <Login />
-        </div>
+        )
       </div>
     </section>
   );

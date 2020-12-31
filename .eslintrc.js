@@ -39,7 +39,8 @@ module.exports = {
     'react/prop-types': 'off',
     'no-control-regex': 'off',
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': ['error']
+    '@typescript-eslint/no-unused-vars': ['error'],
+    '@typescript-eslint/ban-ts-comment': 'off'
   },
   plugins: ['import', 'simple-import-sort'],
   globals: {

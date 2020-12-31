@@ -78,18 +78,15 @@ input {
 button {
   cursor: pointer;
   padding: 12px 2rem;
-  background: #7c5cbf;
   border: none;
   color: #fff;
   font-size: 16px;
 
   &:hover {
-    background: #6b47b8;
   }
 
   &:disabled {
     cursor: default;
-    background: #7c5cbf94;
   }
 }
 

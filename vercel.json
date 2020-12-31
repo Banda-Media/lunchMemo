@@ -1,7 +1,5 @@
 {
   "build": {
-    "env": {
-      "GOOGLE_APPLICATION_CREDENTIALS": "@secret-name"
-    }
+    "env": {}
   }
 }
