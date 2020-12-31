@@ -18,6 +18,7 @@
         and scheduling with everyone and simply your lunch life with LunchMemo.</p>
     <br>
     <h4 align=center>Tech Stack</h4>
+    <br>
     <div align=center>
         <img src="./docs/featurepeek.png" width="32">
         <img src="./docs/firebase.png" width="32">
