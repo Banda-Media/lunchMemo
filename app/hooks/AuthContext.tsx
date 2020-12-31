@@ -17,21 +17,20 @@ const AuthProvider: React.FC = ({ children }) => {
 
   // listen for token changes, call setUser and write new token as a cookie
   useEffect(() => {
-    if (auth) {
+    auth.onIdTokenChanged(async (user) => {
       setLoading(true);
-      auth.onIdTokenChanged(async (user) => {
-        if (!user) {
-          setUser(null);
-          nookies.set(undefined, 'token', '', {});
-          setAuthenticated(true);
-        } else {
-          const token = await user.getIdToken();
-          setUser(user);
-          setLoading(false);
-          nookies.set(undefined, 'token', token, {});
-        }
-      });
-    }
+      if (!user) {
+        setUser(null);
+        setAuthenticated(false);
+        nookies.set(undefined, 'token', '', {});
+      } else {
+        const token = await user.getIdToken();
+        setUser(user);
+        setAuthenticated(true);
+        nookies.set(undefined, 'token', token, {});
+      }
+      setLoading(false);
+    });
   }, []);
 
   // force refresh the token every 10 minutes
