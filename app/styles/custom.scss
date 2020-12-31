@@ -1,2 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Rubik:300,300i,700&display=swap');
+
+@import 'parts/settings';
+@import 'parts/auth';
+@import 'parts/normalize';
+@import 'parts/timepicker';
+@import 'parts/layout';
+@import 'parts/global';
