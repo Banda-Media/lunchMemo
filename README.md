@@ -6,6 +6,12 @@
         <br>
         LunchMemo
         <br>
+        <a href="https://codeclimate.com/github/Banda-Media/lunchMemo/maintainability">
+            <img src="https://api.codeclimate.com/v1/badges/8ddd8f735023d01d9d59/maintainability" />
+        </a>
+        <a href="https://codeclimate.com/github/Banda-Media/lunchMemo/test_coverage">
+            <img src="https://api.codeclimate.com/v1/badges/8ddd8f735023d01d9d59/test_coverage" />
+        </a>
     </h1>
     <p style="font-size: 1.35rem; font-weight: 500; padding: 2rem; text-align: center"> Lunch Memo makes it easy to
         organize lunch with your colleagues and other professionals in your area. Spend less time finding lunch spots
