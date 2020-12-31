@@ -11,6 +11,16 @@
     "sourceMap": true,
     // match output dir to input dir. e.g. dist/index instead of dist/src/index
     "rootDir": "./",
+    "baseUrl": "./",
+    "rootDirs": ["pages", "app"],
+    "paths": {
+      "@utils/*": ["app/utils/*"],
+      "@components/*": ["app/components/*"],
+      "@hooks/*": ["app/hooks/*"],
+      "@types/*": ["app/types/*"],
+      "@pages/*": ["pages/*"],
+      "@public/*": ["public/*"]
+    },
     // stricter type-checking for stronger correctness. Recommended by TS
     "strict": true,
     // linter checks for common issues

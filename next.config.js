@@ -7,6 +7,15 @@ module.exports = {
       fs: 'empty'
     };
 
+    // For bare SVG importing.
+    config.module.rules.push({
+      test: /\.svg$/,
+      issuer: {
+        test: /\.(js|ts)x?$/
+      },
+      use: ['@svgr/webpack']
+    });
+
     return config;
   },
   sassOptions: {

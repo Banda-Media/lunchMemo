@@ -13,6 +13,7 @@ module.exports = {
       version: 'detect' // Automatically detect the react version
     },
     'import/resolver': {
+      typescript: {},
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx']
       }
