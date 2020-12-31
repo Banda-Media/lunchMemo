@@ -1,5 +1,5 @@
-import { CookieVerificationData } from '../../../types/types.d';
-import { logout } from '../../../utils/firebase/auth';
+import { CookieVerificationData } from '@typing/types';
+import { logout } from '@utils/firebase/auth';
 
 const ProfilePanel: React.FC<CookieVerificationData> = (props) => {
   console.log(props);

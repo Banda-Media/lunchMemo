@@ -1,8 +1,8 @@
-import '../app/styles/main.scss';
-import '../app/styles/custom.scss';
+import '@styles/main.scss';
+import '@styles/custom.scss';
 import type { AppProps } from 'next/app';
-import AuthProvider from '../app/hooks/AuthContext';
-import UserProvider from '../app/hooks/UserContext';
+import AuthProvider from '@hooks/AuthContext';
+import UserProvider from '@hooks/UserContext';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (

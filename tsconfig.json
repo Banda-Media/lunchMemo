@@ -17,7 +17,8 @@
       "@utils/*": ["app/utils/*"],
       "@components/*": ["app/components/*"],
       "@hooks/*": ["app/hooks/*"],
-      "@types/*": ["app/types/*"],
+      "@typing/*": ["app/types/*"],
+      "@styles/*": ["app/styles/*"],
       "@pages/*": ["pages/*"],
       "@public/*": ["public/*"]
     },

@@ -1,6 +1,6 @@
 import { useEffect, useState, createContext, useContext } from 'react';
-import { auth } from '../utils/firebase/auth';
-import { IAuthContext } from '../types/types.d';
+import { auth } from '@utils/firebase/auth';
+import { IAuthContext } from '@typing/types';
 import firebase from 'firebase/app';
 import nookies from 'nookies';
 

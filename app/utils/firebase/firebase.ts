@@ -1,8 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/database';
-import 'firebase/firestore';
-import { Firebase } from '../../types/types.d';
+
+import { Firebase } from '../../types/types';
 
 import config from './config';
 

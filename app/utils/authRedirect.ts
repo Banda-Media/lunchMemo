@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies';
-import { backendVerifyUserToken } from '../../app/utils/firebase/auth';
-import { CookieVerificationData } from '../../app/types/types.d';
+import { backendVerifyUserToken } from '@utils/firebase/auth';
+import { CookieVerificationData } from '@typing/types';
 
 const authRedirect: GetServerSideProps = async (context) => {
   const protocol = context.req.headers.referer?.split('://')[0];

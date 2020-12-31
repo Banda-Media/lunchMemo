@@ -1,8 +1,8 @@
 import { FormEvent, useState } from 'react';
 import { login } from '@utils/firebase/auth';
 
-import TwitterSVG from '@public/images/logos/twitter.svg';
-import GithubSVG from '@public/images/logos/github.svg';
+import TwitterSVG from '@styles/svg/twitter.svg';
+import GithubSVG from '@styles/svg/github.svg';
 
 import { useRouter } from 'next/router';
 import Link from 'next/link';
