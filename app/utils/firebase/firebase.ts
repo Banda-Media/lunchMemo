@@ -1,5 +1,8 @@
 import firebase from 'firebase/app';
+/* eslint-disable */
 import 'firebase/auth';
+import 'firebase/firestore';
+/* eslint-enable */
 
 import { Firebase } from '../../types/types';
 

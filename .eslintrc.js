@@ -40,6 +40,8 @@ module.exports = {
     'react/prop-types': 'off',
     'no-control-regex': 'off',
     'no-unused-vars': 'off',
+    'no-duplicate-imports': 'off',
+    // 'no-duplicate-imports': { severity: 'error', options: { 'allow-namespace-imports': true } },
     '@typescript-eslint/no-unused-vars': ['error'],
     '@typescript-eslint/ban-ts-comment': 'off'
   },
