@@ -22,6 +22,7 @@
       "@pages/*": ["pages/*"],
       "@public/*": ["public/*"]
     },
+    "typeRoots": ["./app/types", "./node_modules/@types"],
     // stricter type-checking for stronger correctness. Recommended by TS
     "strict": true,
     // linter checks for common issues

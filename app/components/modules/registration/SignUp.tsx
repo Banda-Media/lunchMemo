@@ -1,7 +1,7 @@
 import { BaseSyntheticEvent } from 'react';
 import { useForm } from 'react-hook-form';
-import { registerUser } from '../../../utils/firebase/auth';
 import { useRouter } from 'next/router';
+import { useAuth } from '@hooks/AuthContext';
 
 interface SignUpData {
   name: string;
@@ -11,6 +11,7 @@ interface SignUpData {
 
 const SignUpForm: React.FC = () => {
   const router = useRouter();
+  const { register: registerUser } = useAuth();
   const { register, errors, handleSubmit, getValues } = useForm<Record<string, unknown>>({
     mode: 'onChange',
     reValidateMode: 'onChange',

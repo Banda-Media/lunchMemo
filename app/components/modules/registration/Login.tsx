@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
-import { login } from '@utils/firebase/auth';
-
-import TwitterSVG from '@styles/svg/twitter.svg';
+import { useAuth } from '@hooks/AuthContext';
+import TwitterSVG from '../../../styles/svg/twitter.svg';
+// import TwitterSVG from '/svg/twitter.svg';
 import GithubSVG from '@styles/svg/github.svg';
 
 import { useRouter } from 'next/router';
@@ -12,6 +12,7 @@ const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [notify, setNotification] = useState('');
+  const { login } = useAuth();
   const router = useRouter();
 
   const handleLogin = (e: FormEvent) => {

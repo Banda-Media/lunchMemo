@@ -1,6 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import Debug from 'debug';
+
 import { serialize } from 'cookie';
 import getFirebaseAdmin from '../../../app/utils/firebase/admin';
+const debug = Debug('lunchmemo:api:auth:token');
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   const admin = await (await getFirebaseAdmin()).auth();
@@ -8,11 +11,11 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
 
   if (req.method === 'POST') {
     const idToken = req.body.token;
-    console.log(idToken);
+    debug('incoming token: %o', idToken);
     const sessionCookie: string | null = await admin
       .verifyIdToken(idToken, true)
       .then((decodedIdToken) => {
-        console.log('decoded token: ', decodedIdToken);
+        debug('decoded token: %o', decodedIdToken);
         if (new Date().getTime() / 1000 - decodedIdToken.auth_time < 5 * 60) {
           return admin.createSessionCookie(idToken, { expiresIn });
         } else {
@@ -22,8 +25,8 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
       });
 
     if (sessionCookie) {
-      console.log('secure:' + process.env.NEXT_PUBLIC_SECURE_COOKIE);
-      console.log(sessionCookie);
+      debug('secure:  %s', process.env.NEXT_PUBLIC_SECURE_COOKIE);
+      debug('Generated cookie:  %o', sessionCookie);
       const options = {
         maxAge: expiresIn,
         httpOnly: true,

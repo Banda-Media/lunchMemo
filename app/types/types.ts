@@ -21,16 +21,30 @@ export interface IAuthContext {
   user: firebase.User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
+  login: (username: string, password: string) => Promise<ApiTokenResponse>;
+  register: (
+    username: string,
+    password: string,
+    displayName: string | undefined,
+    authType: 'email-signup' | 'google-signup' | 'github-signup'
+  ) => Promise<firebase.auth.UserCredential | firebase.auth.OAuthCredential | undefined>;
+  logout: () => Promise<void>;
+  loginAnonymously: () => Promise<firebase.auth.UserCredential>;
 }
 
-interface IEmailLogin {
+export interface ILogin {
+  email: string;
+  password: string;
+}
+
+export interface IEmailLogin {
   email: string;
   password: string;
   redirectPath: string;
 }
 
 export interface Firebase {
-  app: firebase.app.Application;
+  app: firebase.app.App;
   auth: firebase.auth.Auth;
   firestore: firebase.firestore.Firestore;
 }
@@ -42,4 +56,13 @@ export interface IUserContextType {
 export interface CookieVerificationData {
   authenticated: boolean;
   usermail: string | undefined;
+}
+
+export interface ApiResponse {
+  errors?: { [key: string]: string };
+  message?: { [key: string]: string };
+}
+
+export interface ApiTokenResponse extends ApiResponse {
+  token: string;
 }
