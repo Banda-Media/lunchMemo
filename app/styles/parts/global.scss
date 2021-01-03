@@ -78,12 +78,8 @@ input {
 button {
   cursor: pointer;
   padding: 12px 2rem;
-  border: none;
   color: #fff;
   font-size: 16px;
-
-  &:hover {
-  }
 
   &:disabled {
     cursor: default;

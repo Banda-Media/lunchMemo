@@ -1,11 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Debug from 'debug';
-
 import { serialize } from 'cookie';
-import getFirebaseAdmin from '../../../app/utils/firebase/admin';
+import getFirebaseAdmin from '@utils/firebase/admin';
+
 const debug = Debug('lunchmemo:api:auth:token');
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+  debug('Starting ID token verification');
   const admin = await (await getFirebaseAdmin()).auth();
   const expiresIn = 5 * 60 * 1000; // 5 Minutes in ms
 

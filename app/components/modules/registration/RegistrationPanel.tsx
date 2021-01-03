@@ -31,7 +31,6 @@ const RegistrationPanel: React.FC = () => {
           </h3>
           {isLogin ? <Login /> : <SignUp />}
         </div>
-        )
       </div>
     </section>
   );

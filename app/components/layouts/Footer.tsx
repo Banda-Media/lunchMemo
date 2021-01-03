@@ -1,40 +1,36 @@
 const Footer: React.FC = () => {
   return (
-    <div className="container-fluid bg-white p-8">
-      <div className="sm:flex mb-4">
-        <div className="sm:w-1/4 h-auto">
-          <div className="text-orange mb-2">Orange</div>
-          <ul className="list-reset leading-normal">
-            <li className="hover:text-orange text-grey-darker">One</li>
-            <li className="hover:text-orange text-grey-darker">Two</li>
-            <li className="hover:text-orange text-grey-darker">Three</li>
-          </ul>
-        </div>
+    <div className="container-fluid bg-white text-sm px-12 py-6">
+      <div className="sm:flex justify-between">
         <div className="sm:w-1/4 h-auto sm:mt-0 mt-8">
-          <div className="text-blue mb-2">Blue</div>
-          <ul className="list-reset leading-normal">
-            <li className="hover:text-blue text-grey-darker">One</li>
-          </ul>
-
-          <div className="text-blue-light mb-2 mt-4">Blue-light</div>
-          <ul className="list-reset leading-normal">
-            <li className="hover:text-blue-light text-grey-darker">One</li>
+          <div className="text-green-dark mb-2">My Makers</div>
+          <ul className="list-reset leading-normal space-y-5">
+            <li className="hover:text-green-dark text-grey-darker">
+              <div className="flex whitespace-no-wrap text-sm leading-5 text-black-500">
+                <img
+                  src="https://github.com/andresmweber.png?size=24"
+                  className="align-middle"
+                  alt="Andres Weber Avatar"
+                />
+                <span className="px-2 text-xs">Andres Weber</span>
+              </div>
+            </li>
+            <li className="hover:text-green-light text-grey-darker">
+              <div className="flex whitespace-no-wrap text-sm leading-5 text-black-500">
+                <img
+                  src="https://github.com/bobbypwang.png?size=24"
+                  className="align-middle"
+                  alt="Bobby Wang Avatar"
+                />
+                <span className="px-2 text-xs">Bobby Wang</span>
+              </div>
+            </li>
           </ul>
         </div>
-        <div className="sm:w-1/4 h-auto sm:mt-0 mt-8">
-          <div className="text-green-dark mb-2">Green-dark</div>
-          <ul className="list-reset leading-normal">
-            <li className="hover:text-green-dark text-grey-darker">One</li>
-          </ul>
 
-          <div className="text-green-light mb-2 mt-4">Green-light</div>
-          <ul className="list-reset leading-normal">
-            <li className="hover:text-green-light text-grey-darker">One</li>
-          </ul>
-        </div>
         <div className="sm:w-1/2 sm:mt-0 mt-8 h-auto">
           <div className="text-red-light mb-2">Newsletter</div>
-          <p className="text-grey-darker leading-normal">
+          <p className="text-grey-darker leading-normal text-xs">
             Let's stay in touch! Subscribe to our VERY rare newsletter.
           </p>
           <div className="mt-4 flex">

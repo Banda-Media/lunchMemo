@@ -19,7 +19,6 @@ const getFirebase = (): Firebase => {
       debug(`ERROR: Firebase initialization error ${err.message}: %o`, err.stack);
     }
   }
-  debug(firebase);
 
   return { app: firebase.app(), auth: firebase.auth(), firestore: firebase.firestore() };
 };

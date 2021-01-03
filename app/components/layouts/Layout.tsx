@@ -8,7 +8,7 @@ const Layout: React.FC = (props) => {
   return (
     <main className="flex flex-col h-screen justify-between">
       {router.route !== '/' && <Header />}
-      <div className="container-fluid">{props.children}</div>
+      <div className="container-fluid my-10">{props.children}</div>
       <Background />
       <Footer />
     </main>
