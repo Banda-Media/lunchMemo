@@ -1,7 +1,7 @@
-import { CookieVerificationData } from '../app/types/types.d';
-import authRedirect from '../app/utils/authRedirect';
-import ProfilePanel from '../app/components/modules/profile/profilePanel';
-import Layout from '../app/components/layouts/Layout';
+import { CookieVerificationData } from '@typing/types';
+import authRedirect from '@utils/authRedirect';
+import ProfilePanel from '@components/modules/profile/profilePanel';
+import Layout from '@components/layouts/Layout';
 
 export const getServerSideProps = authRedirect;
 

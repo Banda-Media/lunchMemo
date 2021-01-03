@@ -1,8 +1,8 @@
-import { CookieVerificationData } from '../../../types/types.d';
-import { logout } from '../../../utils/firebase/auth';
+import { CookieVerificationData } from '@typing/types';
+import { useAuth } from '@hooks/AuthContext';
 
 const ProfilePanel: React.FC<CookieVerificationData> = (props) => {
-  console.log(props);
+  const { logout } = useAuth();
   return (
     <section className="bg-white md:w-3/4 lg:w-3/5 mx-auto register-login animated fadeInDown faster">
       <div className="register content-center ">

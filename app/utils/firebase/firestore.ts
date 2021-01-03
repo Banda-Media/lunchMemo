@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import config from './config';
-import { Observer, PostPayload, UnsubscribeCallback } from '../../types/types.d';
+import { Observer, PostPayload, UnsubscribeCallback } from '@typing/types';
 import getFirebase from './firebase';
 
 if (!firebase.apps.length) {

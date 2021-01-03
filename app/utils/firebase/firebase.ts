@@ -1,9 +1,13 @@
 import firebase from 'firebase/app';
+/* eslint-disable */
 import 'firebase/auth';
-import 'firebase/database';
 import 'firebase/firestore';
-import { Firebase } from '../../types/types.d';
+/* eslint-enable */
 
+import { Firebase } from '../../types/types';
+
+import Debug from 'debug';
+const debug = Debug('lunchmemo:app:utils:firebase:firebase');
 import config from './config';
 
 const getFirebase = (): Firebase => {
@@ -12,9 +16,10 @@ const getFirebase = (): Firebase => {
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
   } catch (err) {
     if (!/already exists/.test(err.message)) {
-      console.error(`Firebase initialization error ${err.message}`, err.stack);
+      debug(`ERROR: Firebase initialization error ${err.message}: %o`, err.stack);
     }
   }
+  debug(firebase);
 
   return { app: firebase.app(), auth: firebase.auth(), firestore: firebase.firestore() };
 };

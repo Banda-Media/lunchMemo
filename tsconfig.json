@@ -1,6 +1,6 @@
 {
   // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
-  "include": ["pages", "app"],
+  "include": ["public", "pages", "app"],
   "compilerOptions": {
     "module": "esnext",
     "lib": ["dom", "esnext"],
@@ -11,6 +11,18 @@
     "sourceMap": true,
     // match output dir to input dir. e.g. dist/index instead of dist/src/index
     "rootDir": "./",
+    "baseUrl": ".",
+    "rootDirs": ["pages", "app"],
+    "paths": {
+      "@utils/*": ["app/utils/*"],
+      "@components/*": ["app/components/*"],
+      "@hooks/*": ["app/hooks/*"],
+      "@typing/*": ["app/types/*"],
+      "@styles/*": ["app/styles/*"],
+      "@pages/*": ["pages/*"],
+      "@public/*": ["public/*"]
+    },
+    "typeRoots": ["./app/types", "./node_modules/@types"],
     // stricter type-checking for stronger correctness. Recommended by TS
     "strict": true,
     // linter checks for common issues

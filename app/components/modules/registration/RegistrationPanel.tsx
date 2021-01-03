@@ -1,9 +1,14 @@
 import Login from './Login';
 import SignUp from './SignUp';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const RegistrationPanel: React.FC = () => {
-  const [isLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    const pathName = window && window.location.pathname;
+    setIsLogin(pathName === '/login');
+  }, []);
 
   return (
     <section className="bg-white md:w-3/4 lg:w-3/5 mx-auto register-login animated fadeInDown faster">

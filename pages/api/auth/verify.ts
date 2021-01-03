@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { CookieVerificationData } from '../../../app/types/types.d';
-import getFirebaseAdmin from '../../../app/utils/firebase/admin';
+import { CookieVerificationData } from '@typing/types';
+import getFirebaseAdmin from '@utils/firebase/admin';
 
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   const admin = await getFirebaseAdmin();
