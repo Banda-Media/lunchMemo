@@ -14,14 +14,17 @@
     "tsstart": "tsdx watch",
     "tsbuild": "tsdx build",
     "prepare": "tsdx build",
-    "size": "size-limit",
-    "analyze": "size-limit --why"
+    "size": "yarn build && size-limit",
+    "size:why": "size-limit --why"
   },
   "size-limit": [
     {
-      "path": "out/*",
-      "webpack": false,
-      "limit": "1 MB"
+      "path": ".next/**/index-*.js",
+      "limit": "600 ms"
+    },
+    {
+      "path": ".next/**/*-*.js",
+      "limit": "1 mb"
     }
   ],
   "dependencies": {
@@ -43,6 +46,7 @@
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^4.9.1",
+    "@size-limit/time": "^4.9.1",
     "@svgr/webpack": "^5.5.0",
     "@types/node": "^14.14.16",
     "@types/react": "^17.0.0",
