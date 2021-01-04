@@ -1,17 +1,20 @@
 import { FC, MutableRefObject, useRef } from 'react';
-import { useAuth } from '../../hooks/AuthContext';
+import Link from 'next/link';
+import { useAuth } from '@hooks/AuthContext';
 
 const Header: FC = () => {
   const navContent = useRef() as MutableRefObject<HTMLDivElement>;
   const { user } = useAuth();
 
   return (
-    <nav className="text-white bg-white flex items-center justify-between flex-wrap p-6 w-full z-10 top-0">
+    <nav className="text-white bg-white flex items-center justify-between flex-wrap px-10 py-3 w-full z-10 top-0">
       <div className="flex items-center flex-shrink-0 mr-6">
-        <h1 className="lm-logo">
-          <span className="lm-lunch">LUNCH</span>
-          <span className="lm-memo">memo</span>
-        </h1>
+        <Link href="/">
+          <h1 className="lm-logo cursor-pointer">
+            <span className="lm-lunch">LUNCH</span>
+            <span className="lm-memo">memo</span>
+          </h1>
+        </Link>
       </div>
 
       <div className="block lg:hidden">

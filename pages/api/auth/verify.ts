@@ -1,8 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import Debug from 'debug';
 import { CookieVerificationData } from '@typing/types';
 import getFirebaseAdmin from '@utils/firebase/admin';
 
+const debug = Debug('lunchmemo:api:auth:verify');
+
 export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+  debug('Starting session token verification');
   const admin = await getFirebaseAdmin();
   const response: CookieVerificationData = {
     authenticated: false,
@@ -21,7 +25,7 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
       res.status(200).json(response);
     })
     .catch((err) => {
-      console.log(err);
+      debug('Token Verification Failed: %o', err);
       response.authenticated = false;
       res.status(403).json({ error: { ...response } });
     });
