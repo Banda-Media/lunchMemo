@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import Debug from 'debug';
 import { serialize } from 'cookie';
 import getFirebaseAdmin from '@utils/firebase/admin';
+import { sessionTokenCookie } from '@utils/constants';
 
 const debug = Debug('lunchmemo:api:auth:token');
 
@@ -12,18 +13,24 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
 
   if (req.method === 'POST') {
     const idToken = req.body.token;
+    const user = { email: '', picture: '' };
     debug('incoming token: %o', idToken);
+
     const sessionCookie: string | null = await admin
       .verifyIdToken(idToken, true)
       .then((decodedIdToken) => {
         debug('decoded token: %o', decodedIdToken);
+        user.email = decodedIdToken.email || '';
+        user.picture = decodedIdToken.picture || '';
+
         if (new Date().getTime() / 1000 - decodedIdToken.auth_time < 5 * 60) {
           return admin.createSessionCookie(idToken, { expiresIn });
         } else {
-          res.status(401).send('Recent sign in required!');
+          res.status(401).json({ errors: 'Sign in expired, please log in again.' });
           return null;
         }
       });
+    debug('Session Cookie valid...continuing.');
 
     if (sessionCookie) {
       debug('secure:  %s', process.env.NEXT_PUBLIC_SECURE_COOKIE);
@@ -34,10 +41,10 @@ export default async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
         secure: process.env.NEXT_PUBLIC_SECURE_COOKIE === 'true',
         path: '/'
       };
-      res.setHeader('Set-Cookie', serialize('user', sessionCookie, options));
-      res.status(200).json({ response: 'Succesfull logged in' });
+      res.setHeader('Set-Cookie', serialize(sessionTokenCookie, sessionCookie, options));
+      res.status(200).json({ message: 'Succesfull logged in.', token: sessionCookie, user });
     } else {
-      res.status(401).json({ response: 'Invalid authentication' });
+      res.status(401).json({ errors: 'Invalid authentication cookie provided.' });
     }
   }
 };

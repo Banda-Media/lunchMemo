@@ -1,22 +1,15 @@
-import Layout from '../app/components/layouts/Layout';
+import Layout from '@components/layouts/Layout';
 import Modal from 'react-modal';
-import { useRouter } from 'next/router';
-import authRedirect from './../app/utils/authRedirect';
+import authRedirect from '@utils/authRedirect';
 
 Modal.setAppElement('#__next');
 
 export const getServerSideProps = authRedirect;
 
 const HomePage: React.FC = () => {
-  const router = useRouter();
+  console.log('Loading index...');
 
-  return (
-    <Layout>
-      <Modal isOpen={router.route in ['login', 'signup']}>
-        <div>In the modal</div>
-      </Modal>
-    </Layout>
-  );
+  return <Layout></Layout>;
 };
 
 export default HomePage;

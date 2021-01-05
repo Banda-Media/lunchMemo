@@ -11,6 +11,8 @@ const Footer: React.FC = () => {
                   src="https://github.com/andresmweber.png?size=24"
                   className="align-middle"
                   alt="Andres Weber Avatar"
+                  height="24px"
+                  width="24px"
                 />
                 <span className="px-2 text-xs">Andres Weber</span>
               </div>
@@ -21,6 +23,8 @@ const Footer: React.FC = () => {
                   src="https://github.com/bobbypwang.png?size=24"
                   className="align-middle"
                   alt="Bobby Wang Avatar"
+                  height="24px"
+                  width="24px"
                 />
                 <span className="px-2 text-xs">Bobby Wang</span>
               </div>

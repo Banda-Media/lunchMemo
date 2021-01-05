@@ -1,14 +1,12 @@
 import { BaseSyntheticEvent } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useAuth } from '@hooks/AuthContext';
 import { ISignUpData } from '@typing/types';
-import { emailRegex } from '@utils/firebase/auth';
+import { emailRegex } from '@utils/constants';
 import Socials from '@components/modules/registration/Socials';
 
 const SignUpForm: React.FC = () => {
-  const router = useRouter();
   const { register: registerUser } = useAuth();
   const { register, errors, handleSubmit, getValues } = useForm<Record<string, unknown>>({
     mode: 'onChange',
@@ -22,17 +20,13 @@ const SignUpForm: React.FC = () => {
   });
 
   const onSubmit = ({ name, email, password }: ISignUpData) => {
-    registerUser(email, password, name, 'email-signup')
-      .then(() => router.push('/'))
-      .catch(console.log);
+    registerUser(email, password, name, 'email-signup');
   };
 
   const registerThirdParty = (e: BaseSyntheticEvent | undefined) => {
     const { id } = e?.target.id; // eslint-disable-line no-eval
     const { email, password, name } = getValues();
-    registerUser(email as string, password as string, name as string, id)
-      .then(() => router.push('/'))
-      .catch(console.log);
+    registerUser(email as string, password as string, name as string, id);
   };
 
   return (
@@ -104,6 +98,7 @@ const SignUpForm: React.FC = () => {
             )}
           </div>
         </div>
+
         <div className="mt-6">
           <span className="block pt-2 w-full rounded-md shadow-sm">
             <button

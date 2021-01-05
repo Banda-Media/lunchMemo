@@ -1,27 +1,28 @@
 import getFirebase from './firebase';
+import { ApiTokenResponse, ApiTokenVerificationResponse } from '@typing/types';
 
 export const { auth } = getFirebase();
 auth.useDeviceLanguage();
 
-export const emailRegex = /^(?=[A-Z0-9][A-Z0-9@._%+-]{5,253}$)[A-Z0-9._%+-]{1,64}@(?:(?=[A-Z0-9-]{1,63}\.)[A-Z0-9]+(?:-[A-Z0-9]+)*\.){1,8}[A-Z]{2,63}$/gim;
-
-export const clientPostUserToken = async (token: string) => {
-  const response = await fetch(`/api/auth/token`, {
+export const createSessionToken = async (
+  baseApiUrl: string,
+  token: string
+): Promise<ApiTokenResponse> => {
+  const response = await fetch(`${baseApiUrl}/auth/createSessionToken`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ token }) //
   });
   return response.json();
 };
 
-export const backendVerifyUserToken = async (baseApiUrl: string, token: string) => {
-  const response = await fetch(`${baseApiUrl}/auth/verify`, {
+export const verifySessionToken = async (
+  baseApiUrl: string,
+  token: string
+): Promise<ApiTokenVerificationResponse> => {
+  const response = await fetch(`${baseApiUrl}/auth/verifySessionToken`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ token }) //
   });
   return response.json();

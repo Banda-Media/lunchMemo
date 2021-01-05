@@ -1,13 +1,14 @@
 import { useRouter } from 'next/router';
-import Header from './Header';
-import Footer from './Footer';
-import Background from './Background';
+import Header from '@components/elements/Header';
+import Footer from '@components/elements/Footer';
+import Background from '@components/elements/Background';
 
 const Layout: React.FC = (props) => {
-  const router = useRouter();
+  const { route } = useRouter();
+
   return (
     <main className="flex flex-col h-screen justify-between">
-      {router.route !== '/' && <Header />}
+      {['/login', '/signup'].indexOf(route) === -1 && <Header />}
       <div className="container-fluid my-10">{props.children}</div>
       <Background />
       <Footer />

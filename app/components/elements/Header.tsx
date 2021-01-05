@@ -4,7 +4,7 @@ import { useAuth } from '@hooks/AuthContext';
 
 const Header: FC = () => {
   const navContent = useRef() as MutableRefObject<HTMLDivElement>;
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   return (
     <nav className="text-white bg-white flex items-center justify-between flex-wrap px-10 py-3 w-full z-10 top-0">
@@ -53,22 +53,35 @@ const Header: FC = () => {
               Home
             </a>
           </li>
+          {user ? (
+            <>
+              <li className="mr-3">
+                <button
+                  onClick={logout}
+                  className="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4">
+                  Log out
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="mr-3">
+                <a
+                  className="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
+                  href="/login">
+                  Log in
+                </a>
+              </li>
 
-          <li className="mr-3">
-            <a
-              className="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
-              href="/login">
-              Log in
-            </a>
-          </li>
-
-          <li className="mr-3">
-            <a
-              className="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
-              href="/signup">
-              Sign up
-            </a>
-          </li>
+              <li className="mr-3">
+                <a
+                  className="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
+                  href="/signup">
+                  Sign up
+                </a>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </nav>

@@ -27,7 +27,7 @@ export interface IAuthContext {
   user: firebase.User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
-  login: (username: string, password: string) => Promise<ApiTokenResponse>;
+  login: (username: string, password: string) => Promise<ApiTokenResponse | null>;
   loginAnonymously: () => Promise<firebase.auth.UserCredential>;
   loginProvider: (
     authType: 'google-signup' | 'github-signup'
@@ -75,4 +75,18 @@ export interface ApiResponse {
 
 export interface ApiTokenResponse extends ApiResponse {
   token: string;
+  user: {
+    email: string;
+    picture: string;
+  };
+}
+
+export interface ApiTokenVerificationResponse extends ApiResponse {
+  authenticated: boolean;
+  usermail: string;
+}
+
+export interface IDelayedCloseProps {
+  delay: number;
+  message: string;
 }

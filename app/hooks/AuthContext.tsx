@@ -1,8 +1,11 @@
 import { useEffect, useState, createContext, useContext } from 'react';
-import { auth, clientPostUserToken } from '@utils/firebase/auth';
+import { auth, createSessionToken } from '@utils/firebase/auth';
 import { IAuthContext } from '@typing/types';
 import firebase from 'firebase/app';
 import nookies from 'nookies';
+import Debug from 'debug';
+
+const debug = Debug('lunchmemo:hooks:authContext');
 
 const register = async (
   username: string,
@@ -14,7 +17,7 @@ const register = async (
 
   if (authType === 'email-signup') {
     userCredentials = await auth.createUserWithEmailAndPassword(username, password);
-    await clientPostUserToken((await userCredentials?.user?.getIdToken()) || '');
+    await createSessionToken((await userCredentials?.user?.getIdToken()) || '');
   } else {
     userCredentials = await loginProvider(authType);
   }
@@ -38,14 +41,15 @@ const loginProvider = async (
     provider.addScope('repo');
   }
   const oauthCredentials = await auth.signInWithPopup(provider);
-  await clientPostUserToken((await oauthCredentials?.user?.getIdToken()) || '');
+  debug('Successfully retrieved OAuth credentials: %o', oauthCredentials);
+  await createSessionToken((await oauthCredentials?.user?.getIdToken()) || '');
   return oauthCredentials;
 };
 
 const login = async (email: string, password: string) => {
   return auth.signInWithEmailAndPassword(email, password).then(async (response) => {
     if (response && response.user) {
-      return await clientPostUserToken(await response.user.getIdToken());
+      return await createSessionToken(await response.user.getIdToken());
     }
     return null;
   });
@@ -74,20 +78,24 @@ const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<firebase.User | null>(null);
   const [isAuthenticated, setAuthenticated] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  debug('Loading AuthProvider.');
 
   // listen for token changes, call setUser and write new token as a cookie
   useEffect(() => {
     auth.onIdTokenChanged(async (user) => {
+      debug('User id token change detected...');
       setLoading(true);
       if (!user) {
         setUser(null);
         setAuthenticated(false);
         nookies.set(undefined, 'token', '', {});
+        debug('Setting id token...');
       } else {
         const token = await user.getIdToken();
         setUser(user);
         setAuthenticated(true);
         nookies.set(undefined, 'token', token, {});
+        debug('Resetting id token and session token...');
       }
       setLoading(false);
     });
@@ -96,6 +104,7 @@ const AuthProvider: React.FC = ({ children }) => {
   // force refresh the token every 10 minutes
   useEffect(() => {
     const handle = setInterval(async () => {
+      debug('Forcing id token refresh...');
       const user = auth.currentUser;
       if (user) await user.getIdToken(true);
     }, 10 * 60 * 1000);

@@ -1,16 +1,17 @@
 import { GetServerSideProps } from 'next';
 import Debug from 'debug';
 import { parseCookies } from 'nookies';
-import { backendVerifyUserToken } from '@utils/firebase/auth';
+import { createSessionToken, verifySessionToken } from '@utils/firebase/auth';
 import { CookieVerificationData } from '@typing/types';
+import { sessionTokenCookie, userTokenCookie } from './constants';
 
 const debug = Debug('lunchmemo:utils:authRedirect');
 
 const authRedirect: GetServerSideProps = async (context) => {
+  debug('authRedirect Starting');
   const protocol = context.req.headers.referer?.split('://')[0];
   const host = context.req.headers?.host;
   const baseUrl = context.req ? `${protocol || 'http'}://${host}/api` : '';
-  debug('HOST Detected:', baseUrl);
 
   const props: CookieVerificationData = {
     authenticated: false,
@@ -18,24 +19,22 @@ const authRedirect: GetServerSideProps = async (context) => {
   };
 
   const cookies = parseCookies(context);
-  const { res } = context;
-  let redirect = false;
+  if (cookies[userTokenCookie]) {
+    const response = await createSessionToken(baseUrl, cookies[userTokenCookie]);
+    debug('Received session token creation response: %o', response);
 
-  if (cookies.user) {
-    const authentication = await backendVerifyUserToken(baseUrl, cookies.user);
+    props.authenticated = !!response?.token;
+    props.usermail = response?.user?.email || '';
+  } else if (cookies[sessionTokenCookie]) {
+    const response = await verifySessionToken(baseUrl, cookies[sessionTokenCookie]);
+    debug('Received session token verification response: %o', response);
 
-    if (authentication.error) {
-      redirect = true;
-    } else {
-      debug('AUTH: ', authentication);
-      props.authenticated = authentication ? authentication.authenticated : false;
-      props.usermail = authentication ? authentication.usermail : '';
-    }
-  } else {
-    redirect = true;
+    props.usermail = response.usermail;
+    props.authenticated = response.authenticated;
   }
 
-  if (redirect) {
+  const { res } = context;
+  if (!props.authenticated) {
     debug('No user cookie present...redirecting to login');
     res.setHeader('Location', '/login');
     res.statusCode = 302;

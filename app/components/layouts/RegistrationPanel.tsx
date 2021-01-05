@@ -1,5 +1,5 @@
-import Login from './Login';
-import SignUp from './SignUp';
+import Login from '@components/modules/registration/Login';
+import SignUp from '@components/modules/registration/SignUp';
 import { useState, useEffect } from 'react';
 
 const RegistrationPanel: React.FC = () => {

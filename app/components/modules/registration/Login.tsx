@@ -1,14 +1,12 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { BaseSyntheticEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '@hooks/AuthContext';
 import { ILogin } from '@typing/types';
-import { emailRegex } from '@utils/firebase/auth';
+import { emailRegex } from '@utils/constants';
 import Socials from '@components/modules/registration/Socials';
 
 const Login: React.FC = () => {
-  const router = useRouter();
   const { login, loginProvider } = useAuth();
   const { register, errors, handleSubmit } = useForm<Record<string, unknown>>({
     mode: 'onChange',
@@ -22,16 +20,12 @@ const Login: React.FC = () => {
   });
 
   const onSubmit = ({ email, password }: ILogin) => {
-    login(email, password)
-      .then(() => router.push('/'))
-      .catch(console.log);
+    login(email, password);
   };
 
   const loginThirdParty = (e: BaseSyntheticEvent | undefined) => {
     const { id } = e?.target.id;
-    loginProvider(id)
-      .then(() => router.push('/'))
-      .catch(console.log);
+    loginProvider(id);
   };
 
   return (
@@ -47,6 +41,7 @@ const Login: React.FC = () => {
             id="email"
             type="text"
             autoComplete="email"
+            name="email"
             placeholder="email"
             ref={register({
               required: 'Please enter an email',
