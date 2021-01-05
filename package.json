@@ -50,7 +50,7 @@
     "@svgr/webpack": "^5.5.0",
     "@types/node": "^14.14.19",
     "@types/react": "^17.0.0",
-    "@types/react-router-dom": "^5.1.6",
+    "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
     "autoprefixer": "^10.1.0",
