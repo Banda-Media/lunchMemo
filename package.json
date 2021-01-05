@@ -32,11 +32,20 @@
     "debug": "^4.3.1",
     "firebase": "^8.2.1",
     "firebase-admin": "^9.4.2",
+    "image-trace-loader": "^1.0.2",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^8.0.0",
+    "lqip-loader": "^2.2.1",
+    "next-optimized-images": "^2.6.2",
     "nookies": "^2.5.0",
     "react-hook-form": "^6.13.1",
     "react-modal": "^3.12.1",
+    "responsive-loader": "^2.3.0",
     "sass": "^1.32.0",
-    "swr": "^0.3.11"
+    "svg-sprite-loader": "^5.2.1",
+    "swr": "^0.3.11",
+    "webp-loader": "^0.6.0"
   },
   "peerDependencies": {
     "react": ">=17"
