@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { setCookie, destroyCookie } from 'nookies';
-import getFirebase from '../utils/firebase/firebase';
+import getFirebase from '@utils/firebase/firebase';
 
 const { auth } = getFirebase();
 const tokenName = 'firebaseToken';
