@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import config from './config';
-import { Observer, PostPayload, UnsubscribeCallback } from '@typing/types';
+import { Observer, IPostPayload, UnsubscribeCallback } from '@typing/types';
 import getFirebase from './firebase';
 
 if (!firebase.apps.length) {
@@ -14,7 +14,9 @@ const BLOG = 'blog';
 export const addPost = ({
   title,
   content
-}: PostPayload): Promise<firebase.firestore.DocumentReference<firebase.firestore.DocumentData>> => {
+}: IPostPayload): Promise<
+  firebase.firestore.DocumentReference<firebase.firestore.DocumentData>
+> => {
   return firestore.collection(BLOG).add({
     title: title,
     content: content

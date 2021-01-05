@@ -1,4 +1,5 @@
 import firebase from 'firebase/app';
+import { BaseSyntheticEvent } from 'react';
 
 export type UnsubscribeCallback = () => void;
 
@@ -12,9 +13,14 @@ export interface Observer {
 }
 /* eslint-enable */
 
-export interface PostPayload {
+export interface IPostPayload {
   title: string;
   content: string;
+}
+
+export interface ISocialAction {
+  clickHandler: (e: BaseSyntheticEvent | undefined) => void;
+  message: string;
 }
 
 export interface IAuthContext {
@@ -22,14 +28,17 @@ export interface IAuthContext {
   isLoading: boolean;
   isAuthenticated: boolean;
   login: (username: string, password: string) => Promise<ApiTokenResponse>;
+  loginAnonymously: () => Promise<firebase.auth.UserCredential>;
+  loginProvider: (
+    authType: 'google-signup' | 'github-signup'
+  ) => Promise<firebase.auth.UserCredential>;
+  logout: () => Promise<void>;
   register: (
     username: string,
     password: string,
     displayName: string | undefined,
     authType: 'email-signup' | 'google-signup' | 'github-signup'
   ) => Promise<firebase.auth.UserCredential | firebase.auth.OAuthCredential | undefined>;
-  logout: () => Promise<void>;
-  loginAnonymously: () => Promise<firebase.auth.UserCredential>;
 }
 
 export interface ILogin {
@@ -37,9 +46,10 @@ export interface ILogin {
   password: string;
 }
 
-export interface IEmailLogin {
-  email: string;
-  password: string;
+export interface ISignUpData extends ILogin {
+  name: string;
+}
+export interface IEmailLogin extends ILogin {
   redirectPath: string;
 }
 

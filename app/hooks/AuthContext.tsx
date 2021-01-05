@@ -9,30 +9,37 @@ const register = async (
   password: string,
   displayName: string | undefined,
   authType: 'email-signup' | 'google-signup' | 'github-signup'
-): Promise<firebase.auth.UserCredential | firebase.auth.OAuthCredential | undefined> => {
+): Promise<firebase.auth.UserCredential | undefined> => {
   let userCredentials;
 
   if (authType === 'email-signup') {
     userCredentials = await auth.createUserWithEmailAndPassword(username, password);
+    await clientPostUserToken((await userCredentials?.user?.getIdToken()) || '');
   } else {
-    let provider;
-    if (authType === 'google-signup') {
-      provider = new firebase.auth.GoogleAuthProvider();
-      provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-    } else {
-      provider = new firebase.auth.GithubAuthProvider();
-      provider.addScope('repo');
-    }
-    userCredentials = await auth.signInWithPopup(provider);
-    console.log('Successful OAuth signup:', userCredentials);
+    userCredentials = await loginProvider(authType);
   }
 
-  await clientPostUserToken((await userCredentials?.user?.getIdToken()) || '');
   if (userCredentials.user) {
     userCredentials.user.updateProfile({ displayName: displayName || username });
   }
 
   return userCredentials;
+};
+
+const loginProvider = async (
+  authType: 'google-signup' | 'github-signup'
+): Promise<firebase.auth.UserCredential> => {
+  let provider;
+  if (authType === 'google-signup') {
+    provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+  } else {
+    provider = new firebase.auth.GithubAuthProvider();
+    provider.addScope('repo');
+  }
+  const oauthCredentials = await auth.signInWithPopup(provider);
+  await clientPostUserToken((await oauthCredentials?.user?.getIdToken()) || '');
+  return oauthCredentials;
 };
 
 const login = async (email: string, password: string) => {
@@ -59,7 +66,8 @@ const AuthContext = createContext<IAuthContext>({
   login,
   register,
   logout,
-  loginAnonymously
+  loginAnonymously,
+  loginProvider
 });
 
 const AuthProvider: React.FC = ({ children }) => {
@@ -103,7 +111,8 @@ const AuthProvider: React.FC = ({ children }) => {
         logout,
         isAuthenticated,
         isLoading,
-        loginAnonymously
+        loginAnonymously,
+        loginProvider
       }}>
       {children}
     </AuthContext.Provider>

@@ -14,14 +14,17 @@
     "tsstart": "tsdx watch",
     "tsbuild": "tsdx build",
     "prepare": "tsdx build",
-    "size": "size-limit",
-    "analyze": "size-limit --why"
+    "size": "yarn build && size-limit",
+    "size:why": "size-limit --why"
   },
   "size-limit": [
     {
-      "path": "out/*",
-      "webpack": false,
-      "limit": "1 MB"
+      "path": ".next/**/index-*.js",
+      "limit": "600 ms"
+    },
+    {
+      "path": ".next/**/*-*.js",
+      "limit": "1 mb"
     }
   ],
   "dependencies": {
@@ -39,7 +42,7 @@
     "lqip-loader": "^2.2.1",
     "next-optimized-images": "^2.6.2",
     "nookies": "^2.5.0",
-    "react-hook-form": "^6.13.1",
+    "react-hook-form": "^6.14.0",
     "react-modal": "^3.12.1",
     "responsive-loader": "^2.3.0",
     "sass": "^1.32.0",
@@ -52,19 +55,20 @@
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^4.9.1",
+    "@size-limit/time": "^4.9.1",
     "@svgr/webpack": "^5.5.0",
-    "@types/node": "^14.14.16",
+    "@types/node": "^14.14.20",
     "@types/react": "^17.0.0",
-    "@types/react-router-dom": "^5.1.6",
-    "@typescript-eslint/eslint-plugin": "^4.11.1",
-    "@typescript-eslint/parser": "^4.11.1",
+    "@types/react-router-dom": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
     "autoprefixer": "^10.1.0",
-    "eslint": "^7.16.0",
+    "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
