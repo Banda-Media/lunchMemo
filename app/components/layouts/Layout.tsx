@@ -8,7 +8,7 @@ const Layout: React.FC = (props) => {
 
   return (
     <main className="flex flex-col h-screen justify-between">
-      {['/login', '/signup'].indexOf(route) === -1 && <Header />}
+      {['/login', '/signup', '/forgot'].indexOf(route) === -1 && <Header />}
       <div className="container-fluid my-10">{props.children}</div>
       <Background />
       <Footer />

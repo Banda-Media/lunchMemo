@@ -1,19 +1,18 @@
+import Debug from 'debug';
 import firebase from 'firebase/app';
 /* eslint-disable */
 import 'firebase/auth';
 import 'firebase/firestore';
 /* eslint-enable */
-
-import { Firebase } from '../../types/types';
-
-import Debug from 'debug';
-const debug = Debug('lunchmemo:app:utils:firebase:firebase');
 import config from './config';
+import { Firebase } from '@typing/types';
 
-const getFirebase = async (): Promise<Firebase> => {
+const debug = Debug('lunchmemo:app:utils:firebase:firebase');
+
+const getFirebase = (): Firebase => {
   try {
-    await firebase.initializeApp(config);
-    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+    firebase.initializeApp(config);
+    // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
   } catch (err) {
     if (!/already exists/.test(err.message)) {
       debug(`ERROR: Firebase initialization error ${err.message}: %o`, err.stack);
@@ -21,9 +20,9 @@ const getFirebase = async (): Promise<Firebase> => {
   }
 
   return {
-    app: await firebase.app(),
-    auth: await firebase.auth(),
-    firestore: await firebase.firestore()
+    app: firebase.app(),
+    auth: firebase.auth(),
+    firestore: firebase.firestore()
   };
 };
 

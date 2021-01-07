@@ -26,12 +26,14 @@ export interface ISocialAction {
 export interface IAuthContext {
   user: firebase.User | null;
   isAuthenticated: boolean;
+  loadingAuthState: boolean;
   login: (username: string, password: string) => Promise<void>;
   loginAnonymously: () => Promise<firebase.auth.UserCredential>;
   loginProvider: (
     authType: 'google-signup' | 'github-signup'
   ) => Promise<firebase.auth.UserCredential>;
   logout: () => Promise<void>;
+  forgot: (email: string) => Promise<void>;
   register: (
     username: string,
     password: string,
@@ -40,8 +42,10 @@ export interface IAuthContext {
   ) => Promise<firebase.auth.UserCredential | firebase.auth.OAuthCredential | undefined>;
 }
 
-export interface ILogin {
+export interface IForgot {
   email: string;
+}
+export interface ILogin extends IForgot {
   password: string;
 }
 
@@ -88,4 +92,13 @@ export interface ApiTokenVerificationResponse extends ApiResponse {
 export interface IDelayedCloseProps {
   delay: number;
   message: string;
+}
+
+export interface MetaProps {
+  title: string;
+  desc: string;
+  canonical: string;
+  css: string;
+  image: string;
+  js: string;
 }

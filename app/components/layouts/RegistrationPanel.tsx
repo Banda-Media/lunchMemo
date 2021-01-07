@@ -1,13 +1,24 @@
 import Login from '@components/modules/registration/Login';
 import SignUp from '@components/modules/registration/SignUp';
-import { useState, useEffect } from 'react';
+import Forgot from '@components/modules/registration/Forgot';
+import { useState, useEffect, ReactElement } from 'react';
 
 const RegistrationPanel: React.FC = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [route, setRoute] = useState('');
+  const headingLookup: Map<string, string> = new Map([
+    ['/login', 'Log in below to get started'],
+    ['/signup', 'Create an account below to get started'],
+    ['/forgot', 'Enter your email to reset your password']
+  ]);
+  const componentLookup: Map<string, ReactElement> = new Map([
+    ['/login', <Login />],
+    ['/signup', <SignUp />],
+    ['/forgot', <Forgot />]
+  ]);
 
   useEffect(() => {
     const pathName = window && window.location.pathname;
-    setIsLogin(pathName === '/login');
+    setRoute(pathName);
   }, []);
 
   return (
@@ -27,9 +38,9 @@ const RegistrationPanel: React.FC = () => {
         <div className="right widget-login">
           <h3>
             <span>Hungry?</span>
-            {isLogin ? 'Log in ' : 'Create an account '} below to get started
+            {headingLookup.get(route) || ''}
           </h3>
-          {isLogin ? <Login /> : <SignUp />}
+          {componentLookup.get(route) || <Login />}
         </div>
       </div>
     </section>
