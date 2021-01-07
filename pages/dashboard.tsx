@@ -1,12 +1,17 @@
 import { CookieVerificationData } from '@typing/types';
-import authRedirect from '@utils/authRedirect';
+import authGuard from '@utils/authGuard';
 import DashboardPanel from '@components/layouts/DashboardPanel';
 import Layout from '@components/layouts/Layout';
-
-export const getServerSideProps = authRedirect;
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const Dashboard: React.FC<CookieVerificationData> = (props) => {
-  console.log('Loading dash...');
+  const router = useRouter();
+  useEffect(() => {
+    console.log('Loading dashboard...');
+    authGuard(router);
+  }, []);
+
   return (
     <Layout>
       <DashboardPanel {...props} />

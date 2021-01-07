@@ -25,9 +25,8 @@ export interface ISocialAction {
 
 export interface IAuthContext {
   user: firebase.User | null;
-  isLoading: boolean;
   isAuthenticated: boolean;
-  login: (username: string, password: string) => Promise<ApiTokenResponse | null>;
+  login: (username: string, password: string) => Promise<void>;
   loginAnonymously: () => Promise<firebase.auth.UserCredential>;
   loginProvider: (
     authType: 'google-signup' | 'github-signup'

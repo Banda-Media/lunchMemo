@@ -5,6 +5,7 @@ import { useAuth } from '@hooks/AuthContext';
 const Header: FC = () => {
   const navContent = useRef() as MutableRefObject<HTMLDivElement>;
   const { user, logout } = useAuth();
+  console.log('Rendering header');
 
   return (
     <nav className="text-white bg-white flex items-center justify-between flex-wrap px-10 py-3 w-full z-10 top-0">

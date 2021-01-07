@@ -1,9 +1,9 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState, createContext, useContext } from 'react';
-import { auth, createSessionToken } from '@utils/firebase/auth';
-import { IAuthContext } from '@typing/types';
 import firebase from 'firebase/app';
-import nookies from 'nookies';
 import Debug from 'debug';
+import { IAuthContext } from '@typing/types';
+import getFirebase from '@utils/firebase/firebase';
 
 const debug = Debug('lunchmemo:hooks:authContext');
 
@@ -14,10 +14,10 @@ const register = async (
   authType: 'email-signup' | 'google-signup' | 'github-signup'
 ): Promise<firebase.auth.UserCredential | undefined> => {
   let userCredentials;
-
+  debug(`Registering user with ${authType}`);
+  const { auth } = await getFirebase();
   if (authType === 'email-signup') {
     userCredentials = await auth.createUserWithEmailAndPassword(username, password);
-    await createSessionToken((await userCredentials?.user?.getIdToken()) || '');
   } else {
     userCredentials = await loginProvider(authType);
   }
@@ -32,7 +32,9 @@ const register = async (
 const loginProvider = async (
   authType: 'google-signup' | 'github-signup'
 ): Promise<firebase.auth.UserCredential> => {
+  debug('Logging in with provider.');
   let provider;
+  const { auth } = await getFirebase();
   if (authType === 'google-signup') {
     provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
@@ -41,32 +43,31 @@ const loginProvider = async (
     provider.addScope('repo');
   }
   const oauthCredentials = await auth.signInWithPopup(provider);
-  debug('Successfully retrieved OAuth credentials: %o', oauthCredentials);
-  await createSessionToken((await oauthCredentials?.user?.getIdToken()) || '');
+  debug('Successfully logged in with OAuth credentials: %o', oauthCredentials);
   return oauthCredentials;
 };
 
-const login = async (email: string, password: string) => {
-  return auth.signInWithEmailAndPassword(email, password).then(async (response) => {
-    if (response && response.user) {
-      return await createSessionToken(await response.user.getIdToken());
-    }
-    return null;
-  });
+const login = async (email: string, password: string): Promise<void> => {
+  debug('Logging in.');
+  const { auth } = await getFirebase();
+  await auth.signInWithEmailAndPassword(email, password);
 };
 
-const logout = (): Promise<void> => {
+const logout = async (): Promise<void> => {
+  debug('Logging out.');
+  const { auth } = await getFirebase();
   return auth.signOut();
 };
 
-const loginAnonymously = () => {
+const loginAnonymously = async () => {
+  debug('Logging in anonymously.');
+  const { auth } = await getFirebase();
   return auth.signInAnonymously();
 };
 
 const AuthContext = createContext<IAuthContext>({
   user: null,
   isAuthenticated: false,
-  isLoading: false,
   login,
   register,
   logout,
@@ -77,38 +78,36 @@ const AuthContext = createContext<IAuthContext>({
 const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<firebase.User | null>(null);
   const [isAuthenticated, setAuthenticated] = useState(false);
-  const [isLoading, setLoading] = useState(false);
+  const router = useRouter();
   debug('Loading AuthProvider.');
 
   // listen for token changes, call setUser and write new token as a cookie
   useEffect(() => {
-    auth.onIdTokenChanged(async (user) => {
-      debug('User id token change detected...');
-      setLoading(true);
-      if (!user) {
-        setUser(null);
-        setAuthenticated(false);
-        nookies.set(undefined, 'token', '', {});
-        debug('Setting id token...');
-      } else {
-        const token = await user.getIdToken();
-        setUser(user);
-        setAuthenticated(true);
-        nookies.set(undefined, 'token', token, {});
-        debug('Resetting id token and session token...');
-      }
-      setLoading(false);
-    });
+    debug('Setting up listener for token changes.');
+    const createListener = async () => {
+      const { auth } = await getFirebase();
+      auth.onIdTokenChanged(async (user) => {
+        debug('User id token change detected...%o', user);
+        setUser(auth.currentUser);
+        setAuthenticated(!!auth.currentUser);
+      });
+    };
+    createListener();
   }, []);
 
   // force refresh the token every 10 minutes
   useEffect(() => {
-    const handle = setInterval(async () => {
-      debug('Forcing id token refresh...');
-      const user = auth.currentUser;
-      if (user) await user.getIdToken(true);
-    }, 10 * 60 * 1000);
-    return () => clearInterval(handle);
+    const createInterval = async () => {
+      debug('Setting up idToken refresh every 10 minutes.');
+      const { auth } = await getFirebase();
+      const handle = setInterval(async () => {
+        debug('Forcing id token refresh...');
+        const user = auth.currentUser;
+        if (user) await user.getIdToken(true);
+      }, 10 * 60 * 1000);
+      return () => clearInterval(handle);
+    };
+    createInterval();
   }, []);
 
   return (
@@ -116,10 +115,15 @@ const AuthProvider: React.FC = ({ children }) => {
       value={{
         user,
         register,
-        login,
-        logout,
+        login: async (email: string, password: string) => {
+          await login(email, password);
+          router.push('/profile');
+        },
+        logout: async (): Promise<void> => {
+          await logout();
+          router.push('/login');
+        },
         isAuthenticated,
-        isLoading,
         loginAnonymously,
         loginProvider
       }}>

@@ -1,13 +1,17 @@
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Layout from '@components/layouts/Layout';
 import Modal from 'react-modal';
-import authRedirect from '@utils/authRedirect';
+import authGuard from '@utils/authGuard';
 
 Modal.setAppElement('#__next');
 
-export const getServerSideProps = authRedirect;
-
 const HomePage: React.FC = () => {
-  console.log('Loading index...');
+  const router = useRouter();
+  useEffect(() => {
+    console.log('Loading HomePage...');
+    authGuard(router);
+  }, []);
 
   return <Layout></Layout>;
 };

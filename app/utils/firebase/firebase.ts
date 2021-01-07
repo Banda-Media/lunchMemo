@@ -10,17 +10,21 @@ import Debug from 'debug';
 const debug = Debug('lunchmemo:app:utils:firebase:firebase');
 import config from './config';
 
-const getFirebase = (): Firebase => {
+const getFirebase = async (): Promise<Firebase> => {
   try {
-    firebase.initializeApp(config);
-    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+    await firebase.initializeApp(config);
+    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
   } catch (err) {
     if (!/already exists/.test(err.message)) {
       debug(`ERROR: Firebase initialization error ${err.message}: %o`, err.stack);
     }
   }
 
-  return { app: firebase.app(), auth: firebase.auth(), firestore: firebase.firestore() };
+  return {
+    app: await firebase.app(),
+    auth: await firebase.auth(),
+    firestore: await firebase.firestore()
+  };
 };
 
 export default getFirebase;
