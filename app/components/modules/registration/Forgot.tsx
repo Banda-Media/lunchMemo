@@ -5,19 +5,11 @@ import { IForgot } from '@typing/types';
 import EmailInput from './inputs/EmailInput';
 import SubmitButton from './inputs/SubmitButton';
 import Title from './inputs/Title';
+import { formDefaults } from '@utils/constants';
 
 const Forgot: React.FC = () => {
   const { forgot } = useAuth();
-  const form = useForm<Record<string, unknown>>({
-    mode: 'onChange',
-    reValidateMode: 'onChange',
-    defaultValues: {},
-    resolver: undefined,
-    context: undefined,
-    criteriaMode: 'firstError',
-    shouldFocusError: true,
-    shouldUnregister: true
-  });
+  const form = useForm(formDefaults);
   const onSubmit = ({ email }: IForgot) => forgot(email);
 
   return (

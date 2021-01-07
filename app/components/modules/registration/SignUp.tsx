@@ -1,9 +1,10 @@
+import Link from 'next/link';
 import { BaseSyntheticEvent } from 'react';
 import { useForm } from 'react-hook-form';
-import Link from 'next/link';
 import { useAuth } from '@hooks/AuthContext';
 import { ISignUpData } from '@typing/types';
 import Socials from '@components/modules/registration/Socials';
+import { formDefaults } from '@utils/constants';
 import NameInput from './inputs/NameInput';
 import EmailInput from './inputs/EmailInput';
 import PasswordInput from './inputs/PasswordInput';
@@ -12,16 +13,7 @@ import Title from './inputs/Title';
 
 const SignUpForm: React.FC = () => {
   const { register: registerUser } = useAuth();
-  const form = useForm<Record<string, unknown>>({
-    mode: 'onChange',
-    reValidateMode: 'onChange',
-    defaultValues: {},
-    resolver: undefined,
-    context: undefined,
-    criteriaMode: 'firstError',
-    shouldFocusError: true,
-    shouldUnregister: true
-  });
+  const form = useForm(formDefaults);
 
   const onSubmit = ({ name, email, password }: ISignUpData) => {
     registerUser(email, password, name, 'email-signup');

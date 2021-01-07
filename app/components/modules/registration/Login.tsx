@@ -8,19 +8,11 @@ import EmailInput from './inputs/EmailInput';
 import PasswordInput from './inputs/PasswordInput';
 import SubmitButton from './inputs/SubmitButton';
 import Title from './inputs/Title';
+import { formDefaults } from '@utils/constants';
 
 const Login: React.FC = () => {
   const { login, loginProvider } = useAuth();
-  const form = useForm<Record<string, unknown>>({
-    mode: 'onChange',
-    reValidateMode: 'onChange',
-    defaultValues: {},
-    resolver: undefined,
-    context: undefined,
-    criteriaMode: 'firstError',
-    shouldFocusError: true,
-    shouldUnregister: true
-  });
+  const form = useForm(formDefaults);
 
   const onSubmit = ({ email, password }: ILogin) => {
     login(email, password);
