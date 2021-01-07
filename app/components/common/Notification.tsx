@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IDelayedCloseProps } from '@typing/types';
+import { IDelayedCloseProps } from '@typing/props';
 
 const Notification: React.FC<IDelayedCloseProps> = ({ delay, message }) => {
   const [visible, setVisible] = useState(true);

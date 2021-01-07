@@ -1,6 +1,6 @@
 import { CookieVerificationData } from '@typing/types';
 import authGuard from '@utils/authGuard';
-import DashboardPanel from '@components/layouts/DashboardPanel';
+import DashboardPanel from '@components/modules/dashboard/DashboardPanel';
 import Layout from '@components/layouts/Layout';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';

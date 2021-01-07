@@ -88,17 +88,3 @@ export interface ApiTokenVerificationResponse extends ApiResponse {
   authenticated: boolean;
   usermail: string;
 }
-
-export interface IDelayedCloseProps {
-  delay: number;
-  message: string;
-}
-
-export interface MetaProps {
-  title: string;
-  desc: string;
-  canonical: string;
-  css: string;
-  image: string;
-  js: string;
-}

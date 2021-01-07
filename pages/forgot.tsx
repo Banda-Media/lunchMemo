@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '@components/layouts/Layout';
-import RegistrationPanel from '@components/layouts/RegistrationPanel';
+import RegistrationPanel from '@components/modules/registration/RegistrationPanel';
 import UnAuthGuard from '@utils/unAuthGuard';
 
 const ForgotPage: React.FC = () => {

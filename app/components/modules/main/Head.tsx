@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { MetaProps } from '@typing/types';
+import { MetaProps } from '@typing/props';
 
 const Meta: React.FC<MetaProps> = (props) => (
   <Head key={props.title}>

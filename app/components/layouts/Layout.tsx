@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
-import Header from '@components/elements/Header';
-import Footer from '@components/elements/Footer';
-import Background from '@components/elements/Background';
+import Header from '@components/modules/main/Header/Header';
+import Footer from '@components/modules/main/Footer/Footer';
+import Background from '@components/modules/main/Background';
 
 const Layout: React.FC = (props) => {
   const { route } = useRouter();
