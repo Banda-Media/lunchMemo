@@ -1,19 +1,8 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import Layout from '@components/layouts/Layout';
 import Modal from 'react-modal';
-import authGuard from '@utils/authGuard';
+import withAuthGuard from '@utils/authGuard.tsx';
 
 Modal.setAppElement('#__next');
 
-const HomePage: React.FC = () => {
-  const router = useRouter();
-  useEffect(() => {
-    console.log('Loading HomePage...');
-    authGuard(router);
-  }, []);
-
-  return <Layout></Layout>;
-};
-
-export default HomePage;
+const HomePage: React.FC = () => <Layout></Layout>;
+export default withAuthGuard(HomePage);

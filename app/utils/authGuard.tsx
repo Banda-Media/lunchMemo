@@ -1,5 +1,6 @@
 import Debug from 'debug';
-import { NextRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
+import { useEffect } from 'react';
 import getFirebase from '@utils/firebase/firebase';
 
 const debug = Debug('lunchmemo:utils:authRedirect');
@@ -17,4 +18,16 @@ const authGuard = async (router: NextRouter): Promise<void> => {
   });
 };
 
-export default authGuard;
+export function withAuthGuard<T>(WrappedComponent: React.FC<T>): React.FC<T> {
+  const ComponentWithAuthGuard = (props: T) => {
+    const router = useRouter();
+    useEffect(() => {
+      debug(`Rendering Component ${WrappedComponent.name}`);
+      authGuard(router);
+    }, []);
+    return <WrappedComponent {...props} />;
+  };
+  return ComponentWithAuthGuard;
+}
+
+export default withAuthGuard;

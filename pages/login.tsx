@@ -1,21 +1,10 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import Layout from '@components/layouts/Layout';
 import RegistrationPanel from '@components/modules/registration/RegistrationPanel';
-import unAuthGuard from '@utils/unAuthGuard';
+import withUnauthGuard from '@utils/unAuthGuard.tsx';
 
-const LoginPage: React.FC = () => {
-  const router = useRouter();
-  useEffect(() => {
-    console.log('Loading login...');
-    unAuthGuard(router);
-  }, []);
-
-  return (
-    <Layout>
-      <RegistrationPanel />
-    </Layout>
-  );
-};
-
-export default LoginPage;
+const LoginPage: React.FC = () => (
+  <Layout>
+    <RegistrationPanel />
+  </Layout>
+);
+export default withUnauthGuard(LoginPage);
