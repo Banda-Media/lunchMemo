@@ -1,5 +1,10 @@
 import { UseFormMethods } from 'react-hook-form';
 
+export interface MakerLinkProps {
+  url: string;
+  name: string;
+}
+
 export interface AuthActionsProps {
   logout: () => void;
 }
