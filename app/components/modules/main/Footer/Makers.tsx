@@ -9,7 +9,7 @@ const Newsletter: React.FC = () => {
           ['https://github.com/andresmweber.png?size=24', 'Andres Weber'],
           ['https://github.com/bobbypwang.png?size=24', 'Bobby Wang']
         ].map(([url, name]) => (
-          <MakerLink url={url} name={name} />
+          <MakerLink key={name} url={url} name={name} />
         ))}
       </ul>
     </div>

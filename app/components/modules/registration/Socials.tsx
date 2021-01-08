@@ -18,6 +18,7 @@ const Socials: React.FC<ISocialAction> = ({ message, clickHandler }) => {
       <div className="flex flex-col space-y-4">
         {elements.map(([title, svg]) => (
           <button
+            key={title}
             id={`${title.toLowerCase()}-signup`}
             onClick={clickHandler}
             className="flex items-center justify-center px-4 py-2 space-x-2 transition-colors duration-300 border border-gray-800 rounded-md group hover:bg-gray-800 focus:outline-none">

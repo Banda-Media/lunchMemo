@@ -1,8 +1,11 @@
 <div align=center>
     <h1 align=center>
-        <img align=center
-            src="./docs/icon/android-chrome-192x192.png"
-            alt="LunchMemo logo">
+        <a href="https://lunchmemo.andresmweber.com/" target="_blank">
+            <img 
+                align=center
+                src="./docs/icon/android-chrome-192x192.png"
+                alt="LunchMemo logo">
+        </a>
         <br>
         LunchMemo
         <br>
@@ -64,22 +67,21 @@
 - (Optional): Create a [FeaturePeek project](https://featurepeek.com/) and install the Github App
 - Set the following environment variables on | [mac](https://stackoverflow.com/questions/7501678/set-environment-variables-on-mac-os-x-lion) | [windows](https://superuser.com/questions/1334129/setting-an-environment-variable-in-windows-10-gpodder) | [linux](https://stackoverflow.com/questions/45502996/how-to-set-environment-variable-in-linux-permanently) |
 - Copy `.env example` and set entries for environment config
-- 
-| Key                                           | Description                                       |
-| :-------------------------------------------- | ------------------------------------------------- |
-| `NEXT_PUBLIC_LM_YELP_API_KEY`                 | The generated Yelp Fusion API key you created     |
-| `NEXT_PUBLIC_LM_FIREBASE_API_KEY`             | Firebase API Key                                  |
-| `NEXT_PUBLIC_LM_FIREBASE_AUTH_DOMAIN`         | Firebase Project Config Var                       |
-| `NEXT_PUBLIC_LM_FIREBASE_PROJECT_ID`          | Firebase Project Config Var                       |
-| `NEXT_PUBLIC_LM_FIREBASE_DATABASE_URL`        | Firebase Project Config Var                       |
-| `NEXT_PUBLIC_LM_FIREBASE_STORAGE_BUCKET`      | Firebase Project Config Var                       |
-| `NEXT_PUBLIC_LM_FIREBASE_MESSAGING_SENDER_ID` | Firebase Project Config Var                       |
-| `NEXT_PUBLIC_LM_FIREBASE_APP_ID`              | Firebase Project Config Var                       |
-| `NEXT_PUBLIC_LM_FIREBASE_MEASUREMENT_ID`      | Firebase Project Config Var                       |
-| `NEXT_PUBLIC_LM_FIREBASE_CLIENT_EMAIL`        | Firebase Admin Project Config Var                 |
-| `NEXT_PUBLIC_LM_FIREBASE_PRIVATE_KEY`         | Firebase Admin Project Config Var                 |
-| `NEXT_PUBLIC_LM_SECURE_COOKIE`                | LunchMemo auth config (boolean, should be false)  |
-| `DEBUG`                                       | (Optional) Debugger filter, default is lunchmemo:*|
+- | Key                                           | Description                                         |
+  | :-------------------------------------------- | --------------------------------------------------- |
+  | `NEXT_PUBLIC_LM_YELP_API_KEY`                 | The generated Yelp Fusion API key you created       |
+  | `NEXT_PUBLIC_LM_FIREBASE_API_KEY`             | Firebase API Key                                    |
+  | `NEXT_PUBLIC_LM_FIREBASE_AUTH_DOMAIN`         | Firebase Project Config Var                         |
+  | `NEXT_PUBLIC_LM_FIREBASE_PROJECT_ID`          | Firebase Project Config Var                         |
+  | `NEXT_PUBLIC_LM_FIREBASE_DATABASE_URL`        | Firebase Project Config Var                         |
+  | `NEXT_PUBLIC_LM_FIREBASE_STORAGE_BUCKET`      | Firebase Project Config Var                         |
+  | `NEXT_PUBLIC_LM_FIREBASE_MESSAGING_SENDER_ID` | Firebase Project Config Var                         |
+  | `NEXT_PUBLIC_LM_FIREBASE_APP_ID`              | Firebase Project Config Var                         |
+  | `NEXT_PUBLIC_LM_FIREBASE_MEASUREMENT_ID`      | Firebase Project Config Var                         |
+  | `NEXT_PUBLIC_LM_FIREBASE_CLIENT_EMAIL`        | Firebase Admin Project Config Var                   |
+  | `NEXT_PUBLIC_LM_FIREBASE_PRIVATE_KEY`         | Firebase Admin Project Config Var                   |
+  | `NEXT_PUBLIC_LM_SECURE_COOKIE`                | LunchMemo auth config (boolean, should be false)    |
+  | `DEBUG`                                       | (Optional) Debugger filter, default is lunchmemo:\* |
 
 ---
 
