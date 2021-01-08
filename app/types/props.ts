@@ -53,3 +53,8 @@ export interface SubmitButtonProps {
   title: string;
   disabled?: boolean;
 }
+
+export interface NotificationBarContentsProps {
+  message: string;
+  onClick: () => void;
+}
