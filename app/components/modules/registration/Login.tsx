@@ -1,14 +1,14 @@
-import Link from 'next/link';
 import { BaseSyntheticEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '@hooks/AuthContext';
 import { ILogin } from '@typing/types';
 import Socials from '@components/modules/registration/Socials';
-import EmailInput from './inputs/EmailInput';
-import PasswordInput from './inputs/PasswordInput';
-import SubmitButton from './inputs/SubmitButton';
-import Title from './inputs/Title';
+import EmailInput from './components/EmailInput';
+import PasswordInput from './components/PasswordInput';
+import SubmitButton from './components/SubmitButton';
+import Title from './components/Title';
 import { formDefaults } from '@utils/constants';
+import RegistrationFormLink from './components/RegistrationFormLink';
 
 const Login: React.FC = () => {
   const { login, loginProvider } = useAuth();
@@ -26,21 +26,13 @@ const Login: React.FC = () => {
   return (
     <div>
       <Title label="Login" />
-
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-5">
         <EmailInput form={form} />
         <PasswordInput form={form} />
         <SubmitButton title="Log in" disabled={!!Object.keys(form.errors).length} />
       </form>
-
       <Socials message={'or log in with'} clickHandler={loginThirdParty} />
-
-      <p className="mt-2 text-center text-md text-gray-600">
-        don't have an account?
-        <Link href="/signup">
-          <span className="ml-2 text-blue-500 cursor-pointer">Sign up</span>
-        </Link>
-      </p>
+      <RegistrationFormLink url="/signup" prompt="don't have an account?" linkText="Sign up" />
     </div>
   );
 };

@@ -1,5 +1,11 @@
 import { UseFormMethods } from 'react-hook-form';
 
+export interface RegistrationFormLinkProps {
+  prompt: string;
+  linkText: string;
+  url: string;
+}
+
 export interface MakerLinkProps {
   url: string;
   name: string;

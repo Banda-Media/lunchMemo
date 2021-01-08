@@ -1,9 +1,8 @@
-import { CookieVerificationData } from '@typing/types';
 import DashboardPanel from '@components/modules/dashboard/DashboardPanel';
 import Layout from '@components/layouts/Layout';
 import withGuard, { authGuard } from '@utils/guards';
 
-const Dashboard: React.FC<CookieVerificationData> = (props) => (
+const Dashboard: React.FC = (props) => (
   <Layout>
     <DashboardPanel {...props} />
   </Layout>

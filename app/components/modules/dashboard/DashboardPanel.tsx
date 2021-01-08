@@ -1,7 +1,6 @@
-import { CookieVerificationData } from '@typing/types';
 import { useAuth } from '@hooks/AuthContext';
 
-const DashboardPanel: React.FC<CookieVerificationData> = () => {
+const DashboardPanel: React.FC = () => {
   const { logout } = useAuth();
   return (
     <section className="bg-white md:w-3/4 lg:w-3/5 mx-auto register-login animated fadeInDown faster">
