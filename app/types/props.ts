@@ -1,5 +1,19 @@
 import { UseFormMethods } from 'react-hook-form';
 
+export interface AuthActionsProps {
+  logout: () => void;
+}
+
+export interface ListButtonLinkProps {
+  click: () => void;
+  label: string;
+}
+
+export interface ListItemLinkProps {
+  url: string;
+  label: string;
+}
+
 export interface InputProps {
   form: UseFormMethods<Record<string, unknown>>;
 }
