@@ -99,3 +99,23 @@ export interface INotifyContext {
   notification: Notification;
   notify: (message: string, timeout?: number) => void;
 }
+
+export type LunchGroup = {
+  name: string;
+  foods: string[];
+  startTime: string;
+  endTime: number;
+  groupSize: number;
+};
+
+export interface LunchGroupContext {
+  groups: LunchGroup[];
+  addGroup: (
+    name: string,
+    foods: string[],
+    startTime: string,
+    endTime: number,
+    groupSize: number
+  ) => void;
+  removeGroup: (name: string) => void;
+}
