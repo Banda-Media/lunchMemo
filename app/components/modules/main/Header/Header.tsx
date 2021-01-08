@@ -4,7 +4,6 @@ import MenuButtonMobile from './MenuButtonMobile';
 import ActionsList from './ActionsList/ActionsList';
 
 const Header: FC = () => {
-  console.log('Rendering header');
   const navContent = useRef() as MutableRefObject<HTMLDivElement>;
   return (
     <nav className="text-white bg-white flex items-center justify-between flex-wrap px-10 py-3 w-full z-10 top-0">

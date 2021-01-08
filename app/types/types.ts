@@ -88,3 +88,14 @@ export interface ApiTokenVerificationResponse extends ApiResponse {
   authenticated: boolean;
   usermail: string;
 }
+
+export interface Notification {
+  message: string;
+  timeout: number;
+  timestamp: Date;
+}
+
+export interface INotifyContext {
+  notification: Notification;
+  notify: (message: string, timeout?: number) => void;
+}

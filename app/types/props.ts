@@ -37,6 +37,7 @@ export interface PasswordInputProps {
 export interface IDelayedCloseProps {
   delay: number;
   message: string;
+  timestamp: Date;
 }
 
 export interface MetaProps {

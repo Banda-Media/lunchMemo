@@ -1,6 +1,6 @@
 import Debug from 'debug';
 import firebase from 'firebase/app';
-import getFirebase from '@utils/firebase/firebase';
+import getFirebase from 'app/services/firebase/firebase';
 
 const debug = Debug('lunchmemo:utils:firebase:auth');
 export const { auth } = getFirebase();
