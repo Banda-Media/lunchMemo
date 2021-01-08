@@ -1,8 +1,8 @@
 import Layout from '@components/layouts/Layout';
 import Modal from 'react-modal';
-import withAuthGuard from '@utils/authGuard.tsx';
+import withGuard, { authGuard } from '@utils/guards';
 
 Modal.setAppElement('#__next');
 
 const HomePage: React.FC = () => <Layout></Layout>;
-export default withAuthGuard(HomePage);
+export default withGuard(HomePage, authGuard);

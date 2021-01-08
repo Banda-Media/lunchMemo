@@ -1,10 +1,10 @@
 import Layout from '@components/layouts/Layout';
 import RegistrationPanel from '@components/modules/registration/RegistrationPanel';
-import withUnauthGuard from '@utils/unAuthGuard';
+import withGuard, { unauthGuard } from '@utils/guards';
 
 const SignupPage: React.FC = () => (
   <Layout>
     <RegistrationPanel />
   </Layout>
 );
-export default withUnauthGuard(SignupPage);
+export default withGuard(SignupPage, unauthGuard);
