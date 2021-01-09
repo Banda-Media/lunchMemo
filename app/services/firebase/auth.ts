@@ -56,7 +56,8 @@ export const loginProvider = async (
     provider = new firebase.auth.GithubAuthProvider();
     provider.addScope('repo');
   }
-  const oauthCredentials = await auth.signInWithPopup(provider);
+  await auth.signInWithRedirect(provider);
+  const oauthCredentials = firebase.auth().getRedirectResult();
   debug('Successfully logged in with OAuth credentials: %o', oauthCredentials);
   return oauthCredentials;
 };
