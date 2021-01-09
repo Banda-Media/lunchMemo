@@ -110,17 +110,6 @@ export type GoogleDate = {
 };
 
 export type LunchGroup = {
-  name: string;
-  active: boolean;
-  startTime: Date | GoogleDate;
-  endTime: Date | GoogleDate;
-  groupSize: string;
-  creator: OneToManyRelationships;
-  foods: OneToManyRelationships;
-  users: OneToManyRelationships;
-};
-
-export type LunchGroupUpdate = {
   name?: string;
   active?: boolean;
   startTime?: Date | GoogleDate;
@@ -137,7 +126,7 @@ export interface ILunchGroupContext {
   getGroup?: (id: string) => Promise<LunchGroup>;
   addGroup?: (lunchGroup: LunchGroup) => Promise<void>;
   removeGroup?: (name: string) => Promise<void>;
-  updateGroup?: (id: string, payload: LunchGroupUpdate) => Promise<void>;
+  updateGroup?: (id: string, payload: LunchGroup) => Promise<void>;
   loadGroups?: (name: string) => Promise<void>;
   getUser?: (id: string) => Promise<User>;
 }
@@ -146,7 +135,7 @@ export interface User {
   email: string;
   uid: string;
 }
-
+export type RawUser = firebase.User | null;
 export type AMPM = 'AM' | 'PM';
 export type GroupSize = 'Small (1-2)' | 'Medium (3-5)' | 'Large (6+)';
 export interface CreateGroupFormData {

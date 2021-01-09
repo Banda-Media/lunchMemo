@@ -2,7 +2,7 @@ import Debug from 'debug';
 import { useState, createContext, useContext, useEffect } from 'react';
 import getFirebase from '@services/firebase/firebase';
 import { useNotify } from './NotifyContext';
-import { ILunchGroupContext, LunchGroup, LunchGroupUpdate, User } from '@typing/types';
+import { ILunchGroupContext, LunchGroup, User } from '@typing/types';
 import { USER_COLLECTION, GROUPS_COLLECTION } from '@utils/constants';
 
 const debug = Debug('lunchmemo:hooks:LunchGroupContext');
@@ -44,9 +44,9 @@ const LunchGroupProvider: React.FC = ({ children }) => {
     return group;
   };
 
-  const updateGroup = async (id: string, lunchGroupUpdate: LunchGroupUpdate) => {
+  const updateGroup = async (id: string, lunchGroup: LunchGroup) => {
     setLoading(true);
-    await firestore.collection(GROUPS_COLLECTION).doc(id).set(lunchGroupUpdate);
+    await firestore.collection(GROUPS_COLLECTION).doc(id).set(lunchGroup);
     setLoading(false);
   };
 

@@ -7,6 +7,7 @@ import SubmitButton from '@components/common/forms/SubmitButton';
 import TextInput from '@components/common/forms/TextInput';
 import { Select } from '@components/common/forms/Generic';
 import TimePicker from '@components/common/forms/TimePicker';
+import firebase from 'firebase/app';
 
 const setTime = (ampm: string, hours: string, minutes: string): Date => {
   const now = new Date();
@@ -14,11 +15,8 @@ const setTime = (ampm: string, hours: string, minutes: string): Date => {
   return now;
 };
 
-const CreateGroup: React.FC = () => {
-  const form = useForm(formDefaults);
-  const { addGroup } = useLunchGroup();
-  const { user } = useAuth();
-  const onSubmit = ({
+const formToLunchGroup = (
+  {
     name,
     starthours,
     startminutes,
@@ -27,21 +25,30 @@ const CreateGroup: React.FC = () => {
     endampm,
     startampm,
     groupSize
-  }: CreateGroupFormData) => {
-    const userRef: OneToManyRelationships = user ? { [user.uid]: true } : {};
-    const startTime = setTime(startampm, starthours, startminutes);
-    const endTime = setTime(endampm, endhours, endminutes);
-    const lunchGroup: LunchGroup = {
-      name,
-      groupSize,
-      startTime,
-      endTime,
-      creator: userRef,
-      users: userRef,
-      active: true,
-      foods: {}
-    };
-    addGroup && addGroup(lunchGroup);
+  }: CreateGroupFormData,
+  user: firebase.User | null
+): LunchGroup => {
+  const userRef: OneToManyRelationships = user ? { [user.uid]: true } : {};
+  const startTime = setTime(startampm, starthours, startminutes);
+  const endTime = setTime(endampm, endhours, endminutes);
+  return {
+    name,
+    groupSize,
+    startTime,
+    endTime,
+    creator: userRef,
+    users: userRef,
+    active: true,
+    foods: {}
+  };
+};
+
+const CreateGroup: React.FC = () => {
+  const form = useForm(formDefaults);
+  const { addGroup } = useLunchGroup();
+  const { user } = useAuth();
+  const onSubmit = (formData: CreateGroupFormData) => {
+    addGroup && addGroup(formToLunchGroup(formData, user));
   };
 
   return (

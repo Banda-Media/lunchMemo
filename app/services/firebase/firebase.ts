@@ -12,7 +12,7 @@ const debug = Debug('lunchmemo:app:utils:firebase:firebase');
 const getFirebase = (): Firebase => {
   try {
     firebase.initializeApp(config);
-    // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+    firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
   } catch (err) {
     if (!/already exists/.test(err.message)) {
       debug(`ERROR: Firebase initialization error ${err.message}: %o`, err.stack);
