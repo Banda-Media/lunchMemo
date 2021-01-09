@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { useAuth } from '@hooks/AuthContext';
 import { IForgot } from '@typing/types';
-import EmailInput from './components/EmailInput';
-import SubmitButton from './components/SubmitButton';
+import EmailInput from '../../common/forms/EmailInput';
+import SubmitButton from '../../common/forms/SubmitButton';
 import Title from './components/Title';
 import { formDefaults } from '@utils/constants';
 import RegistrationFormLink from './components/RegistrationFormLink';

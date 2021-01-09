@@ -18,7 +18,6 @@ const NotifyProvider: React.FC = ({ children }) => {
   debug('Loading NotifyProvider.');
 
   const notify = (message: string, timeout = 3000) => {
-    console.log('running notify', message, timeout);
     setNotification({ message, timeout, timestamp: new Date() });
   };
 

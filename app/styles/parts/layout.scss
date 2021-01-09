@@ -98,61 +98,52 @@
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.4);
+  }
+}
 
-    .group-container {
-      border-bottom: 1px solid #eee;
-      padding: 1.6rem 2rem;
-      display: flex;
-      justify-content: space-between;
+.group-container {
+  .attendees {
+    width: 10%;
+  }
 
-      .attendees {
-        width: 10%;
+  .group-time-range {
+    div {
+      margin-right: 14px;
+      span {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .btn-join,
+  .btn-leave {
+    width: 100px;
+  }
+
+  .btn-join {
+    background-color: $yellow;
+    &:hover {
+      background-color: $yellow;
+    }
+  }
+
+  .btn-leave {
+    background-color: $red;
+    &:hover {
+      background-color: $red;
+    }
+  }
+  .attendee-list {
+    li {
+      margin-right: 7px;
+      color: $lightgray;
+
+      &.host {
+        color: $red;
       }
 
-      .group-time-range {
-        display: flex;
-        align-items: center;
-        div {
-          margin-right: 14px;
-          span {
-            margin-right: 5px;
-          }
-        }
-      }
-
-      .btn-join,
-      .btn-leave {
-        width: 100px;
-      }
-
-      .btn-join {
-        background-color: $yellow;
-        &:hover {
-          background-color: $yellow;
-        }
-      }
-
-      .btn-leave {
-        background-color: $red;
-        &:hover {
-          background-color: $red;
-        }
-      }
-      .attendee-list {
-        display: flex;
-
-        li {
-          margin-right: 7px;
-          color: $lightgray;
-
-          &.host {
-            color: $red;
-          }
-
-          &.occupied {
-            color: $red;
-          }
-        }
+      &.occupied {
+        color: $red;
       }
     }
   }
@@ -246,10 +237,6 @@
       .group-container {
         display: block;
         position: relative;
-
-        .group-time-range {
-          display: block;
-        }
 
         .join-leave {
           float: right;

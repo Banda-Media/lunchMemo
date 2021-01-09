@@ -4,10 +4,10 @@ import { useAuth } from '@hooks/AuthContext';
 import { ISignUpData } from '@typing/types';
 import Socials from '@components/modules/registration/Socials';
 import { formDefaults } from '@utils/constants';
-import NameInput from './components/NameInput';
-import EmailInput from './components/EmailInput';
-import PasswordInput from './components/PasswordInput';
-import SubmitButton from './components/SubmitButton';
+import NameInput from '../../common/forms/NameInput';
+import EmailInput from '../../common/forms/EmailInput';
+import PasswordInput from '../../common/forms/PasswordInput';
+import SubmitButton from '../../common/forms/SubmitButton';
 import Title from './components/Title';
 import RegistrationFormLink from './components/RegistrationFormLink';
 

@@ -1,11 +1,6 @@
 import firebase from 'firebase/app';
-import config from './config';
 import { Observer, IPostPayload, UnsubscribeCallback } from '@typing/types';
 import getFirebase from './firebase';
-
-if (!firebase.apps.length) {
-  firebase.initializeApp(config);
-}
 
 export const { firestore } = getFirebase();
 

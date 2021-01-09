@@ -1,4 +1,5 @@
 import { UseFormMethods } from 'react-hook-form';
+import { LunchGroup } from '@typing/types';
 
 export interface RegistrationFormLinkProps {
   prompt: string;
@@ -25,10 +26,33 @@ export interface ListItemLinkProps {
   label: string;
 }
 
+export interface InputGenericProps {
+  form: UseFormMethods<Record<string, unknown>>;
+  name: string;
+  [x: string]: any;
+}
+
+export interface SelectGenericProps extends InputGenericProps {
+  options: string[];
+}
+
 export interface InputProps {
   form: UseFormMethods<Record<string, unknown>>;
 }
 
+export interface TimePickerProps extends InputProps {
+  prefix: string;
+  [x: string]: any;
+}
+
+export interface TextInputProps extends InputProps {
+  name: string;
+  label?: string;
+  placeholder: string;
+  autocomplete?: string;
+  message: string;
+  [x: string]: any;
+}
 export interface PasswordInputProps {
   form: UseFormMethods<Record<string, unknown>>;
   newPassword?: boolean;
@@ -57,4 +81,12 @@ export interface SubmitButtonProps {
 export interface NotificationBarContentsProps {
   message: string;
   onClick: () => void;
+}
+
+export interface LunchGroupsProps {
+  groups: LunchGroup[];
+}
+
+export interface LunchGroupProps {
+  group: LunchGroup;
 }

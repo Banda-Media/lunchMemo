@@ -1,9 +1,10 @@
 import Debug from 'debug';
 import firebase from 'firebase/app';
 import getFirebase from 'app/services/firebase/firebase';
+import { USER_COLLECTION } from '@utils/constants';
 
 const debug = Debug('lunchmemo:utils:firebase:auth');
-export const { auth } = getFirebase();
+export const { auth, firestore } = getFirebase();
 
 export const register = async (
   username: string,
@@ -18,9 +19,11 @@ export const register = async (
   } else {
     userCredentials = await loginProvider(authType);
   }
-
+  debug('Registered user: %o', userCredentials);
   if (userCredentials.user) {
     userCredentials.user.updateProfile({ displayName: displayName || username });
+    const uid = userCredentials.user.uid;
+    firestore.collection(USER_COLLECTION).doc(uid).set({ email: userCredentials.user.email, uid });
   }
 
   return userCredentials;
