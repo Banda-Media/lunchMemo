@@ -1,26 +1,49 @@
 import { BaseSyntheticEvent } from 'react';
+import Debug from 'debug';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '@hooks/AuthContext';
+import { useNotify } from '@hooks/NotifyContext';
 import { ILogin } from '@typing/types';
+import { formDefaults } from '@utils/constants';
+import Title from './components/Title';
 import Socials from '@components/modules/registration/Socials';
 import EmailInput from '../../common/forms/EmailInput';
 import PasswordInput from '../../common/forms/PasswordInput';
 import SubmitButton from '../../common/forms/SubmitButton';
-import Title from './components/Title';
-import { formDefaults } from '@utils/constants';
 import RegistrationFormLink from './components/RegistrationFormLink';
+
+const debug = Debug('lunchmemo:app:components:modules:registration:Login');
+interface LoginRun {
+  email?: string;
+  password?: string;
+  id?: 'google-signup' | 'github-signup';
+}
 
 const Login: React.FC = () => {
   const { login, loginProvider } = useAuth();
   const form = useForm(formDefaults);
+  const { notify } = useNotify();
 
   const onSubmit = ({ email, password }: ILogin) => {
-    login(email, password);
+    runLogin({ email, password });
   };
 
   const loginThirdParty = (e: BaseSyntheticEvent | undefined) => {
     const { id } = e?.target.id;
-    loginProvider(id);
+    runLogin({ id });
+  };
+
+  const runLogin = async ({
+    email = '',
+    password = '',
+    id = 'github-signup'
+  }: LoginRun): Promise<void> => {
+    try {
+      email.length ? login(email, password) : loginProvider(id);
+    } catch (err) {
+      debug('Problem logging in: %o', err);
+      notify(`Problem logging in: ${err?.message}`);
+    }
   };
 
   return (

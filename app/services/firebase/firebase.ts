@@ -1,11 +1,11 @@
 import Debug from 'debug';
 import firebase from 'firebase/app';
+import config from './config';
+import { Firebase } from '@typing/types';
 /* eslint-disable */
 import 'firebase/auth';
 import 'firebase/firestore';
 /* eslint-enable */
-import config from './config';
-import { Firebase } from '@typing/types';
 
 const debug = Debug('lunchmemo:app:utils:firebase:firebase');
 

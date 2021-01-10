@@ -4,7 +4,7 @@ import firebase from 'firebase/app';
 import Debug from 'debug';
 import { IAuthContext } from '@typing/types';
 import { userLocalStorage } from '@utils/constants';
-import getFirebase from 'app/services/firebase/firebase';
+import getFirebase from '@services/firebase/firebase';
 import {
   login,
   register,
@@ -12,7 +12,7 @@ import {
   loginProvider,
   loginAnonymously,
   forgot
-} from 'app/services/firebase/auth';
+} from '@services/firebase/auth';
 
 const debug = Debug('lunchmemo:hooks:authContext');
 

@@ -13,12 +13,13 @@ const parseGroupSize = (groupSize: string): readonly [number, number] => {
 };
 
 const LunchGroup: React.FC<LunchGroupProps> = ({
-  group: { name, active, startTime, endTime, groupSize, creator, foods, users }
+  group: { name, active, startTime, endTime, groupSize = '', creator = {}, foods = [], users = [] }
 }) => {
   const { user } = useAuth();
   const { getUser } = useLunchGroup();
   const [owner, setOwner] = useState('');
   const [min, max] = parseGroupSize(groupSize);
+
   useEffect(() => {
     getUser && getUser(Object.keys(creator)[0]).then((user) => setOwner(user.email));
   }, [creator]);
