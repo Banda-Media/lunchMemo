@@ -1,6 +1,6 @@
 import { UseFormOptions } from 'react-hook-form/dist/types';
 
-export const emailRegex = /^(?=[A-Z0-9][A-Z0-9@._%+-]{5,253}$)[A-Z0-9._%+-]{1,64}@(?:(?=[A-Z0-9-]{1,63}\.)[A-Z0-9]+(?:-[A-Z0-9]+)*\.){1,8}[A-Z]{2,63}$/gim;
+export const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 export const sessionTokenCookie = 'LM_SESSION_TOKEN';
 export const userTokenCookie = 'LM_USER_TOKEN';
 export const userLocalStorage = 'LM_FIREBASE_USER';
