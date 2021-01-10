@@ -1,70 +1,30 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState, createContext, useContext } from 'react';
-import { auth, clientPostUserToken } from '@utils/firebase/auth';
-import { IAuthContext } from '@typing/types';
 import firebase from 'firebase/app';
-import nookies from 'nookies';
+import Debug from 'debug';
+import { IAuthContext } from '@typing/types';
+import { userLocalStorage } from '@utils/constants';
+import getFirebase from '@services/firebase/firebase';
+import {
+  login,
+  register,
+  logout,
+  loginProvider,
+  loginAnonymously,
+  forgot
+} from '@services/firebase/auth';
 
-const register = async (
-  username: string,
-  password: string,
-  displayName: string | undefined,
-  authType: 'email-signup' | 'google-signup' | 'github-signup'
-): Promise<firebase.auth.UserCredential | undefined> => {
-  let userCredentials;
+const debug = Debug('lunchmemo:hooks:authContext');
 
-  if (authType === 'email-signup') {
-    userCredentials = await auth.createUserWithEmailAndPassword(username, password);
-    await clientPostUserToken((await userCredentials?.user?.getIdToken()) || '');
-  } else {
-    userCredentials = await loginProvider(authType);
-  }
-
-  if (userCredentials.user) {
-    userCredentials.user.updateProfile({ displayName: displayName || username });
-  }
-
-  return userCredentials;
-};
-
-const loginProvider = async (
-  authType: 'google-signup' | 'github-signup'
-): Promise<firebase.auth.UserCredential> => {
-  let provider;
-  if (authType === 'google-signup') {
-    provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-  } else {
-    provider = new firebase.auth.GithubAuthProvider();
-    provider.addScope('repo');
-  }
-  const oauthCredentials = await auth.signInWithPopup(provider);
-  await clientPostUserToken((await oauthCredentials?.user?.getIdToken()) || '');
-  return oauthCredentials;
-};
-
-const login = async (email: string, password: string) => {
-  return auth.signInWithEmailAndPassword(email, password).then(async (response) => {
-    if (response && response.user) {
-      return await clientPostUserToken(await response.user.getIdToken());
-    }
-    return null;
-  });
-};
-
-const logout = (): Promise<void> => {
-  return auth.signOut();
-};
-
-const loginAnonymously = () => {
-  return auth.signInAnonymously();
-};
+const { auth } = getFirebase();
 
 const AuthContext = createContext<IAuthContext>({
   user: null,
   isAuthenticated: false,
-  isLoading: false,
-  login,
+  loadingAuthState: true,
   register,
+  forgot,
+  login,
   logout,
   loginAnonymously,
   loginProvider
@@ -73,44 +33,75 @@ const AuthContext = createContext<IAuthContext>({
 const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<firebase.User | null>(null);
   const [isAuthenticated, setAuthenticated] = useState(false);
-  const [isLoading, setLoading] = useState(false);
+  const [loadingAuthState, setLoadingAuthState] = useState(true);
+  const router = useRouter();
+  debug('Loading AuthProvider.');
+
+  useEffect(() => {
+    const userData = localStorage.getItem(userLocalStorage);
+    debug('Loading initial local storage item for user state: %o', userData);
+    if (userData && userData !== 'null') {
+      const storageUser: firebase.User = JSON.parse(userData);
+      setUser(storageUser);
+    }
+  }, []);
 
   // listen for token changes, call setUser and write new token as a cookie
   useEffect(() => {
-    auth.onIdTokenChanged(async (user) => {
-      setLoading(true);
-      if (!user) {
-        setUser(null);
-        setAuthenticated(false);
-        nookies.set(undefined, 'token', '', {});
-      } else {
-        const token = await user.getIdToken();
-        setUser(user);
-        setAuthenticated(true);
-        nookies.set(undefined, 'token', token, {});
-      }
-      setLoading(false);
-    });
+    debug('Setting up listener for token changes.');
+    const createListener = async () => {
+      auth.onIdTokenChanged(
+        (user) => {
+          if (user) {
+            debug('User id token change detected...%o', user);
+            localStorage.setItem(userLocalStorage, JSON.stringify(user));
+            setUser(user);
+            setAuthenticated(!!user);
+            setLoadingAuthState(false);
+          }
+        },
+        () => {
+          debug('User id token error...%o', user);
+          localStorage.removeItem(userLocalStorage);
+          setUser(null);
+          setAuthenticated(false);
+          setLoadingAuthState(false);
+        }
+      );
+    };
+    createListener();
   }, []);
 
   // force refresh the token every 10 minutes
   useEffect(() => {
-    const handle = setInterval(async () => {
-      const user = auth.currentUser;
-      if (user) await user.getIdToken(true);
-    }, 10 * 60 * 1000);
-    return () => clearInterval(handle);
+    const createInterval = async () => {
+      debug('Setting up idToken refresh every 10 minutes.');
+      const handle = setInterval(async () => {
+        debug('Forcing id token refresh...');
+        const user = auth.currentUser;
+        if (user) await user.getIdToken(true);
+      }, 10 * 60 * 1000);
+      return () => clearInterval(handle);
+    };
+    createInterval();
   }, []);
 
   return (
     <AuthContext.Provider
       value={{
         user,
+        loadingAuthState,
         register,
-        login,
-        logout,
+        forgot,
+        login: async (email: string, password: string) => {
+          await login(email, password);
+          router.push('/profile');
+        },
+        logout: async (): Promise<void> => {
+          await logout();
+          router.push('/login');
+        },
         isAuthenticated,
-        isLoading,
         loginAnonymously,
         loginProvider
       }}>

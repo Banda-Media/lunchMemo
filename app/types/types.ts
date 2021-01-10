@@ -25,14 +25,15 @@ export interface ISocialAction {
 
 export interface IAuthContext {
   user: firebase.User | null;
-  isLoading: boolean;
   isAuthenticated: boolean;
-  login: (username: string, password: string) => Promise<ApiTokenResponse>;
+  loadingAuthState: boolean;
+  login: (username: string, password: string) => Promise<void>;
   loginAnonymously: () => Promise<firebase.auth.UserCredential>;
   loginProvider: (
     authType: 'google-signup' | 'github-signup'
   ) => Promise<firebase.auth.UserCredential>;
   logout: () => Promise<void>;
+  forgot: (email: string) => Promise<void>;
   register: (
     username: string,
     password: string,
@@ -41,8 +42,10 @@ export interface IAuthContext {
   ) => Promise<firebase.auth.UserCredential | firebase.auth.OAuthCredential | undefined>;
 }
 
-export interface ILogin {
+export interface IForgot {
   email: string;
+}
+export interface ILogin extends IForgot {
   password: string;
 }
 
@@ -75,4 +78,73 @@ export interface ApiResponse {
 
 export interface ApiTokenResponse extends ApiResponse {
   token: string;
+  user: {
+    email: string;
+    picture: string;
+  };
+}
+
+export interface ApiTokenVerificationResponse extends ApiResponse {
+  authenticated: boolean;
+  usermail: string;
+}
+
+export interface Notification {
+  message: string;
+  timeout: number;
+  timestamp: Date;
+}
+
+export interface INotifyContext {
+  notification: Notification;
+  notify: (message: string, timeout?: number) => void;
+}
+
+export type OneToManyRelationships = {
+  [key: string]: boolean;
+};
+
+export type GoogleDate = {
+  nanoseconds: number;
+  seconds: number;
+};
+
+export type LunchGroup = {
+  name?: string;
+  active?: boolean;
+  startTime?: Date | GoogleDate;
+  endTime?: Date | GoogleDate;
+  groupSize?: string;
+  creator?: OneToManyRelationships;
+  foods?: OneToManyRelationships;
+  users?: OneToManyRelationships;
+};
+
+export interface ILunchGroupContext {
+  groups: LunchGroup[];
+  loading: boolean;
+  getGroup?: (id: string) => Promise<LunchGroup>;
+  addGroup?: (lunchGroup: LunchGroup) => Promise<void>;
+  removeGroup?: (name: string) => Promise<void>;
+  updateGroup?: (id: string, payload: LunchGroup) => Promise<void>;
+  loadGroups?: (name: string) => Promise<void>;
+  getUser?: (id: string) => Promise<User>;
+}
+
+export interface User {
+  email: string;
+  uid: string;
+}
+export type RawUser = firebase.User | null;
+export type AMPM = 'AM' | 'PM';
+export type GroupSize = 'Small (1-2)' | 'Medium (3-5)' | 'Large (6+)';
+export interface CreateGroupFormData {
+  endampm: AMPM;
+  endhours: string;
+  endminutes: string;
+  groupSize: GroupSize;
+  name: string;
+  startampm: AMPM;
+  starthours: string;
+  startminutes: string;
 }

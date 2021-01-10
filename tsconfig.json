@@ -19,9 +19,11 @@
       "@hooks/*": ["app/hooks/*"],
       "@typing/*": ["app/types/*"],
       "@styles/*": ["app/styles/*"],
+      "@services/*": ["app/services/*"],
       "@pages/*": ["pages/*"],
       "@public/*": ["public/*"]
     },
+    "downlevelIteration": true,
     "typeRoots": ["./app/types", "./node_modules/@types"],
     // stricter type-checking for stronger correctness. Recommended by TS
     "strict": true,

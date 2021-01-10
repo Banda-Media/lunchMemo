@@ -1,23 +1,32 @@
-import Login from './Login';
-import SignUp from './SignUp';
-import { useState, useEffect } from 'react';
+import Login from '@components/modules/registration/Login';
+import SignUp from '@components/modules/registration/SignUp';
+import Forgot from '@components/modules/registration/Forgot';
+import Logo from '@components/common/Logo';
+import { useState, useEffect, ReactElement } from 'react';
+
+const headingLookup: Map<string, string> = new Map([
+  ['/login', 'Log in below to get started'],
+  ['/signup', 'Create an account below to get started'],
+  ['/forgot', 'Enter your email to reset your password']
+]);
+const componentLookup: Map<string, ReactElement> = new Map([
+  ['/login', <Login />],
+  ['/signup', <SignUp />],
+  ['/forgot', <Forgot />]
+]);
 
 const RegistrationPanel: React.FC = () => {
-  const [isLogin, setIsLogin] = useState(false);
-
+  const [route, setRoute] = useState('');
   useEffect(() => {
     const pathName = window && window.location.pathname;
-    setIsLogin(pathName === '/login');
+    setRoute(pathName);
   }, []);
 
   return (
     <section className="bg-white md:w-3/4 lg:w-3/5 mx-auto register-login animated fadeInDown faster">
       <div className="register content-center ">
         <div className="left">
-          <h1 className="lm-logo">
-            <span className="lm-lunch">LUNCH</span>
-            <span className="lm-memo">memo</span>
-          </h1>
+          <Logo />
           <p>
             Lunch Memo makes it easy to organize lunch with your colleagues and other professionals
             in your area. Spend less time finding lunch spots and scheduling with everyone and
@@ -27,9 +36,9 @@ const RegistrationPanel: React.FC = () => {
         <div className="right widget-login">
           <h3>
             <span>Hungry?</span>
-            {isLogin ? 'Log in ' : 'Create an account '} below to get started
+            {headingLookup.get(route) || ''}
           </h3>
-          {isLogin ? <Login /> : <SignUp />}
+          {componentLookup.get(route) || <Login />}
         </div>
       </div>
     </section>

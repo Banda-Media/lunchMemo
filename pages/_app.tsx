@@ -2,14 +2,18 @@ import '@styles/main.scss';
 import '@styles/custom.scss';
 import type { AppProps } from 'next/app';
 import AuthProvider from '@hooks/AuthContext';
-import UserProvider from '@hooks/UserContext';
+import NotifyProvider from '@hooks/NotifyContext';
+import NotificationBar from '@components/common/NotificationBar';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
+  typeof window !== 'undefined' &&
+    localStorage.setItem('debug', process.env.DEBUG || 'lunchmemo:*');
   return (
     <AuthProvider>
-      <UserProvider>
+      <NotifyProvider>
+        <NotificationBar />
         <Component {...pageProps} />
-      </UserProvider>
+      </NotifyProvider>
     </AuthProvider>
   );
 };
