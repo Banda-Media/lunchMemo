@@ -76,9 +76,12 @@ input {
 
 button {
   cursor: pointer;
-  padding: 12px 2rem;
+  padding: 15px 2rem 14px;
   color: #fff;
   font-size: 16px;
+  height: 3rem;
+  max-width: 150px;
+  margin: 4px;
 
   &:disabled {
     cursor: default;
