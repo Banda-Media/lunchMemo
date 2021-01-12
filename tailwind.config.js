@@ -6,8 +6,6 @@ module.exports = {
   },
   purge: {
     content: ['./app/**/*.tsx', './pages/**/*.tsx'],
-
-    // These options are passed through directly to PurgeCSS
     options: {
       safelist: ['bg-site-0', 'bg-site-1', 'bg-site-2', 'bg-site-3', 'bg-site-4', 'bg-site-5']
     }

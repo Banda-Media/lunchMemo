@@ -53,7 +53,9 @@ const CreateGroup: React.FC = () => {
 
   return (
     <div>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center space-x-2 h-10">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col sm:flex-row items-center space-x-2">
         <TextInput
           form={form}
           name="name"
