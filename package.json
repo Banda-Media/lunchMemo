@@ -82,7 +82,7 @@
     "precss": "^4.0.0",
     "prettier": "^2.2.1",
     "responsive-loader": "^2.3.0",
-    "sass": "^1.32.2",
+    "sass": "^1.32.4",
     "size-limit": "^4.9.1",
     "svg-sprite-loader": "^5.2.1",
     "tsdx": "^0.14.1",
