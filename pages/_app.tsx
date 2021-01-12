@@ -1,5 +1,4 @@
 import '@styles/main.scss';
-import '@styles/custom.scss';
 import type { AppProps } from 'next/app';
 import AuthProvider from '@hooks/AuthContext';
 import NotifyProvider from '@hooks/NotifyContext';

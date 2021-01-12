@@ -38,6 +38,7 @@ export interface SelectGenericProps extends InputGenericProps {
 
 export interface InputProps {
   form: UseFormMethods<Record<string, unknown>>;
+  hasLabel?: boolean;
 }
 
 export interface TimePickerProps extends InputProps {

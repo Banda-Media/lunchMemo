@@ -1,6 +1,6 @@
 import { LunchGroupProps } from '@typing/props';
 import { useAuth } from '@hooks/AuthContext';
-import JoinButton from './JoinButton';
+import JoinButton from './GroupButton';
 import TimeRange from './TimeRange';
 import { GoogleDate } from '@typing/types';
 import AttendeesList from './AtendeesList';
@@ -12,13 +12,21 @@ const parseGroupSize = (groupSize: string): readonly [number, number] => {
   return [matches[0], matches[1]];
 };
 
-const LunchGroup: React.FC<LunchGroupProps> = ({
-  group: { name, active, startTime, endTime, groupSize = '', creator = {}, foods = [], users = [] }
-}) => {
+const LunchGroup: React.FC<LunchGroupProps> = ({ group }) => {
+  const {
+    name,
+    active,
+    startTime,
+    endTime,
+    groupSize = '',
+    creator = {},
+    foods = [],
+    users = {}
+  } = group;
   const { user } = useAuth();
-  const { getUser } = useLunchGroup();
+  const { getUser, updateGroup } = useLunchGroup();
   const [owner, setOwner] = useState('');
-  const [min, max] = parseGroupSize(groupSize);
+  const [, max] = parseGroupSize(groupSize);
 
   useEffect(() => {
     getUser && getUser(Object.keys(creator)[0]).then((user) => setOwner(user.email));
@@ -39,16 +47,25 @@ const LunchGroup: React.FC<LunchGroupProps> = ({
 
           <div className="flex-none">
             <JoinButton
-              onClick={() => null}
+              onClick={(isMember) => {
+                if (user) {
+                  if (isMember) {
+                    delete users[user.uid];
+                  } else {
+                    users[user.uid] = true;
+                  }
+                  updateGroup && updateGroup(group);
+                }
+              }}
               uid={user?.uid || ''}
-              users={Object.keys(users)}
-              min={min}
+              users={users}
+              active={!!active}
               max={max}
             />
           </div>
         </div>
         <div className="flex py-2 text-xsm text-gray-200">
-          <sub>{owner}</sub>
+          <sub>Creator: {owner}</sub>
           <sub>{Object.keys(foods).join(' ')}</sub>
         </div>
       </div>

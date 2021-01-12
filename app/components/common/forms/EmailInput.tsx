@@ -1,12 +1,14 @@
 import { emailRegex } from '@utils/constants';
 import { InputProps } from '@typing/props';
 
-const EmailInput: React.FC<InputProps> = ({ form: { register, errors } }) => {
+const EmailInput: React.FC<InputProps> = ({ form: { register, errors }, hasLabel = true }) => {
   return (
     <div className="flex flex-col space-y-1">
-      <label htmlFor="email" className="text-sm font-semibold text-gray-500">
-        Email address
-      </label>
+      {hasLabel && (
+        <label htmlFor="email" className="text-sm font-semibold text-gray-500">
+          Email address
+        </label>
+      )}
       <input
         id="email"
         type="text"

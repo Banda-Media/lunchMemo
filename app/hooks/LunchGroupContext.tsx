@@ -25,6 +25,7 @@ const LunchGroupProvider: React.FC = ({ children }) => {
     const unsubscribe = firestore.collection(GROUPS_COLLECTION).onSnapshot(
       (snapshot) => {
         const groups = snapshot.docs.map((doc) => doc.data() as LunchGroup);
+        groups.map((group) => !Object.keys(group.users || []).length && removeGroup(group.name));
         setLunchGroups(groups);
         setLoading(false);
       },
@@ -44,9 +45,12 @@ const LunchGroupProvider: React.FC = ({ children }) => {
     return group;
   };
 
-  const updateGroup = async (id: string, lunchGroup: LunchGroup) => {
+  const updateGroup = async (group: LunchGroup) => {
     setLoading(true);
-    await firestore.collection(GROUPS_COLLECTION).doc(id).set(lunchGroup);
+    if (!group.users?.length) {
+      removeGroup(group.name);
+    }
+    await firestore.collection(GROUPS_COLLECTION).doc(group.name).set(group);
     setLoading(false);
   };
 
