@@ -7,6 +7,7 @@
     "prebuild": "printenv | sort",
     "build": "yarn watch:css && next build",
     "start": "yarn watch:css && next start",
+    "build:start": "yarn build && yarn start",
     "lint": "eslint --fix .",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "watch:css": "postcss app/styles/tailwind.scss -o app/styles/main.scss",
