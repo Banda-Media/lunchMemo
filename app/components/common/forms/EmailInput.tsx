@@ -3,7 +3,7 @@ import { InputProps } from '@typing/props';
 
 const EmailInput: React.FC<InputProps> = ({ form: { register, errors }, hasLabel = true }) => {
   return (
-    <div className="flex flex-col space-y-1">
+    <div className="flex flex-col justify-center w-full space-y-1">
       {hasLabel && (
         <label htmlFor="email" className="text-sm font-semibold text-gray-500">
           Email address

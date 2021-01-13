@@ -2,13 +2,12 @@ import { BaseSyntheticEvent } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '@hooks/AuthContext';
 import { ISignUpData } from '@typing/types';
-import Socials from '@components/modules/registration/Socials';
 import { formDefaults } from '@utils/constants';
-import NameInput from '../../common/forms/NameInput';
-import EmailInput from '../../common/forms/EmailInput';
-import PasswordInput from '../../common/forms/PasswordInput';
-import SubmitButton from '../../common/forms/SubmitButton';
-import Title from './components/Title';
+import Socials from '@modules/registration/Socials';
+import NameInput from '@common/forms/NameInput';
+import EmailInput from '@common/forms/EmailInput';
+import PasswordInput from '@common/forms/PasswordInput';
+import SubmitButton from '@common/forms/SubmitButton';
 import RegistrationFormLink from './components/RegistrationFormLink';
 
 const SignUpForm: React.FC = () => {
@@ -27,8 +26,7 @@ const SignUpForm: React.FC = () => {
 
   return (
     <div>
-      <Title label="Sign Up" />
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-5">
         <NameInput form={form} />
         <EmailInput form={form} />
         <PasswordInput form={form} newPassword={true} />

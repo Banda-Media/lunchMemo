@@ -1,13 +1,13 @@
+import firebase from 'firebase/app';
 import { useForm } from 'react-hook-form';
 import { CreateGroupFormData, LunchGroup, OneToManyRelationships } from '@typing/types';
 import { formDefaults, GROUP_OPTIONS } from '@utils/constants';
 import { useAuth } from '@hooks/AuthContext';
 import { useLunchGroup } from '@hooks/LunchGroupContext';
-import SubmitButton from '@components/common/forms/SubmitButton';
-import TextInput from '@components/common/forms/TextInput';
-import { Select } from '@components/common/forms/Generic';
-import TimePicker from '@components/common/forms/TimePicker';
-import firebase from 'firebase/app';
+import SubmitButton from '@common/forms/SubmitButton';
+import TextInput from '@common/forms/TextInput';
+import { Select } from '@common/forms/Generic';
+import TimePicker from '@common/forms/TimePicker';
 
 const setTime = (ampm: string, hours: string, minutes: string): Date => {
   const now = new Date();

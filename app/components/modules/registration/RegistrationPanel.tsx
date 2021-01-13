@@ -1,7 +1,7 @@
 import Login from '@components/modules/registration/Login';
 import SignUp from '@components/modules/registration/SignUp';
 import Forgot from '@components/modules/registration/Forgot';
-import Logo from '@components/common/Logo';
+import Logo from '@common/Logo';
 import { useState, useEffect, ReactElement } from 'react';
 
 const headingLookup: Map<string, string> = new Map([

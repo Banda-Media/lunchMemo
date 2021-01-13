@@ -2,7 +2,7 @@ import Debug from 'debug';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { NextRouter, useRouter } from 'next/router';
 import getFirebase from 'app/services/firebase/firebase';
-import Loading from '@components/common/Loading';
+import Loading from '@common/Loading';
 
 const debug = Debug('lunchmemo:utils:guards');
 type Dispatcher = Dispatch<SetStateAction<boolean>>;

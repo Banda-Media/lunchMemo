@@ -1,9 +1,9 @@
 import Debug from 'debug';
 import { useState, createContext, useContext, useEffect } from 'react';
 import getFirebase from '@services/firebase/firebase';
-import { useNotify } from './NotifyContext';
 import { ILunchGroupContext, LunchGroup, User } from '@typing/types';
 import { USER_COLLECTION, GROUPS_COLLECTION } from '@utils/constants';
+import { useNotify } from './NotifyContext';
 
 const debug = Debug('lunchmemo:hooks:LunchGroupContext');
 

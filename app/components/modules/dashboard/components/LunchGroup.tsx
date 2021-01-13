@@ -1,11 +1,11 @@
+import { useEffect, useState } from 'react';
 import { LunchGroupProps } from '@typing/props';
+import { GoogleDate } from '@typing/types';
 import { useAuth } from '@hooks/AuthContext';
+import { useLunchGroup } from '@hooks/LunchGroupContext';
 import JoinButton from './GroupButton';
 import TimeRange from './TimeRange';
-import { GoogleDate } from '@typing/types';
-import AttendeesList from './AtendeesList';
-import { useLunchGroup } from '@hooks/LunchGroupContext';
-import { useEffect, useState } from 'react';
+import AttendeesList from './AttendeesList';
 
 const parseGroupSize = (groupSize: string): readonly [number, number] => {
   const matches = (groupSize.match(/\d+/g) || ['3', '5']).map((n: string) => parseInt(n));

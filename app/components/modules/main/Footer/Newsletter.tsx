@@ -1,5 +1,5 @@
-import EmailInput from '@components/common/forms/EmailInput';
-import SubmitButton from '@components/common/forms/SubmitButton';
+import EmailInput from '@common/forms/EmailInput';
+import SubmitButton from '@common/forms/SubmitButton';
 import { formDefaults } from '@utils/constants';
 import { useForm } from 'react-hook-form';
 
