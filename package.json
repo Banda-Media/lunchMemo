@@ -45,7 +45,7 @@
     "react": ">=17"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.1",
+    "@fortawesome/fontawesome-free": "^5.15.2",
     "@size-limit/preset-small-lib": "^4.9.1",
     "@size-limit/time": "^4.9.1",
     "@svgr/webpack": "^5.5.0",
