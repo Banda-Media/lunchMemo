@@ -1,5 +1,5 @@
 declare module '*.svg?inline' {
-  const content: any;
+  const content: unknown;
   export default content;
 }
 declare module '*.svg' {
