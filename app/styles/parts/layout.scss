@@ -85,11 +85,6 @@
       letter-spacing: 3px;
       text-transform: uppercase;
     }
-
-    button {
-      padding: 15px 2rem 14px;
-      height: 3rem;
-    }
   }
 
   &.groups-wrapper {
@@ -286,4 +281,14 @@
       line-height: 1.6rem;
     }
   }
+}
+
+.large-title {
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+  margin-bottom: 1rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }

@@ -29,7 +29,7 @@ export interface ListItemLinkProps {
 export interface InputGenericProps {
   form: UseFormMethods<Record<string, unknown>>;
   name: string;
-  [x: string]: any;
+  [x: string]: unknown;
 }
 
 export interface SelectGenericProps extends InputGenericProps {
@@ -38,11 +38,12 @@ export interface SelectGenericProps extends InputGenericProps {
 
 export interface InputProps {
   form: UseFormMethods<Record<string, unknown>>;
+  hasLabel?: boolean;
 }
 
 export interface TimePickerProps extends InputProps {
   prefix: string;
-  [x: string]: any;
+  [x: string]: unknown;
 }
 
 export interface TextInputProps extends InputProps {
@@ -51,7 +52,7 @@ export interface TextInputProps extends InputProps {
   placeholder: string;
   autocomplete?: string;
   message: string;
-  [x: string]: any;
+  [x: string]: unknown;
 }
 export interface PasswordInputProps {
   form: UseFormMethods<Record<string, unknown>>;

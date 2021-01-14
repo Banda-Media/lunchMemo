@@ -1,9 +1,8 @@
 import '@styles/main.scss';
-import '@styles/custom.scss';
 import type { AppProps } from 'next/app';
 import AuthProvider from '@hooks/AuthContext';
 import NotifyProvider from '@hooks/NotifyContext';
-import NotificationBar from '@components/common/NotificationBar';
+import NotificationBar from '@common/NotificationBar';
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   typeof window !== 'undefined' &&

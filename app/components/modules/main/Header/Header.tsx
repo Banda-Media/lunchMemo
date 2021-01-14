@@ -1,5 +1,5 @@
 import { FC, MutableRefObject, useRef } from 'react';
-import Logo from '@components/common/Logo';
+import Logo from '@common/Logo';
 import MenuButtonMobile from './MenuButtonMobile';
 import ActionsList from './ActionsList/ActionsList';
 

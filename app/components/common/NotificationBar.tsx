@@ -12,20 +12,22 @@ const NotificationBar: React.FC = () => {
   const transitionClass = '-translate-y-10';
 
   useEffect(() => {
-    if (message && message.length) {
+    if (message?.length) {
       timer && clearTimeout(timer);
       banner.current.classList.remove(transitionClass);
       setTimer(setTimeout(() => banner.current.classList.add(transitionClass), timeout));
     }
   }, [message, timestamp]);
 
-  return (
+  return message.length ? (
     <div
       className={`alert-banner w-full fixed transform transition-transform top-0 ${transitionClass}`}
       ref={banner}>
       <NotificationBarContents message={message} onClick={handleClick} />
       <input type="checkbox" className="hidden" id="banneralert" />
     </div>
+  ) : (
+    <></>
   );
 };
 

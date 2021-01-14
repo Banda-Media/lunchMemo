@@ -6,8 +6,8 @@ const Newsletter: React.FC = () => {
       <div className="text-green-dark mb-2">My Makers</div>
       <ul className="list-reset leading-normal space-y-5">
         {[
-          ['https://github.com/andresmweber.png?size=24', 'Andres Weber'],
-          ['https://github.com/bobbypwang.png?size=24', 'Bobby Wang']
+          ['https://github.com/andresmweber', 'Andres Weber'],
+          ['https://github.com/bobbypwang', 'Bobby Wang']
         ].map(([url, name]) => (
           <MakerLink key={name} url={url} name={name} />
         ))}

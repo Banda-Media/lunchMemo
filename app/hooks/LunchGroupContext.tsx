@@ -1,9 +1,9 @@
 import Debug from 'debug';
 import { useState, createContext, useContext, useEffect } from 'react';
 import getFirebase from '@services/firebase/firebase';
-import { useNotify } from './NotifyContext';
 import { ILunchGroupContext, LunchGroup, User } from '@typing/types';
 import { USER_COLLECTION, GROUPS_COLLECTION } from '@utils/constants';
+import { useNotify } from './NotifyContext';
 
 const debug = Debug('lunchmemo:hooks:LunchGroupContext');
 
@@ -25,6 +25,7 @@ const LunchGroupProvider: React.FC = ({ children }) => {
     const unsubscribe = firestore.collection(GROUPS_COLLECTION).onSnapshot(
       (snapshot) => {
         const groups = snapshot.docs.map((doc) => doc.data() as LunchGroup);
+        groups.map((group) => !Object.keys(group.users || []).length && removeGroup(group.name));
         setLunchGroups(groups);
         setLoading(false);
       },
@@ -44,9 +45,12 @@ const LunchGroupProvider: React.FC = ({ children }) => {
     return group;
   };
 
-  const updateGroup = async (id: string, lunchGroup: LunchGroup) => {
+  const updateGroup = async (group: LunchGroup) => {
     setLoading(true);
-    await firestore.collection(GROUPS_COLLECTION).doc(id).set(lunchGroup);
+    if (!group.users?.length) {
+      removeGroup(group.name);
+    }
+    await firestore.collection(GROUPS_COLLECTION).doc(group.name).set(group);
     setLoading(false);
   };
 

@@ -1,13 +1,13 @@
+import firebase from 'firebase/app';
 import { useForm } from 'react-hook-form';
 import { CreateGroupFormData, LunchGroup, OneToManyRelationships } from '@typing/types';
 import { formDefaults, GROUP_OPTIONS } from '@utils/constants';
 import { useAuth } from '@hooks/AuthContext';
 import { useLunchGroup } from '@hooks/LunchGroupContext';
-import SubmitButton from '@components/common/forms/SubmitButton';
-import TextInput from '@components/common/forms/TextInput';
-import { Select } from '@components/common/forms/Generic';
-import TimePicker from '@components/common/forms/TimePicker';
-import firebase from 'firebase/app';
+import SubmitButton from '@common/forms/SubmitButton';
+import TextInput from '@common/forms/TextInput';
+import { Select } from '@common/forms/Generic';
+import TimePicker from '@common/forms/TimePicker';
 
 const setTime = (ampm: string, hours: string, minutes: string): Date => {
   const now = new Date();
@@ -55,7 +55,7 @@ const CreateGroup: React.FC = () => {
     <div>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col sm:flex-row items-center space-x-2">
+        className="flex flex-col sm:flex-row items-center justify-center space-x-2 h-12">
         <TextInput
           form={form}
           name="name"
@@ -65,10 +65,8 @@ const CreateGroup: React.FC = () => {
         />
         <TimePicker className="h-full flex" prefix="start" form={form} />
         <TimePicker className="h-full flex" prefix="end" form={form} />
-        <Select className="h-full" form={form} name="groupSize" options={GROUP_OPTIONS} />
-        <div className="flex-auto h-full">
-          <SubmitButton title="Create Group" disabled={!!form.errors.length} />
-        </div>
+        <Select className="h-full px-2" form={form} name="groupSize" options={GROUP_OPTIONS} />
+        <SubmitButton title="Create Group" disabled={!!form.errors.length} />
       </form>
     </div>
   );

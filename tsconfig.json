@@ -21,7 +21,9 @@
       "@styles/*": ["app/styles/*"],
       "@services/*": ["app/services/*"],
       "@pages/*": ["pages/*"],
-      "@public/*": ["public/*"]
+      "@public/*": ["public/*"],
+      "@common/*": ["app/components/common/*"],
+      "@modules/*": ["app/components/modules/*"]
     },
     "downlevelIteration": true,
     "typeRoots": ["./app/types", "./node_modules/@types"],

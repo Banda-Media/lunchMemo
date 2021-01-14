@@ -5,11 +5,10 @@ import { useAuth } from '@hooks/AuthContext';
 import { useNotify } from '@hooks/NotifyContext';
 import { ILogin } from '@typing/types';
 import { formDefaults } from '@utils/constants';
-import Title from './components/Title';
 import Socials from '@components/modules/registration/Socials';
-import EmailInput from '../../common/forms/EmailInput';
-import PasswordInput from '../../common/forms/PasswordInput';
-import SubmitButton from '../../common/forms/SubmitButton';
+import EmailInput from '@common/forms/EmailInput';
+import PasswordInput from '@common/forms/PasswordInput';
+import SubmitButton from '@common/forms/SubmitButton';
 import RegistrationFormLink from './components/RegistrationFormLink';
 
 const debug = Debug('lunchmemo:app:components:modules:registration:Login');
@@ -48,7 +47,6 @@ const Login: React.FC = () => {
 
   return (
     <div>
-      <Title label="Login" />
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-5">
         <EmailInput form={form} />
         <PasswordInput form={form} />

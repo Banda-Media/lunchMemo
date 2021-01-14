@@ -1,6 +1,6 @@
 <div align=center>
     <h1 align=center>
-        <a href="https://lunchmemo.andresmweber.com/" target="_blank">
+        <a href="https://lunchmemo.andresmweber.com/" rel="noopener noreferrer" target="_blank">
             <img 
                 align=center
                 src="./docs/icon/android-chrome-192x192.png"
@@ -31,7 +31,7 @@
         <img src="./docs/tailwind.png" height="32">
     </div>
     <br>
-    <h2 align=center><a href="https://lunch-memo.vercel.app/" target="_blank">Live Demo</a></h2>
+    <h2 align=center><a href="https://lunch-memo.vercel.app/" rel="noopener noreferrer" target="_blank">Live Demo</a></h2>
     <br>
 </div>
 

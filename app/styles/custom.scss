@@ -6,19 +6,8 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 
+@import 'parts/normalize';
 @import 'parts/settings';
 @import 'parts/auth';
-@import 'parts/normalize';
-@import 'parts/timepicker';
 @import 'parts/layout';
 @import 'parts/global';
-
-.large-title {
-  font-size: 2.4rem;
-  font-weight: 300;
-  color: #fff;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
-  margin-bottom: 1rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
