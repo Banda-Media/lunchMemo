@@ -13,6 +13,8 @@ export interface Observer {
 }
 /* eslint-enable */
 
+export type FirestoreDoc = firebase.firestore.DocumentReference<firebase.firestore.DocumentData>;
+
 export interface IPostPayload {
   title: string;
   content: string;
@@ -124,7 +126,7 @@ export interface ILunchGroupContext {
   groups: LunchGroup[];
   loading: boolean;
   getGroup: (id: string) => Promise<LunchGroup>;
-  addGroup: (group: LunchGroup) => Promise<void>;
+  addGroup: (group: LunchGroup) => Promise<FirestoreDoc>;
   removeGroup: (name: string) => Promise<void>;
   updateGroup: (group: LunchGroup) => Promise<void>;
   getUser: (id: string) => Promise<User>;
