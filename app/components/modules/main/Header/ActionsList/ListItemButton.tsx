@@ -6,7 +6,7 @@ const ListItemButton: React.FC<ListButtonLinkProps> = ({ click, label }) => {
     <ListItem>
       <button
         onClick={click}
-        className="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4">
+        className="m-0 inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4">
         {label}
       </button>
     </ListItem>

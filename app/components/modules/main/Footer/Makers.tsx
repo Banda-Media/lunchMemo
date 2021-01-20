@@ -7,7 +7,8 @@ const Newsletter: React.FC = () => {
       <ul className="list-reset leading-normal space-y-5">
         {[
           ['https://github.com/andresmweber', 'Andres Weber'],
-          ['https://github.com/bobbypwang', 'Bobby Wang']
+          ['https://github.com/bobbypwang', 'Bobby Wang'],
+          ['https://github.com/elba3184', 'Elba Chimilio']
         ].map(([url, name]) => (
           <MakerLink key={name} url={url} name={name} />
         ))}

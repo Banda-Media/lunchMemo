@@ -1,3 +1,5 @@
-styles/main.css linguist-vendored
+styles/main.css     linguist-vendored
 styles/tailwind.css linguist-vendored
-ARCHIVE/ linguist-vendored
+ARCHIVE/            linguist-vendored
+*.config.js         linguist-vendored
+*.jpg               -text diff=jpg

@@ -123,12 +123,11 @@ export type LunchGroup = {
 export interface ILunchGroupContext {
   groups: LunchGroup[];
   loading: boolean;
-  getGroup?: (id: string) => Promise<LunchGroup>;
-  addGroup?: (group: LunchGroup) => Promise<void>;
-  removeGroup?: (name: string) => Promise<void>;
-  updateGroup?: (group: LunchGroup) => Promise<void>;
-  loadGroups?: (name: string) => Promise<void>;
-  getUser?: (id: string) => Promise<User>;
+  getGroup: (id: string) => Promise<LunchGroup>;
+  addGroup: (group: LunchGroup) => Promise<void>;
+  removeGroup: (name: string) => Promise<void>;
+  updateGroup: (group: LunchGroup) => Promise<void>;
+  getUser: (id: string) => Promise<User>;
 }
 
 export interface User {

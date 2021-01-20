@@ -1,7 +1,14 @@
+import Image from 'next/image';
+
 const Background: React.FC = () => {
-  const randomBG = `bg-site-${Math.floor(Math.random() * 6)}`;
   return (
-    <div className={`site-background ${randomBG}`}>
+    <div className="site-background">
+      <Image
+        src={`/images/backgrounds/${Math.floor(Math.random() * 6)}.jpg`}
+        alt="lunchmemo background"
+        className="object-center object-cover pointer-events-none"
+        layout="fill"
+      />
       <div className="bginfo">
         <a href="www.something.com" rel="noopener noreferrer" target="_blank">
           First Last

@@ -39,6 +39,7 @@ export interface SelectGenericProps extends InputGenericProps {
 export interface InputProps {
   form: UseFormMethods<Record<string, unknown>>;
   hasLabel?: boolean;
+  id?: string;
 }
 
 export interface TimePickerProps extends InputProps {
@@ -90,4 +91,5 @@ export interface LunchGroupsProps {
 
 export interface LunchGroupProps {
   group: LunchGroup;
+  hasDetailButton?: boolean;
 }

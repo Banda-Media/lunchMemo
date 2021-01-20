@@ -1,6 +1,8 @@
 import firebase from 'firebase/app';
-import { Observer, IPostPayload, UnsubscribeCallback } from '@typing/types';
+import 'firebase/firestore';
 import getFirebase from './firebase';
+import { USER_COLLECTION, GROUPS_COLLECTION } from '@utils/constants';
+import { LunchGroup, User, Observer, IPostPayload, UnsubscribeCallback } from '@typing/types';
 
 export const { firestore } = getFirebase();
 
@@ -33,6 +35,29 @@ export const getPostItems = (
   postId: string
 ): Promise<firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>> => {
   return firestore.collection(BLOG).doc(postId).collection('items').get();
+};
+
+export const getGroup = async (id: string): Promise<LunchGroup> => {
+  return (await firestore.collection(GROUPS_COLLECTION).doc(id).get()).data() as LunchGroup;
+};
+
+export const updateGroup = async (group: LunchGroup): Promise<void> => {
+  if (!group.users?.length) {
+    removeGroup(group.name);
+  }
+  await firestore.collection(GROUPS_COLLECTION).doc(group.name).set(group);
+};
+
+export const addGroup = async (lunchGroup: LunchGroup): Promise<void> => {
+  await firestore.collection(GROUPS_COLLECTION).doc(lunchGroup.name).set(lunchGroup);
+};
+
+export const removeGroup = async (id: string): Promise<void> => {
+  await firestore.collection(GROUPS_COLLECTION).doc(id).delete();
+};
+
+export const getUser = async (id: string): Promise<User> => {
+  return (await firestore.collection(USER_COLLECTION).doc(id).get()).data() as User;
 };
 
 export const streamPostItems = (postId: string, observer: Observer): UnsubscribeCallback => {

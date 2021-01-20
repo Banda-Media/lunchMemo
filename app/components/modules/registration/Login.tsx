@@ -10,6 +10,7 @@ import EmailInput from '@common/forms/EmailInput';
 import PasswordInput from '@common/forms/PasswordInput';
 import SubmitButton from '@common/forms/SubmitButton';
 import RegistrationFormLink from './components/RegistrationFormLink';
+import { useRouter } from 'next/router';
 
 const debug = Debug('lunchmemo:app:components:modules:registration:Login');
 interface LoginRun {
@@ -22,14 +23,16 @@ const Login: React.FC = () => {
   const { login, loginProvider } = useAuth();
   const form = useForm(formDefaults);
   const { notify } = useNotify();
+  const router = useRouter();
 
-  const onSubmit = ({ email, password }: ILogin) => {
-    runLogin({ email, password });
+  const onSubmit = async ({ email, password }: ILogin) => {
+    await runLogin({ email, password });
+    router.push('/profile');
   };
 
-  const loginThirdParty = (e: BaseSyntheticEvent | undefined) => {
+  const loginThirdParty = async (e: BaseSyntheticEvent | undefined) => {
     const { id } = e?.target.id;
-    runLogin({ id });
+    await runLogin({ id });
   };
 
   const runLogin = async ({
@@ -38,7 +41,7 @@ const Login: React.FC = () => {
     id = 'github-signup'
   }: LoginRun): Promise<void> => {
     try {
-      email.length ? login(email, password) : loginProvider(id);
+      email.length ? await login(email, password) : await loginProvider(id);
     } catch (err) {
       debug('Problem logging in: %o', err);
       notify(`Problem logging in: ${err?.message}`);

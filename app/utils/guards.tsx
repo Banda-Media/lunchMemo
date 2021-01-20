@@ -9,7 +9,7 @@ type Dispatcher = Dispatch<SetStateAction<boolean>>;
 
 export const unauthGuard = async (router: NextRouter, callback: Dispatcher): Promise<void> => {
   const { auth } = await getFirebase();
-  debug('unAuthGuard Starting, %o', auth.currentUser);
+  debug('unAuthGuard Starting: %o', auth.currentUser);
   auth.onAuthStateChanged((user) => {
     callback(false);
     if (user) {
