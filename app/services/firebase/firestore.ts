@@ -37,8 +37,16 @@ export const getPostItems = (
   return firestore.collection(BLOG).doc(postId).collection('items').get();
 };
 
+export const getDoc = async <T>(collection: string, id: string): Promise<T> => {
+  return (await firestore.collection(collection).doc(id).get()).data() as T;
+};
+
+export const getUser = async (id: string): Promise<User> => {
+  return await getDoc<User>(USER_COLLECTION, id);
+};
+
 export const getGroup = async (id: string): Promise<LunchGroup> => {
-  return (await firestore.collection(GROUPS_COLLECTION).doc(id).get()).data() as LunchGroup;
+  return await getDoc<LunchGroup>(GROUPS_COLLECTION, id);
 };
 
 export const updateGroup = async (group: LunchGroup): Promise<void> => {
@@ -55,11 +63,6 @@ export const addGroup = async (lunchGroup: LunchGroup): Promise<void> => {
 export const removeGroup = async (id: string): Promise<void> => {
   await firestore.collection(GROUPS_COLLECTION).doc(id).delete();
 };
-
-export const getUser = async (id: string): Promise<User> => {
-  return (await firestore.collection(USER_COLLECTION).doc(id).get()).data() as User;
-};
-
 export const streamPostItems = (postId: string, observer: Observer): UnsubscribeCallback => {
   return firestore
     .collection(BLOG)
