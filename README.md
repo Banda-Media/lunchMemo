@@ -34,7 +34,7 @@
     <h2 align=center><a href="https://lunch-memo.vercel.app/" rel="noopener noreferrer" target="_blank">Live Demo</a></h2>
     <br>
 </div>
-
+stupid
 # Screenshots
 
 <div align=center>
