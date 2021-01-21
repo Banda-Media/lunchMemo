@@ -12,7 +12,7 @@ const Newsletter: React.FC = () => {
         Let's stay in touch! Subscribe to our VERY rare newsletter.
       </p>
       <div className="mt-4 flex">
-        <EmailInput form={form} hasLabel={false} />
+        <EmailInput form={form} hasLabel={false} id="news-email" />
         <SubmitButton title="Subscribe" />
       </div>
     </div>

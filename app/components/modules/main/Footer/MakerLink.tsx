@@ -1,4 +1,5 @@
 import { MakerLinkProps } from '@typing/props';
+import Image from 'next/image';
 
 const MakerLink: React.FC<MakerLinkProps> = ({ url, name }) => (
   <li className="hover:text-green-dark text-grey-darker">
@@ -7,7 +8,13 @@ const MakerLink: React.FC<MakerLinkProps> = ({ url, name }) => (
       target="_blank"
       rel="noopener noreferrer"
       href={url}>
-      <img src={`${url}${'.png?size=32'}`} className="align-middle" alt={`${name} Avatar`} />
+      <Image
+        src={`${url}${'.png?size=32'}`}
+        className="align-middle"
+        width={32}
+        height={32}
+        alt={`${name} Avatar`}
+      />
       <span className="p-2 text-xs">{name}</span>
     </a>
   </li>

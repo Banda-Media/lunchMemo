@@ -11,7 +11,7 @@ const Layout: React.FC = (props) => {
       <Background />
       <main className="flex flex-col w-screen h-screen justify-between">
         {['/login', '/signup', '/forgot'].indexOf(route) === -1 && <Header />}
-        <div className="w-full flex flex-col items-center my-10">{props.children}</div>
+        <div className="w-full h-full flex flex-col items-center my-10">{props.children}</div>
         <Footer />
       </main>
     </>

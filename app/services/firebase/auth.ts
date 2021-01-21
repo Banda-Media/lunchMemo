@@ -21,6 +21,7 @@ export const register = async (
   }
   debug('Registered user: %o', userCredentials);
   if (userCredentials.user) {
+    debug('Updating user in firestore: %o', userCredentials);
     userCredentials.user.updateProfile({ displayName: displayName || username });
     const uid = userCredentials.user.uid;
     firestore.collection(USER_COLLECTION).doc(uid).set({ email: userCredentials.user.email, uid });
