@@ -292,3 +292,13 @@
   letter-spacing: 3px;
   text-transform: uppercase;
 }
+
+.attendee-list {
+  img {
+    border-radius: 50%;
+  }
+  i:hover:after,
+  img:hover:after {
+    content: attr(title);
+  }
+}

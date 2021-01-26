@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import { BaseSyntheticEvent } from 'react';
+import { GetUserProfilesResponse } from '@typing/api';
 
 export type UnsubscribeCallback = () => void;
 
@@ -113,6 +114,7 @@ export type GoogleDate = {
 
 export type LunchGroup = {
   name: string;
+  uid?: string;
   active?: boolean;
   startTime?: Date | GoogleDate;
   endTime?: Date | GoogleDate;
@@ -126,11 +128,11 @@ export interface ILunchGroupContext {
   groups: LunchGroup[];
   loading: boolean;
   getGroup: (id: string) => Promise<LunchGroup>;
-  addGroup: (group: LunchGroup) => Promise<FirestoreDoc>;
+  addGroup: (group: LunchGroup) => Promise<void>;
   removeGroup: (name: string) => Promise<void>;
   updateGroup: (group: LunchGroup) => Promise<void>;
   getUser: (id: string) => Promise<User>;
-  getUsers: (uids: string[]) => Promise<User[]>;
+  getProfiles: (uids: string[]) => Promise<GetUserProfilesResponse>;
 }
 
 export interface User {

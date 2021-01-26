@@ -2,30 +2,10 @@ import firebase from 'firebase-admin';
 import Debug from 'debug';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import getFirebaseAdmin from '@services/firebase/admin';
+import { SanitizedUsers, SanitizedUser } from '@typing/api';
 
 const debug = Debug('lunchmemo:api:getUserProfiles');
 const admin = getFirebaseAdmin();
-
-export interface GetUserProfilesRequest extends NextApiRequest {
-  body: {
-    uids: string;
-  };
-}
-
-export interface SanitizedUser
-  extends Omit<firebase.auth.UserRecord, 'metadata' | 'providerData' | 'toJSON'> {
-  metadata?: firebase.auth.UserMetadata;
-  providerData?: firebase.auth.UserInfo[];
-  toJSON?: CallableFunction;
-}
-
-export interface SanitizeUserError {
-  uid: string;
-  error: {
-    code: string;
-    message: string;
-  };
-}
 
 const sanitizeUser = ({
   uid,
@@ -41,7 +21,7 @@ const sanitizeUser = ({
 const sanitizeProfiles = (
   users: PromiseSettledResult<firebase.auth.UserRecord>[],
   uids: string
-): Array<SanitizedUser | SanitizeUserError> => {
+): SanitizedUsers => {
   return users.map((user, i) => {
     return user.status === 'fulfilled'
       ? sanitizeUser(user.value)
