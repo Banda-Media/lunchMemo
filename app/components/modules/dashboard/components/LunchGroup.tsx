@@ -8,6 +8,7 @@ import TimeRange from './TimeRange';
 import AttendeesList from './AttendeesList';
 import LunchGroupButton from './LunchGroupButton';
 import CreatorSubtitle from './CreatorSubtitle';
+import { SanitizedUsers } from '@typing/api';
 
 const parseGroupSize = (groupSize: string): readonly [number, number] => {
   const matches = (groupSize.match(/\d+/g) || ['3', '5']).map((n: string) => parseInt(n));
@@ -26,12 +27,25 @@ const LunchGroup: React.FC<LunchGroupProps> = ({ group, hasDetailButton = true }
     users = {}
   } = group;
   const { user } = useAuth();
-  const { getUser, updateGroup } = useLunchGroup();
+  const { getProfiles, getUser, updateGroup } = useLunchGroup();
   const [owner, setOwner] = useState('');
+  const [profiles, setProfiles] = useState<SanitizedUsers>([]);
   const [, max] = parseGroupSize(groupSize);
 
+  const joinLeaveGroup = (isMember: boolean) => {
+    if (user) {
+      if (isMember) {
+        delete users[user.uid];
+      } else {
+        users[user.uid] = true;
+      }
+      updateGroup && updateGroup(group);
+    }
+  };
+
   useEffect(() => {
-    getUser && getUser(Object.keys(creator)[0]).then((user) => setOwner(user.email));
+    getUser(Object.keys(creator)[0]).then((user) => setOwner(user.email));
+    getProfiles(Object.keys(users)).then((users) => users.profiles && setProfiles(users.profiles));
   }, [creator]);
 
   return (
@@ -42,7 +56,7 @@ const LunchGroup: React.FC<LunchGroupProps> = ({ group, hasDetailButton = true }
           <div className="flex space-between items-center group-container flex justify-between">
             <div className="flex flex-col flex-1 space-y-1">
               <h3 className="hostname font-extrabold">{name}</h3>
-              <AttendeesList users={Object.keys(users)} max={max} />
+              <AttendeesList users={profiles} max={max} />
             </div>
 
             <div className="flex-1">
@@ -55,16 +69,7 @@ const LunchGroup: React.FC<LunchGroupProps> = ({ group, hasDetailButton = true }
 
             <div className="flex-none">
               <JoinButton
-                onClick={(isMember) => {
-                  if (user) {
-                    if (isMember) {
-                      delete users[user.uid];
-                    } else {
-                      users[user.uid] = true;
-                    }
-                    updateGroup && updateGroup(group);
-                  }
-                }}
+                onClick={(isMember) => joinLeaveGroup(isMember)}
                 uid={user?.uid || ''}
                 users={users}
                 active={!!active}

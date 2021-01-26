@@ -9,7 +9,7 @@ const NotificationBar: React.FC = () => {
     notification: { message, timestamp, timeout }
   } = useNotify();
   const handleClick = () => banner.current.classList.add(transitionClass);
-  const transitionClass = '-translate-y-10';
+  const transitionClass = '-translate-y-14';
 
   useEffect(() => {
     if (message?.length) {
@@ -21,7 +21,7 @@ const NotificationBar: React.FC = () => {
 
   return message.length ? (
     <div
-      className={`alert-banner w-full fixed transform transition-transform top-0 ${transitionClass}`}
+      className={`z-50 alert-banner w-full fixed transform transition-transform top-0 ${transitionClass}`}
       ref={banner}>
       <NotificationBarContents message={message} onClick={handleClick} />
       <input type="checkbox" className="hidden" id="banneralert" />

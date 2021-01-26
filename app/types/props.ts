@@ -1,5 +1,6 @@
 import { UseFormMethods } from 'react-hook-form';
 import { LunchGroup } from '@typing/types';
+import { SanitizedUsers } from './api';
 
 export interface RegistrationFormLinkProps {
   prompt: string;

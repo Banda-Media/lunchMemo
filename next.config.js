@@ -22,6 +22,11 @@ module.exports = {
     includePaths: [path.join(__dirname, 'app/styles')]
   },
   images: {
-    domains: ['github.com'],
-  },
+    domains: [
+      'github.com',
+      'avatars1.githubusercontent.com',
+      'avatars2.githubusercontent.com',
+      'avatars3.githubusercontent.com'
+    ]
+  }
 };
