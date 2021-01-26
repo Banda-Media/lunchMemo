@@ -13,6 +13,7 @@ import {
   removeGroup,
   getUser
 } from '@services/firebase/firestore';
+import { getProfiles } from '@services/api/users';
 
 const debug = Debug('lunchmemo:hooks:LunchGroupContext');
 
@@ -23,7 +24,8 @@ const LunchGroupContext = createContext<ILunchGroupContext>({
   addGroup,
   updateGroup,
   removeGroup,
-  getUser
+  getUser,
+  getProfiles
 });
 
 const { firestore } = getFirebase();
@@ -60,6 +62,7 @@ const LunchGroupProvider: React.FC = ({ children }) => {
         updateGroup,
         removeGroup,
         getUser,
+        getProfiles,
         loading
       }}>
       {children}

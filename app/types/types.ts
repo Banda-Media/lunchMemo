@@ -130,6 +130,7 @@ export interface ILunchGroupContext {
   removeGroup: (name: string) => Promise<void>;
   updateGroup: (group: LunchGroup) => Promise<void>;
   getUser: (id: string) => Promise<User>;
+  getUsers: (uids: string[]) => Promise<User[]>;
 }
 
 export interface User {
