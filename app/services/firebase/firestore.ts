@@ -61,10 +61,12 @@ export const getGroup = async (id: string): Promise<LunchGroup> => {
 };
 
 export const updateGroup = async (group: LunchGroup): Promise<void> => {
-  if (!Object.keys(group.users || {}).length) {
-    await removeGroup(group.uid);
-  } else {
-    await updateDoc<LunchGroup>(GROUPS_COLLECTION, group.uid, group);
+  if (group.uid) {
+    if (!Object.keys(group.users || {}).length) {
+      await removeGroup(group.uid);
+    } else {
+      await updateDoc<LunchGroup>(GROUPS_COLLECTION, group.uid, group);
+    }
   }
 };
 
