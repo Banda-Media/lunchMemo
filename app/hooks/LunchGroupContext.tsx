@@ -3,7 +3,7 @@ import { useState, createContext, useContext, useEffect } from 'react';
 import getFirebase from '@services/firebase/firebase';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import { ILunchGroupContext, LunchGroup } from '@typing/types';
+import { ILunchGroupContext, ILunchGroup } from '@typing/types';
 import { GROUPS_COLLECTION } from '@utils/constants';
 import { useNotify } from './NotifyContext';
 import {
@@ -32,7 +32,7 @@ const { firestore } = getFirebase();
 
 const LunchGroupProvider: React.FC = ({ children }) => {
   debug('Loading LunchGroupProvider.');
-  const [groups, setLunchGroups] = useState<LunchGroup[]>([]);
+  const [groups, setLunchGroups] = useState<ILunchGroup[]>([]);
   const [loading, setLoading] = useState(true);
   const { notify } = useNotify();
 
@@ -40,7 +40,7 @@ const LunchGroupProvider: React.FC = ({ children }) => {
     snapshot: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>
   ): Promise<void> => {
     setLoading(true);
-    const groups = snapshot.docs.map((doc) => doc.data() as LunchGroup);
+    const groups = snapshot.docs.map((doc) => doc.data() as ILunchGroup);
     groups.map((group) => !Object.keys(group.users || []).length && removeGroup(group.name));
     setLunchGroups(groups);
     setLoading(false);

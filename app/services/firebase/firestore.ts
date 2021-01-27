@@ -1,6 +1,6 @@
 import getFirebase from './firebase';
 import { USER_COLLECTION, GROUPS_COLLECTION } from '@utils/constants';
-import { LunchGroup, User, Observer, UnsubscribeCallback } from '@typing/types';
+import { ILunchGroup, User, Observer, UnsubscribeCallback } from '@typing/types';
 
 export const { firestore } = getFirebase();
 
@@ -56,21 +56,21 @@ export const getUser = async (id: string): Promise<User> => {
   return await getDoc<User>(USER_COLLECTION, id);
 };
 
-export const getGroup = async (id: string): Promise<LunchGroup> => {
-  return await getDoc<LunchGroup>(GROUPS_COLLECTION, id);
+export const getGroup = async (id: string): Promise<ILunchGroup> => {
+  return await getDoc<ILunchGroup>(GROUPS_COLLECTION, id);
 };
 
-export const updateGroup = async (group: LunchGroup): Promise<void> => {
+export const updateGroup = async (group: ILunchGroup): Promise<void> => {
   if (group.uid) {
     if (!Object.keys(group.users || {}).length) {
       await removeGroup(group.uid);
     } else {
-      await updateDoc<LunchGroup>(GROUPS_COLLECTION, group.uid, group);
+      await updateDoc<ILunchGroup>(GROUPS_COLLECTION, group.uid, group);
     }
   }
 };
 
-export const addGroup = async (group: LunchGroup): Promise<void> => {
+export const addGroup = async (group: ILunchGroup): Promise<void> => {
   if (await docIsUnique(GROUPS_COLLECTION, 'name', group.name)) {
     return await addDoc(GROUPS_COLLECTION, group);
   }
