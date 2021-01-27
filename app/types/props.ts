@@ -1,5 +1,5 @@
 import { UseFormMethods } from 'react-hook-form';
-import { LunchGroup } from '@typing/types';
+import { ILunchGroup } from '@typing/types';
 
 export interface RegistrationFormLinkProps {
   prompt: string;
@@ -33,7 +33,7 @@ export interface InputGenericProps {
 }
 
 export interface SelectGenericProps extends InputGenericProps {
-  options: string[];
+  options: [string | number | number[] | string[], string][];
 }
 
 export interface InputProps {
@@ -55,6 +55,7 @@ export interface TextInputProps extends InputProps {
   message: string;
   [x: string]: unknown;
 }
+
 export interface PasswordInputProps {
   form: UseFormMethods<Record<string, unknown>>;
   newPassword?: boolean;
@@ -86,10 +87,10 @@ export interface NotificationBarContentsProps {
 }
 
 export interface LunchGroupsProps {
-  groups: LunchGroup[];
+  groups: ILunchGroup[];
 }
 
 export interface LunchGroupProps {
-  group: LunchGroup;
+  group: ILunchGroup;
   hasDetailButton?: boolean;
 }

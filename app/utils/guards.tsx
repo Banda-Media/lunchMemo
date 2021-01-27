@@ -14,7 +14,7 @@ export const unauthGuard = async (router: NextRouter, callback: Dispatcher): Pro
     callback(false);
     if (user) {
       debug('Authenticated...redirecting to profile');
-      router.push('/profile');
+      router.replace('/profile');
     } else {
       debug('Unauthenticated...continuing.');
     }
@@ -28,7 +28,7 @@ export const authGuard = async (router: NextRouter, callback: Dispatcher): Promi
     callback(false);
     if (!user) {
       debug('Unauthenticated...redirecting to login');
-      router.push('/login');
+      router.replace('/login');
     } else {
       debug('Authenticated...continuing.');
     }

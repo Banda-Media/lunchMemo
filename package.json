@@ -12,9 +12,6 @@
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "watch:css": "postcss app/styles/tailwind.scss -o app/styles/main.scss",
     "test": "tsdx test --passWithNoTests",
-    "tsstart": "tsdx watch",
-    "tsbuild": "tsdx build",
-    "prepare": "tsdx build",
     "size": "yarn build && size-limit",
     "size:why": "size-limit --why"
   },

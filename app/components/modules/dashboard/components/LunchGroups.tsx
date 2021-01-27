@@ -6,7 +6,7 @@ const LunchGroups: React.FC = () => {
   return (
     <ul className="w-full">
       {groups.map((group) => (
-        <li className="pb-2" key={group.name}>
+        <li className="pb-2" key={group.uid}>
           <LunchGroup group={group} />
         </li>
       ))}
