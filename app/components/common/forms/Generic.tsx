@@ -11,9 +11,9 @@ export const Select: React.FC<SelectGenericProps> = ({
   ...rest
 }) => (
   <select name={name} ref={register} {...rest}>
-    {options.map((value: string) => (
-      <option key={value} value={value}>
-        {value}
+    {options.map(([value, label]) => (
+      <option key={label} value={typeof value === 'object' ? JSON.stringify(value) : value}>
+        {label}
       </option>
     ))}
   </select>

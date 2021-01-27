@@ -77,10 +77,8 @@ export const addGroup = async (group: ILunchGroup): Promise<void> => {
   throw new Error(`Group ${group.name} already exists.`);
 };
 
-export const removeGroup = async (id: string): Promise<void> => {
-  console.log('trying to remove group', id);
+export const removeGroup = async (id: string): Promise<void> =>
   await removeDoc(GROUPS_COLLECTION, id);
-};
 
 export const streamGroupData = async (
   id: string,

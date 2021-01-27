@@ -26,6 +26,8 @@ export interface ISocialAction {
   message: string;
 }
 
+export type FirebaseUser = firebase.User;
+
 export interface IAuthContext {
   user: firebase.User | null;
   isAuthenticated: boolean;
@@ -112,25 +114,26 @@ export type GoogleDate = {
   seconds: number;
 };
 
-export type LunchGroup = {
+export type ILunchGroup = {
   name: string;
   uid?: string;
   active?: boolean;
-  startTime?: Date | GoogleDate;
-  endTime?: Date | GoogleDate;
-  groupSize?: string;
+  start?: Date | GoogleDate;
+  end?: Date | GoogleDate;
+  min?: number;
+  max?: number;
   creator?: OneToManyRelationships;
   foods?: OneToManyRelationships;
   users?: OneToManyRelationships;
 };
 
 export interface ILunchGroupContext {
-  groups: LunchGroup[];
+  groups: ILunchGroup[];
   loading: boolean;
-  getGroup: (id: string) => Promise<LunchGroup>;
-  addGroup: (group: LunchGroup) => Promise<void>;
+  getGroup: (id: string) => Promise<ILunchGroup>;
+  addGroup: (group: ILunchGroup) => Promise<void>;
   removeGroup: (name: string) => Promise<void>;
-  updateGroup: (group: LunchGroup) => Promise<void>;
+  updateGroup: (group: ILunchGroup) => Promise<void>;
   getUser: (id: string) => Promise<User>;
   getProfiles: (uids: string[]) => Promise<GetUserProfilesResponse>;
 }

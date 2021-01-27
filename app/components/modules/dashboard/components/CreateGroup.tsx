@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import { useForm } from 'react-hook-form';
-import { CreateGroupFormData, LunchGroup, OneToManyRelationships } from '@typing/types';
+import { CreateGroupFormData, ILunchGroup, OneToManyRelationships } from '@typing/types';
 import { formDefaults, GROUP_OPTIONS } from '@utils/constants';
 import { useAuth } from '@hooks/AuthContext';
 import { useLunchGroup } from '@hooks/LunchGroupContext';
@@ -12,7 +12,7 @@ import { useNotify } from '@hooks/NotifyContext';
 
 const setTime = (ampm: string, hours: string, minutes: string): Date => {
   const now = new Date();
-  now.setHours(+hours + (ampm === 'pm' ? 12 : 0), +minutes, 0);
+  now.setHours(+hours + (ampm === 'PM' ? 12 : 0), +minutes, 0);
   return now;
 };
 
@@ -28,17 +28,18 @@ const formToLunchGroup = (
     groupSize
   }: CreateGroupFormData,
   user: firebase.User | null
-): LunchGroup => {
-  const userRef: OneToManyRelationships = user ? { [user.uid]: true } : {};
-  const startTime = setTime(startampm, starthours, startminutes);
-  const endTime = setTime(endampm, endhours, endminutes);
+): ILunchGroup => {
+  const userRefList: OneToManyRelationships = user ? { [user.uid]: true } : {};
+  const [min, max] = JSON.parse(groupSize);
+  console.log(starthours, startminutes, endhours, endminutes, endampm);
   return {
     name,
-    groupSize,
-    startTime,
-    endTime,
-    creator: userRef,
-    users: userRef,
+    min: +min,
+    max: +max,
+    start: setTime(startampm, starthours, startminutes),
+    end: setTime(endampm, endhours, endminutes),
+    creator: userRefList,
+    users: userRefList,
     active: true,
     foods: {}
   };

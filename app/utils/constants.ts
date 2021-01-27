@@ -6,7 +6,11 @@ export const userTokenCookie = 'LM_USER_TOKEN';
 export const userLocalStorage = 'LM_FIREBASE_USER';
 export const GROUPS_COLLECTION = 'lunch-groups';
 export const USER_COLLECTION = 'users';
-export const GROUP_OPTIONS = ['Small (1-2)', 'Medium (3-5)', 'Large (6-10)'];
+export const GROUP_OPTIONS: [number[], string][] = [
+  [[1, 2], 'Small (1-2)'],
+  [[3, 5], 'Medium (3-5)'],
+  [[6, 10], 'Large (6-10)']
+];
 export const formDefaults: UseFormOptions = {
   mode: 'onChange',
   reValidateMode: 'onChange',
