@@ -62,7 +62,7 @@ const LunchGroup: React.FC<LunchGroupProps> = ({ group, hasDetailButton = true }
       <div
         className={`flex flex-col bg-white w-full px-8 py-4 shadow ${active ? '' : 'opacity-50'}`}>
         <div className="flex flex-col">
-          <div className="flex space-between items-center group-container flex justify-between">
+          <div className="flex space-between items-center group-container justify-between">
             <div className="flex flex-col flex-1 space-y-1">
               <h3 className="hostname font-extrabold">{name}</h3>
               <AttendeesList users={profiles} max={max} />

@@ -2,7 +2,7 @@ import Layout from '@components/layouts/Layout';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Loading from '@common/Loading';
-import LunchGroup from '@components/modules/dashboard/components/LunchGroup';
+import GroupDetails from '@components/modules/lunchgroup/GroupDetails';
 import LunchGroupProvider, { useLunchGroup } from '@hooks/LunchGroupContext';
 import { ILunchGroup } from '@typing/types';
 
@@ -25,9 +25,7 @@ const GroupPage: React.FC = () => {
 
   return (
     <LunchGroupProvider>
-      <Layout>
-        {loading ? <Loading /> : group && <LunchGroup group={group} hasDetailButton={false} />}
-      </Layout>
+      <Layout>{loading ? <Loading /> : group && <GroupDetails group={group} />}</Layout>
     </LunchGroupProvider>
   );
 };
