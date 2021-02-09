@@ -1,17 +1,16 @@
 import { LunchGroupProps } from '@typing/props';
 import { SanitizedUsers, GetUserProfilesResponse } from '@typing/api';
-
+import Image from 'next/image';
 import AttendeesList from '../dashboard/components/AttendeesList';
-import TimeRange from '../dashboard/components/TimeRange';
 import { useLunchGroup } from '@hooks/LunchGroupContext';
-import { OneToManyRelationships, GoogleDate } from '@typing/types';
+import { OneToManyRelationships } from '@typing/types';
 import { useEffect, useState } from 'react';
-import CreatorSubtitle from '../dashboard/components/CreatorSubtitle';
 
 const GroupDetails: React.FC<LunchGroupProps> = ({ group }) => {
   const { name, start, end, creator = {}, foods = [], users = {} } = group;
   const { getProfiles } = useLunchGroup();
   const [owner, setOwner] = useState('');
+  const [ownerPhotoURL, setOwnerPhotoURL] = useState('');
   const [profiles, setProfiles] = useState<SanitizedUsers>([]);
 
   const getUserProfiles = (
@@ -36,28 +35,73 @@ const GroupDetails: React.FC<LunchGroupProps> = ({ group }) => {
 
   useEffect(() => {
     getCreatorProfile(creator, getProfiles, setOwner), [creator];
-    console.log(owner);
+    getCreatorImage();
   });
   useEffect(() => getUserProfiles(users, getProfiles, setProfiles), [users]);
 
   const getFoodItems = () => {
     const food = Object.keys(foods).map((foodItems) => foodItems);
-    return food.length === 0 ? ':( No food yet!' : food.map((foodItem) => foodItem);
+    return food.length === 0 ? (
+      <span>
+        <span className="text-xl">No foods selected - here are some ideas:</span>
+        <div className="text-md text-gray-500 pt-3"> Pizza, Vegan, Japanese, and Cuban</div>
+      </span>
+    ) : (
+      food.map((foodItem) => foodItem)
+    );
+  };
+
+  const getCreatorImage = () => {
+    profiles.map((user) => {
+      if (user.uid === Object.keys(creator)[0]) {
+        return 'photoURL' in user && user.photoURL ? setOwnerPhotoURL(user.photoURL) : 'empty';
+      }
+    });
   };
 
   return (
-    <section className="bg-white md:w-3/4 lg:w-4/5 mx-auto register-login animated fadeInDown faster">
-      <div className="register text-center content-center flex flex-col space-y-5 p-10">
-        <h1 className="my-4 text-2xl font-semibold text-gray-700">{name}</h1>
-        <h4 className="my-4 text-sm font-regular text-gray-400">
-          Group Creator:
-          <CreatorSubtitle owner={owner} foods={Object.keys(foods)} />
-        </h4>
-        <div>{getFoodItems()}</div>
-        <div>USERS:</div>
-        <AttendeesList users={profiles} max={10} />
-        <div className="flex-1">
-          <TimeRange flex-1 startTime={start as GoogleDate} endTime={end as GoogleDate} />
+    <section className="bg-white md:w-3/4 lg:w-3/4 mx-auto register-login animated fadeInDown faster">
+      <div className="register text-center content-center flex flex-col p-5">
+        <div className="w-full h-200 bg-blue-500 shadow p-8">
+          <span className="my-4 text-5xl font-regular text-white p-5">{name}</span>
+        </div>
+        <div className="pt-10">{getFoodItems()}</div>
+        <div className="flex flex-row p-5 justify-center">
+          <span className="text-left my-4 text-md font-regular text-gray-500">
+            Start:{' '}
+            <span className="text-md font-regular text-gray-400">
+              {new Date().toLocaleString().replace(',', '')} {start}
+            </span>
+          </span>
+          <span className="text-left my-4 text-md font-regular text-gray-500 pl-10">
+            End:{' '}
+            <span className="text-md font-regular text-gray-400">
+              {new Date().toLocaleString().replace(',', '')} {end}
+            </span>
+          </span>
+        </div>
+        <div className="flex justify-between mt-0 px-10 pt-5 pb-10">
+          <div className="justify-start">
+            <div className="my-4 text-xl font-regular text-gray-500">Group Users</div>
+            <AttendeesList users={profiles} max={3} size={70} spacing={5} />
+          </div>
+
+          <div className="flex flex-col justify-start content-evenly">
+            <span className="my-4 text-xl font-regular text-gray-500">Group Creator</span>
+            <span>
+              {ownerPhotoURL ? (
+                <Image
+                  src={ownerPhotoURL}
+                  width="70px"
+                  height="70px"
+                  className="shadow-lg rounded-full max-w-full h-auto align-middle border-none"
+                />
+              ) : (
+                <i className="fas fa-user-alt"></i>
+              )}
+            </span>
+            <span className="">{owner}</span>
+          </div>
         </div>
       </div>
     </section>
