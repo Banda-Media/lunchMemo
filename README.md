@@ -18,6 +18,7 @@
     <a href=".">
         <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/Banda-Media/lunchMemo" />
     </a>
+    <br />
     <a href="https://github.com/Banda-Media/lunchMemo">
         <img alt="Status" src="https://img.shields.io/badge/status-active-success.svg" />
     </a>
